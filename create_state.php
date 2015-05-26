@@ -33,12 +33,12 @@ $arrCountryOption = $objControl->getRecords('country_master', null, null, 'count
 						   <div class="box-content">
 						<form class="form-horizontal" method="post" action="controller/routes.php">
                         	<input type="hidden" name="hid_action" id="hid_action" value="create_state" />
+							<input type="hidden" name="branch_id" id="branch_id" value="<?php echo $intPageId; ?>" />
 							<fieldset>
 							 <div class="control-group">
 								<label class="control-label" for="focusedInput">Country Name</label>
 								<div class="controls">
-								  <select name="parent_page" id="parent_page"  class="input-xlarge focused" >
-										<option value=""></option>
+									<select name="country_id" id="parent_page"  class="input-xlarge focused" >
 										<?php
 										for ($intIndex = 0; $intIndex < count($arrCountryOption); $intIndex++)
 										{

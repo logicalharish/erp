@@ -9,12 +9,26 @@ $objControl = new CommonController();
 switch ($strAction)
 {
 	case 'create_country':
+		$intCountryId = $_REQUEST['country_id'];
 		$arrData['country_name'] = $_REQUEST['txt_country'];
 		$arrData['status'] = $_REQUEST['sel_status'];
-		$objControl->createRecord($arrData, 'country_master');
+
+		if ($intCountryId != '')
+		{
+			$arrData['modified_datetime'] = date('yyyy-mm-dd hh:mm:ss');//$objControl->dbConnect->new DateTime();//
+			$arrData['modified_by'] = $_SESSION['user']['user_id'];
+			$strCondition = "country_id='$intCountryId'";
+			$objControl->createRecord($arrData, "country_master", $strCondition);
+		} else
+		{
+			$arrData['created_datetime'] = date('d-m-y h:i:s');
+			$arrData['created_by'] = $_SESSION['user']['user_id'];
+			$objControl->createRecord($arrData, 'country_master');
+		}
 		header('Location:' . HTTP_PATH . 'country.php');
 		exit;
 		break;
+		
 	case 'create_user':
 		$arrData['name'] = $_REQUEST['name'];
 		$arrData['email'] = $_REQUEST['email'];
@@ -131,12 +145,13 @@ switch ($strAction)
 		$intStateId = $_REQUEST['branch_id'];
 		$arrData['branch_name'] = $_REQUEST['txt_state'];
 		$arrData['status'] = $_REQUEST['sel_status'];
+		$arrData['country_id'] = $_REQUEST['country_id'];
 
 		if ($intStateId != '')
 		{
-			$arrData['modified_datetime'] = date('d-m-y h:i:s');
+			$arrData['modified_datetime'] = date('yyyy-mm-dd hh:mm:ss');//$objControl->dbConnect->new DateTime();//
 			$arrData['modified_by'] = $_SESSION['user']['user_id'];
-			$strCondition = " nob_id='$intStateId'";
+			$strCondition = "branch_id='$intStateId'";
 			$objControl->createRecord($arrData, "branch_master", $strCondition);
 		} else
 		{
@@ -224,9 +239,14 @@ switch ($strAction)
 		$strTableName = $_REQUEST['table_name'];
 		$intRecordId = $_REQUEST['id'];
 		$strColumnName = $_REQUEST['column_name'];
-		$strQuery = "UPDATE ".$strTableName." SET status = IF(status='Active', 'Inactive', 'Active') where ".$strColumnName." = ".$intRecordId;
-		$objControl->updateRecord($strQuery);
-		echo "Record Updated";
+		$page = $_REQUEST['page_url'];
+		$status = $_REQUEST['status'];
+		if($status=="Active"){$newStatus="Inactive";}else{$newStatus="Active";}
+		$strQuery = "UPDATE ".$strTableName." SET status = '".$newStatus."' where ".$strColumnName." = ".$intRecordId;
+		$objControl->dbConnect->Execute($strQuery);
+		header('Location:' . HTTP_PATH . $page);
+		//echo "Record Updated";
+		exit;
 		break;
 	case 'send_mail_package':
 		

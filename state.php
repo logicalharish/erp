@@ -31,11 +31,8 @@ $arrRecords = $objControl->getRecords('branch_master', null, null, '', $arrField
 				<thead>
 					<tr>
 						<th style="width: 20%">State Name</th>
-						
-
 						<th style="width: 5%">Status</th>
 						<th style="width: 10%">Created Date</th>
-
 						<th style="width: 15%">Actions</th>
 					</tr>
 				</thead>   
@@ -53,9 +50,13 @@ $arrRecords = $objControl->getRecords('branch_master', null, null, '', $arrField
 									if($arrRecords[$intIndex]['status']=='Active')
 									{
 										$strClass = 'label-success';
+										$newStatus = 'Inactive';
+										$btn='btn-danger';
 									}
 									else{
 										$strClass = ' label-warning';
+										$newStatus = 'Active';
+										$btn='btn-success';
 									}
 								?>
 								<span class="label <?php echo $strClass;?>"><?php echo $arrRecords[$intIndex]['status']; ?></span>
@@ -70,9 +71,9 @@ $arrRecords = $objControl->getRecords('branch_master', null, null, '', $arrField
 									Edit                                            
 								</a>
 								
-								<a class="btn btn-danger" href="#" onclick="updateRecord('branch_master','<?php echo $arrRecords[$intIndex]['branch_id']; ?>','branch_id');">
+								<a class="btn <?php echo $btn; ?>" href="controller/routes.php?hid_action=update_status&id=<?php echo $arrRecords[$intIndex]['branch_id']; ?>&status=<?php echo $arrRecords[$intIndex]['status']; ?>&table_name=branch_master&column_name=branch_id&page_url=state.php">
 									<i class="icon-trash icon-white"></i> 
-									Inactive
+									<?php echo $newStatus; ?>
 								</a>
 							</td>
 						</tr>

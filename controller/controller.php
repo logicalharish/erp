@@ -111,8 +111,6 @@ class CommonController
 	//Function to get the records for listing
 	function getRecords($strTableName, $strColumnName = '', $strUrlParameterValue = '',$strOrderBy = '')
 	{
-			
-			
 			$strQuery = 'Select * from '.$strTableName;
 			if($strCoulumnName != null || $strUrlParameterValue != null)
 			{
@@ -123,12 +121,11 @@ class CommonController
 			{
 				$strQuery .= ' order By '.$strOrderBy;
 			}
-			echo $strQuery;
+			//echo $strQuery;
 			$rsData = $this->dbConnect->getAll($strQuery);
 			return $rsData;
-
-			
 	}
+
 	//Function to create The record
 	function createRecord($arrData, $strTableName, $strCondition='')
 	{
@@ -148,8 +145,6 @@ class CommonController
 			$strResult = 'Record Added Sucessfully';
 		}
 		return $strResult;
-			
-		
 	}
 	
 	//Funtion to dete the records

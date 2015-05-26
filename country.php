@@ -1,7 +1,8 @@
 <?php
 require_once('header.php');
-
-$arrRecords = $objControl->getRecords('country_master','','','modified_datetime');
+$arrField = array('*');
+$arrRecords = $objControl->getRecords('country_master', null, null, '', $arrField);
+//$arrRecords = $objControl->getRecords('country_master','','','modified_datetime');
 
 ?>
 <div>
@@ -46,23 +47,35 @@ $arrRecords = $objControl->getRecords('country_master','','','modified_datetime'
 
 							<tr>
 								<td><?php echo $arrRecords[$intIndex]['country_name'];?></td>
-								<td class="center"><?php echo ($arrRecords[$intIndex]['status']=='Active'?'<span class="label label-success">Active</span>':'<span class="label label-important">Inactive</span>');?></td>
+								<td class="center">
+									<?php
+										if($arrRecords[$intIndex]['status']=='Active')
+										{
+											$strClass = 'label-success';
+											$newStatus = 'Inactive';
+											$btn='btn-danger';
+										}
+										else{
+											$strClass = ' label-warning';
+											$newStatus = 'Active';
+											$btn='btn-success';
+										}
+									?>
+									<span class="label <?php echo $strClass;?>"><?php echo $arrRecords[$intIndex]['status']; ?></span>
+								</td>
 								<td width="20%"><?php echo $arrRecords[$intIndex]['created_datetime'];?></td>
 								<td >
 									<?php echo $arrRecords[$intIndex]['modified_datetime'];?>
 								</td>
 								<td class="center">
-									<a class="btn btn-success" href="#">
-										<i class="icon-zoom-in icon-white"></i>  
-										View                                            
-									</a>
+									
 									<a class="btn btn-info" href="create_country.php?country_id=<?php echo $arrRecords[$intIndex]['country_id'];?>">
 										<i class="icon-edit icon-white"></i>  
 										Edit                                            
 									</a>
-									<a class="btn btn-danger" href="#">
+									<a class="btn <?php echo $btn; ?>" href="controller/routes.php?hid_action=update_status&id=<?php echo $arrRecords[$intIndex]['country_id']; ?>&status=<?php echo $arrRecords[$intIndex]['status']; ?>&table_name=country_master&column_name=country_id&page_url=country.php">
 										<i class="icon-trash icon-white"></i> 
-										Delete
+										<?php echo $newStatus; ?>
 									</a>
 								</td>
 							</tr>

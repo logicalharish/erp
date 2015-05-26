@@ -30,6 +30,7 @@ if(isset($intCountryId) && $intCountryId !='')
 						   <div class="box-content">
 						<form class="form-horizontal" method="post" action="controller/routes.php">
                         	<input type="hidden" name="hid_action" id="hid_action" value="create_country" />
+							<input type="hidden" name="country_id" id="country_id" value="<?php echo $intCountryId; ?>" />
 							<fieldset>
 							  <div class="control-group">
 								<label class="control-label" for="focusedInput">Country Name</label>
@@ -40,7 +41,7 @@ if(isset($intCountryId) && $intCountryId !='')
 							 <div class="control-group">
 								<label class="control-label" for="focusedInput">Status</label>
 								<div class="controls">
-								  <select class="input-xlarge focused" id="sel_status" name="txt_country" >
+								  <select class="input-xlarge focused" id="sel_status" name="sel_status" >
                                   <option <?php echo (isset($arrData[0]['status']) && $arrData[0]['status']=='Active' ?'selected="selected"':''); ?> value="Active">Active</option>
                                   <option <?php echo (isset($arrData[0]['status']) && $arrData[0]['status']=='Inactive' ?'selected="selected"':''); ?> value="Inactive">Inactive</option>
                                   </select>
