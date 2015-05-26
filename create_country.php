@@ -7,27 +7,27 @@ if(isset($intCountryId) && $intCountryId !='')
 	$arrData = $objControl->getRecords('country_master','country_id',$intCountryId);
 }
 ?>
-<div>
-				<ul class="breadcrumb">
-					<li>
-						<a href="#">Home</a> <span class="divider">/</span>
-					</li>
-					<li>
-						<a href="#">Country</a><span class="divider">/</span>
-					</li>
-					<li>
-						Add Country
-					</li>
-				</ul>
-			</div>
-<div class="row-fluid">		
+	<div>
+		<ul class="breadcrumb">
+			<li>
+				<a href="#">Home</a> <span class="divider">/</span>
+			</li>
+			<li>
+				<a href="#">Country</a><span class="divider">/</span>
+			</li>
+			<li>
+				Add Country
+			</li>
+		</ul>
+	</div>
+	<div class="row-fluid">		
 				<div class="box span12">
 					
 					<div class="box-header well" data-original-title>
 						<h2><i class="icon-edit"></i>Create Country</h2>
 						
 					</div>
-						   <div class="box-content">
+					<div class="box-content">
 						<form class="form-horizontal" method="post" action="controller/routes.php">
                         	<input type="hidden" name="hid_action" id="hid_action" value="create_country" />
 							<input type="hidden" name="country_id" id="country_id" value="<?php echo $intCountryId; ?>" />
@@ -54,11 +54,10 @@ if(isset($intCountryId) && $intCountryId !='')
 							  </div>
 							</fieldset>
 						  </form>
-					
 					</div>         
 					
 				</div><!--/span-->
-                </div>
+     </div>
 <?php
 require_once('footer.php');
 ?>

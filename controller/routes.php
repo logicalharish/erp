@@ -15,14 +15,14 @@ switch ($strAction)
 
 		if ($intCountryId != '')
 		{
-			$arrData['modified_datetime'] = date('yyyy-mm-dd hh:mm:ss');//$objControl->dbConnect->new DateTime();//
-			$arrData['modified_by'] = $_SESSION['user']['user_id'];
+			//$arrData['modified_datetime'] = date('yyyy-mm-dd hh:mm:ss');//$objControl->dbConnect->new DateTime();//
+			//$arrData['modified_by'] = $_SESSION['user']['user_id'];
 			$strCondition = "country_id='$intCountryId'";
 			$objControl->createRecord($arrData, "country_master", $strCondition);
 		} else
 		{
-			$arrData['created_datetime'] = date('d-m-y h:i:s');
-			$arrData['created_by'] = $_SESSION['user']['user_id'];
+			//$arrData['created_datetime'] = date('d-m-y h:i:s');
+			//$arrData['created_by'] = $_SESSION['user']['user_id'];
 			$objControl->createRecord($arrData, 'country_master');
 		}
 		header('Location:' . HTTP_PATH . 'country.php');
@@ -61,14 +61,14 @@ switch ($strAction)
 
 		if ($intModuleId != '')
 		{
-			$arrData['modified_datetime'] = date('d-m-y h:i:s');
-			$arrData['modified_by'] = $_SESSION['user']['user_id'];
+			//$arrData['modified_datetime'] = date('d-m-y h:i:s');
+			//$arrData['modified_by'] = $_SESSION['user']['user_id'];
 			$strCondition = " module_id='$intModuleId'";
 			$objControl->createRecord($arrData, "module_master", $strCondition);
 		} else
 		{
-			$arrData['created_datetime'] = date('d-m-y h:i:s');
-			$arrData['created_by'] = $_SESSION['user']['user_id'];
+			//$arrData['created_datetime'] = date('d-m-y h:i:s');
+			//$arrData['created_by'] = $_SESSION['user']['user_id'];
 			$objControl->createRecord($arrData, 'module_master');
 		}
 		header('Location:' . HTTP_PATH . 'module.php');
@@ -82,14 +82,14 @@ switch ($strAction)
 
 		if ($intNobId != '')
 		{
-			$arrData['modified_datetime'] = date('d-m-y h:i:s');
-			$arrData['modified_by'] = $_SESSION['user']['user_id'];
+			//$arrData['modified_datetime'] = date('d-m-y h:i:s');
+			//$arrData['modified_by'] = $_SESSION['user']['user_id'];
 			$strCondition = " nob_id='$intNobId'";
 			$objControl->createRecord($arrData, "nob_master", $strCondition);
 		} else
 		{
-			$arrData['created_datetime'] = date('d-m-y h:i:s');
-			$arrData['created_by'] = $_SESSION['user']['user_id'];
+			//$arrData['created_datetime'] = date('d-m-y h:i:s');
+			//$arrData['created_by'] = $_SESSION['user']['user_id'];
 			$objControl->createRecord($arrData, 'nob_master');
 		}
 		
@@ -104,14 +104,14 @@ switch ($strAction)
 
 		if ($intDesignationId != '')
 		{
-			$arrData['modified_datetime'] = date('d-m-y h:i:s');
-			$arrData['modified_by'] = $_SESSION['user']['user_id'];
+			//$arrData['modified_datetime'] = date('d-m-y h:i:s');
+			//$arrData['modified_by'] = $_SESSION['user']['user_id'];
 			$strCondition = " nob_id='$intDesignationId'";
 			$objControl->createRecord($arrData, "designation_master", $strCondition);
 		} else
 		{
-			$arrData['created_datetime'] = date('d-m-y h:i:s');
-			$arrData['created_by'] = $_SESSION['user']['user_id'];
+			//$arrData['created_datetime'] = date('d-m-y h:i:s');
+			//$arrData['created_by'] = $_SESSION['user']['user_id'];
 			$objControl->createRecord($arrData, 'designation_master');
 		}
 		
@@ -123,17 +123,19 @@ switch ($strAction)
 		$intCityId = $_REQUEST['city_id'];
 		$arrData['city_name'] = $_REQUEST['txt_city'];
 		$arrData['status'] = $_REQUEST['sel_status'];
+		$arrData['country_id'] = $_REQUEST['country_id'];
+		$arrData['state_id'] = $_REQUEST['state_id'];
 
 		if ($intCityId != '')
 		{
-			$arrData['modified_datetime'] = date('d-m-y h:i:s');
-			$arrData['modified_by'] = $_SESSION['user']['user_id'];
-			$strCondition = " city_id='$intCityId'";
+			//$arrData['modified_datetime'] = date('d-m-y h:i:s');
+			//$arrData['modified_by'] = $_SESSION['user']['user_id'];
+			$strCondition = "city_id='$intCityId'";
 			$objControl->createRecord($arrData, "City_master", $strCondition);
 		} else
 		{
-			$arrData['created_datetime'] = date('d-m-y h:i:s');
-			$arrData['created_by'] = $_SESSION['user']['user_id'];
+			//$arrData['created_datetime'] = date('d-m-y h:i:s');
+			//$arrData['created_by'] = $_SESSION['user']['user_id'];
 			$objControl->createRecord($arrData, 'City_master');
 		}
 		
@@ -149,17 +151,46 @@ switch ($strAction)
 
 		if ($intStateId != '')
 		{
-			$arrData['modified_datetime'] = date('yyyy-mm-dd hh:mm:ss');//$objControl->dbConnect->new DateTime();//
-			$arrData['modified_by'] = $_SESSION['user']['user_id'];
+			//$arrData['modified_datetime'] = date('yyyy-mm-dd hh:mm:ss');//$objControl->dbConnect->new DateTime();//
+			//$arrData['modified_by'] = $_SESSION['user']['user_id'];
 			$strCondition = "branch_id='$intStateId'";
 			$objControl->createRecord($arrData, "branch_master", $strCondition);
 		} else
 		{
-			$arrData['created_datetime'] = date('d-m-y h:i:s');
-			$arrData['created_by'] = $_SESSION['user']['user_id'];
+			//$arrData['created_datetime'] = date('d-m-y h:i:s');
+			//$arrData['created_by'] = $_SESSION['user']['user_id'];
 			$objControl->createRecord($arrData, 'branch_master');
 		}
 		header('Location:' . HTTP_PATH . 'state.php');
+		exit;
+		break;
+		
+		case 'create_category':
+	
+		$intCategoryId = $_REQUEST['category_id'];
+		$arrData['category_name'] = $_REQUEST['txt_category'];
+		$arrData['status'] = $_REQUEST['sel_status'];
+		$parent_category_id = $_REQUEST['parent_category_id'];
+			if($parent_category_id=="none" || $parent_category_id=="")
+				{
+					$arrData['parent_category_id']=0;
+				}
+				else{
+					$arrData['parent_category_id']=$parent_category_id;
+					}
+		if ($intCategoryId != '')
+		{
+			//$arrData['modified_datetime'] = date('yyyy-mm-dd hh:mm:ss');//$objControl->dbConnect->new DateTime();//
+			//$arrData['modified_by'] = $_SESSION['user']['user_id'];
+			$strCondition = "category_id='$intCategoryId'";
+			$objControl->createRecord($arrData, "category_master", $strCondition);
+		} else
+		{
+			//$arrData['created_datetime'] = date('d-m-y h:i:s');
+			//$arrData['created_by'] = $_SESSION['user']['user_id'];
+			$objControl->createRecord($arrData, 'category_master');
+		}
+		header('Location:' . HTTP_PATH . 'category.php');
 		exit;
 		break;
 	case 'create_website':
@@ -280,8 +311,9 @@ switch ($strAction)
 			$arrData['building'] = $_REQUEST['building'];
 			$arrData['street'] = $_REQUEST['street'];
 			$arrData['landmark'] = $_REQUEST['landmark'];
-			$arrData['city'] = $_REQUEST['city'];
-			$arrData['state'] = $_REQUEST['state'];
+			$arrData['city_id'] = $_REQUEST['city_id'];
+			$arrData['state_id'] = $_REQUEST['state_id'];
+			$arrData['country_id'] = $_REQUEST['country_id'];
 			$arrData['area'] = $_REQUEST['area'];
 			$arrData['pincode'] = $_REQUEST['pincode'];
 			$arrData['latitude'] = $_REQUEST['latitude'];
@@ -302,7 +334,13 @@ switch ($strAction)
 			$arrData['landline'] = $_REQUEST['landline'];
 			$arrData['landline_dis'] = isset($_REQUEST['landline_dis']) ? $_REQUEST['landline_dis'] : 'No' ;
 			$arrData['landline_dnd'] = isset($_REQUEST['landline_dnd']) ? $_REQUEST['landline_dnd'] : 'No' ;
-			
+			$arrData['company_id'] = $_REQUEST['company_id'];
+			$arrCat = $_REQUEST['category_id'];
+				foreach ($arrCat as $categories)
+				{
+					$arrData['category_id']=$categories;
+					$objControl->createRecord($arrData, 'company_category');
+				}
 			$arrData['company_description'] = $_REQUEST['company_description'];
 			$arrData['sunday_from'] = $_REQUEST['sunday_from'];
 			$arrData['sunday_to'] = $_REQUEST['sunday_to'];
@@ -326,7 +364,7 @@ switch ($strAction)
 			$arrData['friday_closed'] = isset($_REQUEST['friday_closed']) ? $_REQUEST['friday_closed'] : 'No' ;
 			$arrData['saturday_closed'] = isset($_REQUEST['saturday_closed']) ? $_REQUEST['saturday_closed'] : 'No' ;
 			$arrData['payment_options'] = @implode(',', $_REQUEST['paymentOptions']);
-			$objControl->createRecord($arrData, 'company_profile');
+		//	$objControl->createRecord($arrData, 'company_profile');
 			$arrData['company_profile_id']= $objControl->dbConnect->Insert_ID();
 			
 			$arrData['contact_full_name'] = $_REQUEST['contact_full_name'];
@@ -335,7 +373,7 @@ switch ($strAction)
 			$arrData['contact_mobile'] = $_REQUEST['contact_mobile'];
 			$arrData['contact_email'] = $_REQUEST['contact_email'];
 			$arrData['designation'] = $_REQUEST['designation'];
-			$objControl->createRecord($arrData, 'company_contact');
+		//	$objControl->createRecord($arrData, 'company_contact');
 			$arrData['company_contact_id']= $objControl->dbConnect->Insert_ID();
 			
 			$arrData['data_source'] = $_REQUEST['data_source'];
@@ -344,11 +382,11 @@ switch ($strAction)
 			$arrData['year'] = $_REQUEST['year'];
 			$arrData['ad_date'] = $_REQUEST['ad_date'];
 			$arrData['page'] = $_REQUEST['page'];
-			$objControl->createRecord($arrData, 'company_advertise');
+		//	$objControl->createRecord($arrData, 'company_advertise');
 			$arrData['company_advertise_id']= $objControl->dbConnect->Insert_ID();
 			
 			//$strCondition = "company_profile_id='$companyId'";
-			$objControl->createRecord($arrData, 'company_master');
+		//	$objControl->createRecord($arrData, 'company_master');
 
 			header('Location:' . HTTP_PATH . 'create_company.php');
 			exit;

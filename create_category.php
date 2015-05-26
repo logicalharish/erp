@@ -1,13 +1,13 @@
 <?php
 require_once('header.php');
 $arrField = array('*');
-$intPageId = $_REQUEST['branch_id'];
+$intPageId = $_REQUEST['category_id'];
 if (isset($intPageId) && $intPageId != '')
 {
-	$arrData = $objControl->getRecords('branch_master', 'branch_id', $intPageId, '', $arrField);
+	$arrData = $objControl->getRecords('category_master', 'category_id', $intPageId, '', $arrField);
 }
-$arrField = array('country_id', 'country_name');
-$arrCountryOption = $objControl->getRecords('country_master', null, null, 'country_name', $arrField);
+	$arrField = array('category_id', 'category_name');
+	$arrCategoryOption = $objControl->getRecords('category_master', null, null, 'category_name', $arrField);
 
 ?>
 	<div>
@@ -16,10 +16,10 @@ $arrCountryOption = $objControl->getRecords('country_master', null, null, 'count
 				<a href="#">Home</a> <span class="divider">/</span>
 			</li>
 			<li>
-				<a href="#">State</a><span class="divider">/</span>
+				<a href="#">Category</a><span class="divider">/</span>
 			</li>
 			<li>
-				Add State
+				Add Category
 			</li>
 		</ul>
 	</div>
@@ -27,31 +27,33 @@ $arrCountryOption = $objControl->getRecords('country_master', null, null, 'count
 				<div class="box span12">
 					
 					<div class="box-header well" data-original-title>
-						<h2><i class="icon-edit"></i>Create State</h2>
+						<h2><i class="icon-edit"></i>Create Category</h2>
 						
 					</div>
 						   <div class="box-content">
 						<form class="form-horizontal" method="post" action="controller/routes.php">
-                        	<input type="hidden" name="hid_action" id="hid_action" value="create_state" />
-							<input type="hidden" name="branch_id" id="branch_id" value="<?php echo $intPageId; ?>" />
+                        	<input type="hidden" name="hid_action" id="hid_action" value="create_category" />
+							<input type="hidden" name="category_id" id="category_id" value="<?php echo $intPageId; ?>" />
 							<fieldset>
 							 <div class="control-group">
-								<label class="control-label" for="focusedInput">Country Name</label>
+								<label class="control-label" for="focusedInput">Parent Category</label>
 								<div class="controls">
-									<select name="country_id" id="country_id"  class="input-xlarge focused" >
+									<select name="parent_category_id" id="parent_category_id"  class="input-xlarge focused" >
+										<option value="">-- SELECT ONE --</option>
+										<option value="none">NO PARENT</option>
 										<?php
-										for ($intIndex = 0; $intIndex < count($arrCountryOption); $intIndex++)
-										{
-											echo "<option value='" . $arrCountryOption[$intIndex]['country_id'] . "' ".($arrCountryOption[$intIndex]['country_id']==$arrData[0]['country_id']?'selected':'').">" . $arrCountryOption[$intIndex]['country_name'] . "</option>";
-										}
+											for ($intIndex = 0; $intIndex < count($arrCategoryOption); $intIndex++)
+											{
+												echo "<option value='" . $arrCategoryOption[$intIndex]['category_id'] . "' ".($arrCategoryOption[$intIndex]['category_id']==$arrData[0]['parent_category_id']?'selected':'').">" . $arrCategoryOption[$intIndex]['category_name'] . "</option>";
+											}
 										?>
 									</select>
 								</div>
 							  </div>
 							  <div class="control-group">
-								<label class="control-label" for="focusedInput">State Name</label>
+								<label class="control-label" for="focusedInput">Category Name</label>
 								<div class="controls">
-								  <input class="input-xlarge focused" id="txt_state" name="txt_state" type="text" value="<?php echo (isset($arrData[0]['branch_name'])?$arrData[0]['branch_name']:''); ?>">
+								  <input class="input-xlarge focused" id="txt_category" name="txt_category" type="text" value="<?php echo (isset($arrData[0]['category_name'])?$arrData[0]['category_name']:''); ?>">
 								</div>
 							  </div>
 							 <div class="control-group">

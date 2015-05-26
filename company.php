@@ -1,7 +1,7 @@
 <?php
 require_once('header.php');
-
-$arrRecords = $objControl->getRecords('company_master_new','','','company_name');
+$arrField = array('*');
+$arrRecords = $objControl->getRecords('company_master', null, null, '', $arrField);
 
 ?>
 <div>
@@ -32,8 +32,8 @@ $arrRecords = $objControl->getRecords('company_master_new','','','company_name')
 						  <thead>
 							  <tr>
 								  <th>Company Name</th>
-								  <th>City</th>
-								  <th>Area</th>
+								  <th>Address</th>
+								  <th>Status</th>
 								  <th>Category</th>
 								  <th>Actions</th>
 							  </tr>
@@ -45,24 +45,47 @@ $arrRecords = $objControl->getRecords('company_master_new','','','company_name')
 						  	?>
 
 							<tr>
-								<td><?php echo $arrRecords[$intIndex]['company_name'];?></td>
-								<td class="center"><?php echo $arrRecords[$intIndex]['address1'].'<br>'.$arrRecords[$intIndex]['address2'].'<br>'.$arrRecords[$intIndex]['address3'].', '.$arrRecords[$intIndex]['city'];?></td>
-								<td width="20%"><?php echo $arrRecords[$intIndex]['area'];?></td>
-								<td >
-									<?php echo $arrRecords[$intIndex]['category'];?>
+								<td><?php echo $arrRecords[$intIndex]['full_name'];?></td>
+								<td><?php 	$arrCityRecords = $objControl->getRecords('city_master', 'city_id', $arrRecords[$intIndex]['city_id'], '');
+											$arrStateRecords = $objControl->getRecords('branch_master', 'branch_id', $arrRecords[$intIndex]['state_id'], '');
+											$arrCountryRecords = $objControl->getRecords('country_master', 'country_id', $arrRecords[$intIndex]['country_id'], '');
+									echo $arrCityRecords[0]['city_name'].' ,'.$arrStateRecords[0]['branch_name'].' ,'.$arrCountryRecords[0]['country_name'];?></td>
+								<td class="center" width="20%"><?php
+													if($arrRecords[$intIndex]['status']=='Active')
+													{
+														$strClass = 'label-success';
+														$newStatus = 'Inactive';
+														$btn='btn-danger';
+													}
+													else{
+														$strClass = ' label-warning';
+														$newStatus = 'Active';
+														$btn='btn-success';
+													}
+												?>
+									<span class="label <?php echo $strClass;?>"><?php echo $arrRecords[$intIndex]['status']; ?></span>
+								</td>
+								<td><?php $arrCCRecords = $objControl->getRecords('company_category', 'company_id', $arrRecords[$intIndex]['company_id'], '');
+										
+										 for($intIndex1 =0; $intIndex1 < count($arrCCRecords); $intIndex1++)
+												{
+													$arrCategoryRecords = $objControl->getRecords('category_master', 'category_id', $arrCCRecords[$intIndex1]['category_id'], '');
+														echo $arrCategoryRecords[0]['category_name'].',<br/>';
+												}
+									?>
 								</td>
 								<td class="center">
-									<a class="btn btn-success" href="#">
+									<!--<a class="btn btn-success" href="#">
 										<i class="icon-zoom-in icon-white"></i>  
 										View                                            
-									</a>
-									<a class="btn btn-info" href="create_country.php?country_id=<?php echo $arrRecords[$intIndex]['country_id'];?>">
+									</a>-->
+									<a class="btn btn-info" href="create_company.php?company_id=<?php echo $arrRecords[$intIndex]['company_id'];?>">
 										<i class="icon-edit icon-white"></i>  
 										Edit                                            
 									</a>
-									<a class="btn btn-danger" href="#">
+									<a class="btn btn-danger" href="controller/routes.php?hid_action=update_status&id=<?php echo $arrRecords[$intIndex]['company_id']; ?>&status=<?php echo $arrRecords[$intIndex]['status']; ?>&table_name=company_master&column_name=company_id&page_url=company.php">
 										<i class="icon-trash icon-white"></i> 
-										Delete
+										<?php echo $newStatus; ?>
 									</a>
 								</td>
 							</tr>

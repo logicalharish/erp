@@ -135,8 +135,9 @@ $objModel -> checkSession();
 						<li><a class="ajax-link" href="zone.php"><i class="icon-home"></i><span class="hidden-tablet"> Zone</span></a></li>
 						<li><a class="ajax-link" href="users.php"><i class="icon-eye-open"></i><span class="hidden-tablet"> User</span></a></li>
                         <li><a class="ajax-link" href="module.php"><i class="icon-eye-open"></i><span class="hidden-tablet"> Module</span></a></li>
+						<li><a class="ajax-link" href="category.php"><i class="icon-eye-open"></i><span class="hidden-tablet"> Category</span></a></li>
 						<li><a class="ajax-link" href="website.php"><i class="icon-edit"></i><span class="hidden-tablet"> Website</span></a></li>
-						<li><a class="ajax-link" href="create_company.php"><i class="icon-list-alt"></i><span class="hidden-tablet"> Company</span></a></li>
+						<li><a class="ajax-link" href="company.php"><i class="icon-list-alt"></i><span class="hidden-tablet"> Company</span></a></li>
 						
 					
 					</ul>

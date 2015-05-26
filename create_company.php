@@ -2,12 +2,14 @@
 require_once('header.php');
 $arrField = array('*');
 $intCompanyId = $_REQUEST['company_id'];
-if (isset($intPageId) && $intPageId != '')
+if (isset($intCompanyId) && $intCompanyId != '')
 {
 	$arrData = $objControl->getRecords('company_master', 'company_id', $intCompanyId, '', $arrField);
 }
-
-
+$arrStateRecords = $objControl->getRecords('branch_master', null, null, '', $arrField);
+$arrCountryRecords = $objControl->getRecords('country_master', null, null, '', $arrField);
+$arrCityRecords = $objControl->getRecords('city_master', null, null, '', $arrField);
+$arrCategoryRecords = $objControl->getRecords('category_master', null, null, '', $arrField);
 ?>
 
 <div>
@@ -56,9 +58,16 @@ if (isset($intPageId) && $intPageId != '')
                 </div>
               </div>
               <div class="control-group span6">
-                <label class="control-label" for="focusedInput">Building</label>
+                <label class="control-label" for="focusedInput">Category</label>
                 <div class="controls">
-                  <input class="input-xlarge focused" id="building" name="building" type="text" value="<?php echo (isset($arrData[0]['building']) ? $arrData[0]['building'] : ''); ?>">
+					<select multiple="multiple" name="category_id[]" id="category_id"  class="input-xlarge focused" >
+						<?php
+							for ($intIndex = 0; $intIndex < count($arrCategoryRecords); $intIndex++)
+							{
+								echo "<option value='" . $arrCategoryRecords[$intIndex]['category_id'] . "' ".($arrCategoryRecords[$intIndex]['category_id']==$arrData[0]['category_id']?'selected':'').">" . $arrCategoryRecords[$intIndex]['category_name'] . "</option>";
+							}
+						?>
+					</select>
                 </div>
               </div>
             </div>
@@ -76,17 +85,53 @@ if (isset($intPageId) && $intPageId != '')
                 </div>
               </div>
             </div>
-            <div class="row-fluid">
-              <div class="control-group span6">
-                <label class="control-label" for="focusedInput">City</label>
+			 <div class="row-fluid">
+			  <div class="control-group span6">
+                <label class="control-label" for="focusedInput">Building</label>
                 <div class="controls">
-                  <input class="input-xlarge focused" id="city" name="city" type="text" value="<?php echo (isset($arrData[0]['city']) ? $arrData[0]['city'] : ''); ?>">
+                  <input class="input-xlarge focused" id="building" name="building" type="text" value="<?php echo (isset($arrData[0]['building']) ? $arrData[0]['building'] : ''); ?>">
                 </div>
               </div>
+			  <div class="control-group span6">
+                <label class="control-label" for="focusedInput">City</label>
+                <div class="controls">
+					<select name="city_id" id="city_id"  class="input-xlarge focused" >
+						<?php
+							for ($intIndex = 0; $intIndex < count($arrCityRecords); $intIndex++)
+							{
+								echo "<option value='" . $arrCityRecords[$intIndex]['city_id'] . "' ".($arrCityRecords[$intIndex]['city_id']==$arrData[0]['city_id']?'selected':'').">" . $arrCityRecords[$intIndex]['city_name'] . "</option>";
+							}
+						?>
+					</select>
+                </div>
+              </div>
+            </div>
+            <div class="row-fluid">
+              
               <div class="control-group span6">
                 <label class="control-label" for="focusedInput">State</label>
                 <div class="controls">
-                  <input class="input-xlarge focused" id="state" name="state" type="text" value="<?php echo (isset($arrData[0]['state']) ? $arrData[0]['state'] : ''); ?>">
+					<select name="state_id" id="state_id"  class="input-xlarge focused" >
+						<?php
+							for ($intIndex = 0; $intIndex < count($arrStateRecords); $intIndex++)
+							{
+								echo "<option value='" . $arrStateRecords[$intIndex]['branch_id'] . "' ".($arrStateRecords[$intIndex]['branch_id']==$arrData[0]['state_id']?'selected':'').">" . $arrStateRecords[$intIndex]['branch_name'] . "</option>";
+							}
+						?>
+					</select>
+                </div>
+              </div>
+			  <div class="control-group span6">
+                <label class="control-label" for="focusedInput">Country</label>
+                <div class="controls">
+                  <select name="country_id" id="country_id"  class="input-xlarge focused" >
+						<?php
+							for ($intIndex = 0; $intIndex < count($arrCountryRecords); $intIndex++)
+							{
+								echo "<option value='" . $arrCountryRecords[$intIndex]['country_id'] . "' ".($arrCountryRecords[$intIndex]['country_id']==$arrData[0]['country_id']?'selected':'').">" . $arrCountryRecords[$intIndex]['country_name'] . "</option>";
+							}
+						?>
+					</select>
                 </div>
               </div>
             </div>
