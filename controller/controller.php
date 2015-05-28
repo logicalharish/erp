@@ -132,14 +132,14 @@ class CommonController
 		#$this->dbConnect->debug = true;
 		if($strCondition !='')
 		{
-			$arrData['modified_datetime'] = date('yyyy-mm-dd hh:mm:ss');
+			$arrData['modified_datetime'] = date('y-m-d h:m:s');
 			$arrData['modified_by'] = $_SESSION['user']['user_id'];
 			$this->dbConnect->AutoExecute($strTableName,$arrData,'UPDATE',$strCondition);
 			$strResult = 'Record Added Sucessfully';
 		}
 		else
 		{
-			$arrData['created_datetime'] = date('yyyy-mm-dd hh:mm:ss');
+			$arrData['created_datetime'] = date('y-m-d h:m:s');
 			$arrData['created_by'] = $_SESSION['user']['user_id'];
 			$this->dbConnect->AutoExecute($strTableName,$arrData,'INSERT');
 			$strResult = 'Record Added Sucessfully';

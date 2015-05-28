@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 26, 2015 at 02:52 PM
+-- Generation Time: May 28, 2015 at 11:23 AM
 -- Server version: 5.5.27
 -- PHP Version: 5.4.7
 
@@ -571,15 +571,21 @@ CREATE TABLE IF NOT EXISTS `company_advertise` (
   `year` varchar(100) DEFAULT NULL,
   `ad_date` varchar(10) DEFAULT NULL,
   `page` varchar(500) DEFAULT NULL,
-  PRIMARY KEY (`company_advertise_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+  `created_datetime` datetime DEFAULT NULL,
+  `created_by` int(11) DEFAULT NULL,
+  `modified_datetime` datetime DEFAULT NULL,
+  `modified_by` int(11) DEFAULT NULL,
+  `company_id` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`company_advertise_id`),
+  KEY `company_id` (`company_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `company_advertise`
 --
 
-INSERT INTO `company_advertise` (`company_advertise_id`, `data_source`, `ad_city`, `budget`, `year`, `ad_date`, `page`) VALUES
-(2, 'data source', 'amd', '25000', '2015', '05/12/2015', 'no page');
+INSERT INTO `company_advertise` (`company_advertise_id`, `data_source`, `ad_city`, `budget`, `year`, `ad_date`, `page`, `created_datetime`, `created_by`, `modified_datetime`, `modified_by`, `company_id`) VALUES
+(2, 'data source', 'amd', '25000', '2015', '05/12/2015', 'no page', NULL, NULL, NULL, NULL, 13);
 
 -- --------------------------------------------------------
 
@@ -619,15 +625,22 @@ CREATE TABLE IF NOT EXISTS `company_contact` (
   `contact_mobile` varchar(20) DEFAULT NULL,
   `contact_email` varchar(100) DEFAULT NULL,
   `designation` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`company_contact_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+  `created_datetime` datetime DEFAULT NULL,
+  `created_by` int(11) DEFAULT NULL,
+  `modified_datetime` datetime DEFAULT NULL,
+  `modified_by` int(11) DEFAULT NULL,
+  `company_id` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`company_contact_id`),
+  KEY `company_id` (`company_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=27 ;
 
 --
 -- Dumping data for table `company_contact`
 --
 
-INSERT INTO `company_contact` (`company_contact_id`, `contact_full_name`, `dob`, `dom`, `contact_mobile`, `contact_email`, `designation`) VALUES
-(2, 'kajal', '05/12/2015', '05/13/2015', '8373838373', 'kajalpatel0377@gmail.com', 'php developer');
+INSERT INTO `company_contact` (`company_contact_id`, `contact_full_name`, `dob`, `dom`, `contact_mobile`, `contact_email`, `designation`, `created_datetime`, `created_by`, `modified_datetime`, `modified_by`, `company_id`) VALUES
+(2, 'kajal', '05/12/2015', '05/13/2015', '8373838373', 'kajalpatel0377@gmail.com', 'php developer', '2015-05-28 02:11:40', 1, '2015-05-28 02:13:55', 1, 13),
+(3, 'kk', '05/18/2015', '05/25/2015', '927262536', 'kk@site.in', 'designation', '2015-05-28 02:11:35', 1, '2015-05-28 02:13:57', NULL, 13);
 
 -- --------------------------------------------------------
 
@@ -666,22 +679,19 @@ CREATE TABLE IF NOT EXISTS `company_master` (
   `landline` varchar(50) DEFAULT NULL,
   `landline_dis` enum('Yes','No') DEFAULT NULL,
   `landline_dnd` enum('Yes','No') DEFAULT NULL,
-  `company_profile_id` bigint(20) DEFAULT NULL,
-  `company_contact_id` bigint(20) DEFAULT NULL,
-  `company_advertise_id` bigint(20) DEFAULT NULL,
-  PRIMARY KEY (`company_id`),
-  UNIQUE KEY `company_profile_id` (`company_profile_id`),
-  UNIQUE KEY `company_profile_id_2` (`company_profile_id`,`company_contact_id`,`company_advertise_id`),
-  KEY `company_contact_id` (`company_contact_id`,`company_advertise_id`),
-  KEY `company_advertise_id` (`company_advertise_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
+  `created_datetime` datetime DEFAULT NULL,
+  `created_by` int(11) DEFAULT NULL,
+  `modified_datetime` datetime DEFAULT NULL,
+  `modified_by` int(11) DEFAULT NULL,
+  PRIMARY KEY (`company_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
 
 --
 -- Dumping data for table `company_master`
 --
 
-INSERT INTO `company_master` (`company_id`, `full_name`, `short_name`, `est_date`, `building`, `street`, `landmark`, `country_id`, `city_id`, `state_id`, `area`, `pincode`, `latitude`, `longitute`, `is_verified`, `nob`, `turn_over`, `status`, `email`, `email_dis`, `email_dnd`, `website`, `website_dis`, `website_dnd`, `mobile`, `mobile_dis`, `mobile_dnd`, `landline`, `landline_dis`, `landline_dnd`, `company_profile_id`, `company_contact_id`, `company_advertise_id`) VALUES
-(13, 'kajal', 'kk', '05/27/2015', 'gopal palace', 'naheru nagar', 'nh', 1, 1, 1, 'naheru nagar', '372523', '23.023046', '72.537736', 'Yes', 'Nature of Bussiness', 'Turn Over', 'Active', 'kajalpatel0377@gmail.com', 'Yes', 'No', 'www.kk.com', 'No', 'Yes', '9168753456', 'Yes', 'Yes', '43526789', 'Yes', 'No', 5, 2, 2);
+INSERT INTO `company_master` (`company_id`, `full_name`, `short_name`, `est_date`, `building`, `street`, `landmark`, `country_id`, `city_id`, `state_id`, `area`, `pincode`, `latitude`, `longitute`, `is_verified`, `nob`, `turn_over`, `status`, `email`, `email_dis`, `email_dnd`, `website`, `website_dis`, `website_dnd`, `mobile`, `mobile_dis`, `mobile_dnd`, `landline`, `landline_dis`, `landline_dnd`, `created_datetime`, `created_by`, `modified_datetime`, `modified_by`) VALUES
+(13, 'kajal', 'kk', '05/27/2015', 'gopal palace', 'naheru nagar', 'nh', 1, 1, 1, 'naheru nagar', '384658', '23.023046', '72.537736', 'Yes', 'Nature of Bussiness', 'Turn Over', 'Active', 'kajalpatel0377@gmail.com', 'No', 'No', 'www.kkp.com', 'Yes', 'Yes', '9168753456', 'No', 'Yes', '43526789', 'Yes', 'No', NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1175,15 +1185,21 @@ CREATE TABLE IF NOT EXISTS `company_profile` (
   `friday_closed` enum('Yes','No') DEFAULT NULL,
   `saturday_closed` enum('Yes','No') DEFAULT NULL,
   `payment_options` varchar(1000) DEFAULT NULL,
-  PRIMARY KEY (`company_profile_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+  `created_datetime` datetime DEFAULT NULL,
+  `created_by` int(11) DEFAULT NULL,
+  `modified_datetime` datetime DEFAULT NULL,
+  `modified_by` int(11) DEFAULT NULL,
+  `company_id` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`company_profile_id`),
+  KEY `company_id` (`company_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `company_profile`
 --
 
-INSERT INTO `company_profile` (`company_profile_id`, `company_description`, `sunday_from`, `sunday_to`, `monday_from`, `monday_to`, `tuesday_from`, `tuesday_to`, `wednesday_from`, `wednesday_to`, `thursday_from`, `thursday_to`, `friday_from`, `friday_to`, `saturday_from`, `saturday_to`, `sunday_closed`, `monday_closed`, `tuesday_closed`, `wednesday_closed`, `thursday_closed`, `friday_closed`, `saturday_closed`, `payment_options`) VALUES
-(5, '<p>this is company profile</p>\r\n', '07:00', '01:00', '10:00', '18:00', '10:00', '18:00', '10:00', '18:00', '10:00', '18:00', '10:00', '18:00', '10:00', '18:00', 'No', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'No', 'Cash,Master Card,Visa Card,Debit Card,Money Orders,Cheques,Credit Card');
+INSERT INTO `company_profile` (`company_profile_id`, `company_description`, `sunday_from`, `sunday_to`, `monday_from`, `monday_to`, `tuesday_from`, `tuesday_to`, `wednesday_from`, `wednesday_to`, `thursday_from`, `thursday_to`, `friday_from`, `friday_to`, `saturday_from`, `saturday_to`, `sunday_closed`, `monday_closed`, `tuesday_closed`, `wednesday_closed`, `thursday_closed`, `friday_closed`, `saturday_closed`, `payment_options`, `created_datetime`, `created_by`, `modified_datetime`, `modified_by`, `company_id`) VALUES
+(5, '<p>this is company profile</p>\r\n', '07:00', '01:00', '10:00', '18:00', '10:00', '18:00', '10:00', '18:00', '10:00', '18:00', '10:00', '18:00', '10:00', '18:00', 'No', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'No', 'Cash,Master Card,Visa Card,Debit Card,Money Orders,Cheques,Credit Card', NULL, NULL, NULL, NULL, 13);
 
 -- --------------------------------------------------------
 
@@ -1401,19 +1417,29 @@ CREATE TABLE IF NOT EXISTS `zone_master` (
 --
 
 --
+-- Constraints for table `company_advertise`
+--
+ALTER TABLE `company_advertise`
+  ADD CONSTRAINT `company_advertise_ibfk_1` FOREIGN KEY (`company_id`) REFERENCES `company_master` (`company_id`) ON DELETE CASCADE;
+
+--
 -- Constraints for table `company_category`
 --
 ALTER TABLE `company_category`
-  ADD CONSTRAINT `company_category_ibfk_2` FOREIGN KEY (`company_id`) REFERENCES `company_master` (`company_id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `company_category_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `category_master` (`category_id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `company_category_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `category_master` (`category_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `company_category_ibfk_2` FOREIGN KEY (`company_id`) REFERENCES `company_master` (`company_id`) ON UPDATE CASCADE;
 
 --
--- Constraints for table `company_master`
+-- Constraints for table `company_contact`
 --
-ALTER TABLE `company_master`
-  ADD CONSTRAINT `company_master_ibfk_1` FOREIGN KEY (`company_profile_id`) REFERENCES `company_profile` (`company_profile_id`),
-  ADD CONSTRAINT `company_master_ibfk_2` FOREIGN KEY (`company_contact_id`) REFERENCES `company_contact` (`company_contact_id`),
-  ADD CONSTRAINT `company_master_ibfk_3` FOREIGN KEY (`company_advertise_id`) REFERENCES `company_advertise` (`company_advertise_id`);
+ALTER TABLE `company_contact`
+  ADD CONSTRAINT `company_id` FOREIGN KEY (`company_id`) REFERENCES `company_master` (`company_id`) ON UPDATE CASCADE;
+
+--
+-- Constraints for table `company_profile`
+--
+ALTER TABLE `company_profile`
+  ADD CONSTRAINT `company_profile_ibfk_1` FOREIGN KEY (`company_id`) REFERENCES `company_master` (`company_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `user_module_master`
