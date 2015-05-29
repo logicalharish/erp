@@ -8,6 +8,7 @@ if (isset($intCompanyId) && $intCompanyId != '')
 	$arrCompanyProfileData = $objControl->getRecords('company_profile', 'company_id', $intCompanyId, '', $arrField);
 	$arrCompanyContactData = $objControl->getRecords('company_contact', 'company_id', $intCompanyId, '', $arrField);
 	$arrCompanyAdvertiseData = $objControl->getRecords('company_advertise', 'company_id', $intCompanyId, '', $arrField);
+	$arrCompanyCategoryData = $objControl->getRecords('company_category', 'company_id', $intCompanyId, '', $arrField);
 }
 $arrStateRecords = $objControl->getRecords('branch_master', null, null, '', $arrField);
 $arrCountryRecords = $objControl->getRecords('country_master', null, null, '', $arrField);
@@ -31,7 +32,7 @@ $arrCategoryRecords = $objControl->getRecords('category_master', null, null, '',
     <div class="box-content">
       <form class="form-horizontal" method="post" action="controller/routes.php">
         <input type="hidden" name="hid_action" id="hid_action" value="create_company" />
-		<input type="hidden" name="company__id" id="company_id" value="<?php echo $_REQUEST['company_id']; ?>" />
+		<input type="hidden" name="company_id" id="company_id" value="<?php echo $intCompanyId; ?>" />
         <input type="hidden" name="company_profile_id" id="company_profile_id" value="<?php echo (isset($arrCompanyProfileData[0]['company_profile_id']) ? $arrCompanyProfileData[0]['company_profile_id'] : ''); ?>" />
 		<input type="hidden" name="company_advertise_id" id="company_advertise_id" value="<?php echo (isset($arrCompanyAdvertiseData[0]['company_advertise_id']) ? $arrCompanyAdvertiseData[0]['company_advertise_id'] : ''); ?>" />
         <div id="tabs">
@@ -70,7 +71,13 @@ $arrCategoryRecords = $objControl->getRecords('category_master', null, null, '',
 						<?php
 							for ($intIndex = 0; $intIndex < count($arrCategoryRecords); $intIndex++)
 							{
-								echo "<option value='" . $arrCategoryRecords[$intIndex]['category_id'] . "' ".($arrCategoryRecords[$intIndex]['category_id']==$arrData[0]['category_id']?'selected':'').">" . $arrCategoryRecords[$intIndex]['category_name'] . "</option>";
+								echo "<option value='" . $arrCategoryRecords[$intIndex]['category_id']."'";
+								for ($intIndex1 = 0; $intIndex1 < count($arrCompanyCategoryData); $intIndex1++){
+										 if($arrCategoryRecords[$intIndex]['category_id']==$arrCompanyCategoryData[$intIndex1]['category_id']){
+											echo 'selected';
+										 }
+							}
+							echo ">".$arrCategoryRecords[$intIndex]['category_name'] . "</option>";
 							}
 						?>
 					</select>
@@ -197,9 +204,10 @@ $arrCategoryRecords = $objControl->getRecords('category_master', null, null, '',
               <div class="control-group span6">
                 <label class="control-label" for="focusedInput">Status</label>
                 <div class="controls">
-                  <select class="input-xlarge focused" name="status" id="status">
-                    <option value="status">Status</option>
-                  </select>
+					<select class="input-xlarge focused" id="status" name="status" >
+						<option <?php echo (isset($arrData[0]['status']) && $arrData[0]['status'] == 'Active' ? 'selected="selected"' : ''); ?> value="Active">Active</option>
+						<option <?php echo (isset($arrData[0]['status']) && $arrData[0]['status'] == 'Inactive' ? 'selected="selected"' : ''); ?> value="Inactive">Inactive</option>
+					</select>
                 </div>
               </div>
             </div>
@@ -785,14 +793,81 @@ $arrCategoryRecords = $objControl->getRecords('category_master', null, null, '',
 						</div>
 					</div>
                 </div>
+				<div class="row-fluid">
+					<div class="control-group span6">
+					  <label class="control-label" for="focusedInput">Status</label>
+					  <div class="controls">
+						<select class="input-xlarge focused" id="company_profile_status" name="company_profile_status" >
+						  <option <?php echo (isset($arrCompanyProfileData[0]['company_profile_status']) && $arrCompanyProfileData[0]['company_profile_status'] == 'Active' ? 'selected="selected"' : '');?> value="Active">Active</option>
+						  <option <?php echo (isset($arrCompanyProfileData[0]['company_profile_status']) && $arrCompanyProfileData[0]['company_profile_status'] == 'Inactive' ? 'selected="selected"' : ''); ?> value="Inactive">Inactive</option>
+						</select>
+					  </div>
+					</div>
+				</div>
               </div>
             </div>
           </div>
           <div id="tabs-3">
 			<div>
 				<div class="row-fluid">
+				  <div class="control-group span6">
+					<label class="control-label" for="focusedInput">Full Name</label>
+					<div class="controls">
+						<input type="hidden" id="c_id" name="c_id" value="">
+					  <input class="input-xlarge focused" id="c_name" name="c_name" type="text" value="">
+					</div>
+				  </div>
+				  <div class="control-group span6">
+					<label class="control-label" for="focusedInput">Date Of Birth</label>
+					<div class="controls">
+					  <input class="input-xlarge datepicker" id="c_dob" name="c_dob" type="text" value="">
+					</div>
+				  </div>
+				</div>
+				<div class="row-fluid">
+				  <div class="control-group span6">
+					<label class="control-label" for="focusedInput">Date Of Marriage</label>
+					<div class="controls">
+					  <input class="input-xlarge datepicker" id="c_dom" name="c_dom" type="text" value="">
+					</div>
+				  </div>
+				  <div class="control-group span6">
+					<label class="control-label" for="focusedInput">Mobile</label>
+					<div class="controls">
+					  <input class="input-xlarge focused" id="c_mobile" name="c_mobile" type="text" value="">
+					</div>
+				  </div>
+				</div>
+				<div class="row-fluid">
+				  <div class="control-group span6">
+					<label class="control-label" for="focusedInput">E-Mail</label>
+					<div class="controls">
+					  <input class="input-xlarge focused" id="c_email" name="c_email" type="text" value="">
+					</div>
+				  </div>
+				  <div class="control-group span6">
+					<label class="control-label" for="focusedInput">Designation</label>
+					<div class="controls">
+					  <input class="input-xlarge focused" id="c_designation" name="c_designation" type="text" value="">
+					</div>
+				  </div>
+				</div>
+				<div class="row-fluid">
+				<div class="control-group span6">
+				  <label class="control-label" for="focusedInput">Status</label>
+				  <div class="controls">
+					<select class="input-xlarge focused" id="c_status" name="c_status" >
+					  <option value="Active">Active</option>
+					  <option value="Inactive">Inactive</option>
+					</select>
+				  </div>
+				</div>
+			  </div>
+				<div class="row-fluid">
 					<div class="control-group span6">
-						<input class="btn btn-success" id="addrows" type="button" value="Add Row"><i class=icon-plus icon-white"></i></input>
+						<div class="controls">
+							<input class="btn btn-success" id="addrows" type="button" value="Add"></input>
+						</div>
 					</div>
 				</div>
 				<table class="table table-striped table-bordered bootstrap-datatable" id="mytable">
@@ -804,15 +879,17 @@ $arrCategoryRecords = $objControl->getRecords('category_master', null, null, '',
 								  <th>Mobile</th>
                                   <th>E-Mail</th>
                                   <th>Designation</th>
+								  <th>Status</th>
 								  <th>Actions</th>
 							  </tr>
 						</thead>  
-						<tbody>						  
+						<tbody>	
 							<?php 
 								if(isset($arrCompanyContactData)){
 									for($intIndex = 0; $intIndex <count($arrCompanyContactData); $intIndex++)
 										{
 							?>
+							
 							<tr id="visibleDiv">
 								<td><input type="hidden" name="company_contact_id[]" id="company_contact_id" value="<?php echo (isset($arrCompanyContactData[$intIndex]['company_contact_id']) ? $arrCompanyContactData[$intIndex]['company_contact_id'] : ''); ?>" />
 									<input class="input-small focused" id="contact_full_name" name="contact_full_name[]" type="text" value="<?php echo (isset($arrCompanyContactData[$intIndex]['contact_full_name']) ? $arrCompanyContactData[$intIndex]['contact_full_name'] : ''); ?>"></td>
@@ -821,7 +898,11 @@ $arrCategoryRecords = $objControl->getRecords('category_master', null, null, '',
 								<td class="center"><input class="input-small focused" id="contact_mobile" name="contact_mobile[]" type="text" value="<?php echo (isset($arrCompanyContactData[$intIndex]['contact_mobile']) ? $arrCompanyContactData[$intIndex]['contact_mobile'] : ''); ?>"></td>
                                 <td class="center"><input class="input-small focused" id="contact_email" name="contact_email[]" type="email" value="<?php echo (isset($arrCompanyContactData[$intIndex]['contact_email']) ? $arrCompanyContactData[$intIndex]['contact_email'] : ''); ?>"></td>
 								<td class="center"><input class="input-small focused" id="designation" name="designation[]" type="text" value="<?php echo (isset($arrCompanyContactData[$intIndex]['designation']) ? $arrCompanyContactData[$intIndex]['designation'] : ''); ?>"></td>
-								<td class="center"> <input class="btn btn-success" id="removeRows" type="button" value="Remove"><i class=icon-plus icon-white"></i></input></td>
+								<td class="center"> <select class="input-small focused" id="contact_status" name="contact_status[]" >
+													  <option <?php echo (isset($arrCompanyContactData[$intIndex]['contact_status']) && $arrCompanyContactData[$intIndex]['contact_status'] == 'Active' ? 'selected="selected"' : ''); ?> value="Active">Active</option>
+													  <option <?php echo (isset($arrCompanyContactData[$intIndex]['contact_status']) && $arrCompanyContactData[$intIndex]['contact_status'] == 'Inactive' ? 'selected="selected"' : ''); ?> value="Inactive">Inactive</option>
+													</select>
+								<td class="center"><input class="btn btn-success" id="removeRows" type="button" value="Remove"></input></td>
 							</tr>
 							<?php
 										}
@@ -874,21 +955,22 @@ $arrCategoryRecords = $objControl->getRecords('category_master', null, null, '',
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-        <fieldset>
-          <div class="row-fluid" style="height: 20px"></div>
-          <div class="row-fluid">
+			<div class="row-fluid">
             <div class="control-group span6">
               <label class="control-label" for="focusedInput">Status</label>
               <div class="controls">
-                <select class="input-xlarge focused" id="sel_status" name="status" >
-                  <option <?php echo (isset($arrData[0]['status']) && $arrData[0]['status'] == 'Active' ? 'selected="selected"' : ''); ?> value="Active">Active</option>
-                  <option <?php echo (isset($arrData[0]['status']) && $arrData[0]['status'] == 'Inactive' ? 'selected="selected"' : ''); ?> value="Inactive">Inactive</option>
+                <select class="input-xlarge focused" id="ad_status" name="ad_status" >
+                  <option <?php echo (isset($arrCompanyAdvertiseData[0]['ad_status']) && $arrCompanyAdvertiseData[0]['ad_status'] == 'Active' ? 'selected="selected"' : ''); ?> value="Active">Active</option>
+                  <option <?php echo (isset($arrCompanyAdvertiseData[0]['ad_status']) && $arrCompanyAdvertiseData[0]['ad_status'] == 'Inactive' ? 'selected="selected"' : ''); ?> value="Inactive">Inactive</option>
                 </select>
               </div>
             </div>
           </div>
+         </div>
+        </div>
+        <fieldset>
+          <div class="row-fluid" style="height: 20px"></div>
+          
           <div class="form-actions">
             <button type="submit" class="btn btn-primary">Save changes</button>
 			<button type="button" class="btn" onclick="javascript:history.go(-1)">Cancel</button>
@@ -908,39 +990,31 @@ require_once('footer.php');
 	$(document).ready(function() {
 		//$("#visibleDiv").css("visibility","visible");
 		$("#addrows").click(function () {
-			 $("#mytable").each(function () {
-				 var tds = '<tr>';
-				 jQuery.each($('tr:last td', this), function () {
-					 tds += '<td>' + $(this).html() + '</td>';
-				 });
-				 tds += '</tr>';
-				 if ($('tbody', this).length > 0) {
-					 $('tbody', this).append(tds);
-				 } else {
-					 $(this).append(tds);
-				 }
-			 });
+			  var c_name = $('#c_name').val();
+			  var c_dob = $('#c_dob').val();
+			  var c_dom = $('#c_dom').val();
+			  var c_mobile = $('#c_mobile').val();
+			  var c_email = $('#c_email').val();
+			  var c_designation = $('#c_designation').val();
+			  var c_status = $('#c_status').val();
+			  $('#mytable tr').last().after('<tr id="visibleDiv"><td><input type="hidden" name="company_contact_id[]" id="company_contact_id" value="" /><input class="input-small focused"   id="contact_full_name" name="contact_full_name[]" type="text" value="'+c_name+'"></td><td class="center"><input type="text"   class="input-small datepicker" id="dob" name="dob[]" value="'+c_dob+'"></td><td class="center"><input type="text"   class="input-small datepicker" id="dom" name="dom[]"value="'+c_dom+'"></td><td class="center"><input class="input-small focused"   id="contact_mobile" name="contact_mobile[]" type="text" value="'+c_mobile+'"></td><td class="center"><input class="input-small focused"   id="contact_email" name="contact_email[]" type="email" value="'+c_email+'"></td><td class="center"><input class="input-small focused"   id="designation" name="designation[]" type="text" value="'+c_designation+'"></td><td class="center"><select class="input-small focused" id="contact_status" name="contact_status[]" ><option value="Active">Active</option><option value="Inactive">Inactive</option></select></td><td class="center"><input class="btn btn-success" id="removeRows" type="button" value="Remove"></input></td></tr>');
+			$('#c_name').val("");$('#c_dob').val("");$('#c_dom').val("");$('#c_mobile').val("");$('#c_email').val("");$('#c_designation').val("");$('#c_status').val("");
+			//  $('table').append('<tr><td>' + newName + '</td></tr>')
 		});
+		
 		$("#removeRows").live('click', function(event) {
 			$(this).parent().parent().remove();
 		});
+		
+		$("#editRows").live('click', function(event){
+					$('#c_name').val($('#contact_full_name').val());
+					$('#c_dob').val($('#dob').val());
+					$('#c_dom').val($('#dom').val());
+					$('#c_mobile').val($('#contact_mobile').val());
+					$('#c_email').val($('#contact_email').val());
+					$('#c_status').val($('#contact_status').val());
+					$('#c_designation').val($('#designation').val());
+			});
 	});
 	
-	/*$(document).ready(function(){
-		 var cnt = 2;
-		 $("#addrows").click(function(){
-			$('#mytable tr').last().after('<tr><td><input class="input-small focused" id="contact_full_name" name="contact_full_name" type="text" value=""></td><td class="center"><input type="text" class="input-small datepicker" id="dob" name="dob" value=""></td><td class="center"><input type="text" class="input-small datepicker" id="dom" name="dom"value=""></td><td class="center"><input class="input-small focused" id="contact_mobile" name="contact_mobile" type="text" value=""></td><td class="center"><input class="input-small focused" id="contact_email" name="contact_email" type="email" value=""></td><td class="center"><input class="input-small focused" id="designation" name="designation" type="text" value=""></td><td class="center"><input class="btn btn-success" id="addrows" type="button" value="Add"><i class=icon-plus icon-white"></i></input></td></tr>');
-			cnt++;
-		 });
-		 
-		$("#removeRows").click(function(){
-			if($('#mytable tr').size()>1){
-			 $('#mytable tr').remove();
-			 }else{
-			 alert('One row should be present in table');
-			 }
-		 });
- 
-	});*/
-
 </script>

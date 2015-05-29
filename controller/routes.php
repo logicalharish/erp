@@ -306,9 +306,7 @@ switch ($strAction)
 		break;
 		case 'create_company':
 			$intcompanyId = $_REQUEST['company_id'];
-			$intcompanyProfileId = $_REQUEST['company_profile_id'];
-			$intcompanyContactId=array();
-			$intcompanyContactId = $_REQUEST['company_contact_id'];
+			
 			$intcompanyAdvertiseId = $_REQUEST['company_advertise_id'];
 			$arrData['full_name'] = $_REQUEST['full_name'];
 			$arrData['short_name'] = $_REQUEST['short_name'];
@@ -327,6 +325,9 @@ switch ($strAction)
 			$arrData['nob'] = $_REQUEST['nob'];
 			$arrData['turn_over'] = $_REQUEST['turn_over'];
 			$arrData['status'] = $_REQUEST['status'];
+			$arrData['company_profile_status'] = $_REQUEST['company_profile_status'];
+			$arrData['contact_status'] = $_REQUEST['contact_status'];
+			$arrData['ad_status'] = $_REQUEST['ad_status'];
 			$arrData['email'] = $_REQUEST['email'];
 			$arrData['email_dis'] = isset($_REQUEST['email_dis']) ? $_REQUEST['email_dis'] : 'No' ;
 			$arrData['email_dnd'] = isset($_REQUEST['email_dnd']) ? $_REQUEST['email_dnd'] : 'No' ;
@@ -340,21 +341,31 @@ switch ($strAction)
 			$arrData['landline_dis'] = isset($_REQUEST['landline_dis']) ? $_REQUEST['landline_dis'] : 'No' ;
 			$arrData['landline_dnd'] = isset($_REQUEST['landline_dnd']) ? $_REQUEST['landline_dnd'] : 'No' ;
 			
-			$arrCat = $_REQUEST['category_id'];
-				foreach ($arrCat as $categories)
-				{
-					$arrData['category_id']=$categories;
-					$objControl->createRecord($arrData, 'company_category');
-				}
 			if ($intcompanyId != '')
 			{
-				$strCondition = "company_id='$intCompanyId'";
+				$strCondition = "company_id='$intcompanyId'";
 				$objControl->createRecord($arrData, "company_master", $strCondition);
 				$arrData['company_id']= $objControl->dbConnect->Insert_ID();
 			}else{
 				$objControl->createRecord($arrData, 'company_master');
 				$arrData['company_id']= $objControl->dbConnect->Insert_ID();
 			}
+			
+			$arrCat = $_REQUEST['category_id'];
+				foreach ($arrCat as $categories)
+				{
+					if ($intcompanyId != '')
+					{
+						$arrData['category_id']=$categories;
+						$strCondition = "company_id='$intcompanyId'";
+						$objControl->createRecord($arrData, "company_category", $strCondition);
+						//$arrData['company_id']= $objControl->dbConnect->Insert_ID();
+					}else{
+						$arrData['category_id']=$categories;
+						$objControl->createRecord($arrData, 'company_category');
+					}
+				}
+			$intcompanyProfileId = $_REQUEST['company_profile_id'];
 			$arrData['company_description'] = $_REQUEST['company_description'];
 			$arrData['sunday_from'] = $_REQUEST['sunday_from'];
 			$arrData['sunday_to'] = $_REQUEST['sunday_to'];
@@ -387,6 +398,7 @@ switch ($strAction)
 				}
 		//	$arrData['company_profile_id']= $objControl->dbConnect->Insert_ID();
 			
+			$intcompanyContactId = $_REQUEST['company_contact_id'];
 			$arrContact = $_REQUEST['contact_full_name'];
 			$arrDOBContact = $_REQUEST['dob'];
 			$arrDOMContact = $_REQUEST['dom'];
@@ -402,10 +414,11 @@ switch ($strAction)
 						$arrData['contact_mobile']=$arrmobileContact[$intContact];
 						$arrData['contact_email']=$arremailContact[$intContact];
 						$arrData['designation']=$arrdesiContact[$intContact];
-							if ($count($intcompanyContactId) > 0)
+							if ($intcompanyContactId[$intContact] != '')
 							{
-								$strCondition = "company_contact_id='$intcompanyContactId[$intContact]'";
-								$objControl->createRecord($arrData, "company_contact", $strCondition);
+								$contactId=$intcompanyContactId[$intContact];
+								$strCondition = "company_contact_id='$contactId'";
+								$objControl->createRecord($arrData, 'company_contact', $strCondition);
 							}else{
 								$objControl->createRecord($arrData, 'company_contact');
 							}
