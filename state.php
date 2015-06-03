@@ -61,7 +61,7 @@ $arrRecords = $objControl->getRecords('branch_master', null, null, '', $arrField
 								?>
 								<span class="label <?php echo $strClass;?>"><?php echo $arrRecords[$intIndex]['status']; ?></span>
 							</td>
-							<td class="center"><?php echo $arrRecords[$intIndex]['created_dateime']; ?></td>
+							<td class="center"><?php echo $arrRecords[$intIndex]['created_datetime']; ?></td>
 
 
 							<td class="center">

@@ -53,14 +53,18 @@ $arrRecords = $objControl->getRecords('city_master', null, null, '', $arrField);
 									if($arrRecords[$intIndex]['status']=='Active')
 									{
 										$strClass = 'label-success';
+										$newStatus = 'Inactive';
+										$btn='btn-danger';
 									}
 									else{
 										$strClass = 'label-warning';
+										$newStatus = 'Active';
+										$btn='btn-success';
 									}
 								?>
 								<span class="label <?php echo $strClass;?>"><?php echo $arrRecords[$intIndex]['status']; ?></span>
 							</td>
-							<td class="center"><?php echo $arrRecords[$intIndex]['created_dateime']; ?></td>
+							<td class="center"><?php echo $arrRecords[$intIndex]['created_datetime']; ?></td>
 
 
 							<td class="center">
@@ -72,7 +76,7 @@ $arrRecords = $objControl->getRecords('city_master', null, null, '', $arrField);
 								
 								<a class="btn btn-danger" href="controller/routes.php?hid_action=update_status&id=<?php echo $arrRecords[$intIndex]['city_id']; ?>&status=<?php echo $arrRecords[$intIndex]['status']; ?>&table_name=city_master&column_name=city_id&page_url=city.php">
 									<i class="icon-trash icon-white"></i> 
-									Inactive
+									<?php echo $newStatus; ?>
 								</a>
 							</td>
 						</tr>

@@ -8,7 +8,12 @@ if (isset($intPageId) && $intPageId != '')
 }
 	$arrField = array('category_id', 'category_name');
 	$arrCategoryOption = $objControl->getRecords('category_master', null, null, 'category_name', $arrField);
-
+	if($arrData[0]['parent_category_id']==0){
+		$parentCategoryId=$arrData[0]['category_id'];
+	}else{
+		$parentCategoryId=$arrData[0]['parent_category_id'];
+	}
+	
 ?>
 	<div>
 		<ul class="breadcrumb">
@@ -44,7 +49,7 @@ if (isset($intPageId) && $intPageId != '')
 										<?php
 											for ($intIndex = 0; $intIndex < count($arrCategoryOption); $intIndex++)
 											{
-												echo "<option value='" . $arrCategoryOption[$intIndex]['category_id'] . "' ".($arrCategoryOption[$intIndex]['category_id']==$arrData[0]['parent_category_id']?'selected':'').">" . $arrCategoryOption[$intIndex]['category_name'] . "</option>";
+												echo "<option value='" . $arrCategoryOption[$intIndex]['category_id'] . "' ".($arrCategoryOption[$intIndex]['category_id']==$parentCategoryId?'selected':'').">" . $arrCategoryOption[$intIndex]['category_name'] . "</option>";
 											}
 										?>
 									</select>

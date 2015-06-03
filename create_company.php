@@ -19,7 +19,7 @@ $arrCategoryRecords = $objControl->getRecords('category_master', null, null, '',
 
 <div>
   <ul class="breadcrumb">
-    <li> <a href="#">Home</a> <span class="divider">/</span> </li>
+    <li> <a href="index.php">Home</a> <span class="divider">/</span> </li>
     <li> <a href="company.php">Company</a><span class="divider">/</span> </li>
     <li> Add Company </li>
   </ul>
@@ -30,7 +30,7 @@ $arrCategoryRecords = $objControl->getRecords('category_master', null, null, '',
       <h2><i class="icon-edit"></i>Create Company</h2>
     </div>
     <div class="box-content">
-      <form class="form-horizontal" method="post" action="controller/routes.php">
+      <form class="form-horizontal" id="form" method="post" action="controller/routes.php">
         <input type="hidden" name="hid_action" id="hid_action" value="create_company" />
 		<input type="hidden" name="company_id" id="company_id" value="<?php echo $intCompanyId; ?>" />
         <input type="hidden" name="company_profile_id" id="company_profile_id" value="<?php echo (isset($arrCompanyProfileData[0]['company_profile_id']) ? $arrCompanyProfileData[0]['company_profile_id'] : ''); ?>" />
@@ -45,29 +45,29 @@ $arrCategoryRecords = $objControl->getRecords('category_master', null, null, '',
           <div id="tabs-1">
             <div class="row-fluid">
               <div class="control-group span6">
-                <label class="control-label" for="focusedInput">Full  Name</label>
+                <label class="control-label" for="full_name">Full Name</label>
                 <div class="controls">
-                  <input class="input-xlarge focused" id="full_name" name="full_name" type="text" value="<?php echo (isset($arrData[0]['full_name']) ? $arrData[0]['full_name'] : ''); ?>">
+                  <input class="input-xlarge focused required" id="full_name"  data-trim data-min-chars="3" maxlength="128" name="full_name" type="text" value="<?php echo (isset($arrData[0]['full_name']) ? $arrData[0]['full_name'] : ''); ?>">
                 </div>
               </div>
               <div class="control-group span6">
-                <label class="control-label" for="focusedInput">Short Name</label>
+                <label class="control-label" for="short_name">Short Name</label>
                 <div class="controls">
-                  <input class="input-xlarge focused" id="short_name" name="short_name" type="text" value="<?php echo (isset($arrData[0]['short_name']) ? $arrData[0]['short_name'] : ''); ?>">
+                  <input class="input-xlarge focused required" id="short_name" data-trim data-min-chars="3" maxlength="23" name="short_name" type="text" value="<?php echo (isset($arrData[0]['short_name']) ? $arrData[0]['short_name'] : ''); ?>">
                 </div>
               </div>
             </div>
             <div class="row-fluid">
               <div class="control-group span6">
-                <label class="control-label" for="focusedInput">Establish Date</label>
+                <label class="control-label" for="est_date">Establish Date</label>
                 <div class="controls">
-                  <input class="input-xlarge datepicker" id="est_date" name="est_date" type="text" value="<?php echo (isset($arrData[0]['est_date']) ? $arrData[0]['est_date'] : ''); ?>">
+                  <input class="input-xlarge datepicker required" id="est_date" data-date="MM-DD-YYYY" maxlength="128" name="est_date" type="text" value="<?php echo (isset($arrData[0]['est_date']) ? $arrData[0]['est_date'] : ''); ?>">
                 </div>
               </div>
               <div class="control-group span6">
-                <label class="control-label" for="focusedInput">Category</label>
+                <label class="control-label" for="category_id">Category</label>
                 <div class="controls">
-					<select multiple="multiple" name="category_id[]" id="category_id"  class="input-xlarge focused" >
+					<select multiple="multiple required" name="category_id[]" id="category_id"  class="input-xlarge focused required" >
 						<?php
 							for ($intIndex = 0; $intIndex < count($arrCategoryRecords); $intIndex++)
 							{
@@ -86,29 +86,30 @@ $arrCategoryRecords = $objControl->getRecords('category_master', null, null, '',
             </div>
             <div class="row-fluid">
               <div class="control-group span6">
-                <label class="control-label" for="focusedInput">Street</label>
+                <label class="control-label" for="street">Street</label>
                 <div class="controls">
-                  <input class="input-xlarge focused" id="street" name="street" type="text" value="<?php echo (isset($arrData[0]['street']) ? $arrData[0]['street'] : ''); ?>">
+                  <input class="input-xlarge focused required" id="street" ddata-trim data-min-chars="4" data-max-chars="25" name="street" type="text" value="<?php echo (isset($arrData[0]['street']) ? $arrData[0]['street'] : ''); ?>">
                 </div>
               </div>
               <div class="control-group span6">
-                <label class="control-label" for="focusedInput">Landmark</label>
+                <label class="control-label" for="landmark">Landmark</label>
                 <div class="controls">
-                  <input class="input-xlarge focused" id="landmark" name="landmark" type="text" value="<?php echo (isset($arrData[0]['landmark']) ? $arrData[0]['landmark'] : ''); ?>">
+                  <input class="input-xlarge focused required" id="landmark"  data-trim data-min-chars="4" data-max-chars="25" name="landmark" type="text" value="<?php echo (isset($arrData[0]['landmark']) ? $arrData[0]['landmark'] : ''); ?>">
                 </div>
               </div>
             </div>
 			 <div class="row-fluid">
 			  <div class="control-group span6">
-                <label class="control-label" for="focusedInput">Building</label>
+                <label class="control-label" for="building">Building</label>
                 <div class="controls">
-                  <input class="input-xlarge focused" id="building" name="building" type="text" value="<?php echo (isset($arrData[0]['building']) ? $arrData[0]['building'] : ''); ?>">
+                  <input class="input-xlarge focused required" id="building" data-trim data-min-chars="4" data-max-chars="25" name="building" type="text" value="<?php echo (isset($arrData[0]['building']) ? $arrData[0]['building'] : ''); ?>">
                 </div>
               </div>
 			  <div class="control-group span6">
-                <label class="control-label" for="focusedInput">City</label>
+                <label class="control-label" for="city_id">City</label>
                 <div class="controls">
-					<select name="city_id" id="city_id"  class="input-xlarge focused" >
+					<select name="city_id" id="city_id"  class="input-xlarge focused required" >
+					<option value="">&mdash; Please Select &mdash;</option>
 						<?php
 							for ($intIndex = 0; $intIndex < count($arrCityRecords); $intIndex++)
 							{
@@ -122,9 +123,10 @@ $arrCategoryRecords = $objControl->getRecords('category_master', null, null, '',
             <div class="row-fluid">
               
               <div class="control-group span6">
-                <label class="control-label" for="focusedInput">State</label>
+                <label class="control-label" for="state_id">State</label>
                 <div class="controls">
-					<select name="state_id" id="state_id"  class="input-xlarge focused" >
+					<select name="state_id" id="state_id"  class="input-xlarge focused required" >
+					<option value="">&mdash; Please Select &mdash;</option>
 						<?php
 							for ($intIndex = 0; $intIndex < count($arrStateRecords); $intIndex++)
 							{
@@ -135,9 +137,10 @@ $arrCategoryRecords = $objControl->getRecords('category_master', null, null, '',
                 </div>
               </div>
 			  <div class="control-group span6">
-                <label class="control-label" for="focusedInput">Country</label>
+                <label class="control-label" for="country_id">Country</label>
                 <div class="controls">
-                  <select name="country_id" id="country_id"  class="input-xlarge focused" >
+                  <select name="country_id" id="country_id"  class="input-xlarge focused required" >
+				  <option value="">&mdash; Please Select &mdash;</option>
 						<?php
 							for ($intIndex = 0; $intIndex < count($arrCountryRecords); $intIndex++)
 							{
@@ -150,61 +153,58 @@ $arrCategoryRecords = $objControl->getRecords('category_master', null, null, '',
             </div>
             <div class="row-fluid">
               <div class="control-group span6">
-                <label class="control-label" for="focusedInput">Area</label>
+                <label class="control-label" for="area">Area</label>
                 <div class="controls">
-                  <input class="input-xlarge focused" id="area" name="area" type="text" value="<?php echo (isset($arrData[0]['area']) ? $arrData[0]['area'] : ''); ?>">
+                  <input class="input-xlarge focused required" id="area" name="area" type="text" value="<?php echo (isset($arrData[0]['area']) ? $arrData[0]['area'] : ''); ?>">
                 </div>
               </div>
               <div class="control-group span6">
-                <label class="control-label" for="focusedInput">Pin code</label>
+                <label class="control-label" for="pincode">Pin code</label>
                 <div class="controls">
-                  <input class="input-xlarge focused" id="pincode" name="pincode" type="text" value="<?php echo (isset($arrData[0]['pincode']) ? $arrData[0]['pincode'] : ''); ?>">
-                </div>
-              </div>
-            </div>
-            <div class="row-fluid">
-              <div class="control-group span6">
-                <label class="control-label" for="focusedInput">Latitude</label>
-                <div class="controls">
-                  <input class="input-xlarge focused" id="latitude" name="latitude" type="text" value="<?php echo (isset($arrData[0]['latitude']) ? $arrData[0]['latitude'] : ''); ?>">
-                </div>
-              </div>
-              <div class="control-group span6">
-                <label class="control-label" for="focusedInput">Longitude</label>
-                <div class="controls">
-                  <input class="input-xlarge focused" id="longitute" name="longitute" type="text" value="<?php echo (isset($arrData[0]['longitute']) ? $arrData[0]['longitute'] : ''); ?>">
+                  <input class="input-xlarge focused required" data-min-chars="4" maxlength="9" id="pincode" name="pincode" type="text" value="<?php echo (isset($arrData[0]['pincode']) ? $arrData[0]['pincode'] : ''); ?>">
                 </div>
               </div>
             </div>
             <div class="row-fluid">
               <div class="control-group span6">
-                <label class="control-label" for="focusedInput">Is Verified</label>
+                <label class="control-label" for="latitude">Latitude</label>
+                <div class="controls">
+                  <input class="input-xlarge focused required" data-float id="latitude" name="latitude" type="text" value="<?php echo (isset($arrData[0]['latitude']) ? $arrData[0]['latitude'] : ''); ?>">
+                </div>
+              </div>
+              <div class="control-group span6">
+                <label class="control-label" for="longitute">Longitude</label>
+                <div class="controls">
+                  <input class="input-xlarge focused required" data-float id="longitute" name="longitute" type="text" value="<?php echo (isset($arrData[0]['longitute']) ? $arrData[0]['longitute'] : ''); ?>">
+                </div>
+              </div>
+            </div>
+            <div class="row-fluid">
+              <div class="control-group span6">
+                <label class="control-label">Is Verified</label>
                 <div class="controls">
                   <input type="checkbox" name="is_verified" id="is_verified" value="Yes" <?php echo ($arrData[0]['is_verified']=='Yes'?"checked='checked'":"")?>>
                 </div>
               </div>	
               <div class="control-group span6">
-                <label class="control-label" for="focusedInput">Nature of Bussiness</label>
+                <label class="control-label" for="nob">Nature of Bussiness</label>
                 <div class="controls">
-                  <select class="input-xlarge focused" name="nob" id="nob">
-                    <option value="Nature of Bussiness">Nature of Bussiness</option>
-                  </select>
+                  <input class="input-xlarge focused required" id="nob" name="nob" type="text" value="<?php echo (isset($arrData[0]['nob']) ? $arrData[0]['nob'] : ''); ?>">
                 </div>
               </div>
             </div>
             <div class="row-fluid">
               <div class="control-group span6">
-                <label class="control-label" for="focusedInput">Turn Over</label>
+                <label class="control-label" for="turn_over">Turn Over</label>
                 <div class="controls">
-                  <select class="input-xlarge focused" name="turn_over" id="turn_over">
-                    <option value="Turn Over">Turn Over</option>
-                  </select>
+                  <input class="input-xlarge focused required" id="turn_over" name="turn_over" type="text" value="<?php echo (isset($arrData[0]['turn_over']) ? $arrData[0]['turn_over'] : ''); ?>">
                 </div>
               </div>
               <div class="control-group span6">
-                <label class="control-label" for="focusedInput">Status</label>
+                <label class="control-label" for="status">Status</label>
                 <div class="controls">
-					<select class="input-xlarge focused" id="status" name="status" >
+					<select class="input-xlarge focused required" id="status" name="status" >
+					<option value="">&mdash; Please Select &mdash;</option>
 						<option <?php echo (isset($arrData[0]['status']) && $arrData[0]['status'] == 'Active' ? 'selected="selected"' : ''); ?> value="Active">Active</option>
 						<option <?php echo (isset($arrData[0]['status']) && $arrData[0]['status'] == 'Inactive' ? 'selected="selected"' : ''); ?> value="Inactive">Inactive</option>
 					</select>
@@ -213,9 +213,9 @@ $arrCategoryRecords = $objControl->getRecords('category_master', null, null, '',
             </div>
             <div class="row-fluid">
               <div class="control-group span6">
-                <label class="control-label" for="focusedInput">Email</label>
+                <label class="control-label" for="email">Email</label>
                 <div class="controls">
-                  <input class="input-xlarge focused" id="email" name="email" type="text" value="<?php echo (isset($arrData[0]['email']) ? $arrData[0]['email'] : ''); ?>">
+                  <input class="input-xlarge focused required" data-email id="email" name="email" type="text" value="<?php echo (isset($arrData[0]['email']) ? $arrData[0]['email'] : ''); ?>">
                 </div>
               </div>
               <div class="control-group span3">
@@ -233,9 +233,9 @@ $arrCategoryRecords = $objControl->getRecords('category_master', null, null, '',
             </div>
             <div class="row-fluid">
               <div class="control-group span6">
-                <label class="control-label" for="focusedInput">Website</label>
+                <label class="control-label" for="website">Website</label>
                 <div class="controls">
-                  <input class="input-xlarge focused" id="website" name="website" type="text" value="<?php echo (isset($arrData[0]['website']) ? $arrData[0]['website'] : ''); ?>">
+                  <input class="input-xlarge focused required" data-url id="website" name="website" type="text" value="<?php echo (isset($arrData[0]['website']) ? $arrData[0]['website'] : ''); ?>">
                 </div>
               </div>
               <div class="control-group span3">
@@ -253,9 +253,9 @@ $arrCategoryRecords = $objControl->getRecords('category_master', null, null, '',
             </div>
             <div class="row-fluid">
               <div class="control-group span6">
-                <label class="control-label" for="focusedInput">Mobile</label>
+                <label class="control-label" for="mobile">Mobile</label>
                 <div class="controls">
-                  <input class="input-xlarge focused" id="mobile" name="mobile" type="text" value="<?php echo (isset($arrData[0]['mobile']) ? $arrData[0]['mobile'] : ''); ?>">
+                  <input class="input-xlarge focused required" data-int data-min-chars="10" maxlength="10" id="mobile" name="mobile" type="text" value="<?php echo (isset($arrData[0]['mobile']) ? $arrData[0]['mobile'] : ''); ?>">
                 </div>
               </div>
               <div class="control-group span3">
@@ -273,9 +273,9 @@ $arrCategoryRecords = $objControl->getRecords('category_master', null, null, '',
             </div>
             <div class="row-fluid">
               <div class="control-group span6">
-                <label class="control-label" for="focusedInput">Landline</label>
+                <label class="control-label" for="landline">Landline</label>
                 <div class="controls">
-                  <input class="input-xlarge focused" id="landline" name="landline" type="text" value="<?php echo (isset($arrData[0]['landline']) ? $arrData[0]['landline'] : ''); ?>">
+                  <input class="input-xlarge focused required" data-int data-min-chars="8" maxlength="15" id="landline" name="landline" type="tel" value="<?php echo (isset($arrData[0]['landline']) ? $arrData[0]['landline'] : ''); ?>">
                 </div>
               </div>
               <div class="control-group span3">
@@ -295,16 +295,20 @@ $arrCategoryRecords = $objControl->getRecords('category_master', null, null, '',
           <div id="tabs-2">
             <div class="row-fluid">
               <div class="control-group span12">
-                <label class="control-label" for="focusedInput">Company Description</label>
+                <label class="control-label" for="company_description">Company Description</label>
                 <div class="controls">
-                  <textarea class="ckeditor" name="company_description" id="company_description"><?php echo (isset($arrCompanyProfileData[0]['company_description']) ? $arrCompanyProfileData[0]['company_description'] : ''); ?></textarea>
+                  <textarea class="ckeditor required" name="company_description" id="company_description"><?php echo (isset($arrCompanyProfileData[0]['company_description']) ? $arrCompanyProfileData[0]['company_description'] : ''); ?></textarea>
                 </div>
               </div>
             </div>
             <div class="row-fluid">
               <div class="control-group span12">
-                <label class="control-label" for="focusedInput">Hours of Operation:</label>
+                <label class="control-label" for="sunday_from">Hours of Operation</label>
                 <div class="controls">
+				 <?php isset($arrCompanyProfileData[0]['hours_of_operation']) ? $operationValue=$arrCompanyProfileData[0]['hours_of_operation'] : '';
+							$optionsHours = @explode(',', $operationValue);
+						//print_r($optionsHours);
+					?>
                   <table class="table table-bordered table-striped">
                     <tbody>
                       <tr>
@@ -315,397 +319,393 @@ $arrCategoryRecords = $objControl->getRecords('category_master', null, null, '',
                       </tr>
                       <tr>
                         <td>Sunday</td>
-                        <td><select name="sunday_from">
-                            <option value="01:00">01:00</option>
-                            <option value="02:00">02:00</option>
-                            <option value="03:00">03:00</option>
-                            <option value="04:00">04:00</option>
-                            <option value="05:00">05:00</option>
-                            <option value="06:00">06:00</option>
-                            <option value="07:00">07:00</option>
-                            <option value="08:00">08:00</option>
-                            <option value="09:00">09:00</option>
-                            <option value="10:00">10:00</option>
-                            <option value="11:00">11:00</option>
-                            <option value="12:00">12:00</option>
-                            <option value="13:00">13:00</option>
-                            <option value="14:00">14:00</option>
-                            <option value="15:00">15:00</option>
-                            <option value="16:00">16:00</option>
-                            <option value="17:00">17:00</option>
-                            <option value="18:00">18:00</option>
-                            <option value="19:00">19:00</option>
-                            <option value="20:00">20:00</option>
-                            <option value="21:00">21:00</option>
-                            <option value="22:00">22:00</option>
-                            <option value="23:00">23:00</option>
-                            <option value="24:00">24:00</option>
-
+                        <td><select name="sunday_from" id="sunday_from" class="required">
+                            <option value="01:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="sunday_from=01:00"){echo "selected"; }}} ?>>01:00</option>
+                            <option value="02:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="sunday_from=02:00"){echo "selected"; }}} ?>>02:00</option>
+                            <option value="03:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="sunday_from=03:00"){echo "selected"; }}} ?>>03:00</option>
+                            <option value="04:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="sunday_from=04:00"){echo "selected"; }}} ?>>04:00</option>
+                            <option value="05:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="sunday_from=05:00"){echo "selected"; }}} ?>>05:00</option>
+                            <option value="06:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="sunday_from=06:00"){echo "selected"; }}} ?>>06:00</option>
+                            <option value="07:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="sunday_from=07:00"){echo "selected"; }}} ?>>07:00</option>
+                            <option value="08:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="sunday_from=08:00"){echo "selected"; }}} ?>>08:00</option>
+                            <option value="09:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="sunday_from=09:00"){echo "selected"; }}} ?>>09:00</option>
+                            <option value="10:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="sunday_from=10:00"){echo "selected"; }}} ?>>10:00</option>
+                            <option value="11:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="sunday_from=11:00"){echo "selected"; }}} ?>>11:00</option>
+                            <option value="12:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="sunday_from=12:00"){echo "selected"; }}} ?>>12:00</option>
+                            <option value="13:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="sunday_from=13:00"){echo "selected"; }}} ?>>13:00</option>
+                            <option value="14:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="sunday_from=14:00"){echo "selected"; }}} ?>>14:00</option>
+                            <option value="15:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="sunday_from=15:00"){echo "selected"; }}} ?>>15:00</option>
+                            <option value="16:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="sunday_from=16:00"){echo "selected"; }}} ?>>16:00</option>
+                            <option value="17:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="sunday_from=17:00"){echo "selected"; }}} ?>>17:00</option>
+                            <option value="18:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="sunday_from=18:00"){echo "selected"; }}} ?>>18:00</option>
+                            <option value="19:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="sunday_from=19:00"){echo "selected"; }}} ?>>19:00</option>
+                            <option value="20:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="sunday_from=20:00"){echo "selected"; }}} ?>>20:00</option>
+                            <option value="21:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="sunday_from=21:00"){echo "selected"; }}} ?>>21:00</option>
+                            <option value="22:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="sunday_from=22:00"){echo "selected"; }}} ?>>22:00</option>
+                            <option value="23:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="sunday_from=23:00"){echo "selected"; }}} ?>>23:00</option>
+                            <option value="24:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="sunday_from=24:00"){echo "selected"; }}} ?>>24:00</option>
+                          </select>
+						</td>
+                        <td><select name="sunday_to" class="required">
+                            <option value="01:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="sunday_to=01:00"){echo "selected"; }}} ?>>01:00</option>
+                            <option value="02:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="sunday_to=02:00"){echo "selected"; }}} ?>>02:00</option>
+                            <option value="03:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="sunday_to=03:00"){echo "selected"; }}} ?>>03:00</option>
+                            <option value="04:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="sunday_to=04:00"){echo "selected"; }}} ?>>04:00</option>
+                            <option value="05:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="sunday_to=05:00"){echo "selected"; }}} ?>>05:00</option>
+                            <option value="06:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="sunday_to=06:00"){echo "selected"; }}} ?>>06:00</option>
+                            <option value="07:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="sunday_to=07:00"){echo "selected"; }}} ?>>07:00</option>
+                            <option value="08:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="sunday_to=08:00"){echo "selected"; }}} ?>>08:00</option>
+                            <option value="09:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="sunday_to=09:00"){echo "selected"; }}} ?>>09:00</option>
+                            <option value="10:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="sunday_to=10:00"){echo "selected"; }}} ?>>10:00</option>
+                            <option value="11:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="sunday_to=11:00"){echo "selected"; }}} ?>>11:00</option>
+                            <option value="12:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="sunday_to=12:00"){echo "selected"; }}} ?>>12:00</option>
+                            <option value="13:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="sunday_to=13:00"){echo "selected"; }}} ?>>13:00</option>
+                            <option value="14:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="sunday_to=14:00"){echo "selected"; }}} ?>>14:00</option>
+                            <option value="15:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="sunday_to=15:00"){echo "selected"; }}} ?>>15:00</option>
+                            <option value="16:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="sunday_to=16:00"){echo "selected"; }}} ?>>16:00</option>
+                            <option value="17:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="sunday_to=17:00"){echo "selected"; }}} ?>>17:00</option>
+                            <option value="18:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="sunday_to=18:00"){echo "selected"; }}} ?>>18:00</option>
+                            <option value="19:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="sunday_to=19:00"){echo "selected"; }}} ?>>19:00</option>
+                            <option value="20:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="sunday_to=20:00"){echo "selected"; }}} ?>>20:00</option>
+                            <option value="21:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="sunday_to=21:00"){echo "selected"; }}} ?>>21:00</option>
+                            <option value="22:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="sunday_to=22:00"){echo "selected"; }}} ?>>22:00</option>
+                            <option value="23:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="sunday_to=23:00"){echo "selected"; }}} ?>>23:00</option>
+                            <option value="24:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="sunday_to=24:00"){echo "selected"; }}} ?>>24:00</option>
                           </select></td>
-                        <td><select name="sunday_to">
-                            <option value="01:00">01:00</option>
-                            <option value="02:00">02:00</option>
-                            <option value="03:00">03:00</option>
-                            <option value="04:00">04:00</option>
-                            <option value="05:00">05:00</option>
-                            <option value="06:00">06:00</option>
-                            <option value="07:00">07:00</option>
-                            <option value="08:00">08:00</option>
-                            <option value="09:00">09:00</option>
-                            <option value="10:00">10:00</option>
-                            <option value="11:00">11:00</option>
-                            <option value="12:00">12:00</option>
-                            <option value="13:00">13:00</option>
-                            <option value="14:00">14:00</option>
-                            <option value="15:00">15:00</option>
-                            <option value="16:00">16:00</option>
-                            <option value="17:00">17:00</option>
-                            <option value="18:00">18:00</option>
-                            <option value="19:00">19:00</option>
-                            <option value="20:00">20:00</option>
-                            <option value="21:00">21:00</option>
-                            <option value="22:00">22:00</option>
-                            <option value="23:00">23:00</option>
-                            <option value="24:00">24:00</option>
-
-                          </select></td>
-                        <td><input data-no-uniform="true" type="checkbox" class="iphone-toggle" name="sunday_closed" value="Yes"></td>
+                        <td><input data-no-uniform="true" type="checkbox" class="iphone-toggle" name="sunday_closed" value="Yes" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="sunday_closed=Yes"){echo "checked='checked'"; }}} ?>></td>
                       </tr>
                       <tr>
                         <td>Monday</td>
-                        <td><select name="monday_from">
-                          <option value="01:00">01:00</option>
-                          <option value="02:00">02:00</option>
-                          <option value="03:00">03:00</option>
-                          <option value="04:00">04:00</option>
-                          <option value="05:00">05:00</option>
-                          <option value="06:00">06:00</option>
-                          <option value="07:00">07:00</option>
-                          <option value="08:00">08:00</option>
-                          <option value="09:00">09:00</option>
-                          <option value="10:00">10:00</option>
-                          <option value="11:00">11:00</option>
-                          <option value="12:00">12:00</option>
-                          <option value="13:00">13:00</option>
-                          <option value="14:00">14:00</option>
-                          <option value="15:00">15:00</option>
-                          <option value="16:00">16:00</option>
-                          <option value="17:00">17:00</option>
-                          <option value="18:00">18:00</option>
-                          <option value="19:00">19:00</option>
-                          <option value="20:00">20:00</option>
-                          <option value="21:00">21:00</option>
-                          <option value="22:00">22:00</option>
-                          <option value="23:00">23:00</option>
-                          <option value="24:00">24:00</option>
+                        <td><select name="monday_from" class="required">
+							<option value="01:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="monday_from=01:00"){echo "selected"; }}} ?>>01:00</option>
+                            <option value="02:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="monday_from=02:00"){echo "selected"; }}} ?>>02:00</option>
+                            <option value="03:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="monday_from=03:00"){echo "selected"; }}} ?>>03:00</option>
+                            <option value="04:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="monday_from=04:00"){echo "selected"; }}} ?>>04:00</option>
+                            <option value="05:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="monday_from=05:00"){echo "selected"; }}} ?>>05:00</option>
+                            <option value="06:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="monday_from=06:00"){echo "selected"; }}} ?>>06:00</option>
+                            <option value="07:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="monday_from=07:00"){echo "selected"; }}} ?>>07:00</option>
+                            <option value="08:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="monday_from=08:00"){echo "selected"; }}} ?>>08:00</option>
+                            <option value="09:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="monday_from=09:00"){echo "selected"; }}} ?>>09:00</option>
+                            <option value="10:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="monday_from=10:00"){echo "selected"; }}} ?>>10:00</option>
+                            <option value="11:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="monday_from=11:00"){echo "selected"; }}} ?>>11:00</option>
+                            <option value="12:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="monday_from=12:00"){echo "selected"; }}} ?>>12:00</option>
+                            <option value="13:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="monday_from=13:00"){echo "selected"; }}} ?>>13:00</option>
+                            <option value="14:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="monday_from=14:00"){echo "selected"; }}} ?>>14:00</option>
+                            <option value="15:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="monday_from=15:00"){echo "selected"; }}} ?>>15:00</option>
+                            <option value="16:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="monday_from=16:00"){echo "selected"; }}} ?>>16:00</option>
+                            <option value="17:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="monday_from=17:00"){echo "selected"; }}} ?>>17:00</option>
+                            <option value="18:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="monday_from=18:00"){echo "selected"; }}} ?>>18:00</option>
+                            <option value="19:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="monday_from=19:00"){echo "selected"; }}} ?>>19:00</option>
+                            <option value="20:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="monday_from=20:00"){echo "selected"; }}} ?>>20:00</option>
+                            <option value="21:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="monday_from=21:00"){echo "selected"; }}} ?>>21:00</option>
+                            <option value="22:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="monday_from=22:00"){echo "selected"; }}} ?>>22:00</option>
+                            <option value="23:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="monday_from=23:00"){echo "selected"; }}} ?>>23:00</option>
+                            <option value="24:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="monday_from=24:00"){echo "selected"; }}} ?>>24:00</option>
                         </select></td>
-                        <td><select name="monday_to">
-                          <option value="01:00">01:00</option>
-                          <option value="02:00">02:00</option>
-                          <option value="03:00">03:00</option>
-                          <option value="04:00">04:00</option>
-                          <option value="05:00">05:00</option>
-                          <option value="06:00">06:00</option>
-                          <option value="07:00">07:00</option>
-                          <option value="08:00">08:00</option>
-                          <option value="09:00">09:00</option>
-                          <option value="10:00">10:00</option>
-                          <option value="11:00">11:00</option>
-                          <option value="12:00">12:00</option>
-                          <option value="13:00">13:00</option>
-                          <option value="14:00">14:00</option>
-                          <option value="15:00">15:00</option>
-                          <option value="16:00">16:00</option>
-                          <option value="17:00">17:00</option>
-                          <option value="18:00">18:00</option>
-                          <option value="19:00">19:00</option>
-                          <option value="20:00">20:00</option>
-                          <option value="21:00">21:00</option>
-                          <option value="22:00">22:00</option>
-                          <option value="23:00">23:00</option>
-                          <option value="24:00">24:00</option>
+                        <td><select name="monday_to" class="required">
+							<option value="01:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="monday_to=01:00"){echo "selected"; }}} ?>>01:00</option>
+                            <option value="02:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="monday_to=02:00"){echo "selected"; }}} ?>>02:00</option>
+                            <option value="03:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="monday_to=03:00"){echo "selected"; }}} ?>>03:00</option>
+                            <option value="04:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="monday_to=04:00"){echo "selected"; }}} ?>>04:00</option>
+                            <option value="05:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="monday_to=05:00"){echo "selected"; }}} ?>>05:00</option>
+                            <option value="06:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="monday_to=06:00"){echo "selected"; }}} ?>>06:00</option>
+                            <option value="07:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="monday_to=07:00"){echo "selected"; }}} ?>>07:00</option>
+                            <option value="08:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="monday_to=08:00"){echo "selected"; }}} ?>>08:00</option>
+                            <option value="09:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="monday_to=09:00"){echo "selected"; }}} ?>>09:00</option>
+                            <option value="10:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="monday_to=10:00"){echo "selected"; }}} ?>>10:00</option>
+                            <option value="11:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="monday_to=11:00"){echo "selected"; }}} ?>>11:00</option>
+                            <option value="12:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="monday_to=12:00"){echo "selected"; }}} ?>>12:00</option>
+                            <option value="13:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="monday_to=13:00"){echo "selected"; }}} ?>>13:00</option>
+                            <option value="14:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="monday_to=14:00"){echo "selected"; }}} ?>>14:00</option>
+                            <option value="15:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="monday_to=15:00"){echo "selected"; }}} ?>>15:00</option>
+                            <option value="16:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="monday_to=16:00"){echo "selected"; }}} ?>>16:00</option>
+                            <option value="17:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="monday_to=17:00"){echo "selected"; }}} ?>>17:00</option>
+                            <option value="18:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="monday_to=18:00"){echo "selected"; }}} ?>>18:00</option>
+                            <option value="19:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="monday_to=19:00"){echo "selected"; }}} ?>>19:00</option>
+                            <option value="20:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="monday_to=20:00"){echo "selected"; }}} ?>>20:00</option>
+                            <option value="21:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="monday_to=21:00"){echo "selected"; }}} ?>>21:00</option>
+                            <option value="22:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="monday_to=22:00"){echo "selected"; }}} ?>>22:00</option>
+                            <option value="23:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="monday_to=23:00"){echo "selected"; }}} ?>>23:00</option>
+                            <option value="24:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="monday_to=24:00"){echo "selected"; }}} ?>>24:00</option>
                         </select></td>
-                        <td><input data-no-uniform="true" type="checkbox" class="iphone-toggle" name="monday_closed" value="Yes"></td>
+                        <td><input data-no-uniform="true" type="checkbox" class="iphone-toggle" name="monday_closed" value="Yes" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="monday_closed=Yes"){echo "checked='checked'"; }}} ?>></td>
                       </tr>
                       <tr>
                         <td>Tuesday</td>
-                        <td><select name="tuesday_from">
-                          <option value="01:00">01:00</option>
-                          <option value="02:00">02:00</option>
-                          <option value="03:00">03:00</option>
-                          <option value="04:00">04:00</option>
-                          <option value="05:00">05:00</option>
-                          <option value="06:00">06:00</option>
-                          <option value="07:00">07:00</option>
-                          <option value="08:00">08:00</option>
-                          <option value="09:00">09:00</option>
-                          <option value="10:00">10:00</option>
-                          <option value="11:00">11:00</option>
-                          <option value="12:00">12:00</option>
-                          <option value="13:00">13:00</option>
-                          <option value="14:00">14:00</option>
-                          <option value="15:00">15:00</option>
-                          <option value="16:00">16:00</option>
-                          <option value="17:00">17:00</option>
-                          <option value="18:00">18:00</option>
-                          <option value="19:00">19:00</option>
-                          <option value="20:00">20:00</option>
-                          <option value="21:00">21:00</option>
-                          <option value="22:00">22:00</option>
-                          <option value="23:00">23:00</option>
-                          <option value="24:00">24:00</option>
+                        <td><select name="tuesday_from" class="required">
+								<option value="01:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="tuesday_from=01:00"){echo "selected"; }}} ?>>01:00</option>
+								<option value="02:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="tuesday_from=02:00"){echo "selected"; }}} ?>>02:00</option>
+								<option value="03:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="tuesday_from=03:00"){echo "selected"; }}} ?>>03:00</option>
+								<option value="04:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="tuesday_from=04:00"){echo "selected"; }}} ?>>04:00</option>
+								<option value="05:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="tuesday_from=05:00"){echo "selected"; }}} ?>>05:00</option>
+								<option value="06:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="tuesday_from=06:00"){echo "selected"; }}} ?>>06:00</option>
+								<option value="07:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="tuesday_from=07:00"){echo "selected"; }}} ?>>07:00</option>
+								<option value="08:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="tuesday_from=08:00"){echo "selected"; }}} ?>>08:00</option>
+								<option value="09:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="tuesday_from=09:00"){echo "selected"; }}} ?>>09:00</option>
+								<option value="10:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="tuesday_from=10:00"){echo "selected"; }}} ?>>10:00</option>
+								<option value="11:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="tuesday_from=11:00"){echo "selected"; }}} ?>>11:00</option>
+								<option value="12:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="tuesday_from=12:00"){echo "selected"; }}} ?>>12:00</option>
+								<option value="13:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="tuesday_from=13:00"){echo "selected"; }}} ?>>13:00</option>
+								<option value="14:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="tuesday_from=14:00"){echo "selected"; }}} ?>>14:00</option>
+								<option value="15:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="tuesday_from=15:00"){echo "selected"; }}} ?>>15:00</option>
+								<option value="16:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="tuesday_from=16:00"){echo "selected"; }}} ?>>16:00</option>
+								<option value="17:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="tuesday_from=17:00"){echo "selected"; }}} ?>>17:00</option>
+								<option value="18:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="tuesday_from=18:00"){echo "selected"; }}} ?>>18:00</option>
+								<option value="19:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="tuesday_from=19:00"){echo "selected"; }}} ?>>19:00</option>
+								<option value="20:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="tuesday_from=20:00"){echo "selected"; }}} ?>>20:00</option>
+								<option value="21:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="tuesday_from=21:00"){echo "selected"; }}} ?>>21:00</option>
+								<option value="22:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="tuesday_from=22:00"){echo "selected"; }}} ?>>22:00</option>
+								<option value="23:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="tuesday_from=23:00"){echo "selected"; }}} ?>>23:00</option>
+								<option value="24:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="tuesday_from=24:00"){echo "selected"; }}} ?>>24:00</option>
                         </select></td>
-                        <td><select name="tuesday_to">
-                          <option value="01:00">01:00</option>
-                          <option value="02:00">02:00</option>
-                          <option value="03:00">03:00</option>
-                          <option value="04:00">04:00</option>
-                          <option value="05:00">05:00</option>
-                          <option value="06:00">06:00</option>
-                          <option value="07:00">07:00</option>
-                          <option value="08:00">08:00</option>
-                          <option value="09:00">09:00</option>
-                          <option value="10:00">10:00</option>
-                          <option value="11:00">11:00</option>
-                          <option value="12:00">12:00</option>
-                          <option value="13:00">13:00</option>
-                          <option value="14:00">14:00</option>
-                          <option value="15:00">15:00</option>
-                          <option value="16:00">16:00</option>
-                          <option value="17:00">17:00</option>
-                          <option value="18:00">18:00</option>
-                          <option value="19:00">19:00</option>
-                          <option value="20:00">20:00</option>
-                          <option value="21:00">21:00</option>
-                          <option value="22:00">22:00</option>
-                          <option value="23:00">23:00</option>
-                          <option value="24:00">24:00</option>
-                        </select></td>
-                        <td><input data-no-uniform="true" type="checkbox" class="iphone-toggle" name="tuesday_closed" value="Yes"></td>
+                        <td><select name="tuesday_to"class="required">
+                          		<option value="01:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="tuesday_to=01:00"){echo "selected"; }}} ?>>01:00</option>
+								<option value="02:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="tuesday_to=02:00"){echo "selected"; }}} ?>>02:00</option>
+								<option value="03:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="tuesday_to=03:00"){echo "selected"; }}} ?>>03:00</option>
+								<option value="04:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="tuesday_to=04:00"){echo "selected"; }}} ?>>04:00</option>
+								<option value="05:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="tuesday_to=05:00"){echo "selected"; }}} ?>>05:00</option>
+								<option value="06:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="tuesday_to=06:00"){echo "selected"; }}} ?>>06:00</option>
+								<option value="07:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="tuesday_to=07:00"){echo "selected"; }}} ?>>07:00</option>
+								<option value="08:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="tuesday_to=08:00"){echo "selected"; }}} ?>>08:00</option>
+								<option value="09:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="tuesday_to=09:00"){echo "selected"; }}} ?>>09:00</option>
+								<option value="10:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="tuesday_to=10:00"){echo "selected"; }}} ?>>10:00</option>
+								<option value="11:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="tuesday_to=11:00"){echo "selected"; }}} ?>>11:00</option>
+								<option value="12:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="tuesday_to=12:00"){echo "selected"; }}} ?>>12:00</option>
+								<option value="13:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="tuesday_to=13:00"){echo "selected"; }}} ?>>13:00</option>
+								<option value="14:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="tuesday_to=14:00"){echo "selected"; }}} ?>>14:00</option>
+								<option value="15:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="tuesday_to=15:00"){echo "selected"; }}} ?>>15:00</option>
+								<option value="16:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="tuesday_to=16:00"){echo "selected"; }}} ?>>16:00</option>
+								<option value="17:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="tuesday_to=17:00"){echo "selected"; }}} ?>>17:00</option>
+								<option value="18:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="tuesday_to=18:00"){echo "selected"; }}} ?>>18:00</option>
+								<option value="19:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="tuesday_to=19:00"){echo "selected"; }}} ?>>19:00</option>
+								<option value="20:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="tuesday_to=20:00"){echo "selected"; }}} ?>>20:00</option>
+								<option value="21:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="tuesday_to=21:00"){echo "selected"; }}} ?>>21:00</option>
+								<option value="22:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="tuesday_to=22:00"){echo "selected"; }}} ?>>22:00</option>
+								<option value="23:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="tuesday_to=23:00"){echo "selected"; }}} ?>>23:00</option>
+								<option value="24:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="tuesday_to=24:00"){echo "selected"; }}} ?>>24:00</option>
+							</select></td>
+                        <td><input data-no-uniform="true" type="checkbox" class="iphone-toggle" name="tuesday_closed" value="Yes" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="tuesday_closed=Yes"){echo "checked='checked'"; }}} ?>></td>
                       </tr>
                       <tr>
                         <td>Wednesday</td>
-                        <td><select name="wednesday_from">
-                          <option value="01:00">01:00</option>
-                          <option value="02:00">02:00</option>
-                          <option value="03:00">03:00</option>
-                          <option value="04:00">04:00</option>
-                          <option value="05:00">05:00</option>
-                          <option value="06:00">06:00</option>
-                          <option value="07:00">07:00</option>
-                          <option value="08:00">08:00</option>
-                          <option value="09:00">09:00</option>
-                          <option value="10:00">10:00</option>
-                          <option value="11:00">11:00</option>
-                          <option value="12:00">12:00</option>
-                          <option value="13:00">13:00</option>
-                          <option value="14:00">14:00</option>
-                          <option value="15:00">15:00</option>
-                          <option value="16:00">16:00</option>
-                          <option value="17:00">17:00</option>
-                          <option value="18:00">18:00</option>
-                          <option value="19:00">19:00</option>
-                          <option value="20:00">20:00</option>
-                          <option value="21:00">21:00</option>
-                          <option value="22:00">22:00</option>
-                          <option value="23:00">23:00</option>
-                          <option value="24:00">24:00</option>
+                        <td><select name="wednesday_from" class="required">
+								<option value="01:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="wednesday_from=01:00"){echo "selected"; }}} ?>>01:00</option>
+								<option value="02:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="wednesday_from=02:00"){echo "selected"; }}} ?>>02:00</option>
+								<option value="03:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="wednesday_from=03:00"){echo "selected"; }}} ?>>03:00</option>
+								<option value="04:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="wednesday_from=04:00"){echo "selected"; }}} ?>>04:00</option>
+								<option value="05:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="wednesday_from=05:00"){echo "selected"; }}} ?>>05:00</option>
+								<option value="06:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="wednesday_from=06:00"){echo "selected"; }}} ?>>06:00</option>
+								<option value="07:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="wednesday_from=07:00"){echo "selected"; }}} ?>>07:00</option>
+								<option value="08:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="wednesday_from=08:00"){echo "selected"; }}} ?>>08:00</option>
+								<option value="09:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="wednesday_from=09:00"){echo "selected"; }}} ?>>09:00</option>
+								<option value="10:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="wednesday_from=10:00"){echo "selected"; }}} ?>>10:00</option>
+								<option value="11:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="wednesday_from=11:00"){echo "selected"; }}} ?>>11:00</option>
+								<option value="12:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="wednesday_from=12:00"){echo "selected"; }}} ?>>12:00</option>
+								<option value="13:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="wednesday_from=13:00"){echo "selected"; }}} ?>>13:00</option>
+								<option value="14:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="wednesday_from=14:00"){echo "selected"; }}} ?>>14:00</option>
+								<option value="15:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="wednesday_from=15:00"){echo "selected"; }}} ?>>15:00</option>
+								<option value="16:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="wednesday_from=16:00"){echo "selected"; }}} ?>>16:00</option>
+								<option value="17:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="wednesday_from=17:00"){echo "selected"; }}} ?>>17:00</option>
+								<option value="18:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="wednesday_from=18:00"){echo "selected"; }}} ?>>18:00</option>
+								<option value="19:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="wednesday_from=19:00"){echo "selected"; }}} ?>>19:00</option>
+								<option value="20:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="wednesday_from=20:00"){echo "selected"; }}} ?>>20:00</option>
+								<option value="21:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="wednesday_from=21:00"){echo "selected"; }}} ?>>21:00</option>
+								<option value="22:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="wednesday_from=22:00"){echo "selected"; }}} ?>>22:00</option>
+								<option value="23:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="wednesday_from=23:00"){echo "selected"; }}} ?>>23:00</option>
+								<option value="24:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="wednesday_from=24:00"){echo "selected"; }}} ?>>24:00</option>
                         </select></td>
-                        <td><select name="wednesday_to">
-                          <option value="01:00">01:00</option>
-                          <option value="02:00">02:00</option>
-                          <option value="03:00">03:00</option>
-                          <option value="04:00">04:00</option>
-                          <option value="05:00">05:00</option>
-                          <option value="06:00">06:00</option>
-                          <option value="07:00">07:00</option>
-                          <option value="08:00">08:00</option>
-                          <option value="09:00">09:00</option>
-                          <option value="10:00">10:00</option>
-                          <option value="11:00">11:00</option>
-                          <option value="12:00">12:00</option>
-                          <option value="13:00">13:00</option>
-                          <option value="14:00">14:00</option>
-                          <option value="15:00">15:00</option>
-                          <option value="16:00">16:00</option>
-                          <option value="17:00">17:00</option>
-                          <option value="18:00">18:00</option>
-                          <option value="19:00">19:00</option>
-                          <option value="20:00">20:00</option>
-                          <option value="21:00">21:00</option>
-                          <option value="22:00">22:00</option>
-                          <option value="23:00">23:00</option>
-                          <option value="24:00">24:00</option>
+                        <td><select name="wednesday_to" class="required">
+								<option value="01:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="wednesday_to=01:00"){echo "selected"; }}} ?>>01:00</option>
+								<option value="02:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="wednesday_to=02:00"){echo "selected"; }}} ?>>02:00</option>
+								<option value="03:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="wednesday_to=03:00"){echo "selected"; }}} ?>>03:00</option>
+								<option value="04:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="wednesday_to=04:00"){echo "selected"; }}} ?>>04:00</option>
+								<option value="05:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="wednesday_to=05:00"){echo "selected"; }}} ?>>05:00</option>
+								<option value="06:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="wednesday_to=06:00"){echo "selected"; }}} ?>>06:00</option>
+								<option value="07:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="wednesday_to=07:00"){echo "selected"; }}} ?>>07:00</option>
+								<option value="08:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="wednesday_to=08:00"){echo "selected"; }}} ?>>08:00</option>
+								<option value="09:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="wednesday_to=09:00"){echo "selected"; }}} ?>>09:00</option>
+								<option value="10:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="wednesday_to=10:00"){echo "selected"; }}} ?>>10:00</option>
+								<option value="11:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="wednesday_to=11:00"){echo "selected"; }}} ?>>11:00</option>
+								<option value="12:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="wednesday_to=12:00"){echo "selected"; }}} ?>>12:00</option>
+								<option value="13:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="wednesday_to=13:00"){echo "selected"; }}} ?>>13:00</option>
+								<option value="14:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="wednesday_to=14:00"){echo "selected"; }}} ?>>14:00</option>
+								<option value="15:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="wednesday_to=15:00"){echo "selected"; }}} ?>>15:00</option>
+								<option value="16:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="wednesday_to=16:00"){echo "selected"; }}} ?>>16:00</option>
+								<option value="17:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="wednesday_to=17:00"){echo "selected"; }}} ?>>17:00</option>
+								<option value="18:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="wednesday_to=18:00"){echo "selected"; }}} ?>>18:00</option>
+								<option value="19:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="wednesday_to=19:00"){echo "selected"; }}} ?>>19:00</option>
+								<option value="20:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="wednesday_to=20:00"){echo "selected"; }}} ?>>20:00</option>
+								<option value="21:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="wednesday_to=21:00"){echo "selected"; }}} ?>>21:00</option>
+								<option value="22:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="wednesday_to=22:00"){echo "selected"; }}} ?>>22:00</option>
+								<option value="23:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="wednesday_to=23:00"){echo "selected"; }}} ?>>23:00</option>
+								<option value="24:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="wednesday_to=24:00"){echo "selected"; }}} ?>>24:00</option>
                         </select></td>
-                        <td><input data-no-uniform="true" type="checkbox" class="iphone-toggle" name="wednesday_closed" value="Yes"></td>
+                        <td><input data-no-uniform="true" type="checkbox" class="iphone-toggle" name="wednesday_closed" value="Yes" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="wednesday_closed=Yes"){echo "checked='checked'"; }}} ?>></td>
                       </tr>
                       <tr>
                         <td>Thursday</td>
-                        <td><select name="thursday_from">
-                          <option value="01:00">01:00</option>
-                          <option value="02:00">02:00</option>
-                          <option value="03:00">03:00</option>
-                          <option value="04:00">04:00</option>
-                          <option value="05:00">05:00</option>
-                          <option value="06:00">06:00</option>
-                          <option value="07:00">07:00</option>
-                          <option value="08:00">08:00</option>
-                          <option value="09:00">09:00</option>
-                          <option value="10:00">10:00</option>
-                          <option value="11:00">11:00</option>
-                          <option value="12:00">12:00</option>
-                          <option value="13:00">13:00</option>
-                          <option value="14:00">14:00</option>
-                          <option value="15:00">15:00</option>
-                          <option value="16:00">16:00</option>
-                          <option value="17:00">17:00</option>
-                          <option value="18:00">18:00</option>
-                          <option value="19:00">19:00</option>
-                          <option value="20:00">20:00</option>
-                          <option value="21:00">21:00</option>
-                          <option value="22:00">22:00</option>
-                          <option value="23:00">23:00</option>
-                          <option value="24:00">24:00</option>
+                        <td><select name="thursday_from" class="required">
+								<option value="01:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="thursday_from=01:00"){echo "selected"; }}} ?>>01:00</option>
+								<option value="02:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="thursday_from=02:00"){echo "selected"; }}} ?>>02:00</option>
+								<option value="03:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="thursday_from=03:00"){echo "selected"; }}} ?>>03:00</option>
+								<option value="04:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="thursday_from=04:00"){echo "selected"; }}} ?>>04:00</option>
+								<option value="05:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="thursday_from=05:00"){echo "selected"; }}} ?>>05:00</option>
+								<option value="06:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="thursday_from=06:00"){echo "selected"; }}} ?>>06:00</option>
+								<option value="07:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="thursday_from=07:00"){echo "selected"; }}} ?>>07:00</option>
+								<option value="08:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="thursday_from=08:00"){echo "selected"; }}} ?>>08:00</option>
+								<option value="09:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="thursday_from=09:00"){echo "selected"; }}} ?>>09:00</option>
+								<option value="10:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="thursday_from=10:00"){echo "selected"; }}} ?>>10:00</option>
+								<option value="11:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="thursday_from=11:00"){echo "selected"; }}} ?>>11:00</option>
+								<option value="12:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="thursday_from=12:00"){echo "selected"; }}} ?>>12:00</option>
+								<option value="13:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="thursday_from=13:00"){echo "selected"; }}} ?>>13:00</option>
+								<option value="14:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="thursday_from=14:00"){echo "selected"; }}} ?>>14:00</option>
+								<option value="15:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="thursday_from=15:00"){echo "selected"; }}} ?>>15:00</option>
+								<option value="16:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="thursday_from=16:00"){echo "selected"; }}} ?>>16:00</option>
+								<option value="17:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="thursday_from=17:00"){echo "selected"; }}} ?>>17:00</option>
+								<option value="18:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="thursday_from=18:00"){echo "selected"; }}} ?>>18:00</option>
+								<option value="19:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="thursday_from=19:00"){echo "selected"; }}} ?>>19:00</option>
+								<option value="20:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="thursday_from=20:00"){echo "selected"; }}} ?>>20:00</option>
+								<option value="21:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="thursday_from=21:00"){echo "selected"; }}} ?>>21:00</option>
+								<option value="22:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="thursday_from=22:00"){echo "selected"; }}} ?>>22:00</option>
+								<option value="23:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="thursday_from=23:00"){echo "selected"; }}} ?>>23:00</option>
+								<option value="24:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="thursday_from=24:00"){echo "selected"; }}} ?>>24:00</option>
                         </select></td>
-                        <td><select name="thursday_to">
-                          <option value="01:00">01:00</option>
-                          <option value="02:00">02:00</option>
-                          <option value="03:00">03:00</option>
-                          <option value="04:00">04:00</option>
-                          <option value="05:00">05:00</option>
-                          <option value="06:00">06:00</option>
-                          <option value="07:00">07:00</option>
-                          <option value="08:00">08:00</option>
-                          <option value="09:00">09:00</option>
-                          <option value="10:00">10:00</option>
-                          <option value="11:00">11:00</option>
-                          <option value="12:00">12:00</option>
-                          <option value="13:00">13:00</option>
-                          <option value="14:00">14:00</option>
-                          <option value="15:00">15:00</option>
-                          <option value="16:00">16:00</option>
-                          <option value="17:00">17:00</option>
-                          <option value="18:00">18:00</option>
-                          <option value="19:00">19:00</option>
-                          <option value="20:00">20:00</option>
-                          <option value="21:00">21:00</option>
-                          <option value="22:00">22:00</option>
-                          <option value="23:00">23:00</option>
-                          <option value="24:00">24:00</option>
+                        <td><select name="thursday_to" class="required">
+								<option value="01:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="thursday_to=01:00"){echo "selected"; }}} ?>>01:00</option>
+								<option value="02:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="thursday_to=02:00"){echo "selected"; }}} ?>>02:00</option>
+								<option value="03:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="thursday_to=03:00"){echo "selected"; }}} ?>>03:00</option>
+								<option value="04:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="thursday_to=04:00"){echo "selected"; }}} ?>>04:00</option>
+								<option value="05:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="thursday_to=05:00"){echo "selected"; }}} ?>>05:00</option>
+								<option value="06:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="thursday_to=06:00"){echo "selected"; }}} ?>>06:00</option>
+								<option value="07:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="thursday_to=07:00"){echo "selected"; }}} ?>>07:00</option>
+								<option value="08:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="thursday_to=08:00"){echo "selected"; }}} ?>>08:00</option>
+								<option value="09:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="thursday_to=09:00"){echo "selected"; }}} ?>>09:00</option>
+								<option value="10:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="thursday_to=10:00"){echo "selected"; }}} ?>>10:00</option>
+								<option value="11:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="thursday_to=11:00"){echo "selected"; }}} ?>>11:00</option>
+								<option value="12:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="thursday_to=12:00"){echo "selected"; }}} ?>>12:00</option>
+								<option value="13:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="thursday_to=13:00"){echo "selected"; }}} ?>>13:00</option>
+								<option value="14:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="thursday_to=14:00"){echo "selected"; }}} ?>>14:00</option>
+								<option value="15:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="thursday_to=15:00"){echo "selected"; }}} ?>>15:00</option>
+								<option value="16:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="thursday_to=16:00"){echo "selected"; }}} ?>>16:00</option>
+								<option value="17:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="thursday_to=17:00"){echo "selected"; }}} ?>>17:00</option>
+								<option value="18:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="thursday_to=18:00"){echo "selected"; }}} ?>>18:00</option>
+								<option value="19:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="thursday_to=19:00"){echo "selected"; }}} ?>>19:00</option>
+								<option value="20:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="thursday_to=20:00"){echo "selected"; }}} ?>>20:00</option>
+								<option value="21:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="thursday_to=21:00"){echo "selected"; }}} ?>>21:00</option>
+								<option value="22:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="thursday_to=22:00"){echo "selected"; }}} ?>>22:00</option>
+								<option value="23:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="thursday_to=23:00"){echo "selected"; }}} ?>>23:00</option>
+								<option value="24:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="thursday_to=24:00"){echo "selected"; }}} ?>>24:00</option>
                         </select></td>
-                        <td><input data-no-uniform="true" type="checkbox" class="iphone-toggle" name="thursday_closed" value="Yes"></td>
+                        <td><input data-no-uniform="true" type="checkbox" class="iphone-toggle" name="thursday_closed" value="Yes" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="thursday_closed=Yes"){echo "checked='checked'"; }}} ?>></td>
                       </tr>
                       <tr>
                         <td>Friday</td>
-                        <td><select name="friday_from">
-                          <option value="01:00">01:00</option>
-                          <option value="02:00">02:00</option>
-                          <option value="03:00">03:00</option>
-                          <option value="04:00">04:00</option>
-                          <option value="05:00">05:00</option>
-                          <option value="06:00">06:00</option>
-                          <option value="07:00">07:00</option>
-                          <option value="08:00">08:00</option>
-                          <option value="09:00">09:00</option>
-                          <option value="10:00">10:00</option>
-                          <option value="11:00">11:00</option>
-                          <option value="12:00">12:00</option>
-                          <option value="13:00">13:00</option>
-                          <option value="14:00">14:00</option>
-                          <option value="15:00">15:00</option>
-                          <option value="16:00">16:00</option>
-                          <option value="17:00">17:00</option>
-                          <option value="18:00">18:00</option>
-                          <option value="19:00">19:00</option>
-                          <option value="20:00">20:00</option>
-                          <option value="21:00">21:00</option>
-                          <option value="22:00">22:00</option>
-                          <option value="23:00">23:00</option>
-                          <option value="24:00">24:00</option>
+                        <td><select name="friday_from"class="required">
+                          <option value="01:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="thursday_to=01:00"){echo "selected"; }}} ?>>01:00</option>
+								<option value="02:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="friday_from=02:00"){echo "selected"; }}} ?>>02:00</option>
+								<option value="03:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="friday_from=03:00"){echo "selected"; }}} ?>>03:00</option>
+								<option value="04:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="friday_from=04:00"){echo "selected"; }}} ?>>04:00</option>
+								<option value="05:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="friday_from=05:00"){echo "selected"; }}} ?>>05:00</option>
+								<option value="06:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="friday_from=06:00"){echo "selected"; }}} ?>>06:00</option>
+								<option value="07:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="friday_from=07:00"){echo "selected"; }}} ?>>07:00</option>
+								<option value="08:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="friday_from=08:00"){echo "selected"; }}} ?>>08:00</option>
+								<option value="09:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="friday_from=09:00"){echo "selected"; }}} ?>>09:00</option>
+								<option value="10:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="friday_from=10:00"){echo "selected"; }}} ?>>10:00</option>
+								<option value="11:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="friday_from=11:00"){echo "selected"; }}} ?>>11:00</option>
+								<option value="12:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="friday_from=12:00"){echo "selected"; }}} ?>>12:00</option>
+								<option value="13:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="friday_from=13:00"){echo "selected"; }}} ?>>13:00</option>
+								<option value="14:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="friday_from=14:00"){echo "selected"; }}} ?>>14:00</option>
+								<option value="15:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="friday_from=15:00"){echo "selected"; }}} ?>>15:00</option>
+								<option value="16:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="friday_from=16:00"){echo "selected"; }}} ?>>16:00</option>
+								<option value="17:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="friday_from=17:00"){echo "selected"; }}} ?>>17:00</option>
+								<option value="18:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="friday_from=18:00"){echo "selected"; }}} ?>>18:00</option>
+								<option value="19:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="friday_from=19:00"){echo "selected"; }}} ?>>19:00</option>
+								<option value="20:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="friday_from=20:00"){echo "selected"; }}} ?>>20:00</option>
+								<option value="21:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="friday_from=21:00"){echo "selected"; }}} ?>>21:00</option>
+								<option value="22:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="friday_from=22:00"){echo "selected"; }}} ?>>22:00</option>
+								<option value="23:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="friday_from=23:00"){echo "selected"; }}} ?>>23:00</option>
+								<option value="24:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="friday_from=24:00"){echo "selected"; }}} ?>>24:00</option>
                         </select></td>
-                        <td><select name="friday_to">
-                          <option value="01:00">01:00</option>
-                          <option value="02:00">02:00</option>
-                          <option value="03:00">03:00</option>
-                          <option value="04:00">04:00</option>
-                          <option value="05:00">05:00</option>
-                          <option value="06:00">06:00</option>
-                          <option value="07:00">07:00</option>
-                          <option value="08:00">08:00</option>
-                          <option value="09:00">09:00</option>
-                          <option value="10:00">10:00</option>
-                          <option value="11:00">11:00</option>
-                          <option value="12:00">12:00</option>
-                          <option value="13:00">13:00</option>
-                          <option value="14:00">14:00</option>
-                          <option value="15:00">15:00</option>
-                          <option value="16:00">16:00</option>
-                          <option value="17:00">17:00</option>
-                          <option value="18:00">18:00</option>
-                          <option value="19:00">19:00</option>
-                          <option value="20:00">20:00</option>
-                          <option value="21:00">21:00</option>
-                          <option value="22:00">22:00</option>
-                          <option value="23:00">23:00</option>
-                          <option value="24:00">24:00</option>
+                        <td><select name="friday_to" class="required">
+								<option value="02:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="friday_to=02:00"){echo "selected"; }}} ?>>02:00</option>
+								<option value="03:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="friday_to=03:00"){echo "selected"; }}} ?>>03:00</option>
+								<option value="04:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="friday_to=04:00"){echo "selected"; }}} ?>>04:00</option>
+								<option value="05:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="friday_to=05:00"){echo "selected"; }}} ?>>05:00</option>
+								<option value="06:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="friday_to=06:00"){echo "selected"; }}} ?>>06:00</option>
+								<option value="07:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="friday_to=07:00"){echo "selected"; }}} ?>>07:00</option>
+								<option value="08:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="friday_to=08:00"){echo "selected"; }}} ?>>08:00</option>
+								<option value="09:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="friday_to=09:00"){echo "selected"; }}} ?>>09:00</option>
+								<option value="10:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="friday_to=10:00"){echo "selected"; }}} ?>>10:00</option>
+								<option value="11:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="friday_to=11:00"){echo "selected"; }}} ?>>11:00</option>
+								<option value="12:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="friday_to=12:00"){echo "selected"; }}} ?>>12:00</option>
+								<option value="13:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="friday_to=13:00"){echo "selected"; }}} ?>>13:00</option>
+								<option value="14:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="friday_to=14:00"){echo "selected"; }}} ?>>14:00</option>
+								<option value="15:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="friday_to=15:00"){echo "selected"; }}} ?>>15:00</option>
+								<option value="16:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="friday_to=16:00"){echo "selected"; }}} ?>>16:00</option>
+								<option value="17:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="friday_to=17:00"){echo "selected"; }}} ?>>17:00</option>
+								<option value="18:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="friday_to=18:00"){echo "selected"; }}} ?>>18:00</option>
+								<option value="19:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="friday_to=19:00"){echo "selected"; }}} ?>>19:00</option>
+								<option value="20:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="friday_to=20:00"){echo "selected"; }}} ?>>20:00</option>
+								<option value="21:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="friday_to=21:00"){echo "selected"; }}} ?>>21:00</option>
+								<option value="22:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="friday_to=22:00"){echo "selected"; }}} ?>>22:00</option>
+								<option value="23:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="friday_to=23:00"){echo "selected"; }}} ?>>23:00</option>
+								<option value="24:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="friday_to=24:00"){echo "selected"; }}} ?>>24:00</option>
                         </select></td>
-                        <td><input data-no-uniform="true" type="checkbox" class="iphone-toggle" name="friday_closed" value="Yes"></td>
+                        <td><input data-no-uniform="true" type="checkbox" class="iphone-toggle" name="friday_closed" value="Yes" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="friday_closed=Yes"){echo "checked='checked'"; }}} ?>></td>
                       </tr>
 					  <tr>
                         <td>Saturday</td>
-                        <td><select name="saturday_from">
-                          <option value="01:00">01:00</option>
-                          <option value="02:00">02:00</option>
-                          <option value="03:00">03:00</option>
-                          <option value="04:00">04:00</option>
-                          <option value="05:00">05:00</option>
-                          <option value="06:00">06:00</option>
-                          <option value="07:00">07:00</option>
-                          <option value="08:00">08:00</option>
-                          <option value="09:00">09:00</option>
-                          <option value="10:00">10:00</option>
-                          <option value="11:00">11:00</option>
-                          <option value="12:00">12:00</option>
-                          <option value="13:00">13:00</option>
-                          <option value="14:00">14:00</option>
-                          <option value="15:00">15:00</option>
-                          <option value="16:00">16:00</option>
-                          <option value="17:00">17:00</option>
-                          <option value="18:00">18:00</option>
-                          <option value="19:00">19:00</option>
-                          <option value="20:00">20:00</option>
-                          <option value="21:00">21:00</option>
-                          <option value="22:00">22:00</option>
-                          <option value="23:00">23:00</option>
-                          <option value="24:00">24:00</option>
+                        <td><select name="saturday_from" class="required">
+								<option value="02:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="saturday_from=02:00"){echo "selected"; }}} ?>>02:00</option>
+								<option value="03:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="saturday_from=03:00"){echo "selected"; }}} ?>>03:00</option>
+								<option value="04:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="saturday_from=04:00"){echo "selected"; }}} ?>>04:00</option>
+								<option value="05:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="saturday_from=05:00"){echo "selected"; }}} ?>>05:00</option>
+								<option value="06:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="saturday_from=06:00"){echo "selected"; }}} ?>>06:00</option>
+								<option value="07:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="saturday_from=07:00"){echo "selected"; }}} ?>>07:00</option>
+								<option value="08:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="saturday_from=08:00"){echo "selected"; }}} ?>>08:00</option>
+								<option value="09:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="saturday_from=09:00"){echo "selected"; }}} ?>>09:00</option>
+								<option value="10:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="saturday_from=10:00"){echo "selected"; }}} ?>>10:00</option>
+								<option value="11:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="saturday_from=11:00"){echo "selected"; }}} ?>>11:00</option>
+								<option value="12:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="saturday_from=12:00"){echo "selected"; }}} ?>>12:00</option>
+								<option value="13:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="saturday_from=13:00"){echo "selected"; }}} ?>>13:00</option>
+								<option value="14:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="saturday_from=14:00"){echo "selected"; }}} ?>>14:00</option>
+								<option value="15:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="saturday_from=15:00"){echo "selected"; }}} ?>>15:00</option>
+								<option value="16:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="saturday_from=16:00"){echo "selected"; }}} ?>>16:00</option>
+								<option value="17:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="saturday_from=17:00"){echo "selected"; }}} ?>>17:00</option>
+								<option value="18:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="saturday_from=18:00"){echo "selected"; }}} ?>>18:00</option>
+								<option value="19:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="saturday_from=19:00"){echo "selected"; }}} ?>>19:00</option>
+								<option value="20:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="saturday_from=20:00"){echo "selected"; }}} ?>>20:00</option>
+								<option value="21:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="saturday_from=21:00"){echo "selected"; }}} ?>>21:00</option>
+								<option value="22:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="saturday_from=22:00"){echo "selected"; }}} ?>>22:00</option>
+								<option value="23:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="saturday_from=23:00"){echo "selected"; }}} ?>>23:00</option>
+								<option value="24:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="saturday_from=24:00"){echo "selected"; }}} ?>>24:00</option>
                         </select></td>
-                        <td><select name="saturday_to">
-                          <option value="01:00">01:00</option>
-                          <option value="02:00">02:00</option>
-                          <option value="03:00">03:00</option>
-                          <option value="04:00">04:00</option>
-                          <option value="05:00">05:00</option>
-                          <option value="06:00">06:00</option>
-                          <option value="07:00">07:00</option>
-                          <option value="08:00">08:00</option>
-                          <option value="09:00">09:00</option>
-                          <option value="10:00">10:00</option>
-                          <option value="11:00">11:00</option>
-                          <option value="12:00">12:00</option>
-                          <option value="13:00">13:00</option>
-                          <option value="14:00">14:00</option>
-                          <option value="15:00">15:00</option>
-                          <option value="16:00">16:00</option>
-                          <option value="17:00">17:00</option>
-                          <option value="18:00">18:00</option>
-                          <option value="19:00">19:00</option>
-                          <option value="20:00">20:00</option>
-                          <option value="21:00">21:00</option>
-                          <option value="22:00">22:00</option>
-                          <option value="23:00">23:00</option>
-                          <option value="24:00">24:00</option>
+                        <td><select name="saturday_to" class="required">
+								<option value="02:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="saturday_to=02:00"){echo "selected"; }}} ?>>02:00</option>
+								<option value="03:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="saturday_to=03:00"){echo "selected"; }}} ?>>03:00</option>
+								<option value="04:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="saturday_to=04:00"){echo "selected"; }}} ?>>04:00</option>
+								<option value="05:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="saturday_to=05:00"){echo "selected"; }}} ?>>05:00</option>
+								<option value="06:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="saturday_to=06:00"){echo "selected"; }}} ?>>06:00</option>
+								<option value="07:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="saturday_to=07:00"){echo "selected"; }}} ?>>07:00</option>
+								<option value="08:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="saturday_to=08:00"){echo "selected"; }}} ?>>08:00</option>
+								<option value="09:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="saturday_to=09:00"){echo "selected"; }}} ?>>09:00</option>
+								<option value="10:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="saturday_to=10:00"){echo "selected"; }}} ?>>10:00</option>
+								<option value="11:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="saturday_to=11:00"){echo "selected"; }}} ?>>11:00</option>
+								<option value="12:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="saturday_to=12:00"){echo "selected"; }}} ?>>12:00</option>
+								<option value="13:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="saturday_to=13:00"){echo "selected"; }}} ?>>13:00</option>
+								<option value="14:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="saturday_to=14:00"){echo "selected"; }}} ?>>14:00</option>
+								<option value="15:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="saturday_to=15:00"){echo "selected"; }}} ?>>15:00</option>
+								<option value="16:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="saturday_to=16:00"){echo "selected"; }}} ?>>16:00</option>
+								<option value="17:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="saturday_to=17:00"){echo "selected"; }}} ?>>17:00</option>
+								<option value="18:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="saturday_to=18:00"){echo "selected"; }}} ?>>18:00</option>
+								<option value="19:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="saturday_to=19:00"){echo "selected"; }}} ?>>19:00</option>
+								<option value="20:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="saturday_to=20:00"){echo "selected"; }}} ?>>20:00</option>
+								<option value="21:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="saturday_to=21:00"){echo "selected"; }}} ?>>21:00</option>
+								<option value="22:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="saturday_to=22:00"){echo "selected"; }}} ?>>22:00</option>
+								<option value="23:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="saturday_to=23:00"){echo "selected"; }}} ?>>23:00</option>
+								<option value="24:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="saturday_to=24:00"){echo "selected"; }}} ?>>24:00</option>
                         </select></td>
-                        <td><input data-no-uniform="true" type="checkbox" class="iphone-toggle" name="saturday_closed" value="Yes"></td>
+                        <td><input data-no-uniform="true" type="checkbox" class="iphone-toggle" name="saturday_closed" value="Yes" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="saturday_closed=Yes"){echo "checked='checked'"; }}} ?>></td>
                       </tr>
                     </tbody>
                   </table>
@@ -714,90 +714,93 @@ $arrCategoryRecords = $objControl->getRecords('category_master', null, null, '',
             </div>
             <div class="row-fluid">
             <legend>Payment Options</legend>
+			<div id="paymentResult"></div>
               <div class="control-group span12">
 			  <?php isset($arrCompanyProfileData[0]['payment_options']) ? $paymentValue=$arrCompanyProfileData[0]['payment_options'] : '';
 							$options = @explode(',', $paymentValue);
 							
 					?>
-                <div class="row-fluid">
+				<div class="row-fluid">
 					 <div class="control-group span3">
-						<label class="control-label" for="focusedInput">Cash</label>
+					 <label class="control-label">Cash</label>
 						<div class="controls">
-						  <input data-no-uniform="true" type="checkbox" class="iphone-toggle" name="paymentOptions[]" value="Cash" <?php if(isset($options)){foreach($options as $option){if($option=="Cash"){echo "checked='checked'"; }}} ?>>
+						  <label class="checkbox inline"><input data-no-uniform="true" type="checkbox" title="Payment Options" class="iphone-toggle required" id="paymentOptions" name="paymentOptions[]" value="Cash" <?php if(isset($options)){foreach($options as $option){if($option=="Cash"){echo "checked='checked'"; }}} ?>></label>
 						</div>
 					</div>
 					<div class="control-group span3">
-						<label class="control-label" for="focusedInput">Master Card</label>
+						<label class="control-label">Master Card</label>
 						<div class="controls">
-						  <input data-no-uniform="true" type="checkbox" class="iphone-toggle" name="paymentOptions[]" value="Master Card" <?php if(isset($options)){foreach($options as $option){if($option=="Master Card"){echo "checked='checked'"; }}} ?>>
+						  <label class="checkbox inline"><input data-no-uniform="true" type="checkbox" class="iphone-toggle" data-min-options="1" id="paymentOptions" name="paymentOptions[]" value="Master Card" <?php if(isset($options)){foreach($options as $option){if($option=="Master Card"){echo "checked='checked'"; }}} ?>></label>
 						</div>
 					</div>
 					<div class="control-group span3">
-						<label class="control-label" for="focusedInput">Visa Card</label>
+						<label class="control-label">Visa Card</label>
 						<div class="controls">
-						  <input data-no-uniform="true" type="checkbox" class="iphone-toggle" name="paymentOptions[]" value="Visa Card" <?php if(isset($options)){foreach($options as $option){if($option=="Visa Card"){echo "checked='checked'"; }}} ?>>
+						  <label class="checkbox inline"><input data-no-uniform="true" type="checkbox" class="iphone-toggle" id="paymentOptions" name="paymentOptions[]" value="Visa Card" <?php if(isset($options)){foreach($options as $option){if($option=="Visa Card"){echo "checked='checked'"; }}} ?>></label>
 						</div>
 					</div>
                 </div>
                 <div class="row-fluid">
 					<div class="control-group span3">
-						<label class="control-label" for="focusedInput">Debit Card</label>
+						<label class="control-label">Debit Card</label>
 						<div class="controls">
-						  <input data-no-uniform="true" type="checkbox" class="iphone-toggle" name="paymentOptions[]" value="Debit Card" <?php if(isset($options)){foreach($options as $option){if($option=="Debit Card"){echo "checked='checked'"; }}} ?>>
+						  <label class="checkbox inline"><input data-no-uniform="true" type="checkbox" class="iphone-toggle" id="paymentOptions" name="paymentOptions[]" value="Debit Card" <?php if(isset($options)){foreach($options as $option){if($option=="Debit Card"){echo "checked='checked'"; }}} ?>></label>
 						</div>
 					</div>
 					<div class="control-group span3">
-						<label class="control-label" for="focusedInput">Money Orders</label>
+						<label class="control-label">Money Orders</label>
 						<div class="controls">
-						  <input data-no-uniform="true" type="checkbox" class="iphone-toggle" name="paymentOptions[]" value="Money Orders" <?php if(isset($options)){foreach($options as $option){if($option=="Money Orders"){echo "checked='checked'"; }}} ?>>
+						  <label class="checkbox inline"><input data-no-uniform="true" type="checkbox" class="iphone-toggle" id="paymentOptions" name="paymentOptions[]" value="Money Orders" <?php if(isset($options)){foreach($options as $option){if($option=="Money Orders"){echo "checked='checked'"; }}} ?>></label>
 						</div>
 					</div>
 					<div class="control-group span3">
-						<label class="control-label" for="focusedInput">Cheques</label>
+						<label class="control-label">Cheques</label>
 						<div class="controls">
-						  <input data-no-uniform="true" type="checkbox" class="iphone-toggle" name="paymentOptions[]" value="Cheques" <?php if(isset($options)){foreach($options as $option){if($option=="Cheques"){echo "checked='checked'"; }}} ?>>
+						  <label class="checkbox inline"><input data-no-uniform="true" type="checkbox" class="iphone-toggle" id="paymentOptions" name="paymentOptions[]" value="Cheques" <?php if(isset($options)){foreach($options as $option){if($option=="Cheques"){echo "checked='checked'"; }}} ?>></label>
 						</div>
 					</div>
                 </div>
                 <div class="row-fluid">
 					<div class="control-group span3">
-						<label class="control-label" for="focusedInput">Credit Card</label>
+						<label class="control-label">Credit Card</label>
 						<div class="controls">
-						  <input data-no-uniform="true" type="checkbox" class="iphone-toggle" name="paymentOptions[]" value="Credit Card" <?php if(isset($options)){foreach($options as $option){if($option=="Credit Card"){echo "checked='checked'"; }}} ?>>
+						  <label class="checkbox inline"><input data-no-uniform="true" type="checkbox" class="iphone-toggle" id="paymentOptions" name="paymentOptions[]" value="Credit Card" <?php if(isset($options)){foreach($options as $option){if($option=="Credit Card"){echo "checked='checked'"; }}} ?>></label>
 						</div>
 					</div>
 					<div class="control-group span3">
-						<label class="control-label" for="focusedInput">Travellers Cheque</label>
+						<label class="control-label">Travellers Cheque</label>
 						<div class="controls">
-						  <input data-no-uniform="true" type="checkbox" class="iphone-toggle" name="paymentOptions[]" value="Travellers Cheque" <?php if(isset($options)){foreach($options as $option){if($option=="Travellers Cheque"){echo "checked='checked'"; }}} ?>>
+						  <label class="checkbox inline"><input data-no-uniform="true" type="checkbox" class="iphone-toggle" id="paymentOptions" name="paymentOptions[]" value="Travellers Cheque" <?php if(isset($options)){foreach($options as $option){if($option=="Travellers Cheque"){echo "checked='checked'"; }}} ?>></label>
 						</div>
 					</div>
 					<div class="control-group span3">
-						<label class="control-label" for="focusedInput">Financing Available</label>
+						<label class="control-label">Financing Available</label>
 						<div class="controls">
-						  <input data-no-uniform="true" type="checkbox" class="iphone-toggle" name="paymentOptions[]" value="Financing Available" <?php if(isset($options)){foreach($options as $option){if($option=="Financing Available"){echo "checked='checked'"; }}} ?>>
+						  <label class="checkbox inline"><input data-no-uniform="true" type="checkbox" class="iphone-toggle" id="paymentOptions" name="paymentOptions[]" value="Financing Available" <?php if(isset($options)){foreach($options as $option){if($option=="Financing Available"){echo "checked='checked'"; }}} ?>></label>
 						</div>
 					</div>
                 </div>
                 <div class="row-fluid">
 					<div class="control-group span3">
-						<label class="control-label" for="focusedInput">American Express Card</label>
+						<label class="control-label">American Express Card</label>
 						<div class="controls">
-						  <input data-no-uniform="true" type="checkbox" class="iphone-toggle" name="paymentOptions[]" value="American Express Card" <?php if(isset($options)){foreach($options as $option){if($option=="American Express Card"){echo "checked='checked'"; }}} ?>>
+						  <input data-no-uniform="true" type="checkbox" class="iphone-toggle" id="paymentOptions" name="paymentOptions[]" value="American Express Card" <?php if(isset($options)){foreach($options as $option){if($option=="American Express Card"){echo "checked='checked'"; }}} ?>></label>
 						</div>
 					</div>
 					<div class="control-group span3">
-						<label class="control-label" for="focusedInput">Dinners Card</label>
+						<label class="control-label">Dinners Card</label>
 						<div class="controls">
-						  <input data-no-uniform="true" type="checkbox" class="iphone-toggle" name="paymentOptions[]" value="Dinners Card" <?php if(isset($options)){foreach($options as $option){if($option=="Dinners Card"){echo "checked='checked'"; }}} ?>>
+						  <input data-no-uniform="true" type="checkbox" class="iphone-toggle" id="paymentOptions" name="paymentOptions[]" value="Dinners Card" <?php if(isset($options)){foreach($options as $option){if($option=="Dinners Card"){echo "checked='checked'"; }}} ?>></label>
 						</div>
 					</div>
                 </div>
+					
 				<div class="row-fluid">
 					<div class="control-group span6">
-					  <label class="control-label" for="focusedInput">Status</label>
+					  <label class="control-label" for="company_profile_status">Status</label>
 					  <div class="controls">
-						<select class="input-xlarge focused" id="company_profile_status" name="company_profile_status" >
+						<select class="input-xlarge focused required" id="company_profile_status" name="company_profile_status" >
+							<option value="">&mdash; Please Select &mdash;</option>
 						  <option <?php echo (isset($arrCompanyProfileData[0]['company_profile_status']) && $arrCompanyProfileData[0]['company_profile_status'] == 'Active' ? 'selected="selected"' : '');?> value="Active">Active</option>
 						  <option <?php echo (isset($arrCompanyProfileData[0]['company_profile_status']) && $arrCompanyProfileData[0]['company_profile_status'] == 'Inactive' ? 'selected="selected"' : ''); ?> value="Inactive">Inactive</option>
 						</select>
@@ -806,6 +809,7 @@ $arrCategoryRecords = $objControl->getRecords('category_master', null, null, '',
 				</div>
               </div>
             </div>
+			
           </div>
           <div id="tabs-3">
 			<div>
@@ -857,6 +861,7 @@ $arrCategoryRecords = $objControl->getRecords('category_master', null, null, '',
 				  <label class="control-label" for="focusedInput">Status</label>
 				  <div class="controls">
 					<select class="input-xlarge focused" id="c_status" name="c_status" >
+					<option value="">&mdash; Please Select &mdash;</option>
 					  <option value="Active">Active</option>
 					  <option value="Inactive">Inactive</option>
 					</select>
@@ -873,12 +878,12 @@ $arrCategoryRecords = $objControl->getRecords('category_master', null, null, '',
 				<table class="table table-striped table-bordered bootstrap-datatable" id="mytable">
 						  <thead>
 							  <tr>
-								  <th>Full Name</th>
-								  <th>Date Of Birth</th>
-								  <th>Date Of Marriage</th>
-								  <th>Mobile</th>
-                                  <th>E-Mail</th>
-                                  <th>Designation</th>
+								  <th><label for="contact_full_name">Full Name<label></th>
+								  <th><label for="dob">Date Of Birth<label></th>
+								  <th><label for="dom">Date Of Marriage<label></th>
+								  <th><label for="contact_mobile">Mobile<label></th>
+                                  <th><label for="contact_email">E-Mail<label></th>
+                                  <th><label for="designation">Designation<label></th>
 								  <th>Status</th>
 								  <th>Actions</th>
 							  </tr>
@@ -892,13 +897,13 @@ $arrCategoryRecords = $objControl->getRecords('category_master', null, null, '',
 							
 							<tr id="visibleDiv">
 								<td><input type="hidden" name="company_contact_id[]" id="company_contact_id" value="<?php echo (isset($arrCompanyContactData[$intIndex]['company_contact_id']) ? $arrCompanyContactData[$intIndex]['company_contact_id'] : ''); ?>" />
-									<input class="input-small focused" id="contact_full_name" name="contact_full_name[]" type="text" value="<?php echo (isset($arrCompanyContactData[$intIndex]['contact_full_name']) ? $arrCompanyContactData[$intIndex]['contact_full_name'] : ''); ?>"></td>
-								<td class="center"><input type="text" class="input-small datepicker" id="dob" name="dob[]" value="<?php echo (isset($arrCompanyContactData[$intIndex]['dob']) ? $arrCompanyContactData[$intIndex]['dob'] : ''); ?>"></td>
-                                <td class="center"><input type="text" class="input-small datepicker" id="dom" name="dom[]"value="<?php echo (isset($arrCompanyContactData[$intIndex]['dom']) ? $arrCompanyContactData[$intIndex]['dom'] : ''); ?>"></td>
-								<td class="center"><input class="input-small focused" id="contact_mobile" name="contact_mobile[]" type="text" value="<?php echo (isset($arrCompanyContactData[$intIndex]['contact_mobile']) ? $arrCompanyContactData[$intIndex]['contact_mobile'] : ''); ?>"></td>
-                                <td class="center"><input class="input-small focused" id="contact_email" name="contact_email[]" type="email" value="<?php echo (isset($arrCompanyContactData[$intIndex]['contact_email']) ? $arrCompanyContactData[$intIndex]['contact_email'] : ''); ?>"></td>
-								<td class="center"><input class="input-small focused" id="designation" name="designation[]" type="text" value="<?php echo (isset($arrCompanyContactData[$intIndex]['designation']) ? $arrCompanyContactData[$intIndex]['designation'] : ''); ?>"></td>
-								<td class="center"> <select class="input-small focused" id="contact_status" name="contact_status[]" >
+									<input class="input-small focused required" id="contact_full_name" name="contact_full_name[]" type="text" value="<?php echo (isset($arrCompanyContactData[$intIndex]['contact_full_name']) ? $arrCompanyContactData[$intIndex]['contact_full_name'] : ''); ?>"></td>
+								<td class="center"><input type="text" class="input-small datepicker required" id="dob" data-date="MM-DD-YYYY" name="dob[]" value="<?php echo (isset($arrCompanyContactData[$intIndex]['dob']) ? $arrCompanyContactData[$intIndex]['dob'] : ''); ?>"></td>
+                                <td class="center"><label for="dom"><input type="text" class="input-small datepicker required" id="dom" data-date="MM-DD-YYYY" name="dom[]"value="<?php echo (isset($arrCompanyContactData[$intIndex]['dom']) ? $arrCompanyContactData[$intIndex]['dom'] : ''); ?>"></td>
+								<td class="center"><input class="input-small focused required" id="contact_mobile" data-int data-min-chars="10" maxlength="10" name="contact_mobile[]" type="text" value="<?php echo (isset($arrCompanyContactData[$intIndex]['contact_mobile']) ? $arrCompanyContactData[$intIndex]['contact_mobile'] : ''); ?>"></td>
+                                <td class="center"><input class="input-small focused required" id="contact_email" data-email name="contact_email[]" type="email" value="<?php echo (isset($arrCompanyContactData[$intIndex]['contact_email']) ? $arrCompanyContactData[$intIndex]['contact_email'] : ''); ?>"></td>
+								<td class="center"><input class="input-small focused required" id="designation" name="designation[]" type="text" value="<?php echo (isset($arrCompanyContactData[$intIndex]['designation']) ? $arrCompanyContactData[$intIndex]['designation'] : ''); ?>"></td>
+								<td class="center"> <select class="input-small focused required" id="contact_status" name="contact_status[]" >
 													  <option <?php echo (isset($arrCompanyContactData[$intIndex]['contact_status']) && $arrCompanyContactData[$intIndex]['contact_status'] == 'Active' ? 'selected="selected"' : ''); ?> value="Active">Active</option>
 													  <option <?php echo (isset($arrCompanyContactData[$intIndex]['contact_status']) && $arrCompanyContactData[$intIndex]['contact_status'] == 'Inactive' ? 'selected="selected"' : ''); ?> value="Inactive">Inactive</option>
 													</select>
@@ -915,51 +920,60 @@ $arrCategoryRecords = $objControl->getRecords('category_master', null, null, '',
           <div id="tabs-4">
             <div class="row-fluid">
               <div class="control-group span6">
-                <label class="control-label" for="focusedInput">Data Source</label>
+                <label class="control-label" for="data_source">Data Source</label>
                 <div class="controls">
-                  <input class="input-xlarge focused" id="data_source" name="data_source" type="text" value="<?php echo (isset($arrCompanyAdvertiseData[0]['data_source']) ? $arrCompanyAdvertiseData[0]['data_source'] : ''); ?>">
+                  <input class="input-xlarge focused required" id="data_source" name="data_source" type="text" value="<?php echo (isset($arrCompanyAdvertiseData[0]['data_source']) ? $arrCompanyAdvertiseData[0]['data_source'] : ''); ?>">
                 </div>
               </div>
               <div class="control-group span6">
-                <label class="control-label" for="focusedInput">City</label>
+                <label class="control-label" for="ad_city">City</label>
                 <div class="controls">
-                  <input class="input-xlarge focused" id="ad_city" name="ad_city" type="text" value="<?php echo (isset($arrCompanyAdvertiseData[0]['ad_city']) ? $arrCompanyAdvertiseData[0]['ad_city'] : ''); ?>">
-                </div>
-              </div>
-            </div>
-            <div class="row-fluid">
-              <div class="control-group span6">
-                <label class="control-label" for="focusedInput">Budget</label>
-                <div class="controls">
-                  <input class="input-xlarge focused" id="budget" name="budget" type="text" value="<?php echo (isset($arrCompanyAdvertiseData[0]['budget']) ? $arrCompanyAdvertiseData[0]['budget'] : ''); ?>">
-                </div>
-              </div>
-              <div class="control-group span6">
-                <label class="control-label" for="focusedInput">Year</label>
-                <div class="controls">
-                  <input class="input-xlarge focused" id="year" name="year" type="text" value="<?php echo (isset($arrCompanyAdvertiseData[0]['year']) ? $arrCompanyAdvertiseData[0]['year'] : ''); ?>">
+					<select name="ad_city" id="ad_city"  class="input-xlarge focused required" >
+						<option value="">&mdash; Please Select &mdash;</option>
+						<?php
+							for ($intIndex = 0; $intIndex < count($arrCityRecords); $intIndex++)
+							{
+								echo "<option value='" . $arrCityRecords[$intIndex]['city_id'] . "' ".($arrCityRecords[$intIndex]['city_id']==$arrCompanyAdvertiseData[0]['city_id']?'selected':'').">" . $arrCityRecords[$intIndex]['city_name'] . "</option>";
+							}
+						?>
+					</select>
                 </div>
               </div>
             </div>
             <div class="row-fluid">
               <div class="control-group span6">
-                <label class="control-label" for="focusedInput">Date</label>
+                <label class="control-label" for="budget">Budget</label>
                 <div class="controls">
-                  <input class="input-xlarge datepicker" id="ad_date" name="ad_date" type="text" value="<?php echo (isset($arrCompanyAdvertiseData[0]['ad_date']) ? $arrCompanyAdvertiseData[0]['ad_date'] : ''); ?>">
+                  <input class="input-xlarge focused required" id="budget" data-int name="budget" type="text" value="<?php echo (isset($arrCompanyAdvertiseData[0]['budget']) ? $arrCompanyAdvertiseData[0]['budget'] : ''); ?>">
                 </div>
               </div>
               <div class="control-group span6">
-                <label class="control-label" for="focusedInput">Page</label>
+                <label class="control-label" for="year">Year</label>
                 <div class="controls">
-                  <input class="input-xlarge focused" id="page" name="page" type="text" value="<?php echo (isset($arrCompanyAdvertiseData[0]['page']) ? $arrCompanyAdvertiseData[0]['page'] : ''); ?>">
+                  <input class="input-xlarge focused required" data-int data-min-chars="4" maxlength="4" id="year" name="year" type="text" value="<?php echo (isset($arrCompanyAdvertiseData[0]['year']) ? $arrCompanyAdvertiseData[0]['year'] : ''); ?>">
+                </div>
+              </div>
+            </div>
+            <div class="row-fluid">
+              <div class="control-group span6">
+                <label class="control-label" for="ad_date">Date</label>
+                <div class="controls">
+                  <input class="input-xlarge datepicker required" data-date="MM-DD-YYYY" maxlength="128" id="ad_date" name="ad_date" type="text" value="<?php echo (isset($arrCompanyAdvertiseData[0]['ad_date']) ? $arrCompanyAdvertiseData[0]['ad_date'] : ''); ?>">
+                </div>
+              </div>
+              <div class="control-group span6">
+                <label class="control-label" for="page">Page</label>
+                <div class="controls">
+                  <input class="input-xlarge focused required" id="page" name="page" type="text" value="<?php echo (isset($arrCompanyAdvertiseData[0]['page']) ? $arrCompanyAdvertiseData[0]['page'] : ''); ?>">
                 </div>
               </div>
             </div>
 			<div class="row-fluid">
             <div class="control-group span6">
-              <label class="control-label" for="focusedInput">Status</label>
+              <label class="control-label" for="ad_status">Status</label>
               <div class="controls">
-                <select class="input-xlarge focused" id="ad_status" name="ad_status" >
+                <select class="input-xlarge focused required" id="ad_status" name="ad_status" >
+					<option value="">&mdash; Please Select &mdash;</option>
                   <option <?php echo (isset($arrCompanyAdvertiseData[0]['ad_status']) && $arrCompanyAdvertiseData[0]['ad_status'] == 'Active' ? 'selected="selected"' : ''); ?> value="Active">Active</option>
                   <option <?php echo (isset($arrCompanyAdvertiseData[0]['ad_status']) && $arrCompanyAdvertiseData[0]['ad_status'] == 'Inactive' ? 'selected="selected"' : ''); ?> value="Inactive">Inactive</option>
                 </select>
@@ -972,7 +986,7 @@ $arrCategoryRecords = $objControl->getRecords('category_master', null, null, '',
           <div class="row-fluid" style="height: 20px"></div>
           
           <div class="form-actions">
-            <button type="submit" class="btn btn-primary">Save changes</button>
+            <button type="submit" id="submit" class="btn btn-primary">Save changes</button>
 			<button type="button" class="btn" onclick="javascript:history.go(-1)">Cancel</button>
           </div>
         </fieldset>
@@ -997,7 +1011,7 @@ require_once('footer.php');
 			  var c_email = $('#c_email').val();
 			  var c_designation = $('#c_designation').val();
 			  var c_status = $('#c_status').val();
-			  $('#mytable tr').last().after('<tr id="visibleDiv"><td><input type="hidden" name="company_contact_id[]" id="company_contact_id" value="" /><input class="input-small focused"   id="contact_full_name" name="contact_full_name[]" type="text" value="'+c_name+'"></td><td class="center"><input type="text"   class="input-small datepicker" id="dob" name="dob[]" value="'+c_dob+'"></td><td class="center"><input type="text"   class="input-small datepicker" id="dom" name="dom[]"value="'+c_dom+'"></td><td class="center"><input class="input-small focused"   id="contact_mobile" name="contact_mobile[]" type="text" value="'+c_mobile+'"></td><td class="center"><input class="input-small focused"   id="contact_email" name="contact_email[]" type="email" value="'+c_email+'"></td><td class="center"><input class="input-small focused"   id="designation" name="designation[]" type="text" value="'+c_designation+'"></td><td class="center"><select class="input-small focused" id="contact_status" name="contact_status[]" ><option value="Active">Active</option><option value="Inactive">Inactive</option></select></td><td class="center"><input class="btn btn-success" id="removeRows" type="button" value="Remove"></input></td></tr>');
+			  $('#mytable tr').last().after('<tr id="visibleDiv"><td><input type="hidden" name="company_contact_id[]" id="company_contact_id" value="" /><input class="input-small focused required" id="contact_full_name" name="contact_full_name[]" type="text" value="'+c_name+'"></td><td class="center"><input type="text" class="input-small datepicker required" id="dob" data-date="MM-DD-YYYY" name="dob[]" value="'+c_dob+'"></td><td class="center"><input type="text" class="input-small datepicker required" id="dom" data-date="MM-DD-YYYY" name="dom[]" value="'+c_dom+'"></td><td class="center"><input class="input-small focused required" data-int data-min-chars="10" maxlength="10" id="contact_mobile" name="contact_mobile[]" type="text" value="'+c_mobile+'"></td><td class="center"><input class="input-small focused required" id="contact_email" data-email name="contact_email[]" type="email" value="'+c_email+'"></td><td class="center"><input class="input-small focused required"   id="designation" name="designation[]" type="text" value="'+c_designation+'"></td><td class="center"><select class="input-small focused required" id="contact_status" name="contact_status[]" ><option value="Active">Active</option><option value="Inactive">Inactive</option></select></td><td class="center"><input class="btn btn-success" id="removeRows" type="button" value="Remove"></input></td></tr>');
 			$('#c_name').val("");$('#c_dob').val("");$('#c_dom').val("");$('#c_mobile').val("");$('#c_email').val("");$('#c_designation').val("");$('#c_status').val("");
 			//  $('table').append('<tr><td>' + newName + '</td></tr>')
 		});
@@ -1006,15 +1020,60 @@ require_once('footer.php');
 			$(this).parent().parent().remove();
 		});
 		
-		$("#editRows").live('click', function(event){
-					$('#c_name').val($('#contact_full_name').val());
-					$('#c_dob').val($('#dob').val());
-					$('#c_dom').val($('#dom').val());
-					$('#c_mobile').val($('#contact_mobile').val());
-					$('#c_email').val($('#contact_email').val());
-					$('#c_status').val($('#contact_status').val());
-					$('#c_designation').val($('#designation').val());
+		$("input[type='text']").keypress(function(){
+			var name = $(this).val();
+			var name_without_special_char = name.replace(/[^a-zA-Z 0-9 . @]+/g,"");
+			$(this).val(name_without_special_char);
+		});
+	// Validate form
+		$('form').submit(function(e) {
+			//e.preventDefault();
+				var isvalidated=false;
+			// From the anchor element find the closest form element
+			
+			$(this).closest('form').formvalidate({
+			//	isvalidated = false;
+				failureMessages: true,
+				successMessages: false,
+				messageFailureClass: 'label label-important',
+				//messageSuccessClass: 'label label-success',
+				onSuccess: function(form) {
+					isvalidated = true;
+					return isvalidated;
+				},
+				validations: {
+					isNot: function(input, params) {
+						return $.inArray(input.toLowerCase(), params);
+					}
+					/*paymentOptions: function(elem) {
+						return $("input[name='paymentOptions[]']").serializeArray().length > 0;
+					}*/
+				},
+				localization: {
+					en: {
+						success: {
+						
+						},
+						failure: {
+							//paymentOptions: function(title, value, name, input) {
+							//	return 'Please select at least one Payment Option';
+							//}
+						}
+					}
+				}
+				
 			});
+			/* var fields = $("input[name='paymentOptions[]']").serializeArray(); 
+				if (fields.length == 0) 
+				{ 
+					$(this).valid();
+					$("#paymentResult").html("<span class='label label-warning'>Please select at least One Payment Option.</span>");
+				} else{ 
+					//isvalidated= true;
+					$("#paymentResult").html("");
+					}*/
+		return isvalidated;
+		});
 	});
 	
 </script>

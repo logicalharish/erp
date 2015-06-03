@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 29, 2015 at 03:05 PM
+-- Generation Time: Jun 03, 2015 at 07:13 AM
 -- Server version: 5.5.27
 -- PHP Version: 5.4.7
 
@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS `branch_master` (
   `modified_datetime` datetime DEFAULT NULL,
   `modified_by` int(11) DEFAULT NULL,
   PRIMARY KEY (`branch_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
 --
 -- Dumping data for table `branch_master`
@@ -70,7 +70,8 @@ INSERT INTO `branch_master` (`branch_id`, `country_id`, `branch_name`, `status`,
 (4, NULL, 'state', 'Inactive', '0000-00-00 00:00:00', 1, '0000-00-00 00:00:00', 1),
 (5, 12, 'new state', 'Active', '0000-00-00 00:00:00', 1, '0000-00-00 00:00:00', 1),
 (6, 12, 'my state', 'Active', '0000-00-00 00:00:00', 1, '0000-00-00 00:00:00', 1),
-(7, 2, 'my new state', 'Active', '0000-00-00 00:00:00', 1, NULL, NULL);
+(7, 2, 'my new state', 'Active', '0000-00-00 00:00:00', 1, NULL, NULL),
+(9, 9, 'my new state', 'Active', '2015-06-01 07:06:07', 1, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -545,6 +546,10 @@ CREATE TABLE IF NOT EXISTS `city_master` (
   `state_id` int(100) DEFAULT NULL,
   `city_name` varchar(100) DEFAULT NULL,
   `status` enum('Active','Inactive') DEFAULT NULL,
+  `created_datetime` datetime DEFAULT NULL,
+  `created_by` int(11) DEFAULT NULL,
+  `modified_datetime` datetime DEFAULT NULL,
+  `modified_by` int(11) DEFAULT NULL,
   PRIMARY KEY (`city_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
@@ -552,10 +557,10 @@ CREATE TABLE IF NOT EXISTS `city_master` (
 -- Dumping data for table `city_master`
 --
 
-INSERT INTO `city_master` (`city_id`, `country_id`, `state_id`, `city_name`, `status`) VALUES
-(1, 1, 1, 'Ahmedabad', 'Active'),
-(2, 13, 6, 'city1', 'Active'),
-(3, 13, 6, 'Ahmedabad', 'Inactive');
+INSERT INTO `city_master` (`city_id`, `country_id`, `state_id`, `city_name`, `status`, `created_datetime`, `created_by`, `modified_datetime`, `modified_by`) VALUES
+(1, 1, 1, 'Amd', 'Active', '2015-05-31 22:08:29', 1, '2015-06-01 07:06:21', 1),
+(2, 13, 6, 'city1', 'Active', '2015-05-31 22:08:31', 1, '2015-05-31 22:08:52', 1),
+(3, 13, 6, 'Ahmedabad', 'Inactive', '2015-05-31 22:08:33', 1, '2015-05-31 22:08:54', 1);
 
 -- --------------------------------------------------------
 
@@ -566,7 +571,7 @@ INSERT INTO `city_master` (`city_id`, `country_id`, `state_id`, `city_name`, `st
 CREATE TABLE IF NOT EXISTS `company_advertise` (
   `company_advertise_id` bigint(20) NOT NULL AUTO_INCREMENT,
   `data_source` varchar(300) DEFAULT NULL,
-  `ad_city` varchar(200) DEFAULT NULL,
+  `city_id` int(11) DEFAULT NULL,
   `budget` varchar(200) DEFAULT NULL,
   `year` varchar(100) DEFAULT NULL,
   `ad_date` varchar(10) DEFAULT NULL,
@@ -585,9 +590,9 @@ CREATE TABLE IF NOT EXISTS `company_advertise` (
 -- Dumping data for table `company_advertise`
 --
 
-INSERT INTO `company_advertise` (`company_advertise_id`, `data_source`, `ad_city`, `budget`, `year`, `ad_date`, `page`, `ad_status`, `created_datetime`, `created_by`, `modified_datetime`, `modified_by`, `company_id`) VALUES
-(2, 'data source', 'amd', '25000', '2015', '05/12/2015', 'no page', 'Active', NULL, NULL, NULL, NULL, 13),
-(4, 'source', 'amd', '20000', '2000', '05/12/2015', 'none', 'Active', '2015-05-29 02:05:19', 1, NULL, NULL, 16);
+INSERT INTO `company_advertise` (`company_advertise_id`, `data_source`, `city_id`, `budget`, `year`, `ad_date`, `page`, `ad_status`, `created_datetime`, `created_by`, `modified_datetime`, `modified_by`, `company_id`) VALUES
+(2, 'data source', 1, '25000', '2015', '05/12/2015', 'no page', 'Active', NULL, NULL, '2015-05-30 07:05:05', 1, 13),
+(4, 'source', 2, '20000', '2000', '05/12/2015', 'none', 'Active', '2015-05-29 02:05:19', 1, '2015-05-30 07:05:48', 1, 16);
 
 -- --------------------------------------------------------
 
@@ -607,10 +612,6 @@ CREATE TABLE IF NOT EXISTS `company_category` (
 --
 
 INSERT INTO `company_category` (`company_id`, `category_id`) VALUES
-(13, 2),
-(13, 3),
-(13, 4),
-(13, 5),
 (13, 6),
 (16, 2),
 (16, 3),
@@ -638,17 +639,19 @@ CREATE TABLE IF NOT EXISTS `company_contact` (
   `company_id` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`company_contact_id`),
   KEY `company_id` (`company_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=45 ;
 
 --
 -- Dumping data for table `company_contact`
 --
 
 INSERT INTO `company_contact` (`company_contact_id`, `contact_full_name`, `dob`, `dom`, `contact_mobile`, `contact_email`, `designation`, `contact_status`, `created_datetime`, `created_by`, `modified_datetime`, `modified_by`, `company_id`) VALUES
-(2, 'kajal', '05/12/2015', '05/13/2015', '8373838373', 'kajalpatel0377@gmail.com', 'php developer', 'Active', '2015-05-28 02:11:40', 1, '2015-05-28 02:13:55', 1, 13),
-(3, 'kk', '05/18/2015', '05/25/2015', '927262536', 'kk@site.in', 'designation', 'Inactive', '2015-05-28 02:11:35', 1, '2015-05-28 02:13:57', 1, 13),
-(6, 'employee1', '05/18/2015', '05/27/2015', '74839784', 'emp1@company.com', 'engineer', 'Active', '2015-05-29 02:05:19', 1, NULL, NULL, 16),
-(7, 'emp2', '05/12/2015', '05/12/2015', '78368436', 'emp2@company.com', 'developer', 'Active', '2015-05-29 02:05:19', 1, NULL, NULL, 16);
+(36, 'kajal', '05/12/2015', '05/13/2015', '8373838373', 'kajalpatel0377@gmail.com', 'php developer', 'Active', '2015-05-30 07:05:05', 1, NULL, NULL, 13),
+(37, 'kk', '05/18/2015', '05/25/2015', '927262536', 'kk@site.in', 'designation', 'Active', '2015-05-30 07:05:05', 1, NULL, NULL, 13),
+(38, 'name', '05/19/2015', '05/20/2015', '894785894', 'kajalp@hd.com', 'desig', 'Active', '2015-05-30 07:05:05', 1, NULL, NULL, 13),
+(42, 'employee1', '05/18/2015', '05/27/2015', '74839784', 'emp1@company.com', 'engineer', 'Active', '2015-05-30 07:05:48', 1, NULL, NULL, 16),
+(43, 'emp2', '05/12/2015', '05/12/2015', '78368436', 'emp2@company.com', 'developer', 'Active', '2015-05-30 07:05:48', 1, NULL, NULL, 16),
+(44, 'emp3', '05/26/2015', '05/11/2015', '8937486376', 'kajal@jisd.djid', 'new desig', 'Inactive', '2015-05-30 07:05:48', 1, NULL, NULL, 16);
 
 -- --------------------------------------------------------
 
@@ -699,8 +702,8 @@ CREATE TABLE IF NOT EXISTS `company_master` (
 --
 
 INSERT INTO `company_master` (`company_id`, `full_name`, `short_name`, `est_date`, `building`, `street`, `landmark`, `country_id`, `city_id`, `state_id`, `area`, `pincode`, `latitude`, `longitute`, `is_verified`, `nob`, `turn_over`, `status`, `email`, `email_dis`, `email_dnd`, `website`, `website_dis`, `website_dnd`, `mobile`, `mobile_dis`, `mobile_dnd`, `landline`, `landline_dis`, `landline_dnd`, `created_datetime`, `created_by`, `modified_datetime`, `modified_by`) VALUES
-(13, 'kajal', 'kk', '05/27/2015', 'gopal palace', 'naheru nagar', 'nh', 1, 1, 1, 'naheru nagar', '384658', '23.023046', '72.537736', 'Yes', 'Nature of Bussiness', 'Turn Over', 'Active', 'kajalpatel0377@gmail.com', 'No', 'No', 'www.kkp.com', 'Yes', 'Yes', '9168753456', 'No', 'Yes', '43526789', 'Yes', 'No', NULL, NULL, NULL, NULL),
-(16, 'company', 'comp', '05/26/2015', 'gopal palace', 'ahmedabad', 'amd', 1, 1, 1, 'ahmedabad', '385367', '63.777656', '73.632665', 'Yes', 'Nature of Bussiness', 'Turn Over', 'Active', 'kk1@company.com', 'Yes', 'No', 'www.company.com', 'Yes', 'No', '748975864', 'Yes', 'No', '987387873', 'Yes', 'No', '2015-05-29 02:05:19', 1, '2015-05-29 02:05:52', 1);
+(13, 'kajal', 'kk', '05/27/2015', 'gopal palace', 'naheru nagar', 'nh', 1, 1, 1, 'naheru nagar', '384658', '23.023046', '72.537736', 'Yes', 'Nature of Bussiness', 'Turn Over', 'Active', 'kajalpatel0377@gmail.com', 'No', 'No', 'www.kkp.com', 'Yes', 'Yes', '9168753456', 'No', 'Yes', '43526789', 'Yes', 'No', NULL, NULL, '2015-05-30 07:05:05', 1),
+(16, 'company', 'comp', '05/26/2015', 'gopal palace', 'ahmedabad', 'amd', 1, 1, 1, 'ahmedabad', '385367', '63.777656', '73.632665', 'Yes', 'Nature of Bussiness', 'Turn Over', 'Active', 'kk1@company.com', 'Yes', 'No', 'www.company.com', 'Yes', 'No', '748975864', 'Yes', 'No', '987387873', 'Yes', 'No', '2015-05-29 02:05:19', 1, '2015-05-30 11:05:25', 1);
 
 -- --------------------------------------------------------
 
@@ -1172,6 +1175,7 @@ INSERT INTO `company_master_new` (`company_id`, `company_name`, `address1`, `add
 CREATE TABLE IF NOT EXISTS `company_profile` (
   `company_profile_id` bigint(20) NOT NULL AUTO_INCREMENT,
   `company_description` text,
+  `hours_of_operation` varchar(1000) DEFAULT NULL,
   `sunday_from` varchar(50) DEFAULT NULL,
   `sunday_to` varchar(50) DEFAULT NULL,
   `monday_from` varchar(50) DEFAULT NULL,
@@ -1208,9 +1212,9 @@ CREATE TABLE IF NOT EXISTS `company_profile` (
 -- Dumping data for table `company_profile`
 --
 
-INSERT INTO `company_profile` (`company_profile_id`, `company_description`, `sunday_from`, `sunday_to`, `monday_from`, `monday_to`, `tuesday_from`, `tuesday_to`, `wednesday_from`, `wednesday_to`, `thursday_from`, `thursday_to`, `friday_from`, `friday_to`, `saturday_from`, `saturday_to`, `sunday_closed`, `monday_closed`, `tuesday_closed`, `wednesday_closed`, `thursday_closed`, `friday_closed`, `saturday_closed`, `payment_options`, `company_profile_status`, `created_datetime`, `created_by`, `modified_datetime`, `modified_by`, `company_id`) VALUES
-(1, 'this is about company', '01:00', '10:00', '1:00', '10:00', '1:00', '10:00', '1:00', '10:100', '1:00', '10:00', '01:00', '10:00', '1:00', '10:00', 'Yes', 'No', 'No', 'No', 'Yes', 'No', 'No', 'Cash,Credit Card,Master Card,Visa Card,', 'Active', NULL, NULL, NULL, NULL, 13),
-(7, '<p>this is all about company</p>\r\n', '06:00', '05:00', '07:00', '07:00', '05:00', '06:00', '14:00', '17:00', '17:00', '16:00', '01:00', '01:00', '01:00', '01:00', 'No', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Cash,Master Card,Visa Card,Cheques,Travellers Cheque,Financing Available', 'Active', '2015-05-29 02:05:19', 1, NULL, NULL, 16);
+INSERT INTO `company_profile` (`company_profile_id`, `company_description`, `hours_of_operation`, `sunday_from`, `sunday_to`, `monday_from`, `monday_to`, `tuesday_from`, `tuesday_to`, `wednesday_from`, `wednesday_to`, `thursday_from`, `thursday_to`, `friday_from`, `friday_to`, `saturday_from`, `saturday_to`, `sunday_closed`, `monday_closed`, `tuesday_closed`, `wednesday_closed`, `thursday_closed`, `friday_closed`, `saturday_closed`, `payment_options`, `company_profile_status`, `created_datetime`, `created_by`, `modified_datetime`, `modified_by`, `company_id`) VALUES
+(1, '<p>this is about company</p>\r\n', 'sunday_from=04:00,sunday_to=08:00,sunday_closed=No,monday_from=04:00,monday_to=09:00,monday_closed=Yes,tuesday_from=06:00,tuesday_to=01:00,tuesday_closed=Yes,wednesday_from=09:00,wednesday_to=09:00,wednesday_closed=Yes,thursday_from=14:00,thursday_to=11:00,thursday_closed=Yes,friday_from=16:00,friday_to=01:00,friday_closed=Yes,saturday_from=12:00,saturday_to=15:00,saturday_closed=No', '01:00', '01:00', '01:00', '01:00', '01:00', '01:00', '01:00', '01:00', '01:00', '01:00', '01:00', '01:00', '01:00', '01:00', 'No', 'No', 'No', 'No', 'No', 'No', 'No', 'Cash,Master Card,Visa Card,Credit Card', 'Active', NULL, NULL, '2015-05-30 07:05:05', 1, 13),
+(7, '<p>this is all about company</p>\r\n', 'sunday_from=04:00,sunday_to=08:00,sunday_closed=No,monday_from=04:00,monday_to=09:00,monday_closed=Yes,tuesday_from=06:00,tuesday_to=01:00,tuesday_closed=Yes,wednesday_from=09:00,wednesday_to=09:00,wednesday_closed=Yes,thursday_from=14:00,thursday_to=11:00,thursday_closed=Yes,friday_from=16:00,friday_to=01:00,friday_closed=Yes,saturday_from=12:00,saturday_to=15:00,saturday_closed=No', '01:00', '01:00', '01:00', '01:00', '01:00', '01:00', '01:00', '01:00', '01:00', '01:00', '01:00', '01:00', '01:00', '01:00', 'No', 'No', 'No', 'No', 'No', 'No', 'No', 'Cash,Master Card,Visa Card,Cheques,Travellers Cheque,Financing Available', 'Active', '2015-05-29 02:05:19', 1, '2015-05-30 07:05:48', 1, 16);
 
 -- --------------------------------------------------------
 
@@ -1227,7 +1231,7 @@ CREATE TABLE IF NOT EXISTS `country_master` (
   `modified_datetime` datetime DEFAULT NULL,
   `modified_by` int(11) DEFAULT NULL,
   PRIMARY KEY (`country_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=17 ;
 
 --
 -- Dumping data for table `country_master`
@@ -1236,17 +1240,18 @@ CREATE TABLE IF NOT EXISTS `country_master` (
 INSERT INTO `country_master` (`country_id`, `country_name`, `status`, `created_datetime`, `created_by`, `modified_datetime`, `modified_by`) VALUES
 (1, 'India', 'Inactive', '2014-05-29 10:25:28', 1, '2014-05-29 10:25:31', 1),
 (2, 'asd country', 'Active', '0000-00-00 00:00:00', NULL, '0000-00-00 00:00:00', 1),
-(3, 'asd', 'Active', '0000-00-00 00:00:00', 1, NULL, NULL),
+(3, 'updated country', 'Active', '0000-00-00 00:00:00', 1, '2015-05-30 02:05:47', 1),
 (4, 'asd', 'Active', '0000-00-00 00:00:00', 1, NULL, NULL),
 (5, 'asd', 'Active', '0000-00-00 00:00:00', 1, NULL, NULL),
 (6, 'dasdas', 'Active', '0000-00-00 00:00:00', 1, NULL, NULL),
 (7, 'dasddads', 'Active', '0000-00-00 00:00:00', 1, NULL, NULL),
 (8, 'dasddads', 'Active', '0000-00-00 00:00:00', 1, NULL, NULL),
-(9, 'Active', 'Inactive', '0000-00-00 00:00:00', 1, NULL, NULL),
-(10, 'Active', 'Active', '0000-00-00 00:00:00', 1, NULL, NULL),
+(9, 'my new country', 'Active', '0000-00-00 00:00:00', 1, '2015-05-30 02:05:31', 1),
+(10, 'Active1', 'Active', '0000-00-00 00:00:00', 1, '2015-06-02 07:06:15', 1),
 (11, 'Active', 'Inactive', '0000-00-00 00:00:00', 1, NULL, NULL),
 (12, 'Active', 'Inactive', '0000-00-00 00:00:00', 1, NULL, NULL),
-(13, 'new country1', 'Active', '0000-00-00 00:00:00', 1, '0000-00-00 00:00:00', 1);
+(13, 'new country1', 'Active', '0000-00-00 00:00:00', 1, '0000-00-00 00:00:00', 1),
+(16, 'country', 'Active', '2015-05-30 02:05:43', 1, NULL, NULL);
 
 -- --------------------------------------------------------
 

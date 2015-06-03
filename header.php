@@ -131,8 +131,6 @@ $objModel -> checkSession();
 						<li><a class="ajax-link" href="country.php"><i class="icon-home"></i><span class="hidden-tablet"> Country</span></a></li>
 						<li><a class="ajax-link" href="state.php"><i class="icon-home"></i><span class="hidden-tablet"> State</span></a></li>
 						<li><a class="ajax-link" href="city.php"><i class="icon-home"></i><span class="hidden-tablet"> City</span></a></li>
-						<li><a class="ajax-link" href="area.php"><i class="icon-home"></i><span class="hidden-tablet"> Area</span></a></li>
-						<li><a class="ajax-link" href="zone.php"><i class="icon-home"></i><span class="hidden-tablet"> Zone</span></a></li>
 						<li><a class="ajax-link" href="users.php"><i class="icon-eye-open"></i><span class="hidden-tablet"> User</span></a></li>
                         <li><a class="ajax-link" href="module.php"><i class="icon-eye-open"></i><span class="hidden-tablet"> Module</span></a></li>
 						<li><a class="ajax-link" href="category.php"><i class="icon-eye-open"></i><span class="hidden-tablet"> Category</span></a></li>

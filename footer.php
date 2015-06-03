@@ -37,6 +37,8 @@
 	<script src="js/jquery.js"></script>
 	<!-- jQuery min -->
 	<script src="js/jquery-1.7.2.min.js"></script>
+	<!-- jQuery Form Validation-->
+	<script src="js/jquery.formvalidate.js"></script>
 	<!-- jQuery UI -->
 	<script src="js/jquery-ui-1.8.21.custom.min.js"></script>
 	<!-- transition / effect library -->

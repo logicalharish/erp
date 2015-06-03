@@ -7,7 +7,7 @@ $arrRecords = $objControl->getRecords('company_master', null, null, '', $arrFiel
 <div>
 				<ul class="breadcrumb">
 					<li>
-						<a href="#">Home</a> <span class="divider">/</span>
+						<a href="index.php">Home</a> <span class="divider">/</span>
 					</li>
 					<li>
 						<a href="#">Company</a>
@@ -21,7 +21,7 @@ $arrRecords = $objControl->getRecords('company_master', null, null, '', $arrFiel
 					<div class="box-header well" data-original-title>
 						<h2><i class="icon-user"></i> Company</h2>
 						<div class="pull-right">
-							<a href="import_company.php" class="btn btn-info add-new">
+							<a href="create_company.php" class="btn btn-info add-new">
             <i class="icon-white icon-plus"></i>  
          Add New
         </a>
