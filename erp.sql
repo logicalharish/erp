@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 03, 2015 at 07:13 AM
+-- Generation Time: Jun 04, 2015 at 02:13 PM
 -- Server version: 5.5.27
 -- PHP Version: 5.4.7
 
@@ -1348,14 +1348,15 @@ CREATE TABLE IF NOT EXISTS `role_master` (
   `public_update` enum('Y','N') DEFAULT NULL,
   `public_delete` enum('Y','N') DEFAULT NULL,
   PRIMARY KEY (`role_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `role_master`
 --
 
 INSERT INTO `role_master` (`role_id`, `role_name`, `public_read`, `public_create`, `public_update`, `public_delete`) VALUES
-(1, 'Master-Admin', 'Y', 'Y', 'Y', 'Y');
+(1, 'Master-Admin', 'Y', 'Y', 'Y', 'Y'),
+(2, 'Admin', 'Y', 'Y', 'Y', 'Y');
 
 -- --------------------------------------------------------
 
@@ -1372,17 +1373,18 @@ CREATE TABLE IF NOT EXISTS `user_master` (
   `password` varchar(100) DEFAULT NULL,
   `user_role_id` tinyint(4) DEFAULT NULL,
   `is_role_updated` enum('Y','N') DEFAULT NULL,
-  `user_modules` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`user_id`),
   KEY `user_role_id` (`user_role_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `user_master`
 --
 
-INSERT INTO `user_master` (`user_id`, `client_id`, `name`, `email`, `username`, `password`, `user_role_id`, `is_role_updated`, `user_modules`) VALUES
-(1, 1, 'Harish sharma', 'sharmaharish09@yahoo.co.in', 'admin', 'admin123', 1, 'N', '1');
+INSERT INTO `user_master` (`user_id`, `client_id`, `name`, `email`, `username`, `password`, `user_role_id`, `is_role_updated`) VALUES
+(1, 1, 'Harish sharma', 'sharmaharish09@yahoo.co.in', 'admin', 'admin123', 1, 'N'),
+(2, 1, 'kajal patel', 'kajalpatel0377@gmail.com', 'kajal', 'kajalpatel', 1, 'N'),
+(3, 0, 'kk patel', 'email2kkpatel@gmail.com', 'kkpatel', 'kkpatel', 2, 'N');
 
 -- --------------------------------------------------------
 
@@ -1406,7 +1408,18 @@ INSERT INTO `user_module_master` (`user_id`, `module_id`) VALUES
 (1, 1),
 (1, 4),
 (1, 5),
-(1, 6);
+(1, 6),
+(2, 1),
+(2, 2),
+(NULL, 2),
+(NULL, 3),
+(NULL, 1),
+(NULL, 4),
+(NULL, 6),
+(3, 1),
+(3, 2),
+(3, 3),
+(3, 6);
 
 -- --------------------------------------------------------
 

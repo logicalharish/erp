@@ -6,7 +6,7 @@ global $db;
 $databasetype='mysql';
 $server = 'localhost';
 $user   = 'root';
-$password = '';
+$password = 'kajal';
 $database = 'erp';
 //echo $database;
 $db = ADONewConnection($databasetype); 

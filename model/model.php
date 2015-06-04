@@ -157,9 +157,16 @@
 				}
 				break;
 				
+				case 'user-details':
+				$strQuery ='SELECT um.user_id, name,email, username, GROUP_CONCAT(mm.module_name ORDER BY mm.module_id) AS user_modules, GROUP_CONCAT(mm.module_id ORDER BY mm.module_id) AS user_module_ids, role_name,role_id, rm.`public_read` AS normal_read, rm.`public_create` AS normal_create, rm.`public_update` AS normal_update, rm.`public_delete` AS normal_delete
+							FROM user_master AS um
+							JOIN role_master AS rm ON user_role_id = role_id
+							JOIN user_module_master AS umm ON um.user_id = umm.user_id
+							JOIN module_master AS mm ON FIND_IN_SET(mm.module_id, umm.module_id) > 0';
+				break;
 				
 				case 'user-edit':
- 				$strQuery = 'select  * , group_concat(module_name) as modules from module_master, user_master where FIND_IN_SET(module_id,(select user_modules from user_master where user_id = '.$_GET['id'].')) and user_id='.$_GET['id'].'';
+ 				$strQuery = 'select *, group_concat(module_name) as modules from module_master, user_master where FIND_IN_SET(module_id,(select user_modules from user_master where user_id = '.$_GET['id'].')) and user_id='.$_GET['id'].'';
 				break;
 				
 				case 'user-edit-available-modules':

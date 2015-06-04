@@ -150,10 +150,10 @@ class CommonController
 	//Funtion to dete the records
 	function deleteRecord($strTableName, $strkeyColoum, $strValue)
 	{
-			$strSQL = "DELETE {$strTableName} WHERE {$strkeyColoum}='{$strValue}'";
+			$strSQL = "DELETE FROM ".$strTableName." WHERE ".$strkeyColoum."=".$strValue;
 			
-			$this->dbconnect->Execute($strSQL);
-			if($this->dbconnect->affected_rows()>0)
+			$this->dbConnect->Execute($strSQL);
+			if($this->dbConnect->affected_rows()>0)
 			{
 				$strResult = "Record deleted sucessfully";
 			}	
@@ -161,17 +161,14 @@ class CommonController
 			{
 				$strResult = "There was some issue, Record not deleted";	
 			}
-			
 			return $strResult;
 	}
 
 	public function saveCategory( $strCategoryId)
 		{
-			
 			$arrField = array('category_name');
-	$arrCategory = $this->getRecords("category_master",'','','category_name',$arrField);
-			
-$arrCateg = array();
+			$arrCategory = $this->getRecords("category_master",'','','category_name',$arrField);
+			$arrCateg = array();
 			for($intIndex = 0; $intIndex <count($arrCategory); $intIndex++)
 			{
 				$arrCateg[] = trim(strtolower($arrCategory[$intIndex]['category_name']));

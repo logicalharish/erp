@@ -724,19 +724,19 @@ $arrCategoryRecords = $objControl->getRecords('category_master', null, null, '',
 					 <div class="control-group span3">
 					 <label class="control-label">Cash</label>
 						<div class="controls">
-						  <label class="checkbox inline"><input data-no-uniform="true" type="checkbox" title="Payment Options" class="iphone-toggle required" id="paymentOptions" name="paymentOptions[]" value="Cash" <?php if(isset($options)){foreach($options as $option){if($option=="Cash"){echo "checked='checked'"; }}} ?>></label>
+						  <label class="checkbox inline"><input data-no-uniform="true" type="checkbox" title="Payment Options" class="iphone-toggle required"  name="paymentOptions[]" value="Cash" <?php if(isset($options)){foreach($options as $option){if($option=="Cash"){echo "checked='checked'"; }}} ?>></label>
 						</div>
 					</div>
 					<div class="control-group span3">
 						<label class="control-label">Master Card</label>
 						<div class="controls">
-						  <label class="checkbox inline"><input data-no-uniform="true" type="checkbox" class="iphone-toggle" data-min-options="1" id="paymentOptions" name="paymentOptions[]" value="Master Card" <?php if(isset($options)){foreach($options as $option){if($option=="Master Card"){echo "checked='checked'"; }}} ?>></label>
+						  <label class="checkbox inline"><input data-no-uniform="true" type="checkbox" class="iphone-toggle" data-min-options="1"  name="paymentOptions[]" value="Master Card" <?php if(isset($options)){foreach($options as $option){if($option=="Master Card"){echo "checked='checked'"; }}} ?>></label>
 						</div>
 					</div>
 					<div class="control-group span3">
 						<label class="control-label">Visa Card</label>
 						<div class="controls">
-						  <label class="checkbox inline"><input data-no-uniform="true" type="checkbox" class="iphone-toggle" id="paymentOptions" name="paymentOptions[]" value="Visa Card" <?php if(isset($options)){foreach($options as $option){if($option=="Visa Card"){echo "checked='checked'"; }}} ?>></label>
+						  <label class="checkbox inline"><input data-no-uniform="true" type="checkbox" class="iphone-toggle"  name="paymentOptions[]" value="Visa Card" <?php if(isset($options)){foreach($options as $option){if($option=="Visa Card"){echo "checked='checked'"; }}} ?>></label>
 						</div>
 					</div>
                 </div>
@@ -744,19 +744,19 @@ $arrCategoryRecords = $objControl->getRecords('category_master', null, null, '',
 					<div class="control-group span3">
 						<label class="control-label">Debit Card</label>
 						<div class="controls">
-						  <label class="checkbox inline"><input data-no-uniform="true" type="checkbox" class="iphone-toggle" id="paymentOptions" name="paymentOptions[]" value="Debit Card" <?php if(isset($options)){foreach($options as $option){if($option=="Debit Card"){echo "checked='checked'"; }}} ?>></label>
+						  <label class="checkbox inline"><input data-no-uniform="true" type="checkbox" class="iphone-toggle"  name="paymentOptions[]" value="Debit Card" <?php if(isset($options)){foreach($options as $option){if($option=="Debit Card"){echo "checked='checked'"; }}} ?>></label>
 						</div>
 					</div>
 					<div class="control-group span3">
 						<label class="control-label">Money Orders</label>
 						<div class="controls">
-						  <label class="checkbox inline"><input data-no-uniform="true" type="checkbox" class="iphone-toggle" id="paymentOptions" name="paymentOptions[]" value="Money Orders" <?php if(isset($options)){foreach($options as $option){if($option=="Money Orders"){echo "checked='checked'"; }}} ?>></label>
+						  <label class="checkbox inline"><input data-no-uniform="true" type="checkbox" class="iphone-toggle"  name="paymentOptions[]" value="Money Orders" <?php if(isset($options)){foreach($options as $option){if($option=="Money Orders"){echo "checked='checked'"; }}} ?>></label>
 						</div>
 					</div>
 					<div class="control-group span3">
 						<label class="control-label">Cheques</label>
 						<div class="controls">
-						  <label class="checkbox inline"><input data-no-uniform="true" type="checkbox" class="iphone-toggle" id="paymentOptions" name="paymentOptions[]" value="Cheques" <?php if(isset($options)){foreach($options as $option){if($option=="Cheques"){echo "checked='checked'"; }}} ?>></label>
+						  <label class="checkbox inline"><input data-no-uniform="true" type="checkbox" class="iphone-toggle"  name="paymentOptions[]" value="Cheques" <?php if(isset($options)){foreach($options as $option){if($option=="Cheques"){echo "checked='checked'"; }}} ?>></label>
 						</div>
 					</div>
                 </div>
@@ -764,19 +764,19 @@ $arrCategoryRecords = $objControl->getRecords('category_master', null, null, '',
 					<div class="control-group span3">
 						<label class="control-label">Credit Card</label>
 						<div class="controls">
-						  <label class="checkbox inline"><input data-no-uniform="true" type="checkbox" class="iphone-toggle" id="paymentOptions" name="paymentOptions[]" value="Credit Card" <?php if(isset($options)){foreach($options as $option){if($option=="Credit Card"){echo "checked='checked'"; }}} ?>></label>
+						  <label class="checkbox inline"><input data-no-uniform="true" type="checkbox" class="iphone-toggle"  name="paymentOptions[]" value="Credit Card" <?php if(isset($options)){foreach($options as $option){if($option=="Credit Card"){echo "checked='checked'"; }}} ?>></label>
 						</div>
 					</div>
 					<div class="control-group span3">
 						<label class="control-label">Travellers Cheque</label>
 						<div class="controls">
-						  <label class="checkbox inline"><input data-no-uniform="true" type="checkbox" class="iphone-toggle" id="paymentOptions" name="paymentOptions[]" value="Travellers Cheque" <?php if(isset($options)){foreach($options as $option){if($option=="Travellers Cheque"){echo "checked='checked'"; }}} ?>></label>
+						  <label class="checkbox inline"><input data-no-uniform="true" type="checkbox" class="iphone-toggle"  name="paymentOptions[]" value="Travellers Cheque" <?php if(isset($options)){foreach($options as $option){if($option=="Travellers Cheque"){echo "checked='checked'"; }}} ?>></label>
 						</div>
 					</div>
 					<div class="control-group span3">
 						<label class="control-label">Financing Available</label>
 						<div class="controls">
-						  <label class="checkbox inline"><input data-no-uniform="true" type="checkbox" class="iphone-toggle" id="paymentOptions" name="paymentOptions[]" value="Financing Available" <?php if(isset($options)){foreach($options as $option){if($option=="Financing Available"){echo "checked='checked'"; }}} ?>></label>
+						  <label class="checkbox inline"><input data-no-uniform="true" type="checkbox" class="iphone-toggle"  name="paymentOptions[]" value="Financing Available" <?php if(isset($options)){foreach($options as $option){if($option=="Financing Available"){echo "checked='checked'"; }}} ?>></label>
 						</div>
 					</div>
                 </div>
@@ -784,13 +784,13 @@ $arrCategoryRecords = $objControl->getRecords('category_master', null, null, '',
 					<div class="control-group span3">
 						<label class="control-label">American Express Card</label>
 						<div class="controls">
-						  <input data-no-uniform="true" type="checkbox" class="iphone-toggle" id="paymentOptions" name="paymentOptions[]" value="American Express Card" <?php if(isset($options)){foreach($options as $option){if($option=="American Express Card"){echo "checked='checked'"; }}} ?>></label>
+						  <input data-no-uniform="true" type="checkbox" class="iphone-toggle"  name="paymentOptions[]" value="American Express Card" <?php if(isset($options)){foreach($options as $option){if($option=="American Express Card"){echo "checked='checked'"; }}} ?>></label>
 						</div>
 					</div>
 					<div class="control-group span3">
 						<label class="control-label">Dinners Card</label>
 						<div class="controls">
-						  <input data-no-uniform="true" type="checkbox" class="iphone-toggle" id="paymentOptions" name="paymentOptions[]" value="Dinners Card" <?php if(isset($options)){foreach($options as $option){if($option=="Dinners Card"){echo "checked='checked'"; }}} ?>></label>
+						  <input data-no-uniform="true" type="checkbox" class="iphone-toggle"  name="paymentOptions[]" value="Dinners Card" <?php if(isset($options)){foreach($options as $option){if($option=="Dinners Card"){echo "checked='checked'"; }}} ?>></label>
 						</div>
 					</div>
                 </div>
@@ -897,13 +897,13 @@ $arrCategoryRecords = $objControl->getRecords('category_master', null, null, '',
 							
 							<tr id="visibleDiv">
 								<td><input type="hidden" name="company_contact_id[]" id="company_contact_id" value="<?php echo (isset($arrCompanyContactData[$intIndex]['company_contact_id']) ? $arrCompanyContactData[$intIndex]['company_contact_id'] : ''); ?>" />
-									<input class="input-small focused required" id="contact_full_name" name="contact_full_name[]" type="text" value="<?php echo (isset($arrCompanyContactData[$intIndex]['contact_full_name']) ? $arrCompanyContactData[$intIndex]['contact_full_name'] : ''); ?>"></td>
-								<td class="center"><input type="text" class="input-small datepicker required" id="dob" data-date="MM-DD-YYYY" name="dob[]" value="<?php echo (isset($arrCompanyContactData[$intIndex]['dob']) ? $arrCompanyContactData[$intIndex]['dob'] : ''); ?>"></td>
-                                <td class="center"><label for="dom"><input type="text" class="input-small datepicker required" id="dom" data-date="MM-DD-YYYY" name="dom[]"value="<?php echo (isset($arrCompanyContactData[$intIndex]['dom']) ? $arrCompanyContactData[$intIndex]['dom'] : ''); ?>"></td>
-								<td class="center"><input class="input-small focused required" id="contact_mobile" data-int data-min-chars="10" maxlength="10" name="contact_mobile[]" type="text" value="<?php echo (isset($arrCompanyContactData[$intIndex]['contact_mobile']) ? $arrCompanyContactData[$intIndex]['contact_mobile'] : ''); ?>"></td>
-                                <td class="center"><input class="input-small focused required" id="contact_email" data-email name="contact_email[]" type="email" value="<?php echo (isset($arrCompanyContactData[$intIndex]['contact_email']) ? $arrCompanyContactData[$intIndex]['contact_email'] : ''); ?>"></td>
-								<td class="center"><input class="input-small focused required" id="designation" name="designation[]" type="text" value="<?php echo (isset($arrCompanyContactData[$intIndex]['designation']) ? $arrCompanyContactData[$intIndex]['designation'] : ''); ?>"></td>
-								<td class="center"> <select class="input-small focused required" id="contact_status" name="contact_status[]" >
+									<input class="input-small focused required field" id="contact_full_name" name="contact_full_name[]" type="text" value="<?php echo (isset($arrCompanyContactData[$intIndex]['contact_full_name']) ? $arrCompanyContactData[$intIndex]['contact_full_name'] : ''); ?>"></td>
+								<td class="center"><input type="text" class="input-small datepicker required field" id="dob" data-date="MM-DD-YYYY" name="dob[]" value="<?php echo (isset($arrCompanyContactData[$intIndex]['dob']) ? $arrCompanyContactData[$intIndex]['dob'] : ''); ?>"></td>
+                                <td class="center"><label for="dom"><input type="text" class="input-small datepicker required field" id="dom" data-date="MM-DD-YYYY" name="dom[]"value="<?php echo (isset($arrCompanyContactData[$intIndex]['dom']) ? $arrCompanyContactData[$intIndex]['dom'] : ''); ?>"></td>
+								<td class="center"><input class="input-small focused required field" id="contact_mobile" data-int data-min-chars="10" maxlength="10" name="contact_mobile[]" type="text" value="<?php echo (isset($arrCompanyContactData[$intIndex]['contact_mobile']) ? $arrCompanyContactData[$intIndex]['contact_mobile'] : ''); ?>"></td>
+                                <td class="center"><input class="input-small focused required field" id="contact_email" data-email name="contact_email[]" type="email" value="<?php echo (isset($arrCompanyContactData[$intIndex]['contact_email']) ? $arrCompanyContactData[$intIndex]['contact_email'] : ''); ?>"></td>
+								<td class="center"><input class="input-small focused required field" id="designation" name="designation[]" type="text" value="<?php echo (isset($arrCompanyContactData[$intIndex]['designation']) ? $arrCompanyContactData[$intIndex]['designation'] : ''); ?>"></td>
+								<td class="center"> <select class="input-small focused required field" id="contact_status" name="contact_status[]" >
 													  <option <?php echo (isset($arrCompanyContactData[$intIndex]['contact_status']) && $arrCompanyContactData[$intIndex]['contact_status'] == 'Active' ? 'selected="selected"' : ''); ?> value="Active">Active</option>
 													  <option <?php echo (isset($arrCompanyContactData[$intIndex]['contact_status']) && $arrCompanyContactData[$intIndex]['contact_status'] == 'Inactive' ? 'selected="selected"' : ''); ?> value="Inactive">Inactive</option>
 													</select>
@@ -1025,6 +1025,14 @@ require_once('footer.php');
 			var name_without_special_char = name.replace(/[^a-zA-Z 0-9 . @]+/g,"");
 			$(this).val(name_without_special_char);
 		});
+		
+		//$("input[name='contact_full_name[]']").each(function() {
+			/*$(".field").on('blur keyup', function() {
+				//$("#contact_full_name").val($(this).val());
+			$('#form').formvalidate();
+			});*/
+		//});
+							
 	// Validate form
 		$('form').submit(function(e) {
 			//e.preventDefault();
@@ -1041,13 +1049,39 @@ require_once('footer.php');
 					isvalidated = true;
 					return isvalidated;
 				},
+				rules: 	{ 
+						  email: 
+						  {
+							required: true,
+							email: true
+						  }
+						},
+				messages:{
+						  email: 
+						  {
+							required: "Please enter your email address."
+						  }
+						},
 				validations: {
 					isNot: function(input, params) {
 						return $.inArray(input.toLowerCase(), params);
 					}
-					/*paymentOptions: function(elem) {
-						return $("input[name='paymentOptions[]']").serializeArray().length > 0;
-					}*/
+					//contactNameCheck: function(input, params) {
+						//var value = $(element).closest('#visibleDiv').find('#contact_full_name:filled');
+						/*var value1 = $("input[name='contact_full_name[]']").each(function() {
+							if($(this).val() ==""){$('#contact_full_name').val($(this).val());}
+							return $(this).val();
+						});*/
+						/*var value1=$("#visibleDiv").each(function(){
+							var $inputs = $(this).find('#contact_full_name:filled');
+							var value =	$(this).children('td').children('input').each(function() {
+									//return this.valid();
+									return $(this).val();
+								});
+							return value;
+						});*/
+					//	return $.inArray(input.toLowerCase(), params);
+					//}
 				},
 				localization: {
 					en: {
@@ -1055,14 +1089,17 @@ require_once('footer.php');
 						
 						},
 						failure: {
-							//paymentOptions: function(title, value, name, input) {
-							//	return 'Please select at least one Payment Option';
-							//}
+							/*Payment Options: function(title, value, name, input) {
+								return '<p>Please select at least one Payment Option</p>';
+							}*/
 						}
 					}
 				}
 				
 			});
+			/*$.validator.addMethod("contactNameCheck", function (value, element) {
+				return value == $("#contact_full_name").val();
+			}, 'Password and Confirm Password should be same');*/
 			/* var fields = $("input[name='paymentOptions[]']").serializeArray(); 
 				if (fields.length == 0) 
 				{ 
@@ -1072,6 +1109,7 @@ require_once('footer.php');
 					//isvalidated= true;
 					$("#paymentResult").html("");
 					}*/
+					
 		return isvalidated;
 		});
 	});

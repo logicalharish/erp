@@ -35,16 +35,25 @@ switch ($strAction)
 		$arrData['username'] = $_REQUEST['username'];
 		$arrData['password'] = $_REQUEST['password'];
 		$arrData['user_role_id'] = $_REQUEST['userRole'];
-		$arrData['user_modules'] = @implode(',', $_REQUEST['modules']);
+		$arrModules = $_REQUEST['modules'];
+		
 		if ($_REQUEST['user_id'] != '')
 		{
-			$strUserId = $_REQUEST['user_id'];
-			$strCondition = "user_id={$strUserId}";
+			$intUserId = $_REQUEST['user_id'];
+			$objControl->deleteRecord('user_module_master', 'user_id', $intUserId);
+			$strCondition = "user_id='$intUserId'";
 			$objControl->createRecord($arrData, 'user_master', $strCondition);
+			$arrData['user_id']=$intUserId;
 		} else
 		{
 			$objControl->createRecord($arrData, 'user_master');
+			$arrData['user_id']= $objControl->dbConnect->Insert_ID();
 		}
+		foreach ($arrModules as $module)
+				{
+					$arrData['module_id']=$module;
+					$objControl->createRecord($arrData, 'user_module_master');
+				}
 		header('Location:' . HTTP_PATH . 'users.php');
 		exit;
 		break;

@@ -14,6 +14,7 @@ $arrAvailableRoles    = $objModel -> getRecords(null, null, null, 'user-edit-ava
 $arrAvailableModules  = $objModel -> getRecords(null, null, null, 'user-edit-available-modules');
 $arrUserModules = explode(',', $arrUserDetails[0]['user_modules']);
 
+
 ?>
 <div class="row-fluid">
     <div class="box span12">
@@ -32,7 +33,7 @@ $arrUserModules = explode(',', $arrUserDetails[0]['user_modules']);
             </div>
 			<form class="form-horizontal" id="formDetails" method="post" action="controller/routes.php">
 				<input  type="hidden" name="hid_action" id="hid_action" value="create_user"/>
-				<input type="hidden" name="user_id" id="user-id" value="<?php echo $_REQUEST['user_id']; ?>"/>
+				<input type="hidden" name="user_id" id="user_id" value="<?php echo $_REQUEST['user_id']; ?>"/>
                 	<fieldset>
                     	<div class="box-content">                               
                             	<div class="row-fluid tab-pane active" id="userBasic">                      
@@ -65,10 +66,9 @@ $arrUserModules = explode(',', $arrUserDetails[0]['user_modules']);
                                     <label class="control-label">User Role:</label>
                                       <div class="controls">
                                         <select name="userRole" class="userRole" id="userRole">
-                                            <?php for($intIndex = 0; $intIndex<count($arrAvailableRoles); $intIndex++)
+                                            <?php for($intIndex = 0; $intIndex < count($arrAvailableRoles); $intIndex++)
                                                     {
-                                            ?>			<option value="<?php echo $arrAvailableRoles[$intIndex]['role_id']; ?>"  <?php echo ($arrUserDetails[0]['user_role_id']==$arrAvailableRoles[$intIndex]['role_id'])?'selected="selected"':'' ; ?>  ?><?php echo $arrAvailableRoles[$intIndex]['role_name']; ?></option>
-                                            <?php
+                                            			echo "<option value='".$arrAvailableRoles[$intIndex]['role_id']."'".($arrUserDetails[0]['user_role_id']==$arrAvailableRoles[$intIndex]['role_id']?'selected':'').">".$arrAvailableRoles[$intIndex]['role_name']."</option>";
                                                     }
                                             ?>
                                         </select>
@@ -77,11 +77,12 @@ $arrUserModules = explode(',', $arrUserDetails[0]['user_modules']);
                                      <div class="control-group">
                                         <label class="control-label">Modules:</label>
                                         <div class="controls">
+										
                                         <?php for($intIndex = 0; $intIndex <count($arrAvailableModules); $intIndex++)
 										{
 										?>
                                           <label class="checkbox inline">
-                                          <input type="checkbox" <?php echo(in_array($arrAvailableModules[$intIndex]['module_id'], $arrUserModules))?'checked="checked"':'';?>  id="inlineCheckbox<?php echo $arrAvailableModules[$intIndex]['module_id']; ?>" value="<?php echo $arrAvailableModules[$intIndex]['module_id']; ?>" name="modules[]"><?php echo ucfirst($arrAvailableModules[$intIndex]['module_name']); ?>
+                                          <input type="checkbox" <?php echo(in_array($arrAvailableModules[$intIndex]['module_id'], $arrUserModules))?'checked':'';?>  id="inlineCheckbox<?php echo $arrAvailableModules[$intIndex]['module_id']; ?>" value="<?php echo $arrAvailableModules[$intIndex]['module_id']; ?>" name="modules[]"><?php echo ucfirst($arrAvailableModules[$intIndex]['module_name']); ?>
                                           </label>
 										<?php
                                         }
