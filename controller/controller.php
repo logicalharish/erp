@@ -52,8 +52,8 @@ class CommonController
 					ORDER BY umm.module_id) AS user_modules, role_name,role_id, rm.`public_read` AS normal_read, rm.`public_create` AS normal_create, rm.`public_update` AS normal_update, rm.`public_delete` AS normal_delete
 					FROM user_master AS um
 					JOIN role_master AS rm ON user_role_id = role_id
-					JOIN module_master AS mm ON mm.module_id = user_modules
 					JOIN user_module_master AS umm ON um.user_id = umm.user_id
+					JOIN module_master AS mm ON mm.module_id = umm.module_id
 					WHERE um.username = '".$safeUsername."'";
 					
 		$arrUserDetails = $db -> getAll($strQuery);
