@@ -32,10 +32,8 @@ $arrRecords = $objControl->getRecords('module_master', null, null, '', $arrField
 					<tr>
 						<th>Module Name</th>
 						<th>Module link</th>
-
-						<th style="width: 5%">Status</th>
-						<th style="width: 10%">Created Date</th>
-
+						<th>Status</th>
+						<th>Created Date</th>
 						<th>Actions</th>
 					</tr>
 				</thead>   
@@ -60,7 +58,7 @@ $arrRecords = $objControl->getRecords('module_master', null, null, '', $arrField
 								?>
 								<span class="label <?php echo $strClass;?>"><?php echo $arrRecords[$intIndex]['status']; ?></span>
 							</td>
-							<td class="center"><?php echo $arrRecords[$intIndex]['created_dateime']; ?></td>
+							<td class="center"><?php echo $arrRecords[$intIndex]['created_datetime']; ?></td>
 
 
 							<td class="center">
@@ -69,7 +67,7 @@ $arrRecords = $objControl->getRecords('module_master', null, null, '', $arrField
 									<i class="icon-edit icon-white"></i>  
 									Edit                                            
 								</a>
-								<a class="btn btn-danger" href="#" onclick="updateRecord('module_master','<?php echo $arrRecords[$intIndex]['module_id']; ?>','module_id');">
+								<a class="btn btn-danger" href="controller/routes.php?hid_action=update_status&id=<?php echo $arrRecords[$intIndex]['module_id']; ?>&status=<?php echo $arrRecords[$intIndex]['status']; ?>&table_name=module_master&column_name=module_id&page_url=module.php" >
 									<i class="icon-trash icon-white"></i> 
 									Inactive
 								</a>

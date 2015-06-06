@@ -15,14 +15,10 @@ switch ($strAction)
 
 		if ($intCountryId != '')
 		{
-			//$arrData['modified_datetime'] = date('yyyy-mm-dd hh:mm:ss');//$objControl->dbConnect->new DateTime();//
-			//$arrData['modified_by'] = $_SESSION['user']['user_id'];
 			$strCondition = "country_id='$intCountryId'";
 			$objControl->createRecord($arrData, "country_master", $strCondition);
 		} else
 		{
-			//$arrData['created_datetime'] = date('d-m-y h:i:s');
-			//$arrData['created_by'] = $_SESSION['user']['user_id'];
 			$objControl->createRecord($arrData, 'country_master');
 		}
 		header('Location:' . HTTP_PATH . 'country.php');
@@ -36,12 +32,15 @@ switch ($strAction)
 		$arrData['password'] = $_REQUEST['password'];
 		$arrData['user_role_id'] = $_REQUEST['userRole'];
 		$arrModules = $_REQUEST['modules'];
-		
+		if($_REQUEST['user_role_id']==$arrData['user_role_id'])
+		{
+			$arrData['is_role_updated']="N";
+		}else{$arrData['is_role_updated']="Y";}
 		if ($_REQUEST['user_id'] != '')
 		{
 			$intUserId = $_REQUEST['user_id'];
-			$objControl->deleteRecord('user_module_master', 'user_id', $intUserId);
 			$strCondition = "user_id='$intUserId'";
+			$objControl->deleteRecord('user_module_master', 'user_id', $intUserId);
 			$objControl->createRecord($arrData, 'user_master', $strCondition);
 			$arrData['user_id']=$intUserId;
 		} else
@@ -66,18 +65,15 @@ switch ($strAction)
 		$intModuleId = $_REQUEST['module_id'];
 		$arrData['module_name'] = $_REQUEST['module_name'];
 		$arrData['module_menu_link'] = $_REQUEST['module_menu_link'];
+		$arrData['module_menu_icon'] = $_REQUEST['module_menu_icon'];
 		$arrData['status'] = $_REQUEST['status'];
 
 		if ($intModuleId != '')
 		{
-			//$arrData['modified_datetime'] = date('d-m-y h:i:s');
-			//$arrData['modified_by'] = $_SESSION['user']['user_id'];
 			$strCondition = " module_id='$intModuleId'";
 			$objControl->createRecord($arrData, "module_master", $strCondition);
 		} else
 		{
-			//$arrData['created_datetime'] = date('d-m-y h:i:s');
-			//$arrData['created_by'] = $_SESSION['user']['user_id'];
 			$objControl->createRecord($arrData, 'module_master');
 		}
 		header('Location:' . HTTP_PATH . 'module.php');
@@ -91,14 +87,10 @@ switch ($strAction)
 
 		if ($intNobId != '')
 		{
-			//$arrData['modified_datetime'] = date('d-m-y h:i:s');
-			//$arrData['modified_by'] = $_SESSION['user']['user_id'];
 			$strCondition = " nob_id='$intNobId'";
 			$objControl->createRecord($arrData, "nob_master", $strCondition);
 		} else
 		{
-			//$arrData['created_datetime'] = date('d-m-y h:i:s');
-			//$arrData['created_by'] = $_SESSION['user']['user_id'];
 			$objControl->createRecord($arrData, 'nob_master');
 		}
 		
@@ -113,14 +105,10 @@ switch ($strAction)
 
 		if ($intDesignationId != '')
 		{
-			//$arrData['modified_datetime'] = date('d-m-y h:i:s');
-			//$arrData['modified_by'] = $_SESSION['user']['user_id'];
 			$strCondition = " nob_id='$intDesignationId'";
 			$objControl->createRecord($arrData, "designation_master", $strCondition);
 		} else
 		{
-			//$arrData['created_datetime'] = date('d-m-y h:i:s');
-			//$arrData['created_by'] = $_SESSION['user']['user_id'];
 			$objControl->createRecord($arrData, 'designation_master');
 		}
 		
@@ -137,14 +125,10 @@ switch ($strAction)
 
 		if ($intCityId != '')
 		{
-			//$arrData['modified_datetime'] = date('d-m-y h:i:s');
-			//$arrData['modified_by'] = $_SESSION['user']['user_id'];
 			$strCondition = "city_id='$intCityId'";
 			$objControl->createRecord($arrData, "City_master", $strCondition);
 		} else
 		{
-			//$arrData['created_datetime'] = date('d-m-y h:i:s');
-			//$arrData['created_by'] = $_SESSION['user']['user_id'];
 			$objControl->createRecord($arrData, 'City_master');
 		}
 		
@@ -160,14 +144,10 @@ switch ($strAction)
 
 		if ($intStateId != '')
 		{
-			//$arrData['modified_datetime'] = date('yyyy-mm-dd hh:mm:ss');//$objControl->dbConnect->new DateTime();//
-			//$arrData['modified_by'] = $_SESSION['user']['user_id'];
 			$strCondition = "branch_id='$intStateId'";
 			$objControl->createRecord($arrData, "branch_master", $strCondition);
 		} else
 		{
-			//$arrData['created_datetime'] = date('d-m-y h:i:s');
-			//$arrData['created_by'] = $_SESSION['user']['user_id'];
 			$objControl->createRecord($arrData, 'branch_master');
 		}
 		header('Location:' . HTTP_PATH . 'state.php');
@@ -189,14 +169,10 @@ switch ($strAction)
 					}
 		if ($intCategoryId != '')
 		{
-			//$arrData['modified_datetime'] = date('yyyy-mm-dd hh:mm:ss');//$objControl->dbConnect->new DateTime();//
-			//$arrData['modified_by'] = $_SESSION['user']['user_id'];
 			$strCondition = "category_id='$intCategoryId'";
 			$objControl->createRecord($arrData, "category_master", $strCondition);
 		} else
 		{
-			//$arrData['created_datetime'] = date('d-m-y h:i:s');
-			//$arrData['created_by'] = $_SESSION['user']['user_id'];
 			$objControl->createRecord($arrData, 'category_master');
 		}
 		header('Location:' . HTTP_PATH . 'category.php');

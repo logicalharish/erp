@@ -150,7 +150,7 @@ class CommonController
 	//Funtion to dete the records
 	function deleteRecord($strTableName, $strkeyColoum, $strValue)
 	{
-			$strSQL = "DELETE FROM ".$strTableName." WHERE ".$strkeyColoum."=".$strValue;
+			$strSQL = "DELETE FROM ".$strTableName." WHERE ".$strkeyColoum." = '".$strValue."'";
 			
 			$this->dbConnect->Execute($strSQL);
 			if($this->dbConnect->affected_rows()>0)

@@ -5,14 +5,19 @@ $intUserId = $_REQUEST['user_id'];
 if(isset($intUserId) && $intUserId !='')
 {	
 	$arrField = array(
-	'user_id','name','email','username','password','(select role_name from role_master where role_master.role_id=user_master.user_role_id) as role_name','user_modules'
-	
+	'user_id','name','email','username','password','(select role_name from role_master where role_master.role_id=user_master.user_role_id) as role_name'
 		);
+	/*$arrField1 = array(
+	'user_id','name','email','username','password','(select role_name from role_master where role_master.role_id=user_master.user_role_id) as role_name'
+		);*/
 	$arrUserDetails = $objControl->getRecords('user_master','user_id',$intUserId,'user_id',$arrField);
+	$arrUserModules = $objControl->getRecords('user_module_master','user_id',$intUserId,'');
 }
+
 $arrAvailableRoles    = $objModel -> getRecords(null, null, null, 'user-edit-available-roles');
 $arrAvailableModules  = $objModel -> getRecords(null, null, null, 'user-edit-available-modules');
-$arrUserModules = explode(',', $arrUserDetails[0]['user_modules']);
+
+//$arrUserModules = explode(',', $arrUserModulesData[0]['module_id']);
 
 
 ?>
@@ -34,6 +39,7 @@ $arrUserModules = explode(',', $arrUserDetails[0]['user_modules']);
 			<form class="form-horizontal" id="formDetails" method="post" action="controller/routes.php">
 				<input  type="hidden" name="hid_action" id="hid_action" value="create_user"/>
 				<input type="hidden" name="user_id" id="user_id" value="<?php echo $_REQUEST['user_id']; ?>"/>
+				<input type="hidden" name="user_role_id" id="user_role_id" value="<?php echo $arrUserDetails[0]['user_role_id']; ?>"/>
                 	<fieldset>
                     	<div class="box-content">                               
                             	<div class="row-fluid tab-pane active" id="userBasic">                      
@@ -82,7 +88,12 @@ $arrUserModules = explode(',', $arrUserDetails[0]['user_modules']);
 										{
 										?>
                                           <label class="checkbox inline">
-                                          <input type="checkbox" <?php echo(in_array($arrAvailableModules[$intIndex]['module_id'], $arrUserModules))?'checked':'';?>  id="inlineCheckbox<?php echo $arrAvailableModules[$intIndex]['module_id']; ?>" value="<?php echo $arrAvailableModules[$intIndex]['module_id']; ?>" name="modules[]"><?php echo ucfirst($arrAvailableModules[$intIndex]['module_name']); ?>
+                                          <input type="checkbox" <?php 
+											  for($intIndex1 =0; $intIndex1 < count($arrUserModules); $intIndex1++)
+												{
+													if($arrUserModules[$intIndex1]['module_id']==$arrAvailableModules[$intIndex]['module_id']){echo 'checked'; break;}
+												}
+										  ?>  id="inlineCheckbox<?php echo $arrAvailableModules[$intIndex]['module_id']; ?>" value="<?php echo $arrAvailableModules[$intIndex]['module_id']; ?>" name="modules[]"><?php echo ucfirst($arrAvailableModules[$intIndex]['module_name']); ?>
                                           </label>
 										<?php
                                         }

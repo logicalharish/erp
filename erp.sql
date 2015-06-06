@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 04, 2015 at 02:13 PM
+-- Generation Time: Jun 06, 2015 at 02:02 AM
 -- Server version: 5.5.27
 -- PHP Version: 5.4.7
 
@@ -1282,22 +1282,29 @@ CREATE TABLE IF NOT EXISTS `module_master` (
   `module_menu_link` varchar(100) DEFAULT NULL,
   `module_menu_icon` varchar(100) DEFAULT NULL,
   `status` enum('Active','Inactive') DEFAULT 'Active',
+  `created_datetime` datetime DEFAULT NULL,
+  `created_by` int(11) DEFAULT NULL,
+  `modified_datetime` datetime DEFAULT NULL,
+  `modified_by` int(11) DEFAULT NULL,
   PRIMARY KEY (`module_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
 
 --
 -- Dumping data for table `module_master`
 --
 
-INSERT INTO `module_master` (`module_id`, `module_name`, `module_menu_link`, `module_menu_icon`, `status`) VALUES
-(1, 'website', 'website', 'icon-globe', 'Active'),
-(2, 'pages', 'pages', 'icon-file', 'Active'),
-(3, 'posts', 'posts', 'icon-pencil', 'Active'),
-(4, 'videos', 'videos', 'icon-film', 'Active'),
-(5, 'store', 'store', 'icon-shopping-cart', 'Active'),
-(6, 'users', 'users', 'icon-shopping-cart', 'Active'),
-(7, 'test', 'test', NULL, 'Active'),
-(8, 'Country', 'country.php', NULL, 'Active');
+INSERT INTO `module_master` (`module_id`, `module_name`, `module_menu_link`, `module_menu_icon`, `status`, `created_datetime`, `created_by`, `modified_datetime`, `modified_by`) VALUES
+(1, 'website', 'website', 'icon-globe', 'Active', '2015-06-05 15:15:17', 1, NULL, NULL),
+(2, 'pages', 'pages', 'icon-file', 'Active', '2015-06-05 15:15:21', 1, NULL, NULL),
+(3, 'posts', 'posts', 'icon-pencil', 'Active', '2015-06-05 15:15:23', 1, NULL, NULL),
+(4, 'videos', 'videos', 'icon-film', 'Active', '2015-06-05 15:15:25', 1, NULL, NULL),
+(5, 'store', 'store', 'icon-shopping-cart', 'Inactive', '2015-06-05 15:15:26', 1, NULL, NULL),
+(8, 'Country', 'country.php', 'icon-list-alt', 'Active', '2015-06-05 15:15:29', 1, NULL, NULL),
+(9, 'state', 'state.php', 'icon-list-alt', 'Active', '2015-06-05 15:15:31', 1, NULL, NULL),
+(10, 'city', 'city.php', 'icon-building', 'Active', '2015-06-05 15:15:32', 1, NULL, NULL),
+(11, 'Users', 'users.php', 'icon-user', 'Active', '2015-06-05 15:15:34', 1, NULL, NULL),
+(12, 'category', 'category.php', 'icon-list-alt', 'Active', '2015-06-05 15:15:35', 1, '2015-06-06 12:06:23', 1),
+(13, 'company', 'company.php', 'icon-building', 'Active', '2015-06-05 15:15:37', 1, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1383,8 +1390,8 @@ CREATE TABLE IF NOT EXISTS `user_master` (
 
 INSERT INTO `user_master` (`user_id`, `client_id`, `name`, `email`, `username`, `password`, `user_role_id`, `is_role_updated`) VALUES
 (1, 1, 'Harish sharma', 'sharmaharish09@yahoo.co.in', 'admin', 'admin123', 1, 'N'),
-(2, 1, 'kajal patel', 'kajalpatel0377@gmail.com', 'kajal', 'kajalpatel', 1, 'N'),
-(3, 0, 'kk patel', 'email2kkpatel@gmail.com', 'kkpatel', 'kkpatel', 2, 'N');
+(2, 1, 'kajal patel', 'kajalpatel0377@gmail.com', 'kajal', 'kajalpatel', 2, 'N'),
+(3, 1, 'kk patel', 'email2kkpatel@gmail.com', 'kkpatel', 'kkpatel', 2, 'Y');
 
 -- --------------------------------------------------------
 
@@ -1408,18 +1415,11 @@ INSERT INTO `user_module_master` (`user_id`, `module_id`) VALUES
 (1, 1),
 (1, 4),
 (1, 5),
-(1, 6),
 (2, 1),
-(2, 2),
-(NULL, 2),
-(NULL, 3),
-(NULL, 1),
-(NULL, 4),
-(NULL, 6),
+(2, 5),
 (3, 1),
 (3, 2),
-(3, 3),
-(3, 6);
+(3, 3);
 
 -- --------------------------------------------------------
 

@@ -31,11 +31,8 @@ $arrRecords = $objControl->getRecords('city_master', null, null, '', $arrField);
 				<thead>
 					<tr>
 						<th style="width: 20%">City Name</th>
-						
-
 						<th style="width: 5%">Status</th>
 						<th style="width: 10%">Created Date</th>
-
 						<th style="width: 15%">Actions</th>
 					</tr>
 				</thead>   
