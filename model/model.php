@@ -144,7 +144,7 @@
 				case 'user':
 				if($_SESSION['user']['user-role']=='Master-Admin')
 				{
-					$strQuery = 'Select *, role_name from user_master join role_master on user_role_id = role_id order by user_id where is_master_admin="N"';
+					$strQuery = 'Select *, role_name from user_master as um join role_master as rm  on um.user_role_id = rm.role_id where rm.is_master_admin="N"';
 				}
 				else if($_SESSION['user']['user-role']=='Admin') 
 				{
