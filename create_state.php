@@ -80,41 +80,6 @@ $arrCountryOption = $objControl->getRecords('country_master', null, null, 'count
 <?php
 require_once('footer.php');
 ?>
-<script type="text/javascript">
-	$(document).ready(function() {
-		
-	// Validate when the submit button is clicked
-		$('form').submit(function(e) {
-			//e.preventDefault();
-				var isvalidated=false;
-			// From the anchor element find the closest form element
-			$(this).closest('form').formvalidate({
-				failureMessages: true,
-				successMessages: false,
-				messageFailureClass: 'label label-important',
-				//messageSuccessClass: 'label label-success',
-				onSuccess: function(form) {
-					isvalidated = true;
-					return isvalidated;
-				},
-				validations: {
-					isNot: function(input, params) {
-						return $.inArray(input.toLowerCase(), params);
-					}
-				},
-				localization: {
-					en: {
-						success: {
-						
-						},
-						failure: {
-							
-						}
-					}
-				}
-			});
-		return isvalidated;
-		});
-	});
-	
-</script>
+<?php
+require_once('javascript_methods.php');
+?>

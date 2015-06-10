@@ -6,9 +6,14 @@ include('model/model.php');
 	
 //Class Instantiation
 $objModel = new model();
-
 $objControl = new CommonController();
 $objModel -> checkSession();
+	if($_SESSION['user']['user-role']=='Master-Admin'){
+		$arrAvailableModules  = $objModel -> getRecords("module_master", null, null,null);
+	}else{
+		$arrAvailableModules  = $objModel -> getRecords(null, null, null, 'user-edit-available-modules');
+	}
+
 
 ?>
 <!DOCTYPE html>
@@ -93,7 +98,7 @@ $objModel -> checkSession();
 				<!-- user dropdown starts -->
 				<div class="btn-group pull-right" >
 					<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-						<i class="icon-user"></i><span class="hidden-phone"> admin</span>
+						<i class="icon-user"></i><span class="hidden-phone"> <?php echo $_SESSION['user']['username']; ?></span>
 						<span class="caret"></span>
 					</a>
 					<ul class="dropdown-menu">
@@ -128,14 +133,21 @@ $objModel -> checkSession();
 				<div class="well nav-collapse sidebar-nav">
 					<ul class="nav nav-tabs nav-stacked main-menu">
 						<li class="nav-header hidden-tablet">Masters</li>
-						<li><a class="ajax-link" href="country.php"><i class="icon-home"></i><span class="hidden-tablet"> Country</span></a></li>
+						<?php for($intIndex = 0; $intIndex <count($arrAvailableModules); $intIndex++)
+										{
+										?>
+                                         <li><a class="ajax-link" href="<?php echo $arrAvailableModules[$intIndex]['module_menu_link']; ?>"><i class="<?php echo $arrAvailableModules[$intIndex]['module_menu_icon']; ?>"></i><span class="hidden-tablet"> <?php echo $arrAvailableModules[$intIndex]['module_name']; ?></span></a></li>
+										<?php
+                                        }
+										?>
+					<!--	<li><a class="ajax-link" href="country.php"><i class="icon-home"></i><span class="hidden-tablet"> Country</span></a></li>
 						<li><a class="ajax-link" href="state.php"><i class="icon-home"></i><span class="hidden-tablet"> State</span></a></li>
 						<li><a class="ajax-link" href="city.php"><i class="icon-home"></i><span class="hidden-tablet"> City</span></a></li>
 						<li><a class="ajax-link" href="users.php"><i class="icon-eye-open"></i><span class="hidden-tablet"> User</span></a></li>
                         <li><a class="ajax-link" href="module.php"><i class="icon-eye-open"></i><span class="hidden-tablet"> Module</span></a></li>
 						<li><a class="ajax-link" href="category.php"><i class="icon-eye-open"></i><span class="hidden-tablet"> Category</span></a></li>
 						<li><a class="ajax-link" href="website.php"><i class="icon-edit"></i><span class="hidden-tablet"> Website</span></a></li>
-						<li><a class="ajax-link" href="company.php"><i class="icon-list-alt"></i><span class="hidden-tablet"> Company</span></a></li>
+						<li><a class="ajax-link" href="company.php"><i class="icon-list-alt"></i><span class="hidden-tablet"> Company</span></a></li>-->
 						
 					
 					</ul>

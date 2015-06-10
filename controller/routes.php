@@ -25,7 +25,26 @@ switch ($strAction)
 		exit;
 		break;
 		
+	case 'create_role':
+		$intRoleId = $_REQUEST['role_id'];
+		$arrData['role_name'] = $_REQUEST['txt_role'];
+		$arrData['status'] = $_REQUEST['status'];
+		$arrData['public_read']="Y"; $arrData['public_create']="Y"; $arrData['public_update']="Y"; $arrData['public_delete']="Y";
+		$arrData['is_master_admin']="N";
+		if ($intRoleId != '')
+		{
+			$strCondition = "role_id='$intRoleId'";
+			$objControl->createRecord($arrData, "role_master", $strCondition);
+		} else
+		{
+			$objControl->createRecord($arrData, 'role_master');
+		}
+		header('Location:' . HTTP_PATH . 'role.php');
+		exit;
+		break;
+		
 	case 'create_user':
+		$arrData['first_name'] = $_REQUEST['last_name'];
 		$arrData['name'] = $_REQUEST['name'];
 		$arrData['email'] = $_REQUEST['email'];
 		$arrData['username'] = $_REQUEST['username'];

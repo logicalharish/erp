@@ -33,18 +33,17 @@ if (isset($intPageId) && $intPageId != '')
 					
 					<div class="box-header well" data-original-title>
 						<h2><i class="icon-edit"></i>Create Category</h2>
-						
 					</div>
 						   <div class="box-content">
-						<form class="form-horizontal" method="post" action="controller/routes.php">
+						<form class="form-horizontal" id="form" method="post" action="controller/routes.php">
                         	<input type="hidden" name="hid_action" id="hid_action" value="create_category" />
 							<input type="hidden" name="category_id" id="category_id" value="<?php echo $intPageId; ?>" />
 							<fieldset>
 							 <div class="control-group">
-								<label class="control-label" for="focusedInput">Parent Category</label>
+								<label class="control-label" for="parent_category_id">Parent Category</label>
 								<div class="controls">
-									<select name="parent_category_id" id="parent_category_id"  class="input-xlarge focused" >
-										<option value="">-- SELECT ONE --</option>
+									<select name="parent_category_id" id="parent_category_id"  class="input-xlarge focused required" >
+										<option value="">&mdash; Please Select &mdash;</option>
 										<option value="none">NO PARENT</option>
 										<?php
 											for ($intIndex = 0; $intIndex < count($arrCategoryOption); $intIndex++)
@@ -56,15 +55,16 @@ if (isset($intPageId) && $intPageId != '')
 								</div>
 							  </div>
 							  <div class="control-group">
-								<label class="control-label" for="focusedInput">Category Name</label>
+								<label class="control-label" for="txt_category">Category Name</label>
 								<div class="controls">
-								  <input class="input-xlarge focused" id="txt_category" name="txt_category" type="text" value="<?php echo (isset($arrData[0]['category_name'])?$arrData[0]['category_name']:''); ?>">
+								  <input class="input-xlarge focused required" id="txt_category" name="txt_category" type="text" value="<?php echo (isset($arrData[0]['category_name'])?$arrData[0]['category_name']:''); ?>">
 								</div>
 							  </div>
 							 <div class="control-group">
-								<label class="control-label" for="focusedInput">Status</label>
+								<label class="control-label" for="sel_status">Status</label>
 								<div class="controls">
-								  <select class="input-xlarge focused" id="sel_status" name="sel_status" >
+								  <select class="input-xlarge focused required" id="sel_status" name="sel_status" >
+								  <option value="">&mdash; Please Select &mdash;</option>
                                   <option <?php echo (isset($arrData[0]['status']) && $arrData[0]['status']=='Active' ?'selected="selected"':''); ?> value="Active">Active</option>
                                   <option <?php echo (isset($arrData[0]['status']) && $arrData[0]['status']=='Inactive' ?'selected="selected"':''); ?> value="Inactive">Inactive</option>
                                   </select>
@@ -84,4 +84,7 @@ if (isset($intPageId) && $intPageId != '')
                 </div>
 <?php
 require_once('footer.php');
+?>
+<?php
+require_once('javascript_methods.php');
 ?>

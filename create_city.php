@@ -68,7 +68,7 @@ $arrStateOption = $objControl->getRecords('branch_master', null, null, 'branch_n
 							  <div class="control-group">
 								<label class="control-label" for="txt_city">City Name</label>
 								<div class="controls">
-								  <input class="input-xlarge focused required" data-trim data-min-chars="3" id="txt_city" name="txt_city" type="text" value="<?php echo (isset($arrData[0]['city_name'])?$arrData[0]['city_name']:''); ?>">
+								  <input class="input-xlarge focused required" id="txt_city" name="txt_city" type="text" value="<?php echo (isset($arrData[0]['city_name'])?$arrData[0]['city_name']:''); ?>">
 								</div>
 							  </div>
 							 <div class="control-group">
@@ -96,41 +96,6 @@ $arrStateOption = $objControl->getRecords('branch_master', null, null, 'branch_n
 <?php
 require_once('footer.php');
 ?>
-<script type="text/javascript">
-	$(document).ready(function() {
-		
-	// Validate when the submit button is clicked
-		$('form').submit(function(e) {
-			//e.preventDefault();
-				var isvalidated=false;
-			// From the anchor element find the closest form element
-			$(this).closest('form').formvalidate({
-				failureMessages: true,
-				successMessages: false,
-				messageFailureClass: 'label label-important',
-				//messageSuccessClass: 'label label-success',
-				onSuccess: function(form) {
-					isvalidated = true;
-					return isvalidated;
-				},
-				validations: {
-					isNot: function(input, params) {
-						return $.inArray(input.toLowerCase(), params);
-					}
-				},
-				localization: {
-					en: {
-						success: {
-						
-						},
-						failure: {
-							
-						}
-					}
-				}
-			});
-		return isvalidated;
-		});
-	});
-	
-</script>
+<?php
+require_once('javascript_methods.php');
+?>

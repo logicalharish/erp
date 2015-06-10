@@ -47,13 +47,13 @@ $arrCategoryRecords = $objControl->getRecords('category_master', null, null, '',
               <div class="control-group span6">
                 <label class="control-label" for="full_name">Full Name</label>
                 <div class="controls">
-                  <input class="input-xlarge focused required" id="full_name"  data-trim data-min-chars="3" maxlength="128" name="full_name" type="text" value="<?php echo (isset($arrData[0]['full_name']) ? $arrData[0]['full_name'] : ''); ?>">
+                  <input class="input-xlarge focused required" id="full_name" maxlength="100" name="full_name" type="text" value="<?php echo (isset($arrData[0]['full_name']) ? $arrData[0]['full_name'] : ''); ?>">
                 </div>
               </div>
               <div class="control-group span6">
                 <label class="control-label" for="short_name">Short Name</label>
                 <div class="controls">
-                  <input class="input-xlarge focused required" id="short_name" data-trim data-min-chars="3" maxlength="23" name="short_name" type="text" value="<?php echo (isset($arrData[0]['short_name']) ? $arrData[0]['short_name'] : ''); ?>">
+                  <input class="input-xlarge focused required" id="short_name" maxlength="23" name="short_name" type="text" value="<?php echo (isset($arrData[0]['short_name']) ? $arrData[0]['short_name'] : ''); ?>">
                 </div>
               </div>
             </div>
@@ -61,7 +61,7 @@ $arrCategoryRecords = $objControl->getRecords('category_master', null, null, '',
               <div class="control-group span6">
                 <label class="control-label" for="est_date">Establish Date</label>
                 <div class="controls">
-                  <input class="input-xlarge datepicker required" id="est_date" data-date="MM-DD-YYYY" maxlength="128" name="est_date" type="text" value="<?php echo (isset($arrData[0]['est_date']) ? $arrData[0]['est_date'] : ''); ?>">
+                  <input class="input-xlarge datepicker required" id="est_date" maxlength="128" name="est_date" type="text" value="<?php echo (isset($arrData[0]['est_date']) ? $arrData[0]['est_date'] : ''); ?>">
                 </div>
               </div>
               <div class="control-group span6">
@@ -72,11 +72,18 @@ $arrCategoryRecords = $objControl->getRecords('category_master', null, null, '',
 							for ($intIndex = 0; $intIndex < count($arrCategoryRecords); $intIndex++)
 							{
 								echo "<option value='" . $arrCategoryRecords[$intIndex]['category_id']."'";
+								//print_r (in_array('category_id',in_array(,$arrCompanyCategoryData)));
+								//print_r($arrCompanyCategoryData);
+								//echo in_array($arrCategoryRecords[$intIndex]['category_id'],$arrCompanyCategoryData['category_id'])?"selected":"";
+								/* if(in_array($arrCompanyCategoryData['company_id'],$arrCategoryRecords[$intIndex]['category_id'])){
+											echo 'selected';
+										 }*/
+								//echo in_array($arrCompanyCategoryData, $a);
 								for ($intIndex1 = 0; $intIndex1 < count($arrCompanyCategoryData); $intIndex1++){
 										 if($arrCategoryRecords[$intIndex]['category_id']==$arrCompanyCategoryData[$intIndex1]['category_id']){
 											echo 'selected';
 										 }
-							}
+								}
 							echo ">".$arrCategoryRecords[$intIndex]['category_name'] . "</option>";
 							}
 						?>
@@ -88,13 +95,13 @@ $arrCategoryRecords = $objControl->getRecords('category_master', null, null, '',
               <div class="control-group span6">
                 <label class="control-label" for="street">Street</label>
                 <div class="controls">
-                  <input class="input-xlarge focused required" id="street" ddata-trim data-min-chars="4" data-max-chars="25" name="street" type="text" value="<?php echo (isset($arrData[0]['street']) ? $arrData[0]['street'] : ''); ?>">
+                  <input class="input-xlarge focused required" id="street" name="street" type="text" value="<?php echo (isset($arrData[0]['street']) ? $arrData[0]['street'] : ''); ?>">
                 </div>
               </div>
               <div class="control-group span6">
                 <label class="control-label" for="landmark">Landmark</label>
                 <div class="controls">
-                  <input class="input-xlarge focused required" id="landmark"  data-trim data-min-chars="4" data-max-chars="25" name="landmark" type="text" value="<?php echo (isset($arrData[0]['landmark']) ? $arrData[0]['landmark'] : ''); ?>">
+                  <input class="input-xlarge focused required" id="landmark" name="landmark" type="text" value="<?php echo (isset($arrData[0]['landmark']) ? $arrData[0]['landmark'] : ''); ?>">
                 </div>
               </div>
             </div>
@@ -102,7 +109,7 @@ $arrCategoryRecords = $objControl->getRecords('category_master', null, null, '',
 			  <div class="control-group span6">
                 <label class="control-label" for="building">Building</label>
                 <div class="controls">
-                  <input class="input-xlarge focused required" id="building" data-trim data-min-chars="4" data-max-chars="25" name="building" type="text" value="<?php echo (isset($arrData[0]['building']) ? $arrData[0]['building'] : ''); ?>">
+                  <input class="input-xlarge focused required" id="building" name="building" type="text" value="<?php echo (isset($arrData[0]['building']) ? $arrData[0]['building'] : ''); ?>">
                 </div>
               </div>
 			  <div class="control-group span6">
@@ -161,7 +168,7 @@ $arrCategoryRecords = $objControl->getRecords('category_master', null, null, '',
               <div class="control-group span6">
                 <label class="control-label" for="pincode">Pin code</label>
                 <div class="controls">
-                  <input class="input-xlarge focused required" data-min-chars="4" maxlength="9" id="pincode" name="pincode" type="text" value="<?php echo (isset($arrData[0]['pincode']) ? $arrData[0]['pincode'] : ''); ?>">
+                  <input class="input-xlarge focused required" maxlength="9" id="pincode" name="pincode" type="text" value="<?php echo (isset($arrData[0]['pincode']) ? $arrData[0]['pincode'] : ''); ?>">
                 </div>
               </div>
             </div>
@@ -169,13 +176,13 @@ $arrCategoryRecords = $objControl->getRecords('category_master', null, null, '',
               <div class="control-group span6">
                 <label class="control-label" for="latitude">Latitude</label>
                 <div class="controls">
-                  <input class="input-xlarge focused required" data-float id="latitude" name="latitude" type="text" value="<?php echo (isset($arrData[0]['latitude']) ? $arrData[0]['latitude'] : ''); ?>">
+                  <input class="input-xlarge focused required" id="latitude" name="latitude" type="text" value="<?php echo (isset($arrData[0]['latitude']) ? $arrData[0]['latitude'] : ''); ?>">
                 </div>
               </div>
               <div class="control-group span6">
                 <label class="control-label" for="longitute">Longitude</label>
                 <div class="controls">
-                  <input class="input-xlarge focused required" data-float id="longitute" name="longitute" type="text" value="<?php echo (isset($arrData[0]['longitute']) ? $arrData[0]['longitute'] : ''); ?>">
+                  <input class="input-xlarge focused required" id="longitute" name="longitute" type="text" value="<?php echo (isset($arrData[0]['longitute']) ? $arrData[0]['longitute'] : ''); ?>">
                 </div>
               </div>
             </div>
@@ -215,7 +222,7 @@ $arrCategoryRecords = $objControl->getRecords('category_master', null, null, '',
               <div class="control-group span6">
                 <label class="control-label" for="email">Email</label>
                 <div class="controls">
-                  <input class="input-xlarge focused required" data-email id="email" name="email" type="text" value="<?php echo (isset($arrData[0]['email']) ? $arrData[0]['email'] : ''); ?>">
+                  <input class="input-xlarge focused required" id="email" name="email" type="text" value="<?php echo (isset($arrData[0]['email']) ? $arrData[0]['email'] : ''); ?>">
                 </div>
               </div>
               <div class="control-group span3">
@@ -319,7 +326,8 @@ $arrCategoryRecords = $objControl->getRecords('category_master', null, null, '',
                       </tr>
                       <tr>
                         <td>Sunday</td>
-                        <td><select name="sunday_from" id="sunday_from" class="required">
+                        <td><select name="sunday_from" id="sunday_from" class="input-small focused required">
+							<option value="">&mdash; Please Select &mdash;</option>
                             <option value="01:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="sunday_from=01:00"){echo "selected"; }}} ?>>01:00</option>
                             <option value="02:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="sunday_from=02:00"){echo "selected"; }}} ?>>02:00</option>
                             <option value="03:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="sunday_from=03:00"){echo "selected"; }}} ?>>03:00</option>
@@ -346,7 +354,8 @@ $arrCategoryRecords = $objControl->getRecords('category_master', null, null, '',
                             <option value="24:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="sunday_from=24:00"){echo "selected"; }}} ?>>24:00</option>
                           </select>
 						</td>
-                        <td><select name="sunday_to" class="required">
+                        <td><select name="sunday_to" class="input-small focused required">
+						<option value="">&mdash; Please Select &mdash;</option>
                             <option value="01:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="sunday_to=01:00"){echo "selected"; }}} ?>>01:00</option>
                             <option value="02:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="sunday_to=02:00"){echo "selected"; }}} ?>>02:00</option>
                             <option value="03:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="sunday_to=03:00"){echo "selected"; }}} ?>>03:00</option>
@@ -376,7 +385,8 @@ $arrCategoryRecords = $objControl->getRecords('category_master', null, null, '',
                       </tr>
                       <tr>
                         <td>Monday</td>
-                        <td><select name="monday_from" class="required">
+                        <td><select name="monday_from" class="input-small focused required">
+							<option value="">&mdash; Please Select &mdash;</option>
 							<option value="01:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="monday_from=01:00"){echo "selected"; }}} ?>>01:00</option>
                             <option value="02:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="monday_from=02:00"){echo "selected"; }}} ?>>02:00</option>
                             <option value="03:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="monday_from=03:00"){echo "selected"; }}} ?>>03:00</option>
@@ -402,7 +412,8 @@ $arrCategoryRecords = $objControl->getRecords('category_master', null, null, '',
                             <option value="23:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="monday_from=23:00"){echo "selected"; }}} ?>>23:00</option>
                             <option value="24:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="monday_from=24:00"){echo "selected"; }}} ?>>24:00</option>
                         </select></td>
-                        <td><select name="monday_to" class="required">
+                        <td><select name="monday_to" class="input-small focused required">
+							<option value="">&mdash; Please Select &mdash;</option>
 							<option value="01:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="monday_to=01:00"){echo "selected"; }}} ?>>01:00</option>
                             <option value="02:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="monday_to=02:00"){echo "selected"; }}} ?>>02:00</option>
                             <option value="03:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="monday_to=03:00"){echo "selected"; }}} ?>>03:00</option>
@@ -432,7 +443,8 @@ $arrCategoryRecords = $objControl->getRecords('category_master', null, null, '',
                       </tr>
                       <tr>
                         <td>Tuesday</td>
-                        <td><select name="tuesday_from" class="required">
+                        <td><select name="tuesday_from" class="input-small focused required">
+								<option value="">&mdash; Please Select &mdash;</option>
 								<option value="01:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="tuesday_from=01:00"){echo "selected"; }}} ?>>01:00</option>
 								<option value="02:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="tuesday_from=02:00"){echo "selected"; }}} ?>>02:00</option>
 								<option value="03:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="tuesday_from=03:00"){echo "selected"; }}} ?>>03:00</option>
@@ -458,7 +470,8 @@ $arrCategoryRecords = $objControl->getRecords('category_master', null, null, '',
 								<option value="23:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="tuesday_from=23:00"){echo "selected"; }}} ?>>23:00</option>
 								<option value="24:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="tuesday_from=24:00"){echo "selected"; }}} ?>>24:00</option>
                         </select></td>
-                        <td><select name="tuesday_to"class="required">
+                        <td><select name="tuesday_to"class="input-small focused required">
+								<option value="">&mdash; Please Select &mdash;</option>
                           		<option value="01:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="tuesday_to=01:00"){echo "selected"; }}} ?>>01:00</option>
 								<option value="02:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="tuesday_to=02:00"){echo "selected"; }}} ?>>02:00</option>
 								<option value="03:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="tuesday_to=03:00"){echo "selected"; }}} ?>>03:00</option>
@@ -488,7 +501,8 @@ $arrCategoryRecords = $objControl->getRecords('category_master', null, null, '',
                       </tr>
                       <tr>
                         <td>Wednesday</td>
-                        <td><select name="wednesday_from" class="required">
+                        <td><select name="wednesday_from" class="input-small focused required">
+								<option value="">&mdash; Please Select &mdash;</option>
 								<option value="01:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="wednesday_from=01:00"){echo "selected"; }}} ?>>01:00</option>
 								<option value="02:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="wednesday_from=02:00"){echo "selected"; }}} ?>>02:00</option>
 								<option value="03:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="wednesday_from=03:00"){echo "selected"; }}} ?>>03:00</option>
@@ -514,7 +528,8 @@ $arrCategoryRecords = $objControl->getRecords('category_master', null, null, '',
 								<option value="23:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="wednesday_from=23:00"){echo "selected"; }}} ?>>23:00</option>
 								<option value="24:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="wednesday_from=24:00"){echo "selected"; }}} ?>>24:00</option>
                         </select></td>
-                        <td><select name="wednesday_to" class="required">
+                        <td><select name="wednesday_to" class="input-small focused required">
+								<option value="">&mdash; Please Select &mdash;</option>
 								<option value="01:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="wednesday_to=01:00"){echo "selected"; }}} ?>>01:00</option>
 								<option value="02:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="wednesday_to=02:00"){echo "selected"; }}} ?>>02:00</option>
 								<option value="03:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="wednesday_to=03:00"){echo "selected"; }}} ?>>03:00</option>
@@ -544,7 +559,8 @@ $arrCategoryRecords = $objControl->getRecords('category_master', null, null, '',
                       </tr>
                       <tr>
                         <td>Thursday</td>
-                        <td><select name="thursday_from" class="required">
+                        <td><select name="thursday_from" class="input-small focused required">
+								<option value="">&mdash; Please Select &mdash;</option>
 								<option value="01:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="thursday_from=01:00"){echo "selected"; }}} ?>>01:00</option>
 								<option value="02:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="thursday_from=02:00"){echo "selected"; }}} ?>>02:00</option>
 								<option value="03:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="thursday_from=03:00"){echo "selected"; }}} ?>>03:00</option>
@@ -570,7 +586,8 @@ $arrCategoryRecords = $objControl->getRecords('category_master', null, null, '',
 								<option value="23:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="thursday_from=23:00"){echo "selected"; }}} ?>>23:00</option>
 								<option value="24:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="thursday_from=24:00"){echo "selected"; }}} ?>>24:00</option>
                         </select></td>
-                        <td><select name="thursday_to" class="required">
+                        <td><select name="thursday_to" class="input-small focused required">
+								<option value="">&mdash; Please Select &mdash;</option>
 								<option value="01:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="thursday_to=01:00"){echo "selected"; }}} ?>>01:00</option>
 								<option value="02:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="thursday_to=02:00"){echo "selected"; }}} ?>>02:00</option>
 								<option value="03:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="thursday_to=03:00"){echo "selected"; }}} ?>>03:00</option>
@@ -600,8 +617,9 @@ $arrCategoryRecords = $objControl->getRecords('category_master', null, null, '',
                       </tr>
                       <tr>
                         <td>Friday</td>
-                        <td><select name="friday_from"class="required">
-                          <option value="01:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="thursday_to=01:00"){echo "selected"; }}} ?>>01:00</option>
+                        <td><select name="friday_from"class="input-small focused required">
+								<option value="">&mdash; Please Select &mdash;</option>
+								<option value="01:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="thursday_to=01:00"){echo "selected"; }}} ?>>01:00</option>
 								<option value="02:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="friday_from=02:00"){echo "selected"; }}} ?>>02:00</option>
 								<option value="03:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="friday_from=03:00"){echo "selected"; }}} ?>>03:00</option>
 								<option value="04:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="friday_from=04:00"){echo "selected"; }}} ?>>04:00</option>
@@ -626,7 +644,9 @@ $arrCategoryRecords = $objControl->getRecords('category_master', null, null, '',
 								<option value="23:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="friday_from=23:00"){echo "selected"; }}} ?>>23:00</option>
 								<option value="24:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="friday_from=24:00"){echo "selected"; }}} ?>>24:00</option>
                         </select></td>
-                        <td><select name="friday_to" class="required">
+                        <td><select name="friday_to" class="input-small focused required">
+								<option value="">&mdash; Please Select &mdash;</option>
+								<option value="01:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="friday_to=01:00"){echo "selected"; }}} ?>>02:00</option>
 								<option value="02:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="friday_to=02:00"){echo "selected"; }}} ?>>02:00</option>
 								<option value="03:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="friday_to=03:00"){echo "selected"; }}} ?>>03:00</option>
 								<option value="04:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="friday_to=04:00"){echo "selected"; }}} ?>>04:00</option>
@@ -655,7 +675,8 @@ $arrCategoryRecords = $objControl->getRecords('category_master', null, null, '',
                       </tr>
 					  <tr>
                         <td>Saturday</td>
-                        <td><select name="saturday_from" class="required">
+                        <td><select name="saturday_from" class="input-small focused required">
+								<option value="">&mdash; Please Select &mdash;</option>
 								<option value="02:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="saturday_from=02:00"){echo "selected"; }}} ?>>02:00</option>
 								<option value="03:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="saturday_from=03:00"){echo "selected"; }}} ?>>03:00</option>
 								<option value="04:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="saturday_from=04:00"){echo "selected"; }}} ?>>04:00</option>
@@ -680,7 +701,8 @@ $arrCategoryRecords = $objControl->getRecords('category_master', null, null, '',
 								<option value="23:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="saturday_from=23:00"){echo "selected"; }}} ?>>23:00</option>
 								<option value="24:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="saturday_from=24:00"){echo "selected"; }}} ?>>24:00</option>
                         </select></td>
-                        <td><select name="saturday_to" class="required">
+                        <td><select name="saturday_to" class="input-small focused required">
+								<option value="">&mdash; Please Select &mdash;</option>
 								<option value="02:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="saturday_to=02:00"){echo "selected"; }}} ?>>02:00</option>
 								<option value="03:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="saturday_to=03:00"){echo "selected"; }}} ?>>03:00</option>
 								<option value="04:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="saturday_to=04:00"){echo "selected"; }}} ?>>04:00</option>
@@ -714,7 +736,7 @@ $arrCategoryRecords = $objControl->getRecords('category_master', null, null, '',
             </div>
             <div class="row-fluid">
             <legend>Payment Options</legend>
-			<div id="paymentResult"></div>
+			
               <div class="control-group span12">
 			  <?php isset($arrCompanyProfileData[0]['payment_options']) ? $paymentValue=$arrCompanyProfileData[0]['payment_options'] : '';
 							$options = @explode(',', $paymentValue);
@@ -724,19 +746,19 @@ $arrCategoryRecords = $objControl->getRecords('category_master', null, null, '',
 					 <div class="control-group span3">
 					 <label class="control-label">Cash</label>
 						<div class="controls">
-						  <label class="checkbox inline"><input data-no-uniform="true" type="checkbox" title="Payment Options" class="iphone-toggle required"  name="paymentOptions[]" value="Cash" <?php if(isset($options)){foreach($options as $option){if($option=="Cash"){echo "checked='checked'"; }}} ?>></label>
+						  <input data-no-uniform="true" type="checkbox" title="Select at least one Payment Option" class="iphone-toggle required"  name="paymentOptions[]" value="Cash" <?php if(isset($options)){foreach($options as $option){if($option=="Cash"){echo "checked='checked'"; }}} ?>>
 						</div>
 					</div>
 					<div class="control-group span3">
 						<label class="control-label">Master Card</label>
 						<div class="controls">
-						  <label class="checkbox inline"><input data-no-uniform="true" type="checkbox" class="iphone-toggle" data-min-options="1"  name="paymentOptions[]" value="Master Card" <?php if(isset($options)){foreach($options as $option){if($option=="Master Card"){echo "checked='checked'"; }}} ?>></label>
+						  <input data-no-uniform="true" type="checkbox" class="iphone-toggle required" data-min-options="1"  name="paymentOptions[]" value="Master Card" <?php if(isset($options)){foreach($options as $option){if($option=="Master Card"){echo "checked='checked'"; }}} ?>>
 						</div>
 					</div>
 					<div class="control-group span3">
 						<label class="control-label">Visa Card</label>
 						<div class="controls">
-						  <label class="checkbox inline"><input data-no-uniform="true" type="checkbox" class="iphone-toggle"  name="paymentOptions[]" value="Visa Card" <?php if(isset($options)){foreach($options as $option){if($option=="Visa Card"){echo "checked='checked'"; }}} ?>></label>
+						  <input data-no-uniform="true" type="checkbox" class="iphone-toggle required "  name="paymentOptions[]" value="Visa Card" <?php if(isset($options)){foreach($options as $option){if($option=="Visa Card"){echo "checked='checked'"; }}} ?>>
 						</div>
 					</div>
                 </div>
@@ -744,19 +766,19 @@ $arrCategoryRecords = $objControl->getRecords('category_master', null, null, '',
 					<div class="control-group span3">
 						<label class="control-label">Debit Card</label>
 						<div class="controls">
-						  <label class="checkbox inline"><input data-no-uniform="true" type="checkbox" class="iphone-toggle"  name="paymentOptions[]" value="Debit Card" <?php if(isset($options)){foreach($options as $option){if($option=="Debit Card"){echo "checked='checked'"; }}} ?>></label>
+						  <input data-no-uniform="true" type="checkbox" class="iphone-toggle required"  name="paymentOptions[]" value="Debit Card" <?php if(isset($options)){foreach($options as $option){if($option=="Debit Card"){echo "checked='checked'"; }}} ?>>
 						</div>
 					</div>
 					<div class="control-group span3">
 						<label class="control-label">Money Orders</label>
 						<div class="controls">
-						  <label class="checkbox inline"><input data-no-uniform="true" type="checkbox" class="iphone-toggle"  name="paymentOptions[]" value="Money Orders" <?php if(isset($options)){foreach($options as $option){if($option=="Money Orders"){echo "checked='checked'"; }}} ?>></label>
+						  <input data-no-uniform="true" type="checkbox" class="iphone-toggle required"  name="paymentOptions[]" value="Money Orders" <?php if(isset($options)){foreach($options as $option){if($option=="Money Orders"){echo "checked='checked'"; }}} ?>>
 						</div>
 					</div>
 					<div class="control-group span3">
 						<label class="control-label">Cheques</label>
 						<div class="controls">
-						  <label class="checkbox inline"><input data-no-uniform="true" type="checkbox" class="iphone-toggle"  name="paymentOptions[]" value="Cheques" <?php if(isset($options)){foreach($options as $option){if($option=="Cheques"){echo "checked='checked'"; }}} ?>></label>
+						  <input data-no-uniform="true" type="checkbox" class="iphone-toggle required"  name="paymentOptions[]" value="Cheques" <?php if(isset($options)){foreach($options as $option){if($option=="Cheques"){echo "checked='checked'"; }}} ?>>
 						</div>
 					</div>
                 </div>
@@ -764,19 +786,19 @@ $arrCategoryRecords = $objControl->getRecords('category_master', null, null, '',
 					<div class="control-group span3">
 						<label class="control-label">Credit Card</label>
 						<div class="controls">
-						  <label class="checkbox inline"><input data-no-uniform="true" type="checkbox" class="iphone-toggle"  name="paymentOptions[]" value="Credit Card" <?php if(isset($options)){foreach($options as $option){if($option=="Credit Card"){echo "checked='checked'"; }}} ?>></label>
+						  <input data-no-uniform="true" type="checkbox" class="iphone-toggle required"  name="paymentOptions[]" value="Credit Card" <?php if(isset($options)){foreach($options as $option){if($option=="Credit Card"){echo "checked='checked'"; }}} ?>>
 						</div>
 					</div>
 					<div class="control-group span3">
 						<label class="control-label">Travellers Cheque</label>
 						<div class="controls">
-						  <label class="checkbox inline"><input data-no-uniform="true" type="checkbox" class="iphone-toggle"  name="paymentOptions[]" value="Travellers Cheque" <?php if(isset($options)){foreach($options as $option){if($option=="Travellers Cheque"){echo "checked='checked'"; }}} ?>></label>
+						  <input data-no-uniform="true" type="checkbox" class="iphone-toggle required"  name="paymentOptions[]" value="Travellers Cheque" <?php if(isset($options)){foreach($options as $option){if($option=="Travellers Cheque"){echo "checked='checked'"; }}} ?>>
 						</div>
 					</div>
 					<div class="control-group span3">
 						<label class="control-label">Financing Available</label>
 						<div class="controls">
-						  <label class="checkbox inline"><input data-no-uniform="true" type="checkbox" class="iphone-toggle"  name="paymentOptions[]" value="Financing Available" <?php if(isset($options)){foreach($options as $option){if($option=="Financing Available"){echo "checked='checked'"; }}} ?>></label>
+						  <input data-no-uniform="true" type="checkbox" class="iphone-toggle required"  name="paymentOptions[]" value="Financing Available" <?php if(isset($options)){foreach($options as $option){if($option=="Financing Available"){echo "checked='checked'"; }}} ?>>
 						</div>
 					</div>
                 </div>
@@ -784,14 +806,17 @@ $arrCategoryRecords = $objControl->getRecords('category_master', null, null, '',
 					<div class="control-group span3">
 						<label class="control-label">American Express Card</label>
 						<div class="controls">
-						  <input data-no-uniform="true" type="checkbox" class="iphone-toggle"  name="paymentOptions[]" value="American Express Card" <?php if(isset($options)){foreach($options as $option){if($option=="American Express Card"){echo "checked='checked'"; }}} ?>></label>
+						  <input data-no-uniform="true" type="checkbox" class="iphone-toggle required"  name="paymentOptions[]" value="American Express Card" <?php if(isset($options)){foreach($options as $option){if($option=="American Express Card"){echo "checked='checked'"; }}} ?>>
 						</div>
 					</div>
 					<div class="control-group span3">
 						<label class="control-label">Dinners Card</label>
 						<div class="controls">
-						  <input data-no-uniform="true" type="checkbox" class="iphone-toggle"  name="paymentOptions[]" value="Dinners Card" <?php if(isset($options)){foreach($options as $option){if($option=="Dinners Card"){echo "checked='checked'"; }}} ?>></label>
+						  <input data-no-uniform="true" type="checkbox" class="iphone-toggle required"  name="paymentOptions[]" value="Dinners Card" <?php if(isset($options)){foreach($options as $option){if($option=="Dinners Card"){echo "checked='checked'"; }}} ?>>
 						</div>
+					</div>
+					<div class="control-group span3">
+						<div id="paymentResult"></div>
 					</div>
                 </div>
 					
@@ -878,12 +903,12 @@ $arrCategoryRecords = $objControl->getRecords('category_master', null, null, '',
 				<table class="table table-striped table-bordered bootstrap-datatable" id="mytable">
 						  <thead>
 							  <tr>
-								  <th><label for="contact_full_name">Full Name<label></th>
-								  <th><label for="dob">Date Of Birth<label></th>
-								  <th><label for="dom">Date Of Marriage<label></th>
-								  <th><label for="contact_mobile">Mobile<label></th>
-                                  <th><label for="contact_email">E-Mail<label></th>
-                                  <th><label for="designation">Designation<label></th>
+								  <th>Full Name</th>
+								  <th>Date Of Birth</th>
+								  <th>Date Of Marriage</th>
+								  <th>Mobile</th>
+                                  <th>E-Mail</th>
+                                  <th>Designation</th>
 								  <th>Status</th>
 								  <th>Actions</th>
 							  </tr>
@@ -895,13 +920,13 @@ $arrCategoryRecords = $objControl->getRecords('category_master', null, null, '',
 										{
 							?>
 							
-							<tr id="visibleDiv">
+							<tr id="visibleDiv" name="visibleDiv">
 								<td><input type="hidden" name="company_contact_id[]" id="company_contact_id" value="<?php echo (isset($arrCompanyContactData[$intIndex]['company_contact_id']) ? $arrCompanyContactData[$intIndex]['company_contact_id'] : ''); ?>" />
 									<input class="input-small focused required field" id="contact_full_name" name="contact_full_name[]" type="text" value="<?php echo (isset($arrCompanyContactData[$intIndex]['contact_full_name']) ? $arrCompanyContactData[$intIndex]['contact_full_name'] : ''); ?>"></td>
-								<td class="center"><input type="text" class="input-small datepicker required field" id="dob" data-date="MM-DD-YYYY" name="dob[]" value="<?php echo (isset($arrCompanyContactData[$intIndex]['dob']) ? $arrCompanyContactData[$intIndex]['dob'] : ''); ?>"></td>
-                                <td class="center"><label for="dom"><input type="text" class="input-small datepicker required field" id="dom" data-date="MM-DD-YYYY" name="dom[]"value="<?php echo (isset($arrCompanyContactData[$intIndex]['dom']) ? $arrCompanyContactData[$intIndex]['dom'] : ''); ?>"></td>
-								<td class="center"><input class="input-small focused required field" id="contact_mobile" data-int data-min-chars="10" maxlength="10" name="contact_mobile[]" type="text" value="<?php echo (isset($arrCompanyContactData[$intIndex]['contact_mobile']) ? $arrCompanyContactData[$intIndex]['contact_mobile'] : ''); ?>"></td>
-                                <td class="center"><input class="input-small focused required field" id="contact_email" data-email name="contact_email[]" type="email" value="<?php echo (isset($arrCompanyContactData[$intIndex]['contact_email']) ? $arrCompanyContactData[$intIndex]['contact_email'] : ''); ?>"></td>
+								<td class="center"><input type="text" class="input-small datepicker required field" id="dob" name="dob[]" value="<?php echo (isset($arrCompanyContactData[$intIndex]['dob']) ? $arrCompanyContactData[$intIndex]['dob'] : ''); ?>"></td>
+                                <td class="center"><label for="dom"><input type="text" class="input-small datepicker required field" id="dom" name="dom[]"value="<?php echo (isset($arrCompanyContactData[$intIndex]['dom']) ? $arrCompanyContactData[$intIndex]['dom'] : ''); ?>"></td>
+								<td class="center"><input class="input-small focused required field" id="contact_mobile" maxlength="10" name="contact_mobile[]" type="text" value="<?php echo (isset($arrCompanyContactData[$intIndex]['contact_mobile']) ? $arrCompanyContactData[$intIndex]['contact_mobile'] : ''); ?>"></td>
+                                <td class="center"><input class="input-small focused required field" id="contact_email" name="contact_email[]" type="email" value="<?php echo (isset($arrCompanyContactData[$intIndex]['contact_email']) ? $arrCompanyContactData[$intIndex]['contact_email'] : ''); ?>"></td>
 								<td class="center"><input class="input-small focused required field" id="designation" name="designation[]" type="text" value="<?php echo (isset($arrCompanyContactData[$intIndex]['designation']) ? $arrCompanyContactData[$intIndex]['designation'] : ''); ?>"></td>
 								<td class="center"> <select class="input-small focused required field" id="contact_status" name="contact_status[]" >
 													  <option <?php echo (isset($arrCompanyContactData[$intIndex]['contact_status']) && $arrCompanyContactData[$intIndex]['contact_status'] == 'Active' ? 'selected="selected"' : ''); ?> value="Active">Active</option>
@@ -950,7 +975,7 @@ $arrCategoryRecords = $objControl->getRecords('category_master', null, null, '',
               <div class="control-group span6">
                 <label class="control-label" for="year">Year</label>
                 <div class="controls">
-                  <input class="input-xlarge focused required" data-int data-min-chars="4" maxlength="4" id="year" name="year" type="text" value="<?php echo (isset($arrCompanyAdvertiseData[0]['year']) ? $arrCompanyAdvertiseData[0]['year'] : ''); ?>">
+                  <input class="input-xlarge focused required" maxlength="4" id="year" name="year" type="text" value="<?php echo (isset($arrCompanyAdvertiseData[0]['year']) ? $arrCompanyAdvertiseData[0]['year'] : ''); ?>">
                 </div>
               </div>
             </div>
@@ -958,7 +983,7 @@ $arrCategoryRecords = $objControl->getRecords('category_master', null, null, '',
               <div class="control-group span6">
                 <label class="control-label" for="ad_date">Date</label>
                 <div class="controls">
-                  <input class="input-xlarge datepicker required" data-date="MM-DD-YYYY" maxlength="128" id="ad_date" name="ad_date" type="text" value="<?php echo (isset($arrCompanyAdvertiseData[0]['ad_date']) ? $arrCompanyAdvertiseData[0]['ad_date'] : ''); ?>">
+                  <input class="input-xlarge datepicker required" id="ad_date" name="ad_date" type="text" value="<?php echo (isset($arrCompanyAdvertiseData[0]['ad_date']) ? $arrCompanyAdvertiseData[0]['ad_date'] : ''); ?>">
                 </div>
               </div>
               <div class="control-group span6">
@@ -1000,118 +1025,7 @@ $arrCategoryRecords = $objControl->getRecords('category_master', null, null, '',
 require_once('footer.php');
 ?>
 
-<script type="text/javascript">
-	$(document).ready(function() {
-		//$("#visibleDiv").css("visibility","visible");
-		$("#addrows").click(function () {
-			  var c_name = $('#c_name').val();
-			  var c_dob = $('#c_dob').val();
-			  var c_dom = $('#c_dom').val();
-			  var c_mobile = $('#c_mobile').val();
-			  var c_email = $('#c_email').val();
-			  var c_designation = $('#c_designation').val();
-			  var c_status = $('#c_status').val();
-			  $('#mytable tr').last().after('<tr id="visibleDiv"><td><input type="hidden" name="company_contact_id[]" id="company_contact_id" value="" /><input class="input-small focused required" id="contact_full_name" name="contact_full_name[]" type="text" value="'+c_name+'"></td><td class="center"><input type="text" class="input-small datepicker required" id="dob" data-date="MM-DD-YYYY" name="dob[]" value="'+c_dob+'"></td><td class="center"><input type="text" class="input-small datepicker required" id="dom" data-date="MM-DD-YYYY" name="dom[]" value="'+c_dom+'"></td><td class="center"><input class="input-small focused required" data-int data-min-chars="10" maxlength="10" id="contact_mobile" name="contact_mobile[]" type="text" value="'+c_mobile+'"></td><td class="center"><input class="input-small focused required" id="contact_email" data-email name="contact_email[]" type="email" value="'+c_email+'"></td><td class="center"><input class="input-small focused required"   id="designation" name="designation[]" type="text" value="'+c_designation+'"></td><td class="center"><select class="input-small focused required" id="contact_status" name="contact_status[]" ><option value="Active">Active</option><option value="Inactive">Inactive</option></select></td><td class="center"><input class="btn btn-success" id="removeRows" type="button" value="Remove"></input></td></tr>');
-			$('#c_name').val("");$('#c_dob').val("");$('#c_dom').val("");$('#c_mobile').val("");$('#c_email').val("");$('#c_designation').val("");$('#c_status').val("");
-			//  $('table').append('<tr><td>' + newName + '</td></tr>')
-		});
-		
-		$("#removeRows").live('click', function(event) {
-			$(this).parent().parent().remove();
-		});
-		
-		$("input[type='text']").keypress(function(){
-			var name = $(this).val();
-			var name_without_special_char = name.replace(/[^a-zA-Z 0-9 . @]+/g,"");
-			$(this).val(name_without_special_char);
-		});
-		
-		//$("input[name='contact_full_name[]']").each(function() {
-			/*$(".field").on('blur keyup', function() {
-				//$("#contact_full_name").val($(this).val());
-			$('#form').formvalidate();
-			});*/
-		//});
-							
-	// Validate form
-		$('form').submit(function(e) {
-			//e.preventDefault();
-				var isvalidated=false;
-			// From the anchor element find the closest form element
-			
-			$(this).closest('form').formvalidate({
-			//	isvalidated = false;
-				failureMessages: true,
-				successMessages: false,
-				messageFailureClass: 'label label-important',
-				//messageSuccessClass: 'label label-success',
-				onSuccess: function(form) {
-					isvalidated = true;
-					return isvalidated;
-				},
-				rules: 	{ 
-						  email: 
-						  {
-							required: true,
-							email: true
-						  }
-						},
-				messages:{
-						  email: 
-						  {
-							required: "Please enter your email address."
-						  }
-						},
-				validations: {
-					isNot: function(input, params) {
-						return $.inArray(input.toLowerCase(), params);
-					}
-					//contactNameCheck: function(input, params) {
-						//var value = $(element).closest('#visibleDiv').find('#contact_full_name:filled');
-						/*var value1 = $("input[name='contact_full_name[]']").each(function() {
-							if($(this).val() ==""){$('#contact_full_name').val($(this).val());}
-							return $(this).val();
-						});*/
-						/*var value1=$("#visibleDiv").each(function(){
-							var $inputs = $(this).find('#contact_full_name:filled');
-							var value =	$(this).children('td').children('input').each(function() {
-									//return this.valid();
-									return $(this).val();
-								});
-							return value;
-						});*/
-					//	return $.inArray(input.toLowerCase(), params);
-					//}
-				},
-				localization: {
-					en: {
-						success: {
-						
-						},
-						failure: {
-							/*Payment Options: function(title, value, name, input) {
-								return '<p>Please select at least one Payment Option</p>';
-							}*/
-						}
-					}
-				}
-				
-			});
-			/*$.validator.addMethod("contactNameCheck", function (value, element) {
-				return value == $("#contact_full_name").val();
-			}, 'Password and Confirm Password should be same');*/
-			/* var fields = $("input[name='paymentOptions[]']").serializeArray(); 
-				if (fields.length == 0) 
-				{ 
-					$(this).valid();
-					$("#paymentResult").html("<span class='label label-warning'>Please select at least One Payment Option.</span>");
-				} else{ 
-					//isvalidated= true;
-					$("#paymentResult").html("");
-					}*/
-					
-		return isvalidated;
-		});
-	});
-	
-</script>
+<?php
+require_once('javascript_methods.php');
+?>
+

@@ -141,28 +141,21 @@
 				}
 				break;
 				
-				
 				case 'user':
 				if($_SESSION['user']['user-role']=='Master-Admin')
 				{
-					$strQuery = 'Select *, role_name from user_master join role_master on user_role_id = role_id order by user_id';
+					$strQuery = 'Select *, role_name from user_master join role_master on user_role_id = role_id order by user_id where is_master_admin="N"';
 				}
 				else if($_SESSION['user']['user-role']=='Admin') 
 				{
-					$strQuery = 'Select *, role_name from user_master join role_master on user_role_id = role_id where client_id ="'.$_SESSION['user']['client_id'].'" order by user_id';	
+					//$strQuery = 'Select *, role_name from user_master join role_master on user_role_id = role_id where client_id ="'.$_SESSION['user']['client_id'].'" order by user_id';	
+					$strQuery = 'Select user_id,first_name,last_name,email,username,rm.role_name from user_master as um join role_master as rm on user_role_id=role_id where um.created_by ="'.$_SESSION['user']['user_id'].'"';		
 				}
 				else 
 				{
-					$strQuery = 'Select *, role_name from user_master join role_master on user_role_id = role_id where client_id ="'.$_SESSION['user']['client_id'].'" and role_id >= "'.$_SESSION['user']['role_id'].'" order by user_id ';		
+					//$strQuery = 'Select *, role_name from user_master join role_master on user_role_id = role_id where client_id ="'.$_SESSION['user']['client_id'].'" and role_id >= "'.$_SESSION['user']['role_id'].'" order by user_id ';		
+					$strQuery = 'Select user_id,first_name,last_name,email,username,rm.role_name from user_master as um join role_master as rm on user_role_id=role_id where um.created_by ="'.$_SESSION['user']['user_id'].'"';		
 				}
-				break;
-				
-				case 'user-details':
-				$strQuery ='SELECT um.user_id, name,email, username, GROUP_CONCAT(mm.module_name ORDER BY mm.module_id) AS user_modules, GROUP_CONCAT(mm.module_id ORDER BY mm.module_id) AS user_module_ids, role_name,role_id, rm.`public_read` AS normal_read, rm.`public_create` AS normal_create, rm.`public_update` AS normal_update, rm.`public_delete` AS normal_delete
-							FROM user_master AS um
-							JOIN role_master AS rm ON user_role_id = role_id
-							JOIN user_module_master AS umm ON um.user_id = umm.user_id
-							JOIN module_master AS mm ON FIND_IN_SET(mm.module_id, umm.module_id) > 0';
 				break;
 				
 				case 'user-edit':
@@ -170,7 +163,7 @@
 				break;
 				
 				case 'user-edit-available-modules':
-				$strQuery = 'select umm.module_id, mm.module_name from user_module_master as umm JOIN module_master as mm on umm.module_id = mm.module_id where user_id ="'.$_SESSION['user']['user_id'].'"';
+				$strQuery = 'select umm.module_id, mm.module_name,mm.module_menu_icon,mm.module_menu_link from user_module_master as umm JOIN module_master as mm on umm.module_id = mm.module_id where user_id ="'.$_SESSION['user']['user_id'].'"';
 				break;
 				
 				case 'user-edit-available-roles';
@@ -207,7 +200,8 @@
 				break;
 				
 				case 'user-details':
-				$strQuery = 'select is_role_updated from user_master where user_id = '.$_SESSION['user']['user_id'];
+			//	$strQuery = 'select is_role_updated from user_master where user_id = '.$_SESSION['user']['user_id'];
+				$strQuery= 'select * from user_master as um JOIN role_master as rm on um.user_role_id = rm.role_id where user_id ="'.$_SESSION['user']['user_id'].'"';
 				break;
 				
 				case 'privileged_user':

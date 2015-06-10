@@ -48,7 +48,7 @@ class CommonController
 	function getUserDetails($safeUsername)
 	{
 		global $db;
-		$strQuery  = "SELECT um.user_id, name, username, GROUP_CONCAT(umm.module_id
+		$strQuery  = "SELECT um.user_id, first_name,last_name, username, GROUP_CONCAT(umm.module_id
 					ORDER BY umm.module_id) AS user_modules, role_name,role_id, rm.`public_read` AS normal_read, rm.`public_create` AS normal_create, rm.`public_update` AS normal_update, rm.`public_delete` AS normal_delete
 					FROM user_master AS um
 					JOIN role_master AS rm ON user_role_id = role_id

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 06, 2015 at 02:02 AM
+-- Generation Time: Jun 10, 2015 at 07:39 AM
 -- Server version: 5.5.27
 -- PHP Version: 5.4.7
 
@@ -1287,24 +1287,22 @@ CREATE TABLE IF NOT EXISTS `module_master` (
   `modified_datetime` datetime DEFAULT NULL,
   `modified_by` int(11) DEFAULT NULL,
   PRIMARY KEY (`module_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
 
 --
 -- Dumping data for table `module_master`
 --
 
 INSERT INTO `module_master` (`module_id`, `module_name`, `module_menu_link`, `module_menu_icon`, `status`, `created_datetime`, `created_by`, `modified_datetime`, `modified_by`) VALUES
-(1, 'website', 'website', 'icon-globe', 'Active', '2015-06-05 15:15:17', 1, NULL, NULL),
-(2, 'pages', 'pages', 'icon-file', 'Active', '2015-06-05 15:15:21', 1, NULL, NULL),
-(3, 'posts', 'posts', 'icon-pencil', 'Active', '2015-06-05 15:15:23', 1, NULL, NULL),
-(4, 'videos', 'videos', 'icon-film', 'Active', '2015-06-05 15:15:25', 1, NULL, NULL),
-(5, 'store', 'store', 'icon-shopping-cart', 'Inactive', '2015-06-05 15:15:26', 1, NULL, NULL),
-(8, 'Country', 'country.php', 'icon-list-alt', 'Active', '2015-06-05 15:15:29', 1, NULL, NULL),
-(9, 'state', 'state.php', 'icon-list-alt', 'Active', '2015-06-05 15:15:31', 1, NULL, NULL),
-(10, 'city', 'city.php', 'icon-building', 'Active', '2015-06-05 15:15:32', 1, NULL, NULL),
+(1, 'website', 'website.php', 'icon-globe', 'Active', '2015-06-05 15:15:17', 1, NULL, NULL),
+(7, 'modules', 'module.php', 'icon-list', 'Active', '2015-06-09 02:06:38', 1, '2015-06-09 02:06:45', 1),
+(8, 'Country', 'country.php', 'icon-map-marker', 'Active', '2015-06-05 15:15:29', 1, NULL, NULL),
+(9, 'state', 'state.php', 'icon-map-marker', 'Active', '2015-06-05 15:15:31', 1, NULL, NULL),
+(10, 'city', 'city.php', 'icon-map-marker', 'Active', '2015-06-05 15:15:32', 1, NULL, NULL),
 (11, 'Users', 'users.php', 'icon-user', 'Active', '2015-06-05 15:15:34', 1, NULL, NULL),
 (12, 'category', 'category.php', 'icon-list-alt', 'Active', '2015-06-05 15:15:35', 1, '2015-06-06 12:06:23', 1),
-(13, 'company', 'company.php', 'icon-building', 'Active', '2015-06-05 15:15:37', 1, NULL, NULL);
+(13, 'company', 'company.php', 'icon-list', 'Active', '2015-06-05 15:15:37', 1, NULL, NULL),
+(14, 'roles', 'role.php', 'icon-cog', 'Active', '2015-06-10 07:06:47', 1, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1354,16 +1352,24 @@ CREATE TABLE IF NOT EXISTS `role_master` (
   `public_create` enum('Y','N') DEFAULT NULL,
   `public_update` enum('Y','N') DEFAULT NULL,
   `public_delete` enum('Y','N') DEFAULT NULL,
+  `status` enum('Active','Inactive') DEFAULT NULL,
+  `is_master_admin` enum('Y','N') DEFAULT NULL,
+  `created_datetime` datetime DEFAULT NULL,
+  `created_by` int(11) DEFAULT NULL,
+  `modified_datetime` datetime DEFAULT NULL,
+  `modified_by` int(11) DEFAULT NULL,
   PRIMARY KEY (`role_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `role_master`
 --
 
-INSERT INTO `role_master` (`role_id`, `role_name`, `public_read`, `public_create`, `public_update`, `public_delete`) VALUES
-(1, 'Master-Admin', 'Y', 'Y', 'Y', 'Y'),
-(2, 'Admin', 'Y', 'Y', 'Y', 'Y');
+INSERT INTO `role_master` (`role_id`, `role_name`, `public_read`, `public_create`, `public_update`, `public_delete`, `status`, `is_master_admin`, `created_datetime`, `created_by`, `modified_datetime`, `modified_by`) VALUES
+(1, 'Master-Admin', 'Y', 'Y', 'Y', 'Y', 'Active', 'Y', '2015-06-09 05:25:01', 1, '2015-06-09 05:25:05', NULL),
+(2, 'Admin', 'Y', 'Y', 'Y', 'Y', 'Active', 'N', '2015-06-09 05:24:57', 1, '2015-06-09 05:25:02', NULL),
+(3, 'User', 'Y', 'Y', 'Y', 'Y', 'Active', 'N', '2015-06-09 05:24:59', 1, '2015-06-09 05:25:04', NULL),
+(4, 'distributor', 'Y', 'Y', 'Y', 'Y', 'Active', 'N', '2015-06-10 07:06:11', 1, '2015-06-10 07:06:14', 1);
 
 -- --------------------------------------------------------
 
@@ -1374,24 +1380,28 @@ INSERT INTO `role_master` (`role_id`, `role_name`, `public_read`, `public_create
 CREATE TABLE IF NOT EXISTS `user_master` (
   `user_id` tinyint(4) NOT NULL AUTO_INCREMENT,
   `client_id` tinyint(4) NOT NULL DEFAULT '0',
-  `name` varchar(200) DEFAULT NULL,
+  `first_name` varchar(200) DEFAULT NULL,
+  `last_name` varchar(200) DEFAULT NULL,
   `email` varchar(100) DEFAULT NULL,
+  `status` enum('Active','Inactive') DEFAULT NULL,
   `username` varchar(100) DEFAULT NULL,
   `password` varchar(100) DEFAULT NULL,
   `user_role_id` tinyint(4) DEFAULT NULL,
+  `created_by` tinyint(4) DEFAULT NULL,
+  `modified_by` tinyint(4) DEFAULT NULL,
   `is_role_updated` enum('Y','N') DEFAULT NULL,
   PRIMARY KEY (`user_id`),
   KEY `user_role_id` (`user_role_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `user_master`
 --
 
-INSERT INTO `user_master` (`user_id`, `client_id`, `name`, `email`, `username`, `password`, `user_role_id`, `is_role_updated`) VALUES
-(1, 1, 'Harish sharma', 'sharmaharish09@yahoo.co.in', 'admin', 'admin123', 1, 'N'),
-(2, 1, 'kajal patel', 'kajalpatel0377@gmail.com', 'kajal', 'kajalpatel', 2, 'N'),
-(3, 1, 'kk patel', 'email2kkpatel@gmail.com', 'kkpatel', 'kkpatel', 2, 'Y');
+INSERT INTO `user_master` (`user_id`, `client_id`, `first_name`, `last_name`, `email`, `status`, `username`, `password`, `user_role_id`, `created_by`, `modified_by`, `is_role_updated`) VALUES
+(1, 1, 'Harish', 'sharma', 'sharmaharish09@yahoo.co.in', 'Active', 'admin', 'admin123', 1, 1, 1, 'N'),
+(2, 1, 'kajal', 'patel', 'kajalpatel0377@gmail.com', 'Active', 'kajal', 'kajalpatel', 2, 1, 1, 'N'),
+(3, 1, 'kk', 'patel', 'email2kkpatel@gmail.com', 'Active', 'kkpatel', 'kkpatel', 3, 2, 2, 'N');
 
 -- --------------------------------------------------------
 
@@ -1410,16 +1420,14 @@ CREATE TABLE IF NOT EXISTS `user_module_master` (
 --
 
 INSERT INTO `user_module_master` (`user_id`, `module_id`) VALUES
-(1, 2),
-(1, 3),
-(1, 1),
-(1, 4),
-(1, 5),
 (2, 1),
-(2, 5),
-(3, 1),
-(3, 2),
-(3, 3);
+(2, 8),
+(3, 13),
+(2, 13),
+(2, 10),
+(2, 9),
+(1, 1),
+(2, 11);
 
 -- --------------------------------------------------------
 

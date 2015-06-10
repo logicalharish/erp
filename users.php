@@ -7,7 +7,7 @@ $arrField = array(
 //$arrUserDetails = $objControl->getRecords('user_master',null,null,'user_id',$arrField);
 $arrUserDetails = $objModel->getRecords(null,null,null,'user');
 //$arrAvailableRoles    = $objModel -> getRecords(null, null, null, 'role_master');
-$arrAvailableModules  = $objModel -> getRecords(user_module_master, null, null, null);
+//$arrAvailableModules  = $objModel -> getRecords('user_module_master', null, null, null);
 //$arrUserModules = explode(',', $arrUserDetails[0]['user_modules']);
 
 ?>
@@ -39,9 +39,9 @@ $arrAvailableModules  = $objModel -> getRecords(user_module_master, null, null, 
           </thead>   
           <tbody>
           <?php for($intIndex=0; $intIndex<count($arrUserDetails); $intIndex++){ 
-		 ?>
+			?>
 		 	<tr>
-                <td class="center"><a href="users-edit.php?user_id=<?php echo $arrUserDetails[$intIndex]['user_id']; ?>"><?php echo $arrUserDetails[$intIndex]['name']; ?></a></td>
+                <td class="center"><a href="users-edit.php?user_id=<?php echo $arrUserDetails[$intIndex]['user_id']; ?>"><?php echo ucfirst($arrUserDetails[$intIndex]['first_name'])." ".ucfirst($arrUserDetails[$intIndex]['last_name']); ?></a></td>
                 <td class="center"><a href="mailto:<?php echo $arrUserDetails[$intIndex]['email']; ?>" target="_blank"><?php echo $arrUserDetails[$intIndex]['email']; ?></a></td>
                 <td class="center"><?php echo $arrUserDetails[$intIndex]['username']; ?></td>
                 <td class="center"><?php /*for($intIndex = 0; $intIndex<count($arrAvailableRoles); $intIndex++)
@@ -62,8 +62,7 @@ $arrAvailableModules  = $objModel -> getRecords(user_module_master, null, null, 
 				?>
 				</td>
             </tr>
-		 <?php
-		  }?>
+			<?php } ?>
             
           </tbody>
       </table>            
