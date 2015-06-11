@@ -201,7 +201,7 @@
 				
 				case 'user-details':
 			//	$strQuery = 'select is_role_updated from user_master where user_id = '.$_SESSION['user']['user_id'];
-				$strQuery= 'select * from user_master as um JOIN role_master as rm on um.user_role_id = rm.role_id where user_id ="'.$_SESSION['user']['user_id'].'"';
+				$strQuery= 'select * from user_master as um JOIN role_master as rm on um.user_role_id = rm.role_id where '.$strColumnName.' = '.$strUrlParameterValue;
 				break;
 				
 				case 'privileged_user':

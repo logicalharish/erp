@@ -22,7 +22,7 @@ require_once('header.php');
 						
 					</div>
 						   <div class="box-content">
-						<form class="form-horizontal" method="post" action="controller/routes.php">
+						<form class="form-horizontal" id="form"method="post" action="#">
                         	<input type="hidden" name="hid_action" id="hid_action" value="create_nob" />
 							<fieldset>
 							  <div class="control-group">
@@ -55,3 +55,30 @@ require_once('header.php');
 <?php
 require_once('footer.php');
 ?>
+<script type="text/javascript">
+	$("#form").validate({
+		debug: false,
+		errorClass: "label label-important",
+		errorElement: "span",
+		rules: {
+			txt_nob: {
+				required: true,
+				minlength: 10
+			},
+			password: {
+				required: true  
+			}
+		},
+		messages: {
+			txt_nob: {
+				required: "Please enter your username"
+			},
+			password: {
+				required: "Please enter your password"
+			}
+		},
+		highlight: function(element, errorClass) {
+			$(element).removeClass(errorClass);
+		}
+	});
+</script>

@@ -43,6 +43,16 @@ $arrCategoryRecords = $objControl->getRecords('category_master', null, null, '',
             <li><a href="#tabs-4">Company Advertise</a></li>
           </ul>
           <div id="tabs-1">
+			<?php //if($_SESSION['user']['user-role']=='Master-Admin'){ ?>
+					<!--	<div class="row-fluid">
+						  <div class="control-group span6">
+							<label class="control-label" for="full_name">Assign to</label>
+							<div class="controls">
+							  <input class="input-xlarge focused required" id="assigned_to" maxlength="100" name="assigned_to" type="text" value="<?php echo (isset($arrData[0]['assigned_to']) ? $arrData[0]['assigned_to'] : ''); ?>">
+							</div>
+						  </div>
+						</div>-->
+				<?php //} ?>
             <div class="row-fluid">
               <div class="control-group span6">
                 <label class="control-label" for="full_name">Full Name</label>
@@ -900,7 +910,7 @@ $arrCategoryRecords = $objControl->getRecords('category_master', null, null, '',
 						</div>
 					</div>
 				</div>
-				<table class="table table-striped table-bordered bootstrap-datatable" id="mytable">
+				<table class="table table-striped table-bordered bootstrap-datatable" id="mytable" name="mytable">
 						  <thead>
 							  <tr>
 								  <th>Full Name</th>

@@ -44,13 +44,17 @@ switch ($strAction)
 		break;
 		
 	case 'create_user':
-		$arrData['first_name'] = $_REQUEST['last_name'];
-		$arrData['name'] = $_REQUEST['name'];
+		$httpPath = $_REQUEST['http_path'];
+		$arrData['first_name'] = $_REQUEST['first_name'];
+		$arrData['last_name'] = $_REQUEST['last_name'];
 		$arrData['email'] = $_REQUEST['email'];
 		$arrData['username'] = $_REQUEST['username'];
 		$arrData['password'] = $_REQUEST['password'];
 		$arrData['user_role_id'] = $_REQUEST['userRole'];
 		$arrModules = $_REQUEST['modules'];
+		if($arrData['user_role_id']==""){
+			$arrData['user_role_id']=3;
+		}
 		if($_REQUEST['user_role_id']==$arrData['user_role_id'])
 		{
 			$arrData['is_role_updated']="N";
@@ -65,14 +69,23 @@ switch ($strAction)
 		} else
 		{
 			$objControl->createRecord($arrData, 'user_master');
-			$arrData['user_id']= $objControl->dbConnect->Insert_ID();
+			$lastInsertedId= $objControl->dbConnect->Insert_ID();
+			if(!isset($_SESSION['user']['user_id'])){ 
+				$arrData['created_by'] = $lastInsertedId;
+				$objControl->createRecord($arrData, 'user_master', "user_id='$lastInsertedId'");
+			}
+		}
+		$arrData['user_id']=$lastInsertedId;
+		if(count($arrModules) == 0){
+			$arrModules[] = 13;
 		}
 		foreach ($arrModules as $module)
 				{
 					$arrData['module_id']=$module;
 					$objControl->createRecord($arrData, 'user_module_master');
 				}
-		header('Location:' . HTTP_PATH . 'users.php');
+		
+		header('Location:' . HTTP_PATH . $httpPath);
 		exit;
 		break;
 	case 'user-advance':
@@ -309,6 +322,7 @@ switch ($strAction)
 		exit;
 		break;
 		case 'create_company':
+			$arrData['user_id'] = $_SESSION['user']['user_id'];
 			$intCompanyId = $_REQUEST['company_id'];
 			$arrData['full_name'] = $_REQUEST['full_name'];
 			$arrData['short_name'] = $_REQUEST['short_name'];
@@ -343,11 +357,11 @@ switch ($strAction)
 			if ($intCompanyId != '')
 			{
 				$strCondition = "company_id='$intCompanyId'";
-				//$objControl->createRecord($arrData, "company_master", $strCondition);
+				$objControl->createRecord($arrData, "company_master", $strCondition);
 			//	$arrData['company_id']= $objControl->dbConnect->Insert_ID();
 			}else{
-				//$objControl->createRecord($arrData, 'company_master');
-			//	$arrData['company_id']= $objControl->dbConnect->Insert_ID();
+				$objControl->createRecord($arrData, 'company_master');
+				$arrData['company_id']= $objControl->dbConnect->Insert_ID();
 			}
 			
 			if($intCompanyId !='')
@@ -360,12 +374,12 @@ switch ($strAction)
 			
 			$arrCat = $_REQUEST['category_id'];
 			$strSQL = "DELETE FROM company_category where company_id='".$_REQUEST['company_id']."'";
-		//	$objControl->dbConnect->Execute($strSQL);
-			/*	foreach ($arrCat as $categories)
+			$objControl->dbConnect->Execute($strSQL);
+				foreach ($arrCat as $categories)
 				{
 						$arrData['category_id']=$categories;
 						$objControl->createRecord($arrData, 'company_category');
-				}*/
+				}
 			$intCompanyProfileId = $_REQUEST['company_profile_id'];
 			$arrData['company_description'] = $_REQUEST['company_description'];
 			
@@ -408,9 +422,9 @@ switch ($strAction)
 				if ($intCompanyProfileId != '')
 				{
 					$strCondition = "company_profile_id='$intCompanyProfileId'";
-					//$objControl->createRecord($arrData, "company_profile", $strCondition);
+					$objControl->createRecord($arrData, "company_profile", $strCondition);
 				}else{
-					//$objControl->createRecord($arrData, 'company_profile');
+					$objControl->createRecord($arrData, 'company_profile');
 				}
 			$intCompanyContactId = $_REQUEST['company_contact_id'];
 			$arrContact = $_REQUEST['contact_full_name'];
@@ -423,7 +437,7 @@ switch ($strAction)
 			
 			//$objControl->dbConnect->debug = true;
 			$strSQL = "DELETE FROM company_contact where company_id='".$_REQUEST['company_id']."'";
-		//	$objControl->dbConnect->Execute($strSQL);
+			$objControl->dbConnect->Execute($strSQL);
 				for ($intContact = 0; $intContact < count($arrContact); $intContact++)
 					{
 						$arrData['contact_full_name']=$arrContact[$intContact];
@@ -433,7 +447,7 @@ switch ($strAction)
 						$arrData['contact_email']=$arremailContact[$intContact];
 						$arrData['designation']=$arrdesiContact[$intContact];
 						$arrData['contact_status']=$arrConStatus[$intContact];
-						//$objControl->createRecord($arrData, 'company_contact');
+						$objControl->createRecord($arrData, 'company_contact');
 					}
 			$intCompanyAdvertiseId = $_REQUEST['company_advertise_id'];
 			$arrData['data_source'] = $_REQUEST['data_source'];
@@ -446,9 +460,9 @@ switch ($strAction)
 			if ($intCompanyAdvertiseId != '')
 				{
 					$strCondition = "company_advertise_id='$intCompanyAdvertiseId'";
-			//		$objControl->createRecord($arrData, "company_advertise", $strCondition);
+					$objControl->createRecord($arrData, "company_advertise", $strCondition);
 				}else{
-				//	$objControl->createRecord($arrData, 'company_advertise');
+					$objControl->createRecord($arrData, 'company_advertise');
 				}
 			header('Location:' . HTTP_PATH . 'company.php');
 			exit;

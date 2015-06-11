@@ -1,7 +1,14 @@
 <?php
 require_once('header.php');
 $arrField = array('*');
-$arrRecords = $objControl->getRecords('company_master', null, null, '', $arrField);
+
+	if($_SESSION['user']['user-role']=='Master-Admin'){
+		$arrRecords = $objControl->getRecords('company_master', null, null, '', $arrField);
+	}else if($_SESSION['user']['user-role']=='Admin'){
+		$arrRecords = $objControl->getRecords('company_master', 'assigned_to', $_SESSION['user']['user_id'], '');
+	}else{
+		$arrRecords = $objControl->getRecords('company_master', 'user_id', $_SESSION['user']['user_id'],'');
+	}
 
 ?>
 <div>
@@ -12,7 +19,6 @@ $arrRecords = $objControl->getRecords('company_master', null, null, '', $arrFiel
 					<li>
 						<a href="#">Company</a>
 					</li>
-					
 				</ul>
 			</div>
 
@@ -43,7 +49,6 @@ $arrRecords = $objControl->getRecords('company_master', null, null, '', $arrFiel
 						  for($intIndex =0; $intIndex < count($arrRecords); $intIndex++)
 						  {
 						  	?>
-
 							<tr>
 								<td><?php echo $arrRecords[$intIndex]['full_name'];?></td>
 								<td><?php 	$arrCityRecords = $objControl->getRecords('city_master', 'city_id', $arrRecords[$intIndex]['city_id'], '');

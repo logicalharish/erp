@@ -23,8 +23,8 @@ class CommonController
 	public function login()
 	{
 		
-		$safeUsername=mysql_real_escape_string($_POST['username']);
-		$safePassword=mysql_real_escape_string($_POST['password']);
+		$safeUsername=mysql_real_escape_string($_POST['l_username']);
+		$safePassword=mysql_real_escape_string($_POST['l_password']);
 
 		$userCount = $this->dbConnect->getAll("Select count(0), user_id from user_master where BINARY username ='".$safeUsername."' and BINARY password = '".$safePassword."'");
 		
@@ -140,7 +140,9 @@ class CommonController
 		else
 		{
 			$arrData['created_datetime'] = date('y-m-d h:m:s');
+			if(isset($_SESSION['user']['user_id'])){
 			$arrData['created_by'] = $_SESSION['user']['user_id'];
+			}
 			$this->dbConnect->AutoExecute($strTableName,$arrData,'INSERT');
 			$strResult = 'Record Added Sucessfully';
 		}

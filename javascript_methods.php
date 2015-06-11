@@ -1,7 +1,50 @@
 <script type="text/javascript">
 	$(document).ready(function() {
-		//$("#visibleDiv").css("visibility","visible");
+		
+			$(".registrationFrom").submit(function(e){
+				e.preventDefault(); //STOP default action
+				$(".alert-info").html("<img src='img/loading.gif'></img>");
+				var postData ="";
+				postData = $(this).serializeArray();
+				var formURL = $(this).attr("action");
+				//alert(postData);
+				$.ajax(
+				{
+					url : formURL,
+					type: "POST",
+					data : postData,
+					success:function(data, textStatus, jqXHR) 
+					{
+						$(".alert-info").before('<div width=500px" class="alert alert-success"><strong>You have been Registered successfully.</strong></div>');
+						$(".alert-info").html('Please login with your Username and Password.');
+						$(".loginForm").css("display","block");
+						$(".registrationFrom").css("display","none");
+					//window.location = "Dealer/PostPropertyAdvanceDetails.php?sdfdsf=sf";
+					},
+					error: function(jqXHR, textStatus, errorThrown) 
+					{
+						$(".alert-info").html('Failed to Register, textStatus='+textStatus+',errorThrown='+errorThrown+'.');
+					}
+				});
+			});
+		 $('#first_name,#last_name').keyup( function() {
+			var fname = $('input:text[name="first_name"]').val();
+			var lname = $('input:text[name="last_name"]').val().charAt(0);
+			$('input:text[name="username"]').val(fname+lname);
+			$("#username").prop('readOnly', true);
+		});
+		
+		$("#regiLink").click(function (){
+			//alert("diaplay form");
+			$(".loginForm").css("display","none");
+			$(".registrationFrom").css("display","block");
+			$(".alert-info").html("Please enter your details to Register.");
+		});
+		
+		var rowCount = $('#mytable >tbody >tr').length;
+		if(rowCount==0){
 		 $('#mytable tr').last().after('<tr id="firstRow"><td><input class="input-small focused required" id="contact_full_name" name="contact_full_name[]" type="text" value=""></td><td class="center"><input type="text" class="input-small datepicker required" id="dob" name="dob[]" value=""></td><td class="center"><input type="text" class="input-small datepicker required" id="dom" data-date="MM-DD-YYYY" name="dom[]" value=""></td><td class="center"><input class="input-small focused required" data-int data-min-chars="10" maxlength="10" id="contact_mobile" name="contact_mobile[]" type="text" value=""></td><td class="center"><input class="input-small focused required" id="contact_email" data-email name="contact_email[]" type="email" value=""></td><td class="center"><input class="input-small focused required" id="designation" name="designation[]" type="text" value=""></td><td class="center"><select class="input-small focused required" id="contact_status" name="contact_status[]" ><option value="Active">Active</option><option value="Inactive">Inactive</option></select></td><td class="center"><input class="btn btn-success" id="removeRows" type="button" value="Remove"></input></td></tr>');
+		}
 		$("#addrows").click(function () {
 			$("#firstRow").remove();
 			  var c_name = $('#c_name').val();
@@ -13,26 +56,15 @@
 			  var c_status = $('#c_status').val();
 			  $('#mytable tr').last().after('<tr id="visibleDiv" name="visibleDiv"><td><input type="hidden" name="company_contact_id[]" id="company_contact_id" value="" /><input class="input-small focused required" id="contact_full_name" name="contact_full_name[]" type="text" value="'+c_name+'"></td><td class="center"><input type="text" class="input-small datepicker required" id="dob" name="dob[]" value="'+c_dob+'"></td><td class="center"><input type="text" class="input-small datepicker required" id="dom" data-date="MM-DD-YYYY" name="dom[]" value="'+c_dom+'"></td><td class="center"><input class="input-small focused required" data-int data-min-chars="10" maxlength="10" id="contact_mobile" name="contact_mobile[]" type="text" value="'+c_mobile+'"></td><td class="center"><input class="input-small focused required" id="contact_email" data-email name="contact_email[]" type="email" value="'+c_email+'"></td><td class="center"><input class="input-small focused required"   id="designation" name="designation[]" type="text" value="'+c_designation+'"></td><td class="center"><select class="input-small focused required" id="contact_status" name="contact_status[]" ><option value="Active">Active</option><option value="Inactive">Inactive</option></select></td><td class="center"><input class="btn btn-success" id="removeRows" type="button" value="Remove"></input></td></tr>');
 			$('#c_name').val("");$('#c_dob').val("");$('#c_dom').val("");$('#c_mobile').val("");$('#c_email').val("");$('#c_designation').val("");$('#c_status').val("");
-			//  $('table').append('<tr><td>' + newName + '</td></tr>')
 		});
 		
 		$("#removeRows").live('click', function(event) {
-			$(this).parent().parent().remove();
+			if($('#mytable >tbody >tr').length > 1){
+				$(this).parent().parent().remove();
+			}
 		});
 		
-		 $('#first_name,#last_name').keyup( function() {
-			var fname = $('input:text[name="first_name"]').val();
-			var lname = $('input:text[name="last_name"]').val().charAt(0);
-			$('input:text[name="username"]').val(fname+lname);
-			$("#username").prop('disabled', true);
-		});
-		/*$("input[type='text']").keypress(function(){
-			var name = $(this).val();
-			var name_without_special_char = name.replace(/[^a-zA-Z 0-9 . @]+/g,"");
-			$(this).val(name_without_special_char);
-		});*/
-		
-	// Validate form
+		// Validate form
 		$("#form").validate({
 		debug: false,
 		errorClass: "label label-important",
@@ -51,13 +83,11 @@
 										nospace: true
 									},
 									full_name: {
-			            				nospace: true,
-			            				//onlyletter: true,
+			            				letter_space: true,
 			            				minlength: 5
 			            				},
 				                    short_name: {
-			            				nospace: true,
-			            				//onlyletter: true,
+			            				letter_space: true,
 			            				minlength: 2
 				            			},
 				                    est_date: {
@@ -127,14 +157,15 @@
 									ad_date:{
 										date:true
 									},
-									visibleDiv:{
+									mytable:{
 										tablewithnorow:true
 									}
 									
 		},
 		messages: {
 			"designation[]":{
-				required: "Designation is Required"
+				required: "Designation is Required",
+				letter_space: "Designation requires valid entry"
 			},
 			"contact_email[]":{
 				required: "Email is Required"
@@ -150,7 +181,8 @@
 				required: "Date Of Birth is Required"
 			},
 			"contact_full_name[]":{
-				required: "Full Name is Required"
+				required: "Full Name is Required",
+				letter_space: "Full Name requires valid entry"
 			}
 		},
 		highlight: function(element, errorClass) {
@@ -187,7 +219,7 @@
 				            );
 				            $.validator.addMethod("letter_space",
 				                    function(value, element) {
-				                            return /^[A-Za-z\ -]+$/.test(value);
+				                            return /^[a-zA-Z ]+$/.test(value);
 				                    },
 				            "Invalid entry"
 				            );
@@ -206,9 +238,9 @@
 				                    },"Invalid Entry");
 									
 							$.validator.addMethod("tablewithnorow", function (value) {
-									if ($("#mytable").length === 0) {
-										$('#visibleDiv').addClass('error');
-										error.insertAfter("#mytable");
+									if ($("#visibleDiv").length === 0) {
+									//	$('#mytable').addClass('error');
+									//	error.insertAfter("#mytable");
 										alert("there must be atleast one contact in table");
 										return false;
 									}else {

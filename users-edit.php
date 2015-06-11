@@ -8,7 +8,7 @@ if(isset($intUserId) && $intUserId !='')
 	'user_id','first_name','last_name','email','username','password','(select role_name from role_master where role_master.role_id=user_master.user_role_id) as role_name'
 		);*/
 	
-	$arrUserDetails = $objModel->getRecords(null,null,null,'user-details');
+	$arrUserDetails = $objModel->getRecords(null,'user_id',$intUserId,'user-details');
 	$arrUserModules = $objControl->getRecords('user_module_master','user_id',$intUserId,'');
 }
 
@@ -36,6 +36,7 @@ $arrAvailableModules  = $objModel -> getRecords("module_master", null, null,null
             </div>
 			<form class="form-horizontal" id="form" method="post" action="controller/routes.php">
 				<input  type="hidden" name="hid_action" id="hid_action" value="create_user"/>
+				<input type="hidden" name="http_path" id="http_path" value="users.php"/>
 				<input type="hidden" name="user_id" id="user_id" value="<?php echo $_REQUEST['user_id']; ?>"/>
 				<input type="hidden" name="user_role_id" id="user_role_id" value="<?php echo $arrUserDetails[0]['user_role_id']; ?>"/>
                 	<fieldset>
