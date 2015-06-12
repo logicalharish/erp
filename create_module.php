@@ -58,8 +58,9 @@ if (isset($intModuleId) && $intModuleId != '')
 								<label class="radio inline"><input type="radio" name="module_menu_icon" <?php echo (isset($arrData[0]['module_menu_icon']) && $arrData[0]['module_menu_icon']=="icon-tag" ? 'checked' : ''); ?> value="icon-tag"> <i class='icon-tag'></i></label>
 								<label class="radio inline"><input type="radio" name="module_menu_icon" <?php echo (isset($arrData[0]['module_menu_icon']) && $arrData[0]['module_menu_icon']=="icon-file" ? 'checked' : ''); ?> value="icon-file" > <i class='icon-file'></i></label>
 								<label class="radio inline"><input type="radio" name="module_menu_icon" <?php echo (isset($arrData[0]['module_menu_icon']) && $arrData[0]['module_menu_icon']=="icon-pencil" ? 'checked' : ''); ?> value="icon-pencil" > <i class='icon-pencil'></i></label>
-								<label class="radio inline"><input type="radio" name="module_menu_icon" <?php echo (isset($arrData[0]['module_menu_icon']) && $arrData[0]['module_menu_icon']=="icon-list-globe" ? 'checked' : ''); ?> value="icon-globe"> <i class='icon-globe'></i></label>
+								<label class="radio inline"><input type="radio" name="module_menu_icon" <?php echo (isset($arrData[0]['module_menu_icon']) && $arrData[0]['module_menu_icon']=="icon-globe" ? 'checked' : ''); ?> value="icon-globe"> <i class='icon-globe'></i></label>
 								<label class="radio inline"><input type="radio" name="module_menu_icon" <?php echo (isset($arrData[0]['module_menu_icon']) && $arrData[0]['module_menu_icon']=="icon-list-alt" ? 'checked' : ''); ?> value="icon-list-alt" > <i class='icon-list-alt'></i></label>
+								<label class="radio inline"><input type="radio" name="module_menu_icon" <?php echo (isset($arrData[0]['module_menu_icon']) && $arrData[0]['module_menu_icon']=="icon-map-marker" ? 'checked' : ''); ?> value="icon-map-marker" > <i class='icon-map-marker'></i></label>
 							</div>
 					</div>
 					<div class="control-group">

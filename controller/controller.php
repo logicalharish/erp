@@ -58,13 +58,13 @@ class CommonController
 					
 		$arrUserDetails = $db -> getAll($strQuery);
 						
-		$strQuery1  = "SELECT *, GROUP_CONCAT(module_name) AS modules, GROUP_CONCAT(module_menu_link) AS menu_link, 
+		$strQuery1  = 	"SELECT GROUP_CONCAT(module_id) AS module_ids, GROUP_CONCAT(module_name) AS modules, GROUP_CONCAT(module_menu_link) AS menu_link, 
 						GROUP_CONCAT(module_menu_icon) AS menu_icon
-						FROM module_master, user_master
+						FROM module_master
 						WHERE FIND_IN_SET(module_id,(
 						SELECT group_concat(module_id  order by module_id)
 						FROM user_module_master
-						where user_id = '".$arrUserDetails[0]['user_id']."')) and username= '".$safeUsername."'";
+						where user_id = '".$arrUserDetails[0]['user_id']."' ))";
 			
 		$arrUserModules = $db -> getAll($strQuery1);
 		
@@ -73,7 +73,7 @@ class CommonController
 			'user_id'           => $arrUserDetails[0]['user_id'],
 			'user-role'         => $arrUserDetails[0]['role_name'],
 			'role_id'           => $arrUserDetails[0]['role_id'],
-			'module_id'         => $arrUserDetails[0]['user_modules'],
+			'module_ids'        => $arrUserModules[0]['module_ids'],
 			'module_names'      => $arrUserModules[0]['modules'],
 			'module_menu_links' => $arrUserModules[0]['menu_link'],	
 			'module_menu_icons' => $arrUserModules[0]['menu_icon'],
@@ -81,8 +81,6 @@ class CommonController
 			'normal_create'     => $arrUserDetails[0]['normal_create'],
 			'normal_update'     => $arrUserDetails[0]['normal_update'],
 			'normal_delete'     => $arrUserDetails[0]['normal_delete'],
-			'database'          => $arrUserDetails[0]['database_name'],
-			'client_id'         => $arrUserDetails[0]['client_id'],
 		);
 		//echo '<pre>';print_r($_SESSION['user']);exit;
 		

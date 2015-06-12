@@ -2,7 +2,6 @@
 session_start();
 require_once 'controller/controller.php';
 include('model/model.php');
-		
 	
 //Class Instantiation
 $objModel = new model();
@@ -13,7 +12,6 @@ $objModel -> checkSession();
 	}else{
 		$arrAvailableModules  = $objModel -> getRecords(null, null, null, 'user-edit-available-modules');
 	}
-
 
 ?>
 <!DOCTYPE html>
@@ -140,16 +138,6 @@ $objModel -> checkSession();
 										<?php
                                         }
 										?>
-					<!--	<li><a class="ajax-link" href="country.php"><i class="icon-home"></i><span class="hidden-tablet"> Country</span></a></li>
-						<li><a class="ajax-link" href="state.php"><i class="icon-home"></i><span class="hidden-tablet"> State</span></a></li>
-						<li><a class="ajax-link" href="city.php"><i class="icon-home"></i><span class="hidden-tablet"> City</span></a></li>
-						<li><a class="ajax-link" href="users.php"><i class="icon-eye-open"></i><span class="hidden-tablet"> User</span></a></li>
-                        <li><a class="ajax-link" href="module.php"><i class="icon-eye-open"></i><span class="hidden-tablet"> Module</span></a></li>
-						<li><a class="ajax-link" href="category.php"><i class="icon-eye-open"></i><span class="hidden-tablet"> Category</span></a></li>
-						<li><a class="ajax-link" href="website.php"><i class="icon-edit"></i><span class="hidden-tablet"> Website</span></a></li>
-						<li><a class="ajax-link" href="company.php"><i class="icon-list-alt"></i><span class="hidden-tablet"> Company</span></a></li>-->
-						
-					
 					</ul>
 					<label id="for-is-ajax" class="hidden-tablet" for="is-ajax"><input id="is-ajax" type="checkbox"> Ajax on menu</label>
 				</div><!--/.well -->

@@ -2,13 +2,7 @@
 require_once('header.php');
 $arrField = array('*');
 
-	if($_SESSION['user']['user-role']=='Master-Admin'){
-		$arrRecords = $objControl->getRecords('company_master', null, null, '', $arrField);
-	}else if($_SESSION['user']['user-role']=='Admin'){
-		$arrRecords = $objControl->getRecords('company_master', 'assigned_to', $_SESSION['user']['user_id'], '');
-	}else{
-		$arrRecords = $objControl->getRecords('company_master', 'user_id', $_SESSION['user']['user_id'],'');
-	}
+	$arrRecords = $objModel->getRecords(null,null,null,'user-company');
 
 ?>
 <div>

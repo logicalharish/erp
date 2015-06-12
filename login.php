@@ -49,7 +49,7 @@ include('header.php'); ?>
 							</p>
 						</fieldset>
 					</form>
-					<form class="form-horizontal registrationFrom" id="form" action="controller/routes.php" method="post" style="display:none;">
+					<form class="form-horizontal registrationFrom" id="form" action="controller/routes.php" method="post" style="display:none;" >
 						<input type="hidden" name="hid_action" id="hid_action" value="create_user"/>
 						<input type="hidden" name="http_path" id="http_path" value="login.php"/>
 						<fieldset>
@@ -80,6 +80,9 @@ include('header.php'); ?>
 							<p class="center span5">
 								<button type="submit" class="btn btn-primary" name="btn-submit" id="btnRegister" value="Save">Submit</button>
 								<button type="button" class="btn" onclick="javascript:history.go(-1)" >Cancel</button>
+							</p>
+							<p class="center span5">
+								<a id="loginLink" href="#">Existing User ? Login here.</a>
 							</p>
 						</fieldset>
 					</form>

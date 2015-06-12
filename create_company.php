@@ -14,6 +14,11 @@ $arrStateRecords = $objControl->getRecords('branch_master', null, null, '', $arr
 $arrCountryRecords = $objControl->getRecords('country_master', null, null, '', $arrField);
 $arrCityRecords = $objControl->getRecords('city_master', null, null, '', $arrField);
 $arrCategoryRecords = $objControl->getRecords('category_master', null, null, '', $arrField);
+if($_SESSION['user']['user-role']=='Master-Admin'){
+	$arrUserRecords = $objControl->getRecords('user_master', null, null, '', $arrField);
+}elseif($_SESSION['user']['user-role']=='Admin'){
+	$arrUserRecords = $objControl->getRecords('user_master', 'assigned_to', $_SESSION['user']['user_id'], '');
+}
 
 ?>
 
@@ -43,16 +48,24 @@ $arrCategoryRecords = $objControl->getRecords('category_master', null, null, '',
             <li><a href="#tabs-4">Company Advertise</a></li>
           </ul>
           <div id="tabs-1">
-			<?php //if($_SESSION['user']['user-role']=='Master-Admin'){ ?>
-					<!--	<div class="row-fluid">
-						  <div class="control-group span6">
-							<label class="control-label" for="full_name">Assign to</label>
-							<div class="controls">
-							  <input class="input-xlarge focused required" id="assigned_to" maxlength="100" name="assigned_to" type="text" value="<?php echo (isset($arrData[0]['assigned_to']) ? $arrData[0]['assigned_to'] : ''); ?>">
-							</div>
-						  </div>
-						</div>-->
-				<?php //} ?>
+		  <?php if($_SESSION['user']['user-role']=='Master-Admin' || $_SESSION['user']['user-role']=='Admin'){ ?>
+		  <div class="row-fluid">
+			<div class="control-group span6">
+                <label class="control-label" for="user_id">User</label>
+                <div class="controls">
+					<select name="user_id" id="user_id"  class="input-xlarge focused required" >
+						<option value="">&mdash; Please Select &mdash;</option>
+						<?php
+							for ($intIndex = 0; $intIndex < count($arrUserRecords); $intIndex++)
+							{
+								echo "<option value='" . $arrUserRecords[$intIndex]['user_id'] . "' ".($arrUserRecords[$intIndex]['user_id']==$arrData[0]['user_id']?'selected':'').">" . $arrUserRecords[$intIndex]['first_name']." ".$arrUserRecords[$intIndex]['last_name']."</option>";
+							}
+						?>
+					</select>
+                </div>
+              </div>
+			</div>	
+		  <?php } ?>
             <div class="row-fluid">
               <div class="control-group span6">
                 <label class="control-label" for="full_name">Full Name</label>
@@ -126,7 +139,7 @@ $arrCategoryRecords = $objControl->getRecords('category_master', null, null, '',
                 <label class="control-label" for="city_id">City</label>
                 <div class="controls">
 					<select name="city_id" id="city_id"  class="input-xlarge focused required" >
-					<option value="">&mdash; Please Select &mdash;</option>
+						<option value="">&mdash; Please Select &mdash;</option>
 						<?php
 							for ($intIndex = 0; $intIndex < count($arrCityRecords); $intIndex++)
 							{
@@ -197,12 +210,14 @@ $arrCategoryRecords = $objControl->getRecords('category_master', null, null, '',
               </div>
             </div>
             <div class="row-fluid">
+			<?php if($_SESSION['user']['user-role']=='Master-Admin'){ ?>
               <div class="control-group span6">
                 <label class="control-label">Is Verified</label>
                 <div class="controls">
                   <input type="checkbox" name="is_verified" id="is_verified" value="Yes" <?php echo ($arrData[0]['is_verified']=='Yes'?"checked='checked'":"")?>>
                 </div>
-              </div>	
+              </div>
+			<?php } ?>
               <div class="control-group span6">
                 <label class="control-label" for="nob">Nature of Bussiness</label>
                 <div class="controls">
@@ -235,6 +250,7 @@ $arrCategoryRecords = $objControl->getRecords('category_master', null, null, '',
                   <input class="input-xlarge focused required" id="email" name="email" type="text" value="<?php echo (isset($arrData[0]['email']) ? $arrData[0]['email'] : ''); ?>">
                 </div>
               </div>
+			  <?php if($_SESSION['user']['user-role']=='Master-Admin'){ ?>
               <div class="control-group span3">
                 <label class="control-label" for="focusedInput">Display in Search</label>
                 <div class="controls">
@@ -247,6 +263,7 @@ $arrCategoryRecords = $objControl->getRecords('category_master', null, null, '',
                   <input data-no-uniform="true" type="checkbox" class="iphone-toggle" id="email_dnd" name="email_dnd" value="yes" <?php echo ($arrData[0]['email_dnd']=='Yes'?"checked='checked'":"")?>>
                 </div>
               </div>
+			  <?php } ?>
             </div>
             <div class="row-fluid">
               <div class="control-group span6">
@@ -255,6 +272,7 @@ $arrCategoryRecords = $objControl->getRecords('category_master', null, null, '',
                   <input class="input-xlarge focused required" data-url id="website" name="website" type="text" value="<?php echo (isset($arrData[0]['website']) ? $arrData[0]['website'] : ''); ?>">
                 </div>
               </div>
+			  <?php if($_SESSION['user']['user-role']=='Master-Admin'){ ?>
               <div class="control-group span3">
                 <label class="control-label" for="focusedInput">Display in Search</label>
                 <div class="controls">
@@ -267,6 +285,7 @@ $arrCategoryRecords = $objControl->getRecords('category_master', null, null, '',
                   <input data-no-uniform="true" type="checkbox" class="iphone-toggle" name="website_dnd" id="website_dnd" value="yes" <?php echo ($arrData[0]['website_dnd']=='Yes'?"checked='checked'":"")?>>
                 </div>
               </div>
+			  <?php } ?>
             </div>
             <div class="row-fluid">
               <div class="control-group span6">
@@ -275,6 +294,7 @@ $arrCategoryRecords = $objControl->getRecords('category_master', null, null, '',
                   <input class="input-xlarge focused required" data-int data-min-chars="10" maxlength="10" id="mobile" name="mobile" type="text" value="<?php echo (isset($arrData[0]['mobile']) ? $arrData[0]['mobile'] : ''); ?>">
                 </div>
               </div>
+			  <?php if($_SESSION['user']['user-role']=='Master-Admin'){ ?>
               <div class="control-group span3">
                 <label class="control-label" for="focusedInput">Display in Search</label>
                 <div class="controls">
@@ -287,6 +307,7 @@ $arrCategoryRecords = $objControl->getRecords('category_master', null, null, '',
                   <input data-no-uniform="true" type="checkbox" class="iphone-toggle" name="mobile_dnd" id="mobile_dnd" value="yes" <?php echo ($arrData[0]['mobile_dnd']=='Yes'?"checked='checked'":"")?>>
                 </div>
               </div>
+			  <?php } ?>
             </div>
             <div class="row-fluid">
               <div class="control-group span6">
@@ -295,6 +316,7 @@ $arrCategoryRecords = $objControl->getRecords('category_master', null, null, '',
                   <input class="input-xlarge focused required" data-int data-min-chars="8" maxlength="15" id="landline" name="landline" type="tel" value="<?php echo (isset($arrData[0]['landline']) ? $arrData[0]['landline'] : ''); ?>">
                 </div>
               </div>
+			  <?php if($_SESSION['user']['user-role']=='Master-Admin'){ ?>
               <div class="control-group span3">
                 <label class="control-label" for="focusedInput">Display in Search</label>
                 <div class="controls">
@@ -307,6 +329,7 @@ $arrCategoryRecords = $objControl->getRecords('category_master', null, null, '',
                   <input data-no-uniform="true" type="checkbox" class="iphone-toggle" name="landline_dnd" id="landline_dnd" value="yes" <?php echo ($arrData[0]['landline_dnd']=='Yes'?"checked='checked'":"")?>>
                 </div>
               </div>
+			  <?php } ?>
             </div>
           </div>
           <div id="tabs-2">

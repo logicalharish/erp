@@ -11,9 +11,10 @@ if(isset($intUserId) && $intUserId !='')
 	$arrUserDetails = $objModel->getRecords(null,'user_id',$intUserId,'user-details');
 	$arrUserModules = $objControl->getRecords('user_module_master','user_id',$intUserId,'');
 }
-
 $arrAvailableRoles    = $objControl -> getRecords('role_master','is_master_admin','"N"','');
 $arrAvailableModules  = $objModel -> getRecords("module_master", null, null,null);
+$arrAdminRole = $objControl -> getRecords('role_master','role_name','"Admin"','');
+$arrAdmins = $objControl -> getRecords('user_master','user_role_id',$arrAdminRole[0]['role_id'],'');
 
 //$arrUserModules = explode(',', $arrUserModulesData[0]['module_id']);
 
@@ -82,6 +83,20 @@ $arrAvailableModules  = $objModel -> getRecords("module_master", null, null,null
                                             <?php for($intIndex = 0; $intIndex < count($arrAvailableRoles); $intIndex++)
                                                     {
                                             			echo "<option value='".$arrAvailableRoles[$intIndex]['role_id']."'".($arrUserDetails[0]['user_role_id']==$arrAvailableRoles[$intIndex]['role_id']?'selected':'').">".$arrAvailableRoles[$intIndex]['role_name']."</option>";
+                                                    }
+                                            ?>
+                                        </select>
+                                      </div>
+                                    </div>
+									<div class="control-group">
+                                    <label class="control-label">Assign to:</label>
+                                      <div class="controls">
+                                        <select name="assigned_to" class="assignTo required" id="assigned_to">
+											<option value="">&mdash; Please Select &mdash;</option>
+											<option value="<?php echo $_SESSION['user']['user_id']; ?>">Self</option>
+                                            <?php for($intIndex = 0; $intIndex < count($arrAdmins); $intIndex++)
+                                                    {
+                                            			echo "<option value='".$arrAdmins[$intIndex]['user_id']."'".($arrUserDetails[0]['assigned_to']==$arrAdmins[$intIndex]['user_id']?'selected':'').">"."Admin-".$arrAdmins[$intIndex]['first_name']." ".$arrAdmins[$intIndex]['last_name']."</option>";
                                                     }
                                             ?>
                                         </select>

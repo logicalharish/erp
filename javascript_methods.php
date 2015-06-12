@@ -2,30 +2,38 @@
 	$(document).ready(function() {
 		
 			$(".registrationFrom").submit(function(e){
+				
 				e.preventDefault(); //STOP default action
-				$(".alert-info").html("<img src='img/loading.gif'></img>");
-				var postData ="";
-				postData = $(this).serializeArray();
-				var formURL = $(this).attr("action");
-				//alert(postData);
-				$.ajax(
-				{
-					url : formURL,
-					type: "POST",
-					data : postData,
-					success:function(data, textStatus, jqXHR) 
-					{
-						$(".alert-info").before('<div width=500px" class="alert alert-success"><strong>You have been Registered successfully.</strong></div>');
-						$(".alert-info").html('Please login with your Username and Password.');
-						$(".loginForm").css("display","block");
-						$(".registrationFrom").css("display","none");
-					//window.location = "Dealer/PostPropertyAdvanceDetails.php?sdfdsf=sf";
-					},
-					error: function(jqXHR, textStatus, errorThrown) 
-					{
-						$(".alert-info").html('Failed to Register, textStatus='+textStatus+',errorThrown='+errorThrown+'.');
+				//var validateForm=$(".registrationFrom").validate();
+				//if($(".registrationFrom").validate()){
+					if($("#first_name").val()=="" || $("#last_name").val()=="" || $("#email").val()=="" ||$("#username").val()=="" || $("#password").val()==""){
+						alert("All fields are required");
+						return false;
 					}
-				});
+					$(".alert-info").html("<img src='img/loading.gif'></img>");
+					var postData ="";
+					postData = $(this).serializeArray();
+					var formURL = $(this).attr("action");
+					//alert(postData);
+					$.ajax(
+					{
+						url : formURL,
+						type: "POST",
+						data : postData,
+						success:function(data, textStatus, jqXHR) 
+						{
+							$(".alert-info").before('<div width=500px" class="alert alert-success"><strong>You have been Registered successfully.</strong></div>');
+							$(".alert-info").html('Please login with your Username and Password.');
+							$(".loginForm").css("display","block");
+							$(".registrationFrom").css("display","none");
+						//window.location = "Dealer/PostPropertyAdvanceDetails.php?sdfdsf=sf";
+						},
+						error: function(jqXHR, textStatus, errorThrown) 
+						{
+							$(".alert-info").html('Failed to Register, textStatus='+textStatus+',errorThrown='+errorThrown+'.');
+						}
+					});
+				//}
 			});
 		 $('#first_name,#last_name').keyup( function() {
 			var fname = $('input:text[name="first_name"]').val();
@@ -35,10 +43,15 @@
 		});
 		
 		$("#regiLink").click(function (){
-			//alert("diaplay form");
 			$(".loginForm").css("display","none");
 			$(".registrationFrom").css("display","block");
 			$(".alert-info").html("Please enter your details to Register.");
+		});
+		
+		$("#loginLink").click(function (){
+			$(".loginForm").css("display","block");
+			$(".registrationFrom").css("display","none");
+			$(".alert-info").html("Please login with your Username and Password.");
 		});
 		
 		var rowCount = $('#mytable >tbody >tr').length;

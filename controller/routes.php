@@ -51,14 +51,15 @@ switch ($strAction)
 		$arrData['username'] = $_REQUEST['username'];
 		$arrData['password'] = $_REQUEST['password'];
 		$arrData['user_role_id'] = $_REQUEST['userRole'];
+		$arrData['assigned_to'] = $_REQUEST['assigned_to'];
 		$arrModules = $_REQUEST['modules'];
 		if($arrData['user_role_id']==""){
 			$arrData['user_role_id']=3;
 		}
-		if($_REQUEST['user_role_id']==$arrData['user_role_id'])
+		/*if($_REQUEST['user_role_id']==$arrData['user_role_id'])
 		{
 			$arrData['is_role_updated']="N";
-		}else{$arrData['is_role_updated']="Y";}
+		}else{$arrData['is_role_updated']="Y";}*/
 		if ($_REQUEST['user_id'] != '')
 		{
 			$intUserId = $_REQUEST['user_id'];
@@ -74,8 +75,8 @@ switch ($strAction)
 				$arrData['created_by'] = $lastInsertedId;
 				$objControl->createRecord($arrData, 'user_master', "user_id='$lastInsertedId'");
 			}
+			$arrData['user_id']=$lastInsertedId;
 		}
-		$arrData['user_id']=$lastInsertedId;
 		if(count($arrModules) == 0){
 			$arrModules[] = 13;
 		}
@@ -99,15 +100,18 @@ switch ($strAction)
 		$arrData['module_menu_link'] = $_REQUEST['module_menu_link'];
 		$arrData['module_menu_icon'] = $_REQUEST['module_menu_icon'];
 		$arrData['status'] = $_REQUEST['status'];
-
+		$arrData['user_id'] = $_SESSION['user']['user_id'];
 		if ($intModuleId != '')
 		{
-			$strCondition = " module_id='$intModuleId'";
+			$strCondition = "module_id='$intModuleId'";
 			$objControl->createRecord($arrData, "module_master", $strCondition);
 		} else
 		{
 			$objControl->createRecord($arrData, 'module_master');
+			$arrData['module_id']= $objControl->dbConnect->Insert_ID();
+			$objControl->createRecord($arrData, 'user_module_master');
 		}
+		
 		header('Location:' . HTTP_PATH . 'module.php');
 		exit;
 		break;
@@ -322,7 +326,11 @@ switch ($strAction)
 		exit;
 		break;
 		case 'create_company':
-			$arrData['user_id'] = $_SESSION['user']['user_id'];
+			if($_REQUEST['user_id']!=''){
+				$arrData['user_id'] = $_REQUEST['user_id'];
+			}else{
+				$arrData['user_id'] = $_SESSION['user']['user_id'];
+			}
 			$intCompanyId = $_REQUEST['company_id'];
 			$arrData['full_name'] = $_REQUEST['full_name'];
 			$arrData['short_name'] = $_REQUEST['short_name'];

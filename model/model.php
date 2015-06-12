@@ -148,13 +148,11 @@
 				}
 				else if($_SESSION['user']['user-role']=='Admin') 
 				{
-					//$strQuery = 'Select *, role_name from user_master join role_master on user_role_id = role_id where client_id ="'.$_SESSION['user']['client_id'].'" order by user_id';	
-					$strQuery = 'Select user_id,first_name,last_name,email,username,rm.role_name from user_master as um join role_master as rm on user_role_id=role_id where um.created_by ="'.$_SESSION['user']['user_id'].'"';		
+					$strQuery = 'Select user_id,first_name,last_name,email,username,rm.role_name from user_master as um join role_master as rm on user_role_id=role_id where um.assigned_to ="'.$_SESSION['user']['user_id'].'"';		
 				}
 				else 
 				{
-					//$strQuery = 'Select *, role_name from user_master join role_master on user_role_id = role_id where client_id ="'.$_SESSION['user']['client_id'].'" and role_id >= "'.$_SESSION['user']['role_id'].'" order by user_id ';		
-					$strQuery = 'Select user_id,first_name,last_name,email,username,rm.role_name from user_master as um join role_master as rm on user_role_id=role_id where um.created_by ="'.$_SESSION['user']['user_id'].'"';		
+					$strQuery = 'Select user_id,first_name,last_name,email,username,rm.role_name from user_master as um join role_master as rm on user_role_id=role_id where um.user_id ="'.$_SESSION['user']['user_id'].'"';		
 				}
 				break;
 				
@@ -168,6 +166,21 @@
 				
 				case 'user-edit-available-roles';
 				$strQuery = 'Select role_id, role_name from role_master where role_id >= "'.$_SESSION['user']['role_id'].'"';
+				break;
+				
+				case 'user-company':
+				if($_SESSION['user']['user-role']=='Master-Admin')
+				{
+					$strQuery = 'Select cm.*,um.first_name,um.last_name,um.assigned_to from company_master as cm join user_master as um  on cm.user_id = um.user_id ';
+				}
+				else if($_SESSION['user']['user-role']=='Admin') 
+				{
+					$strQuery = 'Select cm.*,um.first_name,um.last_name,um.assigned_to from company_master as cm join user_master as um  on cm.user_id = um.user_id where um.assigned_to="'.$_SESSION['user']['user_id'].'"';		
+				}
+				else 
+				{
+					$strQuery = 'Select cm.*,um.first_name,um.last_name,um.assigned_to from company_master as cm join user_master as um  on cm.user_id = um.user_id where um.user_id="'.$_SESSION['user']['user_id'].'"';		
+				}
 				break;
 				
 				case 'privileged_user_available_modules';
