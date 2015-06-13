@@ -2,7 +2,6 @@
 	$(document).ready(function() {
 		
 			$(".registrationFrom").submit(function(e){
-				
 				e.preventDefault(); //STOP default action
 				//var validateForm=$(".registrationFrom").validate();
 				//if($(".registrationFrom").validate()){
@@ -15,8 +14,7 @@
 					postData = $(this).serializeArray();
 					var formURL = $(this).attr("action");
 					//alert(postData);
-					$.ajax(
-					{
+					$.ajax({
 						url : formURL,
 						type: "POST",
 						data : postData,
@@ -172,6 +170,12 @@
 									},
 									mytable:{
 										tablewithnorow:true
+									},
+									conformPwd:{
+										pwdMatch:true
+									},
+									newPwd:{
+										minlength: 10
 									}
 									
 		},
@@ -249,6 +253,10 @@
 							 $.validator.addMethod("lat_long", function(value, element) {
 				                            return /^-?((1?[0-7]?|[0-9]?)[0-9]|180)\.[0-9]{1,6}$/.test(value);
 				                    },"Invalid Entry");
+									
+							 $.validator.addMethod("pwdMatch", function(value, element) {
+				                            return $('#newPwd').val() == value;
+				                    },"New Password and Conform password do not Match.");
 									
 							$.validator.addMethod("tablewithnorow", function (value) {
 									if ($("#visibleDiv").length === 0) {

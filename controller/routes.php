@@ -89,6 +89,14 @@ switch ($strAction)
 		header('Location:' . HTTP_PATH . $httpPath);
 		exit;
 		break;
+	case 'change_pwd':
+		$userId = $_SESSION['user']['user_id'];
+		$arrData['password'] = $_REQUEST['conformPwd'];
+		$strCondition = "user_id='$userId'";
+		$objControl->createRecord($arrData, "user_master", $strCondition);
+		header('Location:' . HTTP_PATH . 'login.php?action=logout');
+		exit;
+		break;
 	case 'user-advance':
 
 		$objControl->addOrUpdateUserAdvanced();

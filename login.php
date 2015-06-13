@@ -54,27 +54,27 @@ include('header.php'); ?>
 						<input type="hidden" name="http_path" id="http_path" value="login.php"/>
 						<fieldset>
 							<div class="input-prepend" title="Firstname" data-rel="tooltip">
-								<span class="add-on"><i class="icon-pencil"></i></span><input class="input-large span10 required" autofocus name="first_name" id="first_name" type="text" value="" placeholder="Enter Your Firstname"/>
+								<span class="add-on"><i class="icon-pencil"></i></span><input class="input-large required" autofocus name="first_name" id="first_name" type="text" value="" placeholder="Enter Your Firstname"/>
 							</div>
 							<div class="clearfix"></div>
 
 							<div class="input-prepend" title="Lastname" data-rel="tooltip">
-								<span class="add-on"><i class="icon-pencil"></i></span><input class="input-large span10 required" name="last_name" id="last_name" type="text" value="" placeholder="Enter Your Lastname"/>
+								<span class="add-on"><i class="icon-pencil"></i></span><input class="input-large required" name="last_name" id="last_name" type="text" value="" placeholder="Enter Your Lastname"/>
 							</div>
 							<div class="clearfix"></div>
 							
 							<div class="input-prepend" title="E-mail" data-rel="tooltip">
-								<span class="add-on"><i class="icon-envelope"></i></span><input class="input-large span10 required" name="email" id="email" type="text" value="" placeholder="Enter Your E-mail"/>
+								<span class="add-on"><i class="icon-envelope"></i></span><input class="input-large required" name="email" id="email" type="text" value="" placeholder="Enter Your E-mail"/>
 							</div>
 							<div class="clearfix"></div>
 							
 							<div class="input-prepend" title="Username" data-rel="tooltip">
-								<span class="add-on"><i class="icon-user"></i></span><input class="input-large span10 required" name="username" id="username" type="text" value="" placeholder="Enter Your Username"/>
+								<span class="add-on"><i class="icon-user"></i></span><input class="input-large uneditable-input required" name="username" id="username" type="text" value="" placeholder="Enter Your Username"/>
 							</div>
 							<div class="clearfix"></div>
 
 							<div class="input-prepend" title="Password" data-rel="tooltip">
-								<span class="add-on"><i class="icon-lock"></i></span><input class="input-large span10 required" name="password" id="password" type="password" value="" placeholder="Enter Your Password"/>
+								<span class="add-on"><i class="icon-lock"></i></span><input class="input-large required" name="password" id="password" type="password" value="" placeholder="Enter Your Password"/>
 							</div>
 							<div class="clearfix"></div>
 							<p class="center span5">

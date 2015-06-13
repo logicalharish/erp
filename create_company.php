@@ -46,6 +46,7 @@ if($_SESSION['user']['user-role']=='Master-Admin'){
             <li><a href="#tabs-2">Company Profile</a></li>
             <li><a href="#tabs-3">Company Contact</a></li>
             <li><a href="#tabs-4">Company Advertise</a></li>
+			<li><a href="#tabs-5">Product</a></li>
           </ul>
           <div id="tabs-1">
 		  <?php if($_SESSION['user']['user-role']=='Master-Admin' || $_SESSION['user']['user-role']=='Admin'){ ?>
@@ -90,7 +91,7 @@ if($_SESSION['user']['user-role']=='Master-Admin'){
               <div class="control-group span6">
                 <label class="control-label" for="category_id">Category</label>
                 <div class="controls">
-					<select multiple="multiple required" name="category_id[]" id="category_id"  class="input-xlarge focused required" >
+					<select multiple data-rel="chosen" name="category_id[]" id="category_id"  class="input-xlarge focused required" >
 						<?php
 							for ($intIndex = 0; $intIndex < count($arrCategoryRecords); $intIndex++)
 							{
@@ -1031,6 +1032,52 @@ if($_SESSION['user']['user-role']=='Master-Admin'){
               <label class="control-label" for="ad_status">Status</label>
               <div class="controls">
                 <select class="input-xlarge focused required" id="ad_status" name="ad_status" >
+					<option value="">&mdash; Please Select &mdash;</option>
+                  <option <?php echo (isset($arrCompanyAdvertiseData[0]['ad_status']) && $arrCompanyAdvertiseData[0]['ad_status'] == 'Active' ? 'selected="selected"' : ''); ?> value="Active">Active</option>
+                  <option <?php echo (isset($arrCompanyAdvertiseData[0]['ad_status']) && $arrCompanyAdvertiseData[0]['ad_status'] == 'Inactive' ? 'selected="selected"' : ''); ?> value="Inactive">Inactive</option>
+                </select>
+              </div>
+            </div>
+          </div>
+         </div>
+		 <div id="tabs-5">
+            <div class="row-fluid">
+              <div class="control-group span6">
+                <label class="control-label" for="data_source">Product Name</label>
+                <div class="controls">
+                  <input class="input-xlarge focused required" id="product_name" name="product_name" type="text" value="<?php echo (isset($arrCompanyAdvertiseData[0]['data_source']) ? $arrCompanyAdvertiseData[0]['data_source'] : ''); ?>">
+                </div>
+              </div>
+            </div>
+			<div class="row-fluid">
+              <div class="control-group span12">
+                <label class="control-label" for="product_description">Product Description</label>
+                <div class="controls">
+                  <textarea class="ckeditor required" name="product_description" id="product_description"><?php echo (isset($arrCompanyProfileData[0]['company_description']) ? $arrCompanyProfileData[0]['company_description'] : ''); ?></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="row-fluid">
+              <div class="control-group span6">
+                <label class="control-label" for="price">Price</label>
+                <div class="controls">
+                  <input class="input-xlarge focused required" id="price" name="price" type="text" value="<?php echo (isset($arrCompanyAdvertiseData[0]['budget']) ? $arrCompanyAdvertiseData[0]['budget'] : ''); ?>">
+                </div>
+              </div>
+            </div>
+			<div class="row-fluid">
+              <div class="control-group span6">
+                <label class="control-label" for="upload_image">Image</label>
+                <div class="controls" id="image">
+                  <input name="img" id="upload_image" type="file">
+                </div>
+              </div>
+            </div>
+			<div class="row-fluid">
+            <div class="control-group span6">
+              <label class="control-label" for="ad_status">Status</label>
+              <div class="controls">
+                <select class="input-xlarge focused required" id="product_status" name="product_status" >
 					<option value="">&mdash; Please Select &mdash;</option>
                   <option <?php echo (isset($arrCompanyAdvertiseData[0]['ad_status']) && $arrCompanyAdvertiseData[0]['ad_status'] == 'Active' ? 'selected="selected"' : ''); ?> value="Active">Active</option>
                   <option <?php echo (isset($arrCompanyAdvertiseData[0]['ad_status']) && $arrCompanyAdvertiseData[0]['ad_status'] == 'Inactive' ? 'selected="selected"' : ''); ?> value="Inactive">Inactive</option>

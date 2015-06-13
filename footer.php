@@ -107,6 +107,9 @@
 	<!-- application script for Charisma demo -->
 	<script src="js/charisma.js"></script>
 	<script src="ckeditor/ckeditor.js"></script>
+	<!-- image upload and crop  -->
+	<script src="js/jquery-pack.js"></script>
+	<script src="js/jquery.imgareaselect.min.js"></script>
 	
 <script>
 $(function() {

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 11, 2015 at 12:27 PM
+-- Generation Time: Jun 13, 2015 at 03:17 AM
 -- Server version: 5.5.27
 -- PHP Version: 5.4.7
 
@@ -700,7 +700,6 @@ CREATE TABLE IF NOT EXISTS `company_master` (
   `created_datetime` datetime DEFAULT NULL,
   `created_by` int(11) DEFAULT NULL,
   `modified_datetime` datetime DEFAULT NULL,
-  `assigned_to` int(11) DEFAULT NULL,
   `modified_by` int(11) DEFAULT NULL,
   `user_id` tinyint(4) DEFAULT NULL,
   PRIMARY KEY (`company_id`)
@@ -710,10 +709,10 @@ CREATE TABLE IF NOT EXISTS `company_master` (
 -- Dumping data for table `company_master`
 --
 
-INSERT INTO `company_master` (`company_id`, `full_name`, `short_name`, `est_date`, `building`, `street`, `landmark`, `country_id`, `city_id`, `state_id`, `area`, `pincode`, `latitude`, `longitute`, `is_verified`, `nob`, `turn_over`, `status`, `email`, `email_dis`, `email_dnd`, `website`, `website_dis`, `website_dnd`, `mobile`, `mobile_dis`, `mobile_dnd`, `landline`, `landline_dis`, `landline_dnd`, `created_datetime`, `created_by`, `modified_datetime`, `assigned_to`, `modified_by`, `user_id`) VALUES
-(13, 'kajal', 'kk', '05/27/2015', 'gopal palace', 'naheru nagar', 'nh', 1, 1, 1, 'naheru nagar', '384658', '23.023046', '72.537736', 'Yes', 'Nature of Bussiness', 'Turn Over', 'Active', 'kajalpatel0377@gmail.com', 'No', 'No', 'www.kkp.com', 'Yes', 'Yes', '9168753456', 'No', 'Yes', '43526789', 'Yes', 'No', '2015-06-09 23:00:32', 2, '2015-05-30 07:05:05', 2, 2, 2),
-(16, 'company', 'comp', '05/26/2015', 'gopal palace', 'ahmedabad', 'amd', 1, 1, 1, 'ahmedabad', '385367', '63.777656', '73.632665', 'Yes', 'Nature of Bussiness', 'Turn Over', 'Active', 'kk1@company.com', 'Yes', 'No', 'www.company.com', 'Yes', 'No', '748975864', 'Yes', 'No', '987387873', 'Yes', 'No', '2015-05-29 02:05:19', 3, '2015-05-30 11:05:25', 2, 3, 3),
-(17, 'example group of company', 'example', '01/11/2012', 'shreenath heaven', 'bhakti circle', 'nr. new india colony', 1, 3, 1, 'new nikol', '382345', '32.632727', '40.938733', 'Yes', 'web developing', 'no turn over', 'Active', 'kajalpatel0377@gmail.com', 'Yes', 'No', 'http://examplekajal.co.in', 'Yes', 'No', '7338902923', 'Yes', 'No', '079-283011', 'Yes', 'No', '2015-06-10 11:06:43', 3, NULL, 2, NULL, 3);
+INSERT INTO `company_master` (`company_id`, `full_name`, `short_name`, `est_date`, `building`, `street`, `landmark`, `country_id`, `city_id`, `state_id`, `area`, `pincode`, `latitude`, `longitute`, `is_verified`, `nob`, `turn_over`, `status`, `email`, `email_dis`, `email_dnd`, `website`, `website_dis`, `website_dnd`, `mobile`, `mobile_dis`, `mobile_dnd`, `landline`, `landline_dis`, `landline_dnd`, `created_datetime`, `created_by`, `modified_datetime`, `modified_by`, `user_id`) VALUES
+(13, 'kajal', 'kk', '05/27/2015', 'gopal palace', 'nehrunagar', 'nh', 1, 1, 1, 'naheru nagar', '384658', '23.023046', '72.537736', 'Yes', 'Nature of Bussiness', 'Turn Over', 'Active', 'kajalpatel0377@gmail.com', 'No', 'No', 'www.kkp.com', 'Yes', 'Yes', '9168753456', 'No', 'Yes', '43526789', 'Yes', 'No', '2015-06-09 23:00:32', 2, '2015-05-30 07:05:05', 2, 2),
+(16, 'company', 'comp', '05/26/2015', 'gopal palace', 'ahmedabad', 'amd', 1, 1, 1, 'ahmedabad', '385367', '63.777656', '73.632665', 'Yes', 'Nature of Bussiness', 'Turn Over', 'Active', 'kk1@company.com', 'Yes', 'No', 'www.company.com', 'Yes', 'No', '748975864', 'Yes', 'No', '987387873', 'Yes', 'No', '2015-05-29 02:05:19', 3, '2015-05-30 11:05:25', 3, 3),
+(17, 'example group of company', 'example', '01/11/2012', 'shreenath heaven', 'bhakti circle', 'nr. new india colony', 1, 3, 1, 'new nikol', '382345', '32.632727', '40.938733', 'Yes', 'web developing', 'no turn over', 'Active', 'kajalpatel0377@gmail.com', 'Yes', 'No', 'http://examplekajal.co.in', 'Yes', 'No', '7338902923', 'Yes', 'No', '079-283011', 'Yes', 'No', '2015-06-10 11:06:43', 3, NULL, NULL, 3);
 
 -- --------------------------------------------------------
 
@@ -1179,6 +1178,25 @@ INSERT INTO `company_master_new` (`company_id`, `company_name`, `address1`, `add
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `company_product`
+--
+
+CREATE TABLE IF NOT EXISTS `company_product` (
+  `company_product_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `price` varchar(200) DEFAULT NULL,
+  `product_description` text,
+  `product_status` enum('Active','Inactive') DEFAULT NULL,
+  `created_datetime` datetime DEFAULT NULL,
+  `created_by` int(11) DEFAULT NULL,
+  `modified_datetime` datetime DEFAULT NULL,
+  `modified_by` int(11) DEFAULT NULL,
+  `company_id` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`company_product_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `company_profile`
 --
 
@@ -1305,11 +1323,11 @@ CREATE TABLE IF NOT EXISTS `module_master` (
 --
 
 INSERT INTO `module_master` (`module_id`, `module_name`, `module_menu_link`, `module_menu_icon`, `status`, `created_datetime`, `created_by`, `modified_datetime`, `modified_by`) VALUES
-(1, 'website', 'website.php', 'icon-globe', 'Active', '2015-06-05 15:15:17', 1, NULL, NULL),
+(1, 'website', 'website.php', 'icon-globe', 'Active', '2015-06-05 15:15:17', 1, '2015-06-12 01:06:44', 1),
 (7, 'modules', 'module.php', 'icon-list', 'Active', '2015-06-09 02:06:38', 1, '2015-06-09 02:06:45', 1),
 (8, 'Country', 'country.php', 'icon-map-marker', 'Active', '2015-06-05 15:15:29', 1, NULL, NULL),
 (9, 'state', 'state.php', 'icon-map-marker', 'Active', '2015-06-05 15:15:31', 1, NULL, NULL),
-(10, 'city', 'city.php', 'icon-map-marker', 'Active', '2015-06-05 15:15:32', 1, NULL, NULL),
+(10, 'city', 'city.php', 'icon-edit', 'Active', '2015-06-05 15:15:32', 1, '2015-06-12 12:06:30', 1),
 (11, 'Users', 'users.php', 'icon-user', 'Active', '2015-06-05 15:15:34', 1, NULL, NULL),
 (12, 'category', 'category.php', 'icon-list-alt', 'Active', '2015-06-05 15:15:35', 1, '2015-06-06 12:06:23', 1),
 (13, 'company', 'company.php', 'icon-list', 'Active', '2015-06-05 15:15:37', 1, NULL, NULL),
@@ -1389,7 +1407,7 @@ INSERT INTO `role_master` (`role_id`, `role_name`, `public_read`, `public_create
 --
 
 CREATE TABLE IF NOT EXISTS `user_master` (
-  `user_id` tinyint(4) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL AUTO_INCREMENT,
   `first_name` varchar(200) DEFAULT NULL,
   `last_name` varchar(200) DEFAULT NULL,
   `email` varchar(100) DEFAULT NULL,
@@ -1402,19 +1420,21 @@ CREATE TABLE IF NOT EXISTS `user_master` (
   `is_role_updated` enum('Y','N') DEFAULT NULL,
   `created_datetime` datetime DEFAULT NULL,
   `modified_datetime` datetime DEFAULT NULL,
+  `assigned_to` int(11) DEFAULT '1',
   PRIMARY KEY (`user_id`),
   KEY `user_role_id` (`user_role_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=19 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
 
 --
 -- Dumping data for table `user_master`
 --
 
-INSERT INTO `user_master` (`user_id`, `first_name`, `last_name`, `email`, `status`, `username`, `password`, `user_role_id`, `created_by`, `modified_by`, `is_role_updated`, `created_datetime`, `modified_datetime`) VALUES
-(1, 'Harish', 'sharma', 'sharmaharish09@yahoo.co.in', 'Active', 'admin', 'admin123', 1, 1, 1, 'N', NULL, NULL),
-(2, 'kajal', 'patel', 'kajalpatel0377@gmail.com', 'Active', 'kajal', 'kajalpatel', 2, 1, 1, 'N', NULL, NULL),
-(3, 'kk', 'patel', 'email2kkpatel@gmail.com', 'Active', 'kkp', 'kkpatel', 3, 2, 1, 'N', NULL, NULL),
-(18, 'kajal1', 'patel1', 'emails', 'Active', 'names', 'names', 3, 18, NULL, 'N', '2015-06-11 11:06:33', '2015-06-11 11:06:33');
+INSERT INTO `user_master` (`user_id`, `first_name`, `last_name`, `email`, `status`, `username`, `password`, `user_role_id`, `created_by`, `modified_by`, `is_role_updated`, `created_datetime`, `modified_datetime`, `assigned_to`) VALUES
+(1, 'Harish', 'sharma', 'sharmaharish09@yahoo.co.in', 'Active', 'admin', 'harishsharma', 1, 1, 1, 'N', '2015-06-12 03:18:17', '2015-06-13 12:06:57', 1),
+(2, 'kajal', 'patel', 'kajalpatel0377@gmail.com', 'Active', 'kajal', 'kajalpatel', 2, 1, 1, 'N', '2015-06-12 03:18:15', '2015-06-12 12:06:24', 1),
+(3, 'kk', 'patel', 'email2kkpatel@gmail.com', 'Active', 'kkp', 'kkpatel', 3, 2, 1, 'N', '2015-06-12 03:18:18', NULL, 2),
+(18, 'kajal1', 'patel1', 'emails', 'Active', 'names', 'names', 3, 18, 1, 'N', '2015-06-11 11:06:33', '2015-06-11 11:06:33', 1),
+(20, 'kkk', 'ppp', 'email2kkpatel@gmail.com', 'Active', 'kkkp', 'kkkppppatel', 3, 1, NULL, 'N', '2015-06-12 01:06:32', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1433,15 +1453,25 @@ CREATE TABLE IF NOT EXISTS `user_module_master` (
 --
 
 INSERT INTO `user_module_master` (`user_id`, `module_id`) VALUES
-(2, 1),
-(2, 8),
-(2, 13),
-(2, 10),
-(2, 9),
-(1, 1),
-(2, 11),
 (3, 13),
-(18, 13);
+(18, 13),
+(19, 13),
+(2, 8),
+(2, 9),
+(2, 10),
+(2, 11),
+(2, 12),
+(2, 13),
+(1, 1),
+(1, 7),
+(1, 8),
+(1, 9),
+(1, 10),
+(1, 11),
+(1, 12),
+(1, 13),
+(1, 14),
+(20, 13);
 
 -- --------------------------------------------------------
 
