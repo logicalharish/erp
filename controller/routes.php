@@ -373,11 +373,10 @@ switch ($strAction)
 			if ($intCompanyId != '')
 			{
 				$strCondition = "company_id='$intCompanyId'";
-				$objControl->createRecord($arrData, "company_master", $strCondition);
-			//	$arrData['company_id']= $objControl->dbConnect->Insert_ID();
+			//	$objControl->createRecord($arrData, "company_master", $strCondition);
 			}else{
-				$objControl->createRecord($arrData, 'company_master');
-				$arrData['company_id']= $objControl->dbConnect->Insert_ID();
+			//	$objControl->createRecord($arrData, 'company_master');
+			//	$lastInsertedCompanyId= $objControl->dbConnect->Insert_ID();
 			}
 			
 			if($intCompanyId !='')
@@ -385,16 +384,16 @@ switch ($strAction)
 				$arrData['company_id'] = $intCompanyId;
 			}
 			else{
-				$arrData['company_id'] = $arrData['company_id'];
+				$arrData['company_id'] = $lastInsertedCompanyId;
 			}
 			
 			$arrCat = $_REQUEST['category_id'];
 			$strSQL = "DELETE FROM company_category where company_id='".$_REQUEST['company_id']."'";
-			$objControl->dbConnect->Execute($strSQL);
+		//	$objControl->dbConnect->Execute($strSQL);
 				foreach ($arrCat as $categories)
 				{
 						$arrData['category_id']=$categories;
-						$objControl->createRecord($arrData, 'company_category');
+					//	$objControl->createRecord($arrData, 'company_category');
 				}
 			$intCompanyProfileId = $_REQUEST['company_profile_id'];
 			$arrData['company_description'] = $_REQUEST['company_description'];
@@ -438,9 +437,9 @@ switch ($strAction)
 				if ($intCompanyProfileId != '')
 				{
 					$strCondition = "company_profile_id='$intCompanyProfileId'";
-					$objControl->createRecord($arrData, "company_profile", $strCondition);
+				//	$objControl->createRecord($arrData, "company_profile", $strCondition);
 				}else{
-					$objControl->createRecord($arrData, 'company_profile');
+				//	$objControl->createRecord($arrData, 'company_profile');
 				}
 			$intCompanyContactId = $_REQUEST['company_contact_id'];
 			$arrContact = $_REQUEST['contact_full_name'];
@@ -453,7 +452,7 @@ switch ($strAction)
 			
 			//$objControl->dbConnect->debug = true;
 			$strSQL = "DELETE FROM company_contact where company_id='".$_REQUEST['company_id']."'";
-			$objControl->dbConnect->Execute($strSQL);
+		//	$objControl->dbConnect->Execute($strSQL);
 				for ($intContact = 0; $intContact < count($arrContact); $intContact++)
 					{
 						$arrData['contact_full_name']=$arrContact[$intContact];
@@ -463,7 +462,7 @@ switch ($strAction)
 						$arrData['contact_email']=$arremailContact[$intContact];
 						$arrData['designation']=$arrdesiContact[$intContact];
 						$arrData['contact_status']=$arrConStatus[$intContact];
-						$objControl->createRecord($arrData, 'company_contact');
+						//$objControl->createRecord($arrData, 'company_contact');
 					}
 			$intCompanyAdvertiseId = $_REQUEST['company_advertise_id'];
 			$arrData['data_source'] = $_REQUEST['data_source'];
@@ -476,10 +475,26 @@ switch ($strAction)
 			if ($intCompanyAdvertiseId != '')
 				{
 					$strCondition = "company_advertise_id='$intCompanyAdvertiseId'";
-					$objControl->createRecord($arrData, "company_advertise", $strCondition);
+					//$objControl->createRecord($arrData, "company_advertise", $strCondition);
 				}else{
-					$objControl->createRecord($arrData, 'company_advertise');
+					//$objControl->createRecord($arrData, 'company_advertise');
 				}
+				
+			$intCompanyProductId = $_REQUEST['company_product_id'];
+			$arrData['product_name'] = $_REQUEST['product_name'];
+			$arrData['price'] = $_REQUEST['price'];
+			$arrData['product_description'] = $_REQUEST['product_description'];
+			$imgPath=$objControl->uploadImage($_FILES['photoimg']['name'],$_REQUEST['img_path'],$arrData['company_id'],$_REQUEST['x_axis'],$_REQUEST['x2_axis'],$_REQUEST['y_axis'],$_REQUEST['y2_axis'],$_REQUEST['thumb_width'],$_REQUEST['thumb_height']);
+			$arrData['product_img_path'] = $imgPath;
+			$arrData['product_status'] = $_REQUEST['product_status'];
+			if ($intCompanyProductId != '')
+				{
+					$strCondition = "company_product_id='$intCompanyProductId'";
+					$objControl->createRecord($arrData, "company_product", $strCondition);
+				}else{
+					$objControl->createRecord($arrData, 'company_product');
+				}
+				
 			header('Location:' . HTTP_PATH . 'company.php');
 			exit;
 			break;

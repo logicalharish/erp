@@ -194,6 +194,47 @@ class CommonController
 			}
 
 		}
+		
+		public function uploadImage($img_path,$img,$companyId,$x1,$x2,$y1,$y2,$w,$h){
+			$t_width = 100;	// Maximum thumbnail width
+			$t_height = 100;	// Maximum thumbnail height
+			$new_name = $companyId.".jpg"; // Thumbnail image name
+			$path = "../uploads/";
+					$ext1 = explode(".", $img_path);
+					//$ext = pathinfo($img, PATHINFO_EXTENSION);
+					echo "ext....".end($ext1)."====";
+					$ext = end($ext1);
+					$ratio = ($t_width/$w); 
+					$nw = ceil($w * $ratio);
+					$nh = ceil($h * $ratio);
+					$nimg = imagecreatetruecolor($nw,$nh);
+					switch ($ext)
+						{
+							case 'jpg':
+								$im_src = imagecreatefromjpeg($img);
+								imagecopyresampled($nimg,$im_src,0,0,$x1,$y1,$nw,$nh,$w,$h);
+								$r = imagejpeg($nimg,$path.$new_name,90);
+								break;
+							case 'png':
+								$im_src = imagecreatefrompng($img);
+								imagealphablending($nimg, FALSE);
+								imagesavealpha($nimg, TRUE);
+								imagecopyresampled($nimg,$im_src,0,0,$x1,$y1,$nw,$nh,$w,$h);
+								$r = @imagepng($nimg,$path.$new_name);
+								break;
+							case 'gif':
+								$im_src = imagecreatefromgif($img);
+								imagecopyresampled($nimg,$im_src,0,0,$x1,$y1,$nw,$nh,$w,$h);
+								$background = imagecolorallocate($nimg, 0, 0, 0); 
+								imagecolortransparent($nimg, $background);
+								$r = @imagegif($nimg,$path.$new_name);
+								break;
+						}
+					
+				//	mysql_query("UPDATE users SET profile_image_small='$new_name' WHERE uid='$session_id'");
+					echo $new_name;
+					return $new_name;
+		}
 
 
 	

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 13, 2015 at 03:17 AM
+-- Generation Time: Jun 15, 2015 at 02:27 AM
 -- Server version: 5.5.27
 -- PHP Version: 5.4.7
 
@@ -591,7 +591,6 @@ CREATE TABLE IF NOT EXISTS `company_advertise` (
 --
 
 INSERT INTO `company_advertise` (`company_advertise_id`, `data_source`, `city_id`, `budget`, `year`, `ad_date`, `page`, `ad_status`, `created_datetime`, `created_by`, `modified_datetime`, `modified_by`, `company_id`) VALUES
-(2, 'data source', 1, '25000', '2015', '05/12/2015', 'no page', 'Active', NULL, NULL, '2015-05-30 07:05:05', 1, 13),
 (4, 'source', 2, '20000', '2000', '05/12/2015', 'none', 'Active', '2015-05-29 02:05:19', 1, '2015-05-30 07:05:48', 1, 16),
 (5, 'data source', 3, '30,000', '2010', '06/08/2015', 'no any page', 'Active', '2015-06-10 11:06:44', 3, NULL, NULL, 17);
 
@@ -703,7 +702,7 @@ CREATE TABLE IF NOT EXISTS `company_master` (
   `modified_by` int(11) DEFAULT NULL,
   `user_id` tinyint(4) DEFAULT NULL,
   PRIMARY KEY (`company_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=20 ;
 
 --
 -- Dumping data for table `company_master`
@@ -1183,8 +1182,10 @@ INSERT INTO `company_master_new` (`company_id`, `company_name`, `address1`, `add
 
 CREATE TABLE IF NOT EXISTS `company_product` (
   `company_product_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `product_name` varchar(200) DEFAULT NULL,
   `price` varchar(200) DEFAULT NULL,
   `product_description` text,
+  `product_img_path` varchar(200) DEFAULT NULL,
   `product_status` enum('Active','Inactive') DEFAULT NULL,
   `created_datetime` datetime DEFAULT NULL,
   `created_by` int(11) DEFAULT NULL,
@@ -1192,7 +1193,14 @@ CREATE TABLE IF NOT EXISTS `company_product` (
   `modified_by` int(11) DEFAULT NULL,
   `company_id` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`company_product_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `company_product`
+--
+
+INSERT INTO `company_product` (`company_product_id`, `product_name`, `price`, `product_description`, `product_img_path`, `product_status`, `created_datetime`, `created_by`, `modified_datetime`, `modified_by`, `company_id`) VALUES
+(1, 'product name', '30,000', '<p>this is about my product</p>\r\n', '17.jpg', 'Active', '2015-06-15 01:06:51', 1, '2015-06-15 02:06:52', 1, 17);
 
 -- --------------------------------------------------------
 

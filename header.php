@@ -49,6 +49,9 @@ $objModel -> checkSession();
 	<link href='css/jquery.iphone.toggle.css' rel='stylesheet'>
 	<link href='css/opa-icons.css' rel='stylesheet'>
 	<link href='css/uploadify.css' rel='stylesheet'>
+	<link href='css/imgareaselect-animated.css' rel='stylesheet'>
+	<link href='css/imgareaselect-default.css' rel='stylesheet'>
+	<link href='css/imgareaselect-deprecated.css' rel='stylesheet'>
 
 	<!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->
 	<!--[if lt IE 9]>

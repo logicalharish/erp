@@ -8,6 +8,7 @@ if (isset($intCompanyId) && $intCompanyId != '')
 	$arrCompanyProfileData = $objControl->getRecords('company_profile', 'company_id', $intCompanyId, '', $arrField);
 	$arrCompanyContactData = $objControl->getRecords('company_contact', 'company_id', $intCompanyId, '', $arrField);
 	$arrCompanyAdvertiseData = $objControl->getRecords('company_advertise', 'company_id', $intCompanyId, '', $arrField);
+	$arrCompanyProductData = $objControl->getRecords('company_product', 'company_id', $intCompanyId, '', $arrField);
 	$arrCompanyCategoryData = $objControl->getRecords('company_category', 'company_id', $intCompanyId, '', $arrField);
 }
 $arrStateRecords = $objControl->getRecords('branch_master', null, null, '', $arrField);
@@ -35,11 +36,12 @@ if($_SESSION['user']['user-role']=='Master-Admin'){
       <h2><i class="icon-edit"></i>Create Company</h2>
     </div>
     <div class="box-content">
-      <form class="form-horizontal" id="form" method="post" action="controller/routes.php">
+      <form class="form-horizontal" id="form" method="post" action="controller/routes.php" enctype="multipart/form-data">
         <input type="hidden" name="hid_action" id="hid_action" value="create_company" />
 		<input type="hidden" name="company_id" id="company_id" value="<?php echo $intCompanyId; ?>" />
         <input type="hidden" name="company_profile_id" id="company_profile_id" value="<?php echo (isset($arrCompanyProfileData[0]['company_profile_id']) ? $arrCompanyProfileData[0]['company_profile_id'] : ''); ?>" />
 		<input type="hidden" name="company_advertise_id" id="company_advertise_id" value="<?php echo (isset($arrCompanyAdvertiseData[0]['company_advertise_id']) ? $arrCompanyAdvertiseData[0]['company_advertise_id'] : ''); ?>" />
+		<input type="hidden" name="company_product_id" id="company_product_id" value="<?php echo (isset($arrCompanyProductData[0]['company_product_id']) ? $arrCompanyProductData[0]['company_product_id'] : ''); ?>" />
         <div id="tabs">
           <ul>
             <li><a href="#tabs-1">Basic Details</a></li>
@@ -1045,7 +1047,7 @@ if($_SESSION['user']['user-role']=='Master-Admin'){
               <div class="control-group span6">
                 <label class="control-label" for="data_source">Product Name</label>
                 <div class="controls">
-                  <input class="input-xlarge focused required" id="product_name" name="product_name" type="text" value="<?php echo (isset($arrCompanyAdvertiseData[0]['data_source']) ? $arrCompanyAdvertiseData[0]['data_source'] : ''); ?>">
+                  <input class="input-xlarge focused required" id="product_name" name="product_name" type="text" value="<?php echo (isset($arrCompanyProductData[0]['product_name']) ? $arrCompanyProductData[0]['product_name'] : ''); ?>">
                 </div>
               </div>
             </div>
@@ -1053,7 +1055,7 @@ if($_SESSION['user']['user-role']=='Master-Admin'){
               <div class="control-group span12">
                 <label class="control-label" for="product_description">Product Description</label>
                 <div class="controls">
-                  <textarea class="ckeditor required" name="product_description" id="product_description"><?php echo (isset($arrCompanyProfileData[0]['company_description']) ? $arrCompanyProfileData[0]['company_description'] : ''); ?></textarea>
+                  <textarea class="ckeditor required" name="product_description" id="product_description"><?php echo (isset($arrCompanyProductData[0]['product_description']) ? $arrCompanyProductData[0]['product_description'] : ''); ?></textarea>
                 </div>
               </div>
             </div>
@@ -1061,26 +1063,35 @@ if($_SESSION['user']['user-role']=='Master-Admin'){
               <div class="control-group span6">
                 <label class="control-label" for="price">Price</label>
                 <div class="controls">
-                  <input class="input-xlarge focused required" id="price" name="price" type="text" value="<?php echo (isset($arrCompanyAdvertiseData[0]['budget']) ? $arrCompanyAdvertiseData[0]['budget'] : ''); ?>">
+                  <input class="input-xlarge focused required" id="price" name="price" type="text" value="<?php echo (isset($arrCompanyProductData[0]['price']) ? $arrCompanyProductData[0]['price'] : ''); ?>">
                 </div>
               </div>
             </div>
 			<div class="row-fluid">
-              <div class="control-group span6">
-                <label class="control-label" for="upload_image">Image</label>
-                <div class="controls" id="image">
-                  <input name="img" id="upload_image" type="file">
-                </div>
+              <div class="control-group span8">
+                <label class="control-label" for="upload_image">Upload image</label>
+				<div class="controls">
+					<div id="previewDiv"><?php echo (isset($arrCompanyProductData[0]['product_img_path']) ? "<img src='uploads/".$arrCompanyProductData[0]['product_img_path']."' id='photo'>" : ''); ?></div>
+					<div id="thumbs" style="padding:5px; width:600px"></div>
+					<input type="file" class="required" name="photoimg" id="photoimg" />
+					<input type="hidden" name="img_path" value="" id="img_path" />
+					<input type="hidden" name="x_axis" value="" id="x_axis" />
+					<input type="hidden" name="y_axis" value="" id="y_axis" />
+					<input type="hidden" name="x2_axis" value="" id="x2_axis" />
+					<input type="hidden" name="y2_axis" value="" id="y2_axis" />
+					<input type="hidden" name="thumb_width" value="" id="thumb_width" />
+					<input type="hidden" name="thumb_height" value="" id="thumb_height" />
+				</div>
               </div>
             </div>
 			<div class="row-fluid">
             <div class="control-group span6">
-              <label class="control-label" for="ad_status">Status</label>
+              <label class="control-label" for="product_status">Status</label>
               <div class="controls">
                 <select class="input-xlarge focused required" id="product_status" name="product_status" >
 					<option value="">&mdash; Please Select &mdash;</option>
-                  <option <?php echo (isset($arrCompanyAdvertiseData[0]['ad_status']) && $arrCompanyAdvertiseData[0]['ad_status'] == 'Active' ? 'selected="selected"' : ''); ?> value="Active">Active</option>
-                  <option <?php echo (isset($arrCompanyAdvertiseData[0]['ad_status']) && $arrCompanyAdvertiseData[0]['ad_status'] == 'Inactive' ? 'selected="selected"' : ''); ?> value="Inactive">Inactive</option>
+                  <option <?php echo (isset($arrCompanyProductData[0]['product_status']) && $arrCompanyProductData[0]['product_status'] == 'Active' ? 'selected="selected"' : ''); ?> value="Active">Active</option>
+                  <option <?php echo (isset($arrCompanyProductData[0]['product_status']) && $arrCompanyProductData[0]['product_status'] == 'Inactive' ? 'selected="selected"' : ''); ?> value="Inactive">Inactive</option>
                 </select>
               </div>
             </div>
@@ -1108,4 +1119,56 @@ require_once('footer.php');
 <?php
 require_once('javascript_methods.php');
 ?>
+<script type="text/javascript">
+   function getSizes(im,obj)
+	{
+		if(obj.width > 0){
+			$("#x_axis").val(obj.x1);
+			$("#x2_axis").val(obj.x2);
+			$("#y_axis").val(obj.y1);
+			$("#y2_axis").val(obj.y2);
+			$("#thumb_width").val(obj.width);
+			$("#thumb_height").val(obj.height);
+		}else
+			alert("Please select image portion to upload..!");
+	}
 
+$(document).ready(function () {
+	
+	$("#photoimg").on('change', function () {
+
+		var imgPath = $(this)[0].value;
+		var extn = imgPath.substring(imgPath.lastIndexOf('.') + 1).toLowerCase();
+
+		if (extn == "gif" || extn == "png" || extn == "jpg" || extn == "jpeg") {
+			if (typeof (FileReader) != "undefined") {
+
+				var image_holder = $("#previewDiv");
+				image_holder.empty();
+
+				var reader = new FileReader();
+				reader.onload = function (e) {
+					$("<img />", {
+						"src": e.target.result,
+							"id":"photo"
+					}).appendTo(image_holder);
+					$("#img_path").val(e.target.result);
+					$('#photo').imgAreaSelect({
+						//aspectRatio: '1:1',
+						onSelectEnd: getSizes
+					});
+
+				}
+				image_holder.show();
+				reader.readAsDataURL($(this)[0].files[0]);
+			} else {
+				alert("This browser does not support FileReader.");
+			}
+		} else {
+			alert("Pls select only images");
+		}
+	});
+    
+});
+
+</script>
