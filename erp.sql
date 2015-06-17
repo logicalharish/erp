@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 15, 2015 at 02:27 AM
+-- Generation Time: Jun 17, 2015 at 01:11 PM
 -- Server version: 5.5.27
 -- PHP Version: 5.4.7
 
@@ -584,15 +584,28 @@ CREATE TABLE IF NOT EXISTS `company_advertise` (
   `company_id` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`company_advertise_id`),
   KEY `company_id` (`company_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data for table `company_advertise`
 --
 
 INSERT INTO `company_advertise` (`company_advertise_id`, `data_source`, `city_id`, `budget`, `year`, `ad_date`, `page`, `ad_status`, `created_datetime`, `created_by`, `modified_datetime`, `modified_by`, `company_id`) VALUES
-(4, 'source', 2, '20000', '2000', '05/12/2015', 'none', 'Active', '2015-05-29 02:05:19', 1, '2015-05-30 07:05:48', 1, 16),
-(5, 'data source', 3, '30,000', '2010', '06/08/2015', 'no any page', 'Active', '2015-06-10 11:06:44', 3, NULL, NULL, 17);
+(4, 'source', 1, '20000', '2000', '05/12/2015', 'none', 'Active', '2015-05-29 02:05:19', 1, '2015-06-16 02:06:47', 1, 16),
+(5, 'source', 3, '30,000', '2010', '06/08/2015', 'no any page', 'Active', '2015-06-10 11:06:44', 3, '2015-06-17 11:06:47', 1, 17),
+(6, 'data source', 3, '300000000', '2015', '06/09/2015', 'page', 'Active', '2015-06-15 03:06:22', 1, NULL, NULL, 20),
+(7, 'data source', 1, '830000', '2013', '06/15/2015', 'page name', 'Active', '2015-06-15 11:06:05', 1, '2015-06-17 11:06:40', 1, 13);
+
+--
+-- Triggers `company_advertise`
+--
+DROP TRIGGER IF EXISTS `log_comp_advertise`;
+DELIMITER //
+CREATE TRIGGER `log_comp_advertise` BEFORE UPDATE ON `company_advertise`
+ FOR EACH ROW INSERT INTO log_company_advertise
+					  (SELECT *,now() FROM company_advertise WHERE company_advertise_id = OLD.company_advertise_id)
+//
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -612,14 +625,16 @@ CREATE TABLE IF NOT EXISTS `company_category` (
 --
 
 INSERT INTO `company_category` (`company_id`, `category_id`) VALUES
-(13, 6),
+(20, 382),
 (16, 2),
 (16, 3),
 (16, 4),
 (17, 219),
 (17, 223),
 (17, 225),
-(17, 239);
+(17, 239),
+(13, 6),
+(13, 178);
 
 -- --------------------------------------------------------
 
@@ -643,21 +658,34 @@ CREATE TABLE IF NOT EXISTS `company_contact` (
   `company_id` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`company_contact_id`),
   KEY `company_id` (`company_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=47 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=28 ;
 
 --
 -- Dumping data for table `company_contact`
 --
 
 INSERT INTO `company_contact` (`company_contact_id`, `contact_full_name`, `dob`, `dom`, `contact_mobile`, `contact_email`, `designation`, `contact_status`, `created_datetime`, `created_by`, `modified_datetime`, `modified_by`, `company_id`) VALUES
-(36, 'kajal', '05/12/2015', '05/13/2015', '8373838373', 'kajalpatel0377@gmail.com', 'php developer', 'Active', '2015-05-30 07:05:05', 1, NULL, NULL, 13),
-(37, 'kk', '05/18/2015', '05/25/2015', '927262536', 'kk@site.in', 'designation', 'Active', '2015-05-30 07:05:05', 1, NULL, NULL, 13),
-(38, 'name', '05/19/2015', '05/20/2015', '894785894', 'kajalp@hd.com', 'desig', 'Active', '2015-05-30 07:05:05', 1, NULL, NULL, 13),
-(42, 'employee1', '05/18/2015', '05/27/2015', '74839784', 'emp1@company.com', 'engineer', 'Active', '2015-05-30 07:05:48', 1, NULL, NULL, 16),
-(43, 'emp2', '05/12/2015', '05/12/2015', '78368436', 'emp2@company.com', 'developer', 'Active', '2015-05-30 07:05:48', 1, NULL, NULL, 16),
-(44, 'emp3', '05/26/2015', '05/11/2015', '8937486376', 'kajal@jisd.djid', 'new desig', 'Inactive', '2015-05-30 07:05:48', 1, NULL, NULL, 16),
-(45, 'contact one', '06/08/2015', '06/09/2015', '9237256276', 'email@website.com', 'designation one', 'Active', '2015-06-10 11:06:44', 3, NULL, NULL, 17),
-(46, 'contact two', '06/08/2015', '06/09/2015', '7236353438', 'contact_two@website.com', 'designation two', 'Active', '2015-06-10 11:06:44', 3, NULL, NULL, 17);
+(1, 'employee1', '05/18/2015', '05/27/2015', '74839784', 'emp1@company.com', 'engineer', 'Active', '2015-05-30 07:05:48', 1, NULL, NULL, 16),
+(2, 'emp2', '05/12/2015', '05/12/2015', '78368436', 'emp2@company.com', 'developer', 'Active', '2015-05-30 07:05:48', 1, NULL, NULL, 16),
+(3, 'emp3', '05/26/2015', '05/11/2015', '8937486376', 'kajal@jisd.djid', 'new desig', 'Inactive', '2015-05-30 07:05:48', 1, NULL, NULL, 16),
+(6, 'kajal', '06/09/2015', '06/11/2015', '8267262226', 'kajalpatel0377@gmail.com', 'software developer', 'Active', '2015-06-15 03:06:22', 1, NULL, NULL, 20),
+(7, 'rekha', '06/15/2015', '06/17/2015', '8937363535', 'rekha@gmail.com', 'accountant', 'Active', '2015-06-15 03:06:22', 1, NULL, NULL, 20),
+(23, 'contact one', '06/08/2015', '06/09/2015', '9237256276', 'email@website.com', 'designation one', 'Active', '2015-06-17 11:06:47', 1, NULL, NULL, 17),
+(24, 'contact two', '06/08/2015', '06/09/2015', '7236353438', 'contact_two@website.com', 'designation two', 'Active', '2015-06-17 11:06:47', 1, NULL, NULL, 17),
+(25, 'test name', '06/15/1987', '06/15/2015', '9736382729', 'kajalpatel@gmail.com', 'contact desi', 'Active', '2015-06-17 11:06:47', 1, NULL, NULL, 17),
+(26, 'kajal', '05/12/2015', '12/08/2015', '9738373628', 'kajal@kajal.com', 'php developer', 'Active', '2015-06-17 11:06:40', 1, NULL, NULL, 13),
+(27, 'contact name', '06/15/2015', '06/02/2015', '7836339728', 'contact@gmail.com', 'designation', 'Active', '2015-06-17 11:06:40', 1, NULL, NULL, 13);
+
+--
+-- Triggers `company_contact`
+--
+DROP TRIGGER IF EXISTS `log_comp_contact`;
+DELIMITER //
+CREATE TRIGGER `log_comp_contact` BEFORE INSERT ON `company_contact`
+ FOR EACH ROW INSERT INTO log_company_contact (company_contact_id, contact_full_name, dob, dom, contact_mobile, contact_email, designation, contact_status, created_datetime, created_by, modified_datetime, modified_by, company_id, log_insert_time)
+										 values (new.company_contact_id, new.contact_full_name, new.dob, new.dom, new.contact_mobile, new.contact_email, new.designation, new.contact_status, new.created_datetime, new.created_by, new.modified_datetime, new.modified_by, new.company_id, now())
+//
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -702,16 +730,28 @@ CREATE TABLE IF NOT EXISTS `company_master` (
   `modified_by` int(11) DEFAULT NULL,
   `user_id` tinyint(4) DEFAULT NULL,
   PRIMARY KEY (`company_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=20 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
 
 --
 -- Dumping data for table `company_master`
 --
 
 INSERT INTO `company_master` (`company_id`, `full_name`, `short_name`, `est_date`, `building`, `street`, `landmark`, `country_id`, `city_id`, `state_id`, `area`, `pincode`, `latitude`, `longitute`, `is_verified`, `nob`, `turn_over`, `status`, `email`, `email_dis`, `email_dnd`, `website`, `website_dis`, `website_dnd`, `mobile`, `mobile_dis`, `mobile_dnd`, `landline`, `landline_dis`, `landline_dnd`, `created_datetime`, `created_by`, `modified_datetime`, `modified_by`, `user_id`) VALUES
-(13, 'kajal', 'kk', '05/27/2015', 'gopal palace', 'nehrunagar', 'nh', 1, 1, 1, 'naheru nagar', '384658', '23.023046', '72.537736', 'Yes', 'Nature of Bussiness', 'Turn Over', 'Active', 'kajalpatel0377@gmail.com', 'No', 'No', 'www.kkp.com', 'Yes', 'Yes', '9168753456', 'No', 'Yes', '43526789', 'Yes', 'No', '2015-06-09 23:00:32', 2, '2015-05-30 07:05:05', 2, 2),
-(16, 'company', 'comp', '05/26/2015', 'gopal palace', 'ahmedabad', 'amd', 1, 1, 1, 'ahmedabad', '385367', '63.777656', '73.632665', 'Yes', 'Nature of Bussiness', 'Turn Over', 'Active', 'kk1@company.com', 'Yes', 'No', 'www.company.com', 'Yes', 'No', '748975864', 'Yes', 'No', '987387873', 'Yes', 'No', '2015-05-29 02:05:19', 3, '2015-05-30 11:05:25', 3, 3),
-(17, 'example group of company', 'example', '01/11/2012', 'shreenath heaven', 'bhakti circle', 'nr. new india colony', 1, 3, 1, 'new nikol', '382345', '32.632727', '40.938733', 'Yes', 'web developing', 'no turn over', 'Active', 'kajalpatel0377@gmail.com', 'Yes', 'No', 'http://examplekajal.co.in', 'Yes', 'No', '7338902923', 'Yes', 'No', '079-283011', 'Yes', 'No', '2015-06-10 11:06:43', 3, NULL, NULL, 3);
+(13, 'kajal', 'kk', '05/27/2015', 'gopal palace', 'nehrunagar', 'nh', 1, 1, 1, 'naheru nagar', '384658', '23.023046', '72.537736', 'Yes', 'Nature of Bussiness', 'Turn Over', 'Active', 'kajalpatel0377@gmail.com', 'Yes', 'No', 'http://www.kkp.com', 'Yes', 'No', '9168753456', 'Yes', 'No', '43526789', 'Yes', 'No', '2015-06-09 23:00:32', 2, '2015-06-17 11:06:40', 1, 2),
+(16, 'company pvt ltd', 'company', '05/26/2015', 'gopal palace', 'ahmedabad', 'amd', 1, 1, 1, 'ahmedabad', '385367', '63.777656', '73.632665', 'Yes', 'Nature of Bussiness', 'Turn Over', 'Active', 'kk1@company.com', 'Yes', 'No', 'http://www.company.com', 'Yes', 'No', '7489758649', 'Yes', 'No', '987387873', 'Yes', 'No', '2015-05-29 02:05:19', 3, '2015-06-16 02:06:47', 1, 3),
+(17, 'example group of company', 'example', '01/11/2012', 'shreenath heaven', 'bhakti circle', 'nr. new india colony', 1, 3, 1, 'new nikol', '382345', '32.632727', '40.938733', 'No', 'web developing', 'no turn over', 'Active', 'kajalpatel0377@gmail.com', 'No', 'No', 'http://examplekajal.co.in', 'No', 'No', '7338902923', 'No', 'No', '079-283011', 'No', 'No', '2015-06-10 11:06:43', 3, '2015-06-17 11:06:47', 1, 3),
+(20, 'mieux infracon pvt ltd', 'mieux', '06/09/2015', 'gopal palace', 'nehru nagar', 'nr. nehrunagar brts', 1, 3, 1, 'nehru nagar', '376252', '24.36763', '73.373633', 'Yes', 'racharge of mobile,dth etc', 'turn over', 'Active', 'mieuxinfracon@gmail.com', 'Yes', 'No', 'http://www.mieux.in', 'Yes', 'No', '7383790377', 'Yes', 'No', '079-222222', 'Yes', 'No', '2015-06-15 03:06:21', 1, NULL, NULL, 3);
+
+--
+-- Triggers `company_master`
+--
+DROP TRIGGER IF EXISTS `log_company`;
+DELIMITER //
+CREATE TRIGGER `log_company` BEFORE UPDATE ON `company_master`
+ FOR EACH ROW INSERT INTO log_company_master
+					  (SELECT *,now() FROM company_master WHERE company_id = OLD.company_id)
+//
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -1193,14 +1233,28 @@ CREATE TABLE IF NOT EXISTS `company_product` (
   `modified_by` int(11) DEFAULT NULL,
   `company_id` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`company_product_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `company_product`
 --
 
 INSERT INTO `company_product` (`company_product_id`, `product_name`, `price`, `product_description`, `product_img_path`, `product_status`, `created_datetime`, `created_by`, `modified_datetime`, `modified_by`, `company_id`) VALUES
-(1, 'product name', '30,000', '<p>this is about my product</p>\r\n', '17.jpg', 'Active', '2015-06-15 01:06:51', 1, '2015-06-15 02:06:52', 1, 17);
+(1, 'product name', '40,000', '<p>this is about my product</p>\r\n', '17.jpg', 'Active', '2015-06-15 01:06:51', 1, '2015-06-17 11:06:47', 1, 17),
+(3, 'product name', '837363', '<p>this is all about company product, and description</p>\r\n', '20.jpg', 'Active', '2015-06-15 03:06:22', 1, NULL, NULL, 20),
+(4, 'product name', '50000', '<p>this is my product description about company product&nbsp;</p>\r\n', '13.jpg', 'Active', '2015-06-15 11:06:06', 1, '2015-06-17 11:06:40', 1, 13),
+(5, 'company', '50,000', '<p>company pvt ltd&#39;s product description here comes.</p>\r\n', '16.jpg', 'Active', '2015-06-16 02:06:14', 1, '2015-06-16 02:06:47', 1, 16);
+
+--
+-- Triggers `company_product`
+--
+DROP TRIGGER IF EXISTS `log_comp_product`;
+DELIMITER //
+CREATE TRIGGER `log_comp_product` BEFORE UPDATE ON `company_product`
+ FOR EACH ROW INSERT INTO log_company_product
+					  (SELECT *,now() FROM company_product WHERE company_product_id = OLD.company_product_id)
+//
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -1212,27 +1266,6 @@ CREATE TABLE IF NOT EXISTS `company_profile` (
   `company_profile_id` bigint(20) NOT NULL AUTO_INCREMENT,
   `company_description` text,
   `hours_of_operation` varchar(1000) DEFAULT NULL,
-  `sunday_from` varchar(50) DEFAULT NULL,
-  `sunday_to` varchar(50) DEFAULT NULL,
-  `monday_from` varchar(50) DEFAULT NULL,
-  `monday_to` varchar(50) DEFAULT NULL,
-  `tuesday_from` varchar(50) DEFAULT NULL,
-  `tuesday_to` varchar(50) DEFAULT NULL,
-  `wednesday_from` varchar(50) DEFAULT NULL,
-  `wednesday_to` varchar(50) DEFAULT NULL,
-  `thursday_from` varchar(50) DEFAULT NULL,
-  `thursday_to` varchar(50) DEFAULT NULL,
-  `friday_from` varchar(50) DEFAULT NULL,
-  `friday_to` varchar(50) DEFAULT NULL,
-  `saturday_from` varchar(50) DEFAULT NULL,
-  `saturday_to` varchar(50) DEFAULT NULL,
-  `sunday_closed` enum('Yes','No') DEFAULT NULL,
-  `monday_closed` enum('Yes','No') DEFAULT NULL,
-  `tuesday_closed` enum('Yes','No') DEFAULT NULL,
-  `wednesday_closed` enum('Yes','No') DEFAULT NULL,
-  `thursday_closed` enum('Yes','No') DEFAULT NULL,
-  `friday_closed` enum('Yes','No') DEFAULT NULL,
-  `saturday_closed` enum('Yes','No') DEFAULT NULL,
   `payment_options` varchar(1000) DEFAULT NULL,
   `company_profile_status` enum('Active','Inactive') DEFAULT NULL,
   `created_datetime` datetime DEFAULT NULL,
@@ -1242,16 +1275,28 @@ CREATE TABLE IF NOT EXISTS `company_profile` (
   `company_id` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`company_profile_id`),
   KEY `company_id` (`company_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
 --
 -- Dumping data for table `company_profile`
 --
 
-INSERT INTO `company_profile` (`company_profile_id`, `company_description`, `hours_of_operation`, `sunday_from`, `sunday_to`, `monday_from`, `monday_to`, `tuesday_from`, `tuesday_to`, `wednesday_from`, `wednesday_to`, `thursday_from`, `thursday_to`, `friday_from`, `friday_to`, `saturday_from`, `saturday_to`, `sunday_closed`, `monday_closed`, `tuesday_closed`, `wednesday_closed`, `thursday_closed`, `friday_closed`, `saturday_closed`, `payment_options`, `company_profile_status`, `created_datetime`, `created_by`, `modified_datetime`, `modified_by`, `company_id`) VALUES
-(1, '<p>this is about company</p>\r\n', 'sunday_from=04:00,sunday_to=08:00,sunday_closed=No,monday_from=04:00,monday_to=09:00,monday_closed=Yes,tuesday_from=06:00,tuesday_to=01:00,tuesday_closed=Yes,wednesday_from=09:00,wednesday_to=09:00,wednesday_closed=Yes,thursday_from=14:00,thursday_to=11:00,thursday_closed=Yes,friday_from=16:00,friday_to=01:00,friday_closed=Yes,saturday_from=12:00,saturday_to=15:00,saturday_closed=No', '01:00', '01:00', '01:00', '01:00', '01:00', '01:00', '01:00', '01:00', '01:00', '01:00', '01:00', '01:00', '01:00', '01:00', 'No', 'No', 'No', 'No', 'No', 'No', 'No', 'Cash,Master Card,Visa Card,Credit Card', 'Active', NULL, NULL, '2015-05-30 07:05:05', 1, 13),
-(7, '<p>this is all about company</p>\r\n', 'sunday_from=04:00,sunday_to=08:00,sunday_closed=No,monday_from=04:00,monday_to=09:00,monday_closed=Yes,tuesday_from=06:00,tuesday_to=01:00,tuesday_closed=Yes,wednesday_from=09:00,wednesday_to=09:00,wednesday_closed=Yes,thursday_from=14:00,thursday_to=11:00,thursday_closed=Yes,friday_from=16:00,friday_to=01:00,friday_closed=Yes,saturday_from=12:00,saturday_to=15:00,saturday_closed=No', '01:00', '01:00', '01:00', '01:00', '01:00', '01:00', '01:00', '01:00', '01:00', '01:00', '01:00', '01:00', '01:00', '01:00', 'No', 'No', 'No', 'No', 'No', 'No', 'No', 'Cash,Master Card,Visa Card,Cheques,Travellers Cheque,Financing Available', 'Active', '2015-05-29 02:05:19', 1, '2015-05-30 07:05:48', 1, 16),
-(8, '<p>this is all about my company named example</p>\r\n', 'sunday_from=01:00,sunday_to=01:00,sunday_closed=No,monday_from=09:00,monday_to=21:00,monday_closed=Yes,tuesday_from=09:00,tuesday_to=21:00,tuesday_closed=Yes,wednesday_from=09:00,wednesday_to=21:00,wednesday_closed=Yes,thursday_from=09:00,thursday_to=21:00,thursday_closed=Yes,friday_from=09:00,friday_to=21:00,friday_closed=Yes,saturday_from=09:00,saturday_to=21:00,saturday_closed=No', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Cash,Master Card,Visa Card,Debit Card,Money Orders,Cheques,Credit Card', 'Active', '2015-06-10 11:06:44', 3, NULL, NULL, 17);
+INSERT INTO `company_profile` (`company_profile_id`, `company_description`, `hours_of_operation`, `payment_options`, `company_profile_status`, `created_datetime`, `created_by`, `modified_datetime`, `modified_by`, `company_id`) VALUES
+(1, '<p>company description</p>\r\n', 'sunday_from=04:00,sunday_to=08:00,sunday_closed=No,monday_from=04:00,monday_to=09:00,monday_closed=Yes,tuesday_from=06:00,tuesday_to=01:00,tuesday_closed=Yes,wednesday_from=09:00,wednesday_to=09:00,wednesday_closed=Yes,thursday_from=14:00,thursday_to=11:00,thursday_closed=Yes,friday_from=16:00,friday_to=01:00,friday_closed=Yes,saturday_from=12:00,saturday_to=15:00,saturday_closed=No', 'Cash,Master Card,Visa Card,Credit Card', 'Active', NULL, NULL, '2015-06-17 11:06:40', 1, 13),
+(7, '<p>this is all about company</p>\r\n', 'sunday_from=04:00,sunday_to=08:00,sunday_closed=No,monday_from=04:00,monday_to=09:00,monday_closed=Yes,tuesday_from=06:00,tuesday_to=01:00,tuesday_closed=Yes,wednesday_from=09:00,wednesday_to=09:00,wednesday_closed=Yes,thursday_from=14:00,thursday_to=11:00,thursday_closed=Yes,friday_from=16:00,friday_to=01:00,friday_closed=Yes,saturday_from=12:00,saturday_to=15:00,saturday_closed=No', 'Cash,Master Card,Visa Card,Cheques,Travellers Cheque,Financing Available', 'Active', '2015-05-29 02:05:19', 1, '2015-06-16 02:06:47', 1, 16),
+(8, '<p>this is all about my company named example</p>\r\n', 'sunday_from=01:00,sunday_to=01:00,sunday_closed=No,monday_from=09:00,monday_to=21:00,monday_closed=Yes,tuesday_from=09:00,tuesday_to=21:00,tuesday_closed=Yes,wednesday_from=09:00,wednesday_to=21:00,wednesday_closed=Yes,thursday_from=09:00,thursday_to=21:00,thursday_closed=Yes,friday_from=09:00,friday_to=21:00,friday_closed=Yes,saturday_from=09:00,saturday_to=21:00,saturday_closed=No', 'Cash,Master Card,Visa Card,Debit Card,Money Orders,Cheques,Credit Card', 'Active', '2015-06-10 11:06:44', 3, '2015-06-17 11:06:47', 1, 17),
+(9, '<p>mieux infracon is iso 2008:9001 certified company.</p>\r\n', 'sunday_from=10:00,sunday_to=04:00,sunday_closed=No,monday_from=10:00,monday_to=20:00,monday_closed=Yes,tuesday_from=10:00,tuesday_to=19:00,tuesday_closed=Yes,wednesday_from=10:00,wednesday_to=19:00,wednesday_closed=Yes,thursday_from=10:00,thursday_to=23:00,thursday_closed=Yes,friday_from=10:00,friday_to=22:00,friday_closed=Yes,saturday_from=10:00,saturday_to=20:00,saturday_closed=Yes', 'Cash,Master Card,Debit Card,Money Orders', 'Active', '2015-06-15 03:06:22', 1, NULL, NULL, 20);
+
+--
+-- Triggers `company_profile`
+--
+DROP TRIGGER IF EXISTS `log_comp_profile`;
+DELIMITER //
+CREATE TRIGGER `log_comp_profile` BEFORE UPDATE ON `company_profile`
+ FOR EACH ROW INSERT INTO log_company_profile
+					  (SELECT *,now() FROM company_profile WHERE company_profile_id = OLD.company_profile_id)
+//
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -1306,6 +1351,214 @@ CREATE TABLE IF NOT EXISTS `designation_master` (
   `modified_by` int(11) DEFAULT NULL,
   PRIMARY KEY (`designation_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `log_company_advertise`
+--
+
+CREATE TABLE IF NOT EXISTS `log_company_advertise` (
+  `company_advertise_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `data_source` varchar(300) DEFAULT NULL,
+  `city_id` int(11) DEFAULT NULL,
+  `budget` varchar(200) DEFAULT NULL,
+  `year` varchar(100) DEFAULT NULL,
+  `ad_date` varchar(10) DEFAULT NULL,
+  `page` varchar(500) DEFAULT NULL,
+  `ad_status` enum('Active','Inactive') DEFAULT NULL,
+  `created_datetime` datetime DEFAULT NULL,
+  `created_by` int(11) DEFAULT NULL,
+  `modified_datetime` datetime DEFAULT NULL,
+  `modified_by` int(11) DEFAULT NULL,
+  `company_id` bigint(20) DEFAULT NULL,
+  `log_insert_time` datetime DEFAULT NULL,
+  KEY `Index 1` (`company_advertise_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+
+--
+-- Dumping data for table `log_company_advertise`
+--
+
+INSERT INTO `log_company_advertise` (`company_advertise_id`, `data_source`, `city_id`, `budget`, `year`, `ad_date`, `page`, `ad_status`, `created_datetime`, `created_by`, `modified_datetime`, `modified_by`, `company_id`, `log_insert_time`) VALUES
+(7, 'data source', 1, '830000', '2013', '06/15/2015', 'page name', 'Active', '2015-06-15 11:06:05', 1, '2015-06-17 10:06:07', 1, 13, '2015-06-17 02:05:44'),
+(5, 'source', 3, '30,000', '2010', '06/08/2015', 'no any page', 'Active', '2015-06-10 11:06:44', 3, NULL, NULL, 17, '2015-06-17 02:12:23'),
+(7, 'data source', 1, '830000', '2013', '06/15/2015', 'page name', 'Active', '2015-06-15 11:06:05', 1, '2015-06-17 11:06:44', 1, 13, '2015-06-17 02:21:10'),
+(5, 'source', 3, '30,000', '2010', '06/08/2015', 'no any page', 'Active', '2015-06-10 11:06:44', 3, '2015-06-17 11:06:23', 3, 17, '2015-06-17 02:24:02'),
+(5, 'source', 3, '30,000', '2010', '06/08/2015', 'no any page', 'Active', '2015-06-10 11:06:44', 3, '2015-06-17 11:06:02', 3, 17, '2015-06-17 02:33:47'),
+(7, 'data source', 1, '830000', '2013', '06/15/2015', 'page name', 'Active', '2015-06-15 11:06:05', 1, '2015-06-17 11:06:10', 3, 13, '2015-06-17 02:48:40');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `log_company_contact`
+--
+
+CREATE TABLE IF NOT EXISTS `log_company_contact` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `company_contact_id` bigint(20) DEFAULT NULL,
+  `contact_full_name` varchar(100) DEFAULT NULL,
+  `dob` varchar(10) DEFAULT NULL,
+  `dom` varchar(10) DEFAULT NULL,
+  `contact_mobile` varchar(20) DEFAULT NULL,
+  `contact_email` varchar(100) DEFAULT NULL,
+  `designation` varchar(255) DEFAULT NULL,
+  `contact_status` enum('Active','Inactive') DEFAULT NULL,
+  `created_datetime` datetime DEFAULT NULL,
+  `created_by` int(11) DEFAULT NULL,
+  `modified_datetime` datetime DEFAULT NULL,
+  `modified_by` int(11) DEFAULT NULL,
+  `company_id` bigint(20) DEFAULT NULL,
+  `log_insert_time` datetime DEFAULT NULL,
+  KEY `Index 1` (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=22 ;
+
+--
+-- Dumping data for table `log_company_contact`
+--
+
+INSERT INTO `log_company_contact` (`id`, `company_contact_id`, `contact_full_name`, `dob`, `dom`, `contact_mobile`, `contact_email`, `designation`, `contact_status`, `created_datetime`, `created_by`, `modified_datetime`, `modified_by`, `company_id`, `log_insert_time`) VALUES
+(7, 0, 'kajal', '05/12/2015', '12/08/2015', '9738373628', 'kajal@kajal.com', 'php developer', 'Active', '2015-06-17 11:06:43', 1, NULL, NULL, 13, '2015-06-17 02:05:43'),
+(8, 0, 'contact name', '06/15/2015', '06/02/2015', '7836339728', 'contact@gmail.com', 'designation', 'Active', '2015-06-17 11:06:43', 1, NULL, NULL, 13, '2015-06-17 02:05:44'),
+(9, 0, 'contact one', '06/08/2015', '06/09/2015', '9237256276', 'email@website.com', 'designation one', 'Active', '2015-06-17 11:06:23', 3, NULL, NULL, 17, '2015-06-17 02:12:23'),
+(10, 0, 'contact two', '06/08/2015', '06/09/2015', '7236353438', 'contact_two@website.com', 'designation two', 'Active', '2015-06-17 11:06:23', 3, NULL, NULL, 17, '2015-06-17 02:12:23'),
+(11, 0, 'test name', '06/15/1987', '06/15/2015', '9736382729', 'kajalpatel@gmail.com', 'contact desi', 'Active', '2015-06-17 11:06:23', 3, NULL, NULL, 17, '2015-06-17 02:12:23'),
+(12, 0, 'kajal', '05/12/2015', '12/08/2015', '9738373628', 'kajal@kajal.com', 'php developer', 'Active', '2015-06-17 11:06:10', 3, NULL, NULL, 13, '2015-06-17 02:21:10'),
+(13, 0, 'contact name', '06/15/2015', '06/02/2015', '7836339728', 'contact@gmail.com', 'designation', 'Active', '2015-06-17 11:06:10', 3, NULL, NULL, 13, '2015-06-17 02:21:10'),
+(14, 0, 'contact one', '06/08/2015', '06/09/2015', '9237256276', 'email@website.com', 'designation one', 'Active', '2015-06-17 11:06:02', 3, NULL, NULL, 17, '2015-06-17 02:24:02'),
+(15, 0, 'contact two', '06/08/2015', '06/09/2015', '7236353438', 'contact_two@website.com', 'designation two', 'Active', '2015-06-17 11:06:02', 3, NULL, NULL, 17, '2015-06-17 02:24:02'),
+(16, 0, 'test name', '06/15/1987', '06/15/2015', '9736382729', 'kajalpatel@gmail.com', 'contact desi', 'Active', '2015-06-17 11:06:02', 3, NULL, NULL, 17, '2015-06-17 02:24:02'),
+(17, 0, 'contact one', '06/08/2015', '06/09/2015', '9237256276', 'email@website.com', 'designation one', 'Active', '2015-06-17 11:06:47', 1, NULL, NULL, 17, '2015-06-17 02:33:47'),
+(18, 0, 'contact two', '06/08/2015', '06/09/2015', '7236353438', 'contact_two@website.com', 'designation two', 'Active', '2015-06-17 11:06:47', 1, NULL, NULL, 17, '2015-06-17 02:33:47'),
+(19, 0, 'test name', '06/15/1987', '06/15/2015', '9736382729', 'kajalpatel@gmail.com', 'contact desi', 'Active', '2015-06-17 11:06:47', 1, NULL, NULL, 17, '2015-06-17 02:33:47'),
+(20, 0, 'kajal', '05/12/2015', '12/08/2015', '9738373628', 'kajal@kajal.com', 'php developer', 'Active', '2015-06-17 11:06:40', 1, NULL, NULL, 13, '2015-06-17 02:48:40'),
+(21, 0, 'contact name', '06/15/2015', '06/02/2015', '7836339728', 'contact@gmail.com', 'designation', 'Active', '2015-06-17 11:06:40', 1, NULL, NULL, 13, '2015-06-17 02:48:40');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `log_company_master`
+--
+
+CREATE TABLE IF NOT EXISTS `log_company_master` (
+  `company_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `full_name` varchar(100) DEFAULT NULL,
+  `short_name` varchar(100) DEFAULT NULL,
+  `est_date` varchar(100) DEFAULT NULL,
+  `building` varchar(255) DEFAULT NULL,
+  `street` varchar(255) DEFAULT NULL,
+  `landmark` varchar(255) DEFAULT NULL,
+  `country_id` int(11) DEFAULT NULL,
+  `city_id` int(11) DEFAULT NULL,
+  `state_id` int(11) DEFAULT NULL,
+  `area` varchar(255) DEFAULT NULL,
+  `pincode` varchar(100) DEFAULT NULL,
+  `latitude` varchar(50) DEFAULT NULL,
+  `longitute` varchar(50) DEFAULT NULL,
+  `is_verified` enum('Yes','No') DEFAULT NULL,
+  `nob` varchar(300) DEFAULT NULL,
+  `turn_over` varchar(300) DEFAULT NULL,
+  `status` enum('Active','Inactive') DEFAULT NULL,
+  `email` varchar(300) DEFAULT NULL,
+  `email_dis` enum('Yes','No') DEFAULT NULL,
+  `email_dnd` enum('Yes','No') DEFAULT NULL,
+  `website` varchar(100) DEFAULT NULL,
+  `website_dis` enum('Yes','No') DEFAULT NULL,
+  `website_dnd` enum('Yes','No') DEFAULT NULL,
+  `mobile` varchar(50) DEFAULT NULL,
+  `mobile_dis` enum('Yes','No') DEFAULT NULL,
+  `mobile_dnd` enum('Yes','No') DEFAULT NULL,
+  `landline` varchar(50) DEFAULT NULL,
+  `landline_dis` enum('Yes','No') DEFAULT NULL,
+  `landline_dnd` enum('Yes','No') DEFAULT NULL,
+  `created_datetime` datetime DEFAULT NULL,
+  `created_by` int(11) DEFAULT NULL,
+  `modified_datetime` datetime DEFAULT NULL,
+  `modified_by` int(11) DEFAULT NULL,
+  `user_id` tinyint(4) DEFAULT NULL,
+  `log_insert_time` datetime DEFAULT NULL,
+  KEY `Index 1` (`company_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
+
+--
+-- Dumping data for table `log_company_master`
+--
+
+INSERT INTO `log_company_master` (`company_id`, `full_name`, `short_name`, `est_date`, `building`, `street`, `landmark`, `country_id`, `city_id`, `state_id`, `area`, `pincode`, `latitude`, `longitute`, `is_verified`, `nob`, `turn_over`, `status`, `email`, `email_dis`, `email_dnd`, `website`, `website_dis`, `website_dnd`, `mobile`, `mobile_dis`, `mobile_dnd`, `landline`, `landline_dis`, `landline_dnd`, `created_datetime`, `created_by`, `modified_datetime`, `modified_by`, `user_id`, `log_insert_time`) VALUES
+(13, 'kajal', 'kk', '05/27/2015', 'gopal palace', 'nehrunagar', 'nh', 1, 1, 1, 'naheru nagar', '384658', '23.023046', '72.537736', 'Yes', 'Nature of Bussiness', 'Turn Over', 'Active', 'kajalpatel0377@gmail.com', 'No', 'No', 'http://www.kkp.com', 'Yes', 'Yes', '9168753456', 'No', 'Yes', '43526789', 'Yes', 'No', '2015-06-09 23:00:32', 2, '2015-06-17 10:06:07', 1, 2, '2015-06-17 02:05:43'),
+(17, 'example group of company', 'example', '01/11/2012', 'shreenath heaven', 'bhakti circle', 'nr. new india colony', 1, 3, 1, 'new nikol', '382345', '32.632727', '40.938733', 'Yes', 'web developing', 'no turn over', 'Active', 'kajalpatel0377@gmail.com', 'Yes', 'No', 'http://examplekajal.co.in', 'Yes', 'No', '7338902923', 'Yes', 'No', '079-283011', 'Yes', 'No', '2015-06-10 11:06:43', 3, NULL, NULL, 3, '2015-06-17 02:12:23'),
+(13, 'kajal', 'kk', '05/27/2015', 'gopal palace', 'nehrunagar', 'nh', 1, 1, 1, 'naheru nagar', '384658', '23.023046', '72.537736', 'Yes', 'Nature of Bussiness', 'Turn Over', 'Active', 'kajalpatel0377@gmail.com', 'No', 'No', 'http://www.kkp.com', 'Yes', 'Yes', '9168753456', 'No', 'Yes', '43526789', 'Yes', 'No', '2015-06-09 23:00:32', 2, '2015-06-17 11:06:43', 1, 2, '2015-06-17 02:21:10'),
+(13, 'kajal', 'kk', '05/27/2015', 'gopal palace', 'nehrunagar', 'nh', 1, 1, 1, 'naheru nagar', '384658', '23.023046', '72.537736', 'No', 'Nature of Bussiness', 'Turn Over', 'Active', 'kajalpatel0377@gmail.com', 'No', 'No', 'http://www.kkp.com', 'No', 'No', '9168753456', 'No', 'No', '43526789', 'No', 'No', '2015-06-09 23:00:32', 2, '2015-06-17 11:06:10', 3, 3, '2015-06-17 02:22:35'),
+(17, 'example group of company', 'example', '01/11/2012', 'shreenath heaven', 'bhakti circle', 'nr. new india colony', 1, 3, 1, 'new nikol', '382345', '32.632727', '40.938733', 'No', 'web developing', 'no turn over', 'Active', 'kajalpatel0377@gmail.com', 'No', 'No', 'http://examplekajal.co.in', 'No', 'No', '7338902923', 'No', 'No', '079-283011', 'No', 'No', '2015-06-10 11:06:43', 3, '2015-06-17 11:06:23', 3, 3, '2015-06-17 02:24:01'),
+(17, 'example group of company', 'example', '01/11/2012', 'shreenath heaven', 'bhakti circle', 'nr. new india colony', 1, 3, 1, 'new nikol', '382345', '32.632727', '40.938733', 'No', 'web developing', 'no turn over', 'Active', 'kajalpatel0377@gmail.com', 'No', 'No', 'http://examplekajal.co.in', 'No', 'No', '7338902923', 'No', 'No', '079-283011', 'No', 'No', '2015-06-10 11:06:43', 3, '2015-06-17 11:06:01', 3, 3, '2015-06-17 02:33:47'),
+(13, 'kajal', 'kk', '05/27/2015', 'gopal palace', 'nehrunagar', 'nh', 1, 1, 1, 'naheru nagar', '384658', '23.023046', '72.537736', 'No', 'Nature of Bussiness', 'Turn Over', 'Active', 'kajalpatel0377@gmail.com', 'No', 'No', 'http://www.kkp.com', 'No', 'No', '9168753456', 'No', 'No', '43526789', 'No', 'No', '2015-06-09 23:00:32', 2, '2015-06-17 11:06:10', 2, 2, '2015-06-17 02:48:40');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `log_company_product`
+--
+
+CREATE TABLE IF NOT EXISTS `log_company_product` (
+  `company_product_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `product_name` varchar(200) DEFAULT NULL,
+  `price` varchar(200) DEFAULT NULL,
+  `product_description` text,
+  `product_img_path` varchar(200) DEFAULT NULL,
+  `product_status` enum('Active','Inactive') DEFAULT NULL,
+  `created_datetime` datetime DEFAULT NULL,
+  `created_by` int(11) DEFAULT NULL,
+  `modified_datetime` datetime DEFAULT NULL,
+  `modified_by` int(11) DEFAULT NULL,
+  `company_id` bigint(20) DEFAULT NULL,
+  `log_insert_time` datetime DEFAULT NULL,
+  KEY `Index 1` (`company_product_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+
+--
+-- Dumping data for table `log_company_product`
+--
+
+INSERT INTO `log_company_product` (`company_product_id`, `product_name`, `price`, `product_description`, `product_img_path`, `product_status`, `created_datetime`, `created_by`, `modified_datetime`, `modified_by`, `company_id`, `log_insert_time`) VALUES
+(4, 'product name', '50000', '<p>this is my product description about company product&nbsp;</p>\r\n', '13.jpg', 'Active', '2015-06-15 11:06:06', 1, '2015-06-17 10:06:07', 1, 13, '2015-06-17 02:05:44'),
+(1, 'product name', '40,000', '<p>this is about my product</p>\r\n', '17.jpg', 'Active', '2015-06-15 01:06:51', 1, '2015-06-15 02:06:20', 1, 17, '2015-06-17 02:12:23'),
+(4, 'product name', '50000', '<p>this is my product description about company product&nbsp;</p>\r\n', '13.jpg', 'Active', '2015-06-15 11:06:06', 1, '2015-06-17 11:06:44', 1, 13, '2015-06-17 02:21:10'),
+(1, 'product name', '40,000', '<p>this is about my product</p>\r\n', '17.jpg', 'Active', '2015-06-15 01:06:51', 1, '2015-06-17 11:06:23', 3, 17, '2015-06-17 02:24:02'),
+(1, 'product name', '40,000', '<p>this is about my product</p>\r\n', '17.jpg', 'Active', '2015-06-15 01:06:51', 1, '2015-06-17 11:06:02', 3, 17, '2015-06-17 02:33:47'),
+(4, 'product name', '50000', '<p>this is my product description about company product&nbsp;</p>\r\n', '13.jpg', 'Active', '2015-06-15 11:06:06', 1, '2015-06-17 11:06:10', 3, 13, '2015-06-17 02:48:40');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `log_company_profile`
+--
+
+CREATE TABLE IF NOT EXISTS `log_company_profile` (
+  `company_profile_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `company_description` text,
+  `hours_of_operation` varchar(1000) DEFAULT NULL,
+  `payment_options` varchar(1000) DEFAULT NULL,
+  `company_profile_status` enum('Active','Inactive') DEFAULT NULL,
+  `created_datetime` datetime DEFAULT NULL,
+  `created_by` int(11) DEFAULT NULL,
+  `modified_datetime` datetime DEFAULT NULL,
+  `modified_by` int(11) DEFAULT NULL,
+  `company_id` bigint(20) DEFAULT NULL,
+  `log_insert_time` datetime DEFAULT NULL,
+  KEY `Index 1` (`company_profile_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+
+--
+-- Dumping data for table `log_company_profile`
+--
+
+INSERT INTO `log_company_profile` (`company_profile_id`, `company_description`, `hours_of_operation`, `payment_options`, `company_profile_status`, `created_datetime`, `created_by`, `modified_datetime`, `modified_by`, `company_id`, `log_insert_time`) VALUES
+(1, '<p>company description</p>\r\n', 'sunday_from=04:00,sunday_to=08:00,sunday_closed=No,monday_from=04:00,monday_to=09:00,monday_closed=Yes,tuesday_from=06:00,tuesday_to=01:00,tuesday_closed=Yes,wednesday_from=09:00,wednesday_to=09:00,wednesday_closed=Yes,thursday_from=14:00,thursday_to=11:00,thursday_closed=Yes,friday_from=16:00,friday_to=01:00,friday_closed=Yes,saturday_from=12:00,saturday_to=15:00,saturday_closed=No', 'Cash,Master Card,Visa Card,Credit Card', 'Active', NULL, NULL, '2015-06-17 10:06:07', 1, 13, '2015-06-17 02:05:43'),
+(8, '<p>this is all about my company named example</p>\r\n', 'sunday_from=01:00,sunday_to=01:00,sunday_closed=No,monday_from=09:00,monday_to=21:00,monday_closed=Yes,tuesday_from=09:00,tuesday_to=21:00,tuesday_closed=Yes,wednesday_from=09:00,wednesday_to=21:00,wednesday_closed=Yes,thursday_from=09:00,thursday_to=21:00,thursday_closed=Yes,friday_from=09:00,friday_to=21:00,friday_closed=Yes,saturday_from=09:00,saturday_to=21:00,saturday_closed=No', 'Cash,Master Card,Visa Card,Debit Card,Money Orders,Cheques,Credit Card', 'Active', '2015-06-10 11:06:44', 3, NULL, NULL, 17, '2015-06-17 02:12:23'),
+(1, '<p>company description</p>\r\n', 'sunday_from=04:00,sunday_to=08:00,sunday_closed=No,monday_from=04:00,monday_to=09:00,monday_closed=Yes,tuesday_from=06:00,tuesday_to=01:00,tuesday_closed=Yes,wednesday_from=09:00,wednesday_to=09:00,wednesday_closed=Yes,thursday_from=14:00,thursday_to=11:00,thursday_closed=Yes,friday_from=16:00,friday_to=01:00,friday_closed=Yes,saturday_from=12:00,saturday_to=15:00,saturday_closed=No', 'Cash,Master Card,Visa Card,Credit Card', 'Active', NULL, NULL, '2015-06-17 11:06:43', 1, 13, '2015-06-17 02:21:10'),
+(8, '<p>this is all about my company named example</p>\r\n', 'sunday_from=01:00,sunday_to=01:00,sunday_closed=No,monday_from=09:00,monday_to=21:00,monday_closed=Yes,tuesday_from=09:00,tuesday_to=21:00,tuesday_closed=Yes,wednesday_from=09:00,wednesday_to=21:00,wednesday_closed=Yes,thursday_from=09:00,thursday_to=21:00,thursday_closed=Yes,friday_from=09:00,friday_to=21:00,friday_closed=Yes,saturday_from=09:00,saturday_to=21:00,saturday_closed=No', 'Cash,Master Card,Visa Card,Debit Card,Money Orders,Cheques,Credit Card', 'Active', '2015-06-10 11:06:44', 3, '2015-06-17 11:06:23', 3, 17, '2015-06-17 02:24:02'),
+(8, '<p>this is all about my company named example</p>\r\n', 'sunday_from=01:00,sunday_to=01:00,sunday_closed=No,monday_from=09:00,monday_to=21:00,monday_closed=Yes,tuesday_from=09:00,tuesday_to=21:00,tuesday_closed=Yes,wednesday_from=09:00,wednesday_to=21:00,wednesday_closed=Yes,thursday_from=09:00,thursday_to=21:00,thursday_closed=Yes,friday_from=09:00,friday_to=21:00,friday_closed=Yes,saturday_from=09:00,saturday_to=21:00,saturday_closed=No', 'Cash,Master Card,Visa Card,Debit Card,Money Orders,Cheques,Credit Card', 'Active', '2015-06-10 11:06:44', 3, '2015-06-17 11:06:02', 3, 17, '2015-06-17 02:33:47'),
+(1, '<p>company description</p>\r\n', 'sunday_from=04:00,sunday_to=08:00,sunday_closed=No,monday_from=04:00,monday_to=09:00,monday_closed=Yes,tuesday_from=06:00,tuesday_to=01:00,tuesday_closed=Yes,wednesday_from=09:00,wednesday_to=09:00,wednesday_closed=Yes,thursday_from=14:00,thursday_to=11:00,thursday_closed=Yes,friday_from=16:00,friday_to=01:00,friday_closed=Yes,saturday_from=12:00,saturday_to=15:00,saturday_closed=No', 'Cash,Master Card,Visa Card,Credit Card', 'Active', NULL, NULL, '2015-06-17 11:06:10', 3, 13, '2015-06-17 02:48:40');
 
 -- --------------------------------------------------------
 
@@ -1438,7 +1691,7 @@ CREATE TABLE IF NOT EXISTS `user_master` (
 --
 
 INSERT INTO `user_master` (`user_id`, `first_name`, `last_name`, `email`, `status`, `username`, `password`, `user_role_id`, `created_by`, `modified_by`, `is_role_updated`, `created_datetime`, `modified_datetime`, `assigned_to`) VALUES
-(1, 'Harish', 'sharma', 'sharmaharish09@yahoo.co.in', 'Active', 'admin', 'harishsharma', 1, 1, 1, 'N', '2015-06-12 03:18:17', '2015-06-13 12:06:57', 1),
+(1, 'Harish', 'sharma', 'sharmaharish09@yahoo.co.in', 'Active', 'admin', 'adminpassword', 1, 1, 1, 'N', '2015-06-12 03:18:17', '2015-06-17 11:06:16', 1),
 (2, 'kajal', 'patel', 'kajalpatel0377@gmail.com', 'Active', 'kajal', 'kajalpatel', 2, 1, 1, 'N', '2015-06-12 03:18:15', '2015-06-12 12:06:24', 1),
 (3, 'kk', 'patel', 'email2kkpatel@gmail.com', 'Active', 'kkp', 'kkpatel', 3, 2, 1, 'N', '2015-06-12 03:18:18', NULL, 2),
 (18, 'kajal1', 'patel1', 'emails', 'Active', 'names', 'names', 3, 18, 1, 'N', '2015-06-11 11:06:33', '2015-06-11 11:06:33', 1),
