@@ -105,6 +105,12 @@ if($_SESSION['user']['user-role']=='Master-Admin'){
 											echo 'selected';
 										 }*/
 								//echo in_array($arrCompanyCategoryData, $a);
+								/*array_filter($arrCompanyCategoryData,function ($ac) {
+																 if(array_key_exists('category_id', $ac) && $ac['category_id'] == $arrCategoryRecords[$intIndex]['category_id']){
+																	 echo 'selected';
+																 }
+															}
+											);*/
 								for ($intIndex1 = 0; $intIndex1 < count($arrCompanyCategoryData); $intIndex1++){
 										 if($arrCategoryRecords[$intIndex]['category_id']==$arrCompanyCategoryData[$intIndex1]['category_id']){
 											echo 'selected';
@@ -1068,13 +1074,13 @@ if($_SESSION['user']['user-role']=='Master-Admin'){
               </div>
             </div>
 			<div class="row-fluid">
-              <div class="control-group span8">
+              <div class="control-group span12">
                 <label class="control-label" for="upload_image">Upload image</label>
 				<div class="controls">
 					<div id="previewDiv"><?php echo (isset($arrCompanyProductData[0]['product_img_path']) ? "<img src='uploads/".$arrCompanyProductData[0]['product_img_path']."' id='photo'>" : ''); ?></div>
 					<div id="thumbs" style="padding:5px; width:600px"></div>
-					<input type="file" class="required" name="photoimg" id="photoimg" />
-					<input type="hidden" name="img_path" value="" id="img_path" />
+					<input type="file" class="required" name="photoimg" id="photoimg" value="<?php echo (isset($arrCompanyProductData[0]['product_img_path']) ? "uploads/".$arrCompanyProductData[0]['product_img_path'] : ''); ?>"/>
+					<input type="hidden" name="img_path" id="img_path" value="<?php echo (isset($arrCompanyProductData[0]['product_img_path']) ? "uploads/".$arrCompanyProductData[0]['product_img_path'] : ''); ?>" />
 					<input type="hidden" name="x_axis" value="" id="x_axis" />
 					<input type="hidden" name="y_axis" value="" id="y_axis" />
 					<input type="hidden" name="x2_axis" value="" id="x2_axis" />

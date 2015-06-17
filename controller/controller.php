@@ -37,9 +37,9 @@ class CommonController
 		}
 		else
 		{
-		?> <div width="500px" class="alert alert-error"><strong>Please enter a valid username or password.
-		<?php session_destroy();
-		?></strong></div>
+			session_unset();
+			session_destroy();
+		?> <div width="500px" class="alert alert-error"><strong>Please enter a valid username or password.</strong></div>
 		<?php 
 		}			
 	}
@@ -164,6 +164,25 @@ class CommonController
 			return $strResult;
 	}
 
+	function createTrigger($triggerName,$triggerEvent,$strTableName,$strLogTableName,$strkeyColoum)
+	{
+		//	$strSQL = "DROP TRIGGER IF EXISTS ".$triggerName."";
+			if(strtoupper($triggerEvent)=="BEFORE UPDATE"){
+			$strSQL = "DROP TRIGGER IF EXISTS ".$triggerName."
+						CREATE TRIGGER ".$triggerName." BEFORE UPDATE ON ".$strTableName."
+						FOR EACH ROW 
+						   INSERT INTO ".$strLogTableName."
+								  (SELECT *,now() FROM ".$strTableName." WHERE ".$strkeyColoum." = OLD.".$strkeyColoum.");";
+			}else if(strtoupper($triggerEvent)=="BEFORE INSERT"){
+				$strSQL .= "DROP TRIGGER IF EXISTS ".$triggerName."
+							CREATE TRIGGER ".$triggerName." BEFORE INSERT ON ".$strTableName."
+								FOR EACH ROW 
+								INSERT INTO ".$strLogTableName." (company_contact_id, contact_full_name, dob, dom, contact_mobile, contact_email, designation, contact_status, created_datetime, created_by, modified_datetime, modified_by, company_id, insert_log_time)
+										 values (new.company_contact_id, new.contact_full_name, new.dob, new.dom, new.contact_mobile, new.contact_email, new.designation, new.contact_status, new.created_datetime, new.created_by, new.modified_datetime, new.modified_by, new.company_id, now());";
+			}
+			$this->dbConnect->Execute($strSQL);
+	}
+	
 	public function saveCategory( $strCategoryId)
 		{
 			$arrField = array('category_name');
@@ -213,7 +232,7 @@ class CommonController
 							case 'jpg':
 								$im_src = imagecreatefromjpeg($img);
 								imagecopyresampled($nimg,$im_src,0,0,$x1,$y1,$nw,$nh,$w,$h);
-								$r = imagejpeg($nimg,$path.$new_name,90);
+								$r = @imagejpeg($nimg,$path.$new_name);
 								break;
 							case 'png':
 								$im_src = imagecreatefrompng($img);
@@ -230,10 +249,7 @@ class CommonController
 								$r = @imagegif($nimg,$path.$new_name);
 								break;
 						}
-					
-				//	mysql_query("UPDATE users SET profile_image_small='$new_name' WHERE uid='$session_id'");
-					echo $new_name;
-					return $new_name;
+			return $new_name;
 		}
 
 

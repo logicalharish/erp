@@ -1,6 +1,6 @@
-<?php include('header.php'); ?>
-
-
+<?php include('header.php'); 
+	$arrRecords = $objModel->getRecords(null,null,null,'user-company');
+?>
 			<div>
 				<ul class="breadcrumb">
 					<li>
@@ -12,6 +12,23 @@
 				</ul>
 			</div>
 			<div class="sortable row-fluid">
+				<?php if($_SESSION['user']['user-role']=='Master-Admin'){
+							$length  = count(array_filter(
+															$arrRecords,
+															function ($a) {
+																return array_key_exists('is_verified', $a) && $a['is_verified'] == 'No';
+															}
+														)
+											);
+				?>
+				
+					<a data-rel="tooltip" title="<?php echo $length ; ?> unverified companies." class="well span3 top-block" href="company.php">
+						<span class="icon32 icon-color icon-bookmark"></span>
+						<div>Total Companies</div>
+						<div><?php echo count($arrRecords); ?></div>
+						<span class="notification red"><?php echo $length ; ?></span>
+					</a>
+				<?php } ?>
 				<a data-rel="tooltip" title="6 new members." class="well span3 top-block" href="#">
 					<span class="icon32 icon-red icon-user"></span>
 					<div>Total Members</div>
@@ -19,7 +36,7 @@
 					<span class="notification">6</span>
 				</a>
 
-				<a data-rel="tooltip" title="4 new pro members." class="well span3 top-block" href="#">
+				<!--<a data-rel="tooltip" title="4 new pro members." class="well span3 top-block" href="#">
 					<span class="icon32 icon-color icon-star-on"></span>
 					<div>Pro Members</div>
 					<div>228</div>
@@ -38,7 +55,7 @@
 					<div>Messages</div>
 					<div>25</div>
 					<span class="notification red">12</span>
-				</a>
+				</a>-->
 			</div>
 			
 			<div class="row-fluid">

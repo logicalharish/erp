@@ -49,7 +49,7 @@ $arrField = array('*');
 											$arrStateRecords = $objControl->getRecords('branch_master', 'branch_id', $arrRecords[$intIndex]['state_id'], '');
 											$arrCountryRecords = $objControl->getRecords('country_master', 'country_id', $arrRecords[$intIndex]['country_id'], '');
 									echo $arrCityRecords[0]['city_name'].' ,'.$arrStateRecords[0]['branch_name'].' ,'.$arrCountryRecords[0]['country_name'];?></td>
-								<td class="center" width="20%"><?php
+								<td class="center"><?php
 													if($arrRecords[$intIndex]['status']=='Active')
 													{
 														$strClass = 'label-success';

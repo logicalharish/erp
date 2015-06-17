@@ -105,7 +105,7 @@ $objModel -> checkSession();
 					<ul class="dropdown-menu">
 						<li><a href="profile.php">Profile</a></li>
 						<li class="divider"></li>
-						<li><a href="login.html">Logout</a></li>
+						<li><a href="login.php?action=logout">Logout</a></li>
 					</ul>
 				</div>
 				<!-- user dropdown ends -->

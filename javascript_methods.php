@@ -72,7 +72,7 @@
 		$("#removeRows").live('click', function(event) {
 			if($('#mytable >tbody >tr').length > 1){
 				$(this).parent().parent().remove();
-			}
+			}else{alert("There must be at least one contact.");}
 		});
 		
 		// Validate form
@@ -176,6 +176,10 @@
 									},
 									newPwd:{
 										minlength: 10
+									},
+									photoimg:{
+										required:false,
+										imageExist:true
 									}
 									
 		},
@@ -250,13 +254,17 @@
 				            	  return arg != value;
 				            	 }, "Please select any one!");
 
-							 $.validator.addMethod("lat_long", function(value, element) {
+							$.validator.addMethod("lat_long", function(value, element) {
 				                            return /^-?((1?[0-7]?|[0-9]?)[0-9]|180)\.[0-9]{1,6}$/.test(value);
 				                    },"Invalid Entry");
 									
-							 $.validator.addMethod("pwdMatch", function(value, element) {
+							$.validator.addMethod("pwdMatch", function(value, element) {
 				                            return $('#newPwd').val() == value;
 				                    },"New Password and Conform password do not Match.");
+							
+							$.validator.addMethod("imageExist", function(value, element) {
+											return  $('#img_path').val() != "";
+				                    },"Please upload Image.");
 									
 							$.validator.addMethod("tablewithnorow", function (value) {
 									if ($("#visibleDiv").length === 0) {

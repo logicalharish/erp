@@ -60,8 +60,9 @@
 				{
 					if(isset($_GET['action']) || $_GET['action']== 'logout')
 					{
-						header('location:login.php');
+						session_unset();
 						session_destroy();
+						header('location:login.php');
 						exit;
 					}
 					else
