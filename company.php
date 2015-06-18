@@ -73,7 +73,7 @@ $arrField = array('*');
 												}
 									?>
 								</td>
-								<td class="center">
+								<td>
 									<!--<a class="btn btn-success" href="#">
 										<i class="icon-zoom-in icon-white"></i>  
 										View                                            

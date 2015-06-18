@@ -52,6 +52,7 @@ switch ($strAction)
 		$arrData['password'] = $_REQUEST['password'];
 		$arrData['user_role_id'] = $_REQUEST['userRole'];
 		$arrData['assigned_to'] = $_REQUEST['assigned_to'];
+		$arrData['user_status'] = isset($_REQUEST['user_status']) ? $_REQUEST['user_status'] : 'Active' ;
 		$arrModules = $_REQUEST['modules'];
 		if($arrData['user_role_id']==""){
 			$arrData['user_role_id']=3;

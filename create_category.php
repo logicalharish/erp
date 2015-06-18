@@ -42,7 +42,7 @@ if (isset($intPageId) && $intPageId != '')
 							 <div class="control-group">
 								<label class="control-label" for="parent_category_id">Parent Category</label>
 								<div class="controls">
-									<select name="parent_category_id" id="parent_category_id"  class="input-xlarge focused required" >
+									<select name="parent_category_id" id="parent_category_id"  class="input-xlarge focused span4 required" >
 										<option value="">&mdash; Please Select &mdash;</option>
 										<option value="none">NO PARENT</option>
 										<?php
@@ -57,13 +57,13 @@ if (isset($intPageId) && $intPageId != '')
 							  <div class="control-group">
 								<label class="control-label" for="txt_category">Category Name</label>
 								<div class="controls">
-								  <input class="input-xlarge focused required" id="txt_category" name="txt_category" type="text" value="<?php echo (isset($arrData[0]['category_name'])?$arrData[0]['category_name']:''); ?>">
+								  <input class="input-xlarge focused span4 required" id="txt_category" name="txt_category" type="text" value="<?php echo (isset($arrData[0]['category_name'])?$arrData[0]['category_name']:''); ?>">
 								</div>
 							  </div>
 							 <div class="control-group">
 								<label class="control-label" for="sel_status">Status</label>
 								<div class="controls">
-								  <select class="input-xlarge focused required" id="sel_status" name="sel_status" >
+								  <select class="input-xlarge focused span4 required" id="sel_status" name="sel_status" >
 								  <option value="">&mdash; Please Select &mdash;</option>
                                   <option <?php echo (isset($arrData[0]['status']) && $arrData[0]['status']=='Active' ?'selected="selected"':''); ?> value="Active">Active</option>
                                   <option <?php echo (isset($arrData[0]['status']) && $arrData[0]['status']=='Inactive' ?'selected="selected"':''); ?> value="Inactive">Inactive</option>

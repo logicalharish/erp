@@ -40,7 +40,7 @@ $arrStateOption = $objControl->getRecords('branch_master', null, null, 'branch_n
 							 <div class="control-group">
 								<label class="control-label" for="country_id">Country Name</label>
 								<div class="controls">
-								  <select id="country_id"  name="country_id" class="input-xlarge focused required" >
+								  <select id="country_id"  name="country_id" class="input-xlarge focused span4 required" >
 										<option value="">&mdash; Please Select &mdash;</option>
 										<?php
 										for ($intIndex = 0; $intIndex < count($arrCountryOption); $intIndex++)
@@ -54,7 +54,7 @@ $arrStateOption = $objControl->getRecords('branch_master', null, null, 'branch_n
 							  <div class="control-group">
 								<label class="control-label" for="state_id">State Name</label>
 								<div class="controls">
-								  <select name="state_id" id="state_id"  class="input-xlarge focused required" >
+								  <select name="state_id" id="state_id"  class="input-xlarge focused span4 required" >
 										<option value="">&mdash; Please Select &mdash;</option>
 										<?php
 										for ($intIndex = 0; $intIndex < count($arrStateOption); $intIndex++)
@@ -68,13 +68,13 @@ $arrStateOption = $objControl->getRecords('branch_master', null, null, 'branch_n
 							  <div class="control-group">
 								<label class="control-label" for="txt_city">City Name</label>
 								<div class="controls">
-								  <input class="input-xlarge focused required" id="txt_city" name="txt_city" type="text" value="<?php echo (isset($arrData[0]['city_name'])?$arrData[0]['city_name']:''); ?>">
+								  <input class="input-xlarge focused span4 required" id="txt_city" name="txt_city" type="text" value="<?php echo (isset($arrData[0]['city_name'])?$arrData[0]['city_name']:''); ?>">
 								</div>
 							  </div>
 							 <div class="control-group">
 								<label class="control-label" for="sel_status">Status</label>
 								<div class="controls">
-								  <select class="input-xlarge focused required" id="sel_status" name="sel_status" >
+								  <select class="input-xlarge focused span4 required" id="sel_status" name="sel_status" >
 									  <option value="">&mdash; Please Select &mdash;</option>
 									  <option <?php echo (isset($arrData[0]['status']) && $arrData[0]['status']=='Active' ?'selected="selected"':''); ?> value="Active">Active</option>
 									  <option <?php echo (isset($arrData[0]['status']) && $arrData[0]['status']=='Inactive' ?'selected="selected"':''); ?> value="Inactive">Inactive</option>

@@ -35,13 +35,13 @@ if (isset($intModuleId) && $intModuleId != '')
 					<div class="control-group">
 						<label class="control-label" for="module_name">Module  Name</label>
 						<div class="controls">
-							<input class="input-xlarge focused required" id="module_name" name="module_name" type="text" value="<?php echo (isset($arrData[0]['module_name']) ? $arrData[0]['module_name'] : ''); ?>">
+							<input class="input-xlarge focused span4 required" id="module_name" name="module_name" type="text" value="<?php echo (isset($arrData[0]['module_name']) ? $arrData[0]['module_name'] : ''); ?>">
 						</div>
 					</div>
 					<div class="control-group">
 						<label class="control-label" for="module_menu_link">Module  Menu Link</label>
 						<div class="controls">
-							<input class="input-xlarge focused required" id="module_menu_link" name="module_menu_link" type="text" value="<?php echo (isset($arrData[0]['module_menu_link']) ? $arrData[0]['module_menu_link'] : ''); ?>">
+							<input class="input-xlarge focused span4 required" id="module_menu_link" name="module_menu_link" type="text" value="<?php echo (isset($arrData[0]['module_menu_link']) ? $arrData[0]['module_menu_link'] : ''); ?>">
 						</div>
 					</div>
 					<div class="control-group">
@@ -66,7 +66,7 @@ if (isset($intModuleId) && $intModuleId != '')
 					<div class="control-group">
 						<label class="control-label" for="status">Status</label>
 						<div class="controls">
-							<select class="input-xlarge focused required" id="status" name="status" >
+							<select class="input-xlarge focused span4 required" id="status" name="status" >
 							<option value="">&mdash; Please Select &mdash;</option>
 								<option <?php echo (isset($arrData[0]['status']) && $arrData[0]['status'] == 'Active' ? 'selected="selected"' : ''); ?> value="Active">Active</option>
 								<option <?php echo (isset($arrData[0]['status']) && $arrData[0]['status'] == 'Inactive' ? 'selected="selected"' : ''); ?> value="Inactive">Inactive</option>

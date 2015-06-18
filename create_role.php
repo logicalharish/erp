@@ -33,13 +33,13 @@ if(isset($intRoleId) && $intRoleId !='')
 							  <div class="control-group">
 								<label class="control-label" for="role_name">Role Name</label>
 								<div class="controls">
-								  <input class="input-xlarge focused required" id="txt_role" name="txt_role" type="text" value="<?php echo (isset($arrData[0]['role_name'])?$arrData[0]['role_name']:''); ?>">
+								  <input class="input-xlarge focused span4 required" id="txt_role" name="txt_role" type="text" value="<?php echo (isset($arrData[0]['role_name'])?$arrData[0]['role_name']:''); ?>">
 								</div>
 							  </div>
 							 <div class="control-group">
 								<label class="control-label" for="sel_status">Status</label>
 								<div class="controls">
-								  <select class="input-xlarge focused required" id="status" name="status" >
+								  <select class="input-xlarge focused span4 required" id="status" name="status" >
 									<option value="">&mdash; Please Select &mdash;</option>
 									<option <?php echo (isset($arrData[0]['status']) && $arrData[0]['status']=='Active' ?'selected="selected"':''); ?> value="Active">Active</option>
 									<option <?php echo (isset($arrData[0]['status']) && $arrData[0]['status']=='Inactive' ?'selected="selected"':''); ?> value="Inactive">Inactive</option>

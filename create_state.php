@@ -38,7 +38,7 @@ $arrCountryOption = $objControl->getRecords('country_master', null, null, 'count
 							 <div class="control-group">
 								<label class="control-label" for="country_id">Country Name</label>
 								<div class="controls">
-									<select name="country_id" id="country_id"  class="input-xlarge focused required" >
+									<select name="country_id" id="country_id"  class="input-xlarge focused span4 required" >
 										<option value="">&mdash; Please Select &mdash;</option>
 										<?php
 										for ($intIndex = 0; $intIndex < count($arrCountryOption); $intIndex++)
@@ -52,13 +52,13 @@ $arrCountryOption = $objControl->getRecords('country_master', null, null, 'count
 							  <div class="control-group">
 								<label class="control-label" for="txt_state">State Name</label>
 								<div class="controls">
-								  <input class="input-xlarge focused required" data-trim data-min-chars="3" id="txt_state" name="txt_state" type="text" value="<?php echo (isset($arrData[0]['branch_name'])?$arrData[0]['branch_name']:''); ?>">
+								  <input class="input-xlarge focused span4 required" data-trim data-min-chars="3" id="txt_state" name="txt_state" type="text" value="<?php echo (isset($arrData[0]['branch_name'])?$arrData[0]['branch_name']:''); ?>">
 								</div>
 							  </div>
 							 <div class="control-group">
 								<label class="control-label" for="sel_status">Status</label>
 								<div class="controls">
-								  <select class="input-xlarge focused required" id="sel_status" name="sel_status" >
+								  <select class="input-xlarge focused span4 required" id="sel_status" name="sel_status" >
 								  <option value="">&mdash; Please Select &mdash;</option>
                                   <option <?php echo (isset($arrData[0]['status']) && $arrData[0]['status']=='Active' ?'selected="selected"':''); ?> value="Active">Active</option>
                                   <option <?php echo (isset($arrData[0]['status']) && $arrData[0]['status']=='Inactive' ?'selected="selected"':''); ?> value="Inactive">Inactive</option>

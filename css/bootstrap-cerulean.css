@@ -797,7 +797,7 @@ input[type="checkbox"]:focus {
   width: 60px;
 }
 .input-small {
-  width: 90px;
+  width: 80%;
 }
 .input-medium {
   width: 150px;
@@ -806,7 +806,7 @@ input[type="checkbox"]:focus {
   width: 210px;
 }
 .input-xlarge {
-  width: 270px;
+  width: 80%;
 }
 .input-xxlarge {
   width: 530px;

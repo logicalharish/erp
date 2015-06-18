@@ -93,7 +93,7 @@ if($_SESSION['user']['user-role']=='Master-Admin'){
               <div class="control-group span6">
                 <label class="control-label" for="category_id">Category</label>
                 <div class="controls">
-					<select multiple data-rel="chosen" name="category_id[]" id="category_id"  class="input-xlarge focused required" >
+					<select multiple data-rel="chosen" name="category_id[]" id="category_id"  class="input-xlarge focused required" style="width: 70%">
 						<?php
 							for ($intIndex = 0; $intIndex < count($arrCategoryRecords); $intIndex++)
 							{
@@ -219,29 +219,13 @@ if($_SESSION['user']['user-role']=='Master-Admin'){
               </div>
             </div>
             <div class="row-fluid">
-			<?php if($_SESSION['user']['user-role']=='Master-Admin'){ ?>
-              <div class="control-group span6">
-                <label class="control-label">Is Verified</label>
-                <div class="controls">
-                  <input type="checkbox" name="is_verified" id="is_verified" value="Yes" <?php echo ($arrData[0]['is_verified']=='Yes'?"checked='checked'":"")?>>
-                </div>
-              </div>
-			<?php } ?>
-              <div class="control-group span6">
-                <label class="control-label" for="nob">Nature of Bussiness</label>
-                <div class="controls">
-                  <input class="input-xlarge focused required" id="nob" name="nob" type="text" value="<?php echo (isset($arrData[0]['nob']) ? $arrData[0]['nob'] : ''); ?>">
-                </div>
-              </div>
-            </div>
-            <div class="row-fluid">
-              <div class="control-group span6">
-                <label class="control-label" for="turn_over">Turn Over</label>
-                <div class="controls">
-                  <input class="input-xlarge focused required" id="turn_over" name="turn_over" type="text" value="<?php echo (isset($arrData[0]['turn_over']) ? $arrData[0]['turn_over'] : ''); ?>">
-                </div>
-              </div>
-              <div class="control-group span6">
+				<div class="control-group span6">
+					<label class="control-label" for="nob">Nature of Bussiness</label>
+					<div class="controls">
+					  <input class="input-xlarge focused required" id="nob" name="nob" type="text" value="<?php echo (isset($arrData[0]['nob']) ? $arrData[0]['nob'] : ''); ?>">
+					</div>
+				 </div>
+				<div class="control-group span6">
                 <label class="control-label" for="status">Status</label>
                 <div class="controls">
 					<select class="input-xlarge focused required" id="status" name="status" >
@@ -254,19 +238,35 @@ if($_SESSION['user']['user-role']=='Master-Admin'){
             </div>
             <div class="row-fluid">
               <div class="control-group span6">
+                <label class="control-label" for="turn_over">Turn Over</label>
+                <div class="controls">
+                  <input class="input-xlarge focused required" id="turn_over" name="turn_over" type="text" value="<?php echo (isset($arrData[0]['turn_over']) ? $arrData[0]['turn_over'] : ''); ?>">
+                </div>
+              </div>
+			  <?php if($_SESSION['user']['user-role']=='Master-Admin'){ ?>
+              <div class="control-group span6">
+                <label class="control-label">Is Verified</label>
+                <div class="controls">
+                  <input type="checkbox" name="is_verified" id="is_verified" value="Yes" <?php echo ($arrData[0]['is_verified']=='Yes'?"checked='checked'":"")?>>
+                </div>
+              </div>
+			<?php } ?>
+            </div>
+            <div class="row-fluid">
+              <div class="control-group span4">
                 <label class="control-label" for="email">Email</label>
                 <div class="controls">
                   <input class="input-xlarge focused required" id="email" name="email" type="text" value="<?php echo (isset($arrData[0]['email']) ? $arrData[0]['email'] : ''); ?>">
                 </div>
               </div>
 			  <?php if($_SESSION['user']['user-role']=='Master-Admin'){ ?>
-              <div class="control-group span3">
+              <div class="control-group span4">
                 <label class="control-label" for="focusedInput">Display in Search</label>
                 <div class="controls">
                   <input data-no-uniform="true" type="checkbox" class="iphone-toggle" name="email_dis" id="email_dis" value="yes" <?php echo ($arrData[0]['email_dis']=='Yes'?"checked='checked'":"")?>>
                 </div>
               </div>
-              <div class="control-group span3">
+              <div class="control-group span2">
                 <label class="control-label" for="focusedInput">Don't Provide email</label>
                 <div class="controls">
                   <input data-no-uniform="true" type="checkbox" class="iphone-toggle" id="email_dnd" name="email_dnd" value="yes" <?php echo ($arrData[0]['email_dnd']=='Yes'?"checked='checked'":"")?>>
@@ -275,20 +275,20 @@ if($_SESSION['user']['user-role']=='Master-Admin'){
 			  <?php } ?>
             </div>
             <div class="row-fluid">
-              <div class="control-group span6">
+              <div class="control-group span4">
                 <label class="control-label" for="website">Website</label>
                 <div class="controls">
-                  <input class="input-xlarge focused required" data-url id="website" name="website" type="text" value="<?php echo (isset($arrData[0]['website']) ? $arrData[0]['website'] : ''); ?>">
+                  <input class="input-xlarge focused required" id="website" name="website" type="text" value="<?php echo (isset($arrData[0]['website']) ? $arrData[0]['website'] : ''); ?>">
                 </div>
               </div>
 			  <?php if($_SESSION['user']['user-role']=='Master-Admin'){ ?>
-              <div class="control-group span3">
+              <div class="control-group span4">
                 <label class="control-label" for="focusedInput">Display in Search</label>
                 <div class="controls">
                   <input data-no-uniform="true" type="checkbox" class="iphone-toggle" name="website_dis" id="website_dis" value="yes" <?php echo ($arrData[0]['website_dis']=='Yes'?"checked='checked'":"")?>>
                 </div>
               </div>
-              <div class="control-group span3">
+              <div class="control-group span2">
                 <label class="control-label" for="focusedInput">Don't Provide Website</label>
                 <div class="controls">
                   <input data-no-uniform="true" type="checkbox" class="iphone-toggle" name="website_dnd" id="website_dnd" value="yes" <?php echo ($arrData[0]['website_dnd']=='Yes'?"checked='checked'":"")?>>
@@ -297,21 +297,21 @@ if($_SESSION['user']['user-role']=='Master-Admin'){
 			  <?php } ?>
             </div>
             <div class="row-fluid">
-              <div class="control-group span6">
+              <div class="control-group span4">
                 <label class="control-label" for="mobile">Mobile</label>
                 <div class="controls">
                   <input class="input-xlarge focused required" data-int data-min-chars="10" maxlength="10" id="mobile" name="mobile" type="text" value="<?php echo (isset($arrData[0]['mobile']) ? $arrData[0]['mobile'] : ''); ?>">
                 </div>
               </div>
 			  <?php if($_SESSION['user']['user-role']=='Master-Admin'){ ?>
-              <div class="control-group span3">
+              <div class="control-group span4">
                 <label class="control-label" for="focusedInput">Display in Search</label>
                 <div class="controls">
                   <input data-no-uniform="true" type="checkbox" class="iphone-toggle" name="mobile_dis" id="mobile_dis" value="yes" <?php echo ($arrData[0]['mobile_dis']=='Yes'?"checked='checked'":"")?>>
                 </div>
               </div>
-              <div class="control-group span3">
-                <label class="control-label" for="focusedInput">Don't Provide number</label>
+              <div class="control-group span2">
+                <label class="control-label" for="focusedInput">Don't Provide Mobile</label>
                 <div class="controls">
                   <input data-no-uniform="true" type="checkbox" class="iphone-toggle" name="mobile_dnd" id="mobile_dnd" value="yes" <?php echo ($arrData[0]['mobile_dnd']=='Yes'?"checked='checked'":"")?>>
                 </div>
@@ -319,21 +319,21 @@ if($_SESSION['user']['user-role']=='Master-Admin'){
 			  <?php } ?>
             </div>
             <div class="row-fluid">
-              <div class="control-group span6">
+              <div class="control-group span4">
                 <label class="control-label" for="landline">Landline</label>
                 <div class="controls">
                   <input class="input-xlarge focused required" data-int data-min-chars="8" maxlength="15" id="landline" name="landline" type="tel" value="<?php echo (isset($arrData[0]['landline']) ? $arrData[0]['landline'] : ''); ?>">
                 </div>
               </div>
 			  <?php if($_SESSION['user']['user-role']=='Master-Admin'){ ?>
-              <div class="control-group span3">
+              <div class="control-group span4">
                 <label class="control-label" for="focusedInput">Display in Search</label>
                 <div class="controls">
                   <input data-no-uniform="true" type="checkbox" class="iphone-toggle" name="landline_dis" id="landline_dis" value="yes" <?php echo ($arrData[0]['landline_dis']=='Yes'?"checked='checked'":"")?>>
                 </div>
               </div>
-              <div class="control-group span3">
-                <label class="control-label" for="focusedInput">Don't Provide number</label>
+              <div class="control-group span2">
+                <label class="control-label" for="focusedInput">Don't Provide Landline</label>
                 <div class="controls">
                   <input data-no-uniform="true" type="checkbox" class="iphone-toggle" name="landline_dnd" id="landline_dnd" value="yes" <?php echo ($arrData[0]['landline_dnd']=='Yes'?"checked='checked'":"")?>>
                 </div>
@@ -358,7 +358,7 @@ if($_SESSION['user']['user-role']=='Master-Admin'){
 							$optionsHours = @explode(',', $operationValue);
 						//print_r($optionsHours);
 					?>
-                  <table class="table table-bordered table-striped">
+                  <table class="table table-striped table-bordered">
                     <tbody>
                       <tr>
                         <td><h3>Day</h3></td>
@@ -397,7 +397,7 @@ if($_SESSION['user']['user-role']=='Master-Admin'){
                           </select>
 						</td>
                         <td><select name="sunday_to" class="input-small focused required">
-						<option value="">&mdash; Please Select &mdash;</option>
+							<option value="">&mdash; Please Select &mdash;</option>
                             <option value="01:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="sunday_to=01:00"){echo "selected"; }}} ?>>01:00</option>
                             <option value="02:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="sunday_to=02:00"){echo "selected"; }}} ?>>02:00</option>
                             <option value="03:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="sunday_to=03:00"){echo "selected"; }}} ?>>03:00</option>
@@ -423,7 +423,7 @@ if($_SESSION['user']['user-role']=='Master-Admin'){
                             <option value="23:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="sunday_to=23:00"){echo "selected"; }}} ?>>23:00</option>
                             <option value="24:00" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="sunday_to=24:00"){echo "selected"; }}} ?>>24:00</option>
                           </select></td>
-                        <td><input data-no-uniform="true" type="checkbox" class="iphone-toggle" name="sunday_closed" value="Yes" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="sunday_closed=Yes"){echo "checked='checked'"; }}} ?>></td>
+                        <td><input data-no-uniform="true" type="checkbox" class="iphone-toggle" name="sunday_closed" value="Yes" <?php if(isset($optionsHours)){foreach($optionsHours as $optionsHour){if($optionsHour=="sunday_closed=Yes"){echo "checked='checked'"; }}} ?>/></td>
                       </tr>
                       <tr>
                         <td>Monday</td>
@@ -785,13 +785,13 @@ if($_SESSION['user']['user-role']=='Master-Admin'){
 							
 					?>
 				<div class="row-fluid">
-					 <div class="control-group span3">
+					 <div class="control-group span4">
 					 <label class="control-label">Cash</label>
 						<div class="controls">
 						  <input data-no-uniform="true" type="checkbox" title="Select at least one Payment Option" class="iphone-toggle required"  name="paymentOptions[]" value="Cash" <?php if(isset($options)){foreach($options as $option){if($option=="Cash"){echo "checked='checked'"; }}} ?>>
 						</div>
 					</div>
-					<div class="control-group span3">
+					<div class="control-group span4">
 						<label class="control-label">Master Card</label>
 						<div class="controls">
 						  <input data-no-uniform="true" type="checkbox" class="iphone-toggle required" data-min-options="1"  name="paymentOptions[]" value="Master Card" <?php if(isset($options)){foreach($options as $option){if($option=="Master Card"){echo "checked='checked'"; }}} ?>>
@@ -805,13 +805,13 @@ if($_SESSION['user']['user-role']=='Master-Admin'){
 					</div>
                 </div>
                 <div class="row-fluid">
-					<div class="control-group span3">
+					<div class="control-group span4">
 						<label class="control-label">Debit Card</label>
 						<div class="controls">
 						  <input data-no-uniform="true" type="checkbox" class="iphone-toggle required"  name="paymentOptions[]" value="Debit Card" <?php if(isset($options)){foreach($options as $option){if($option=="Debit Card"){echo "checked='checked'"; }}} ?>>
 						</div>
 					</div>
-					<div class="control-group span3">
+					<div class="control-group span4">
 						<label class="control-label">Money Orders</label>
 						<div class="controls">
 						  <input data-no-uniform="true" type="checkbox" class="iphone-toggle required"  name="paymentOptions[]" value="Money Orders" <?php if(isset($options)){foreach($options as $option){if($option=="Money Orders"){echo "checked='checked'"; }}} ?>>
@@ -825,13 +825,13 @@ if($_SESSION['user']['user-role']=='Master-Admin'){
 					</div>
                 </div>
                 <div class="row-fluid">
-					<div class="control-group span3">
+					<div class="control-group span4">
 						<label class="control-label">Credit Card</label>
 						<div class="controls">
 						  <input data-no-uniform="true" type="checkbox" class="iphone-toggle required"  name="paymentOptions[]" value="Credit Card" <?php if(isset($options)){foreach($options as $option){if($option=="Credit Card"){echo "checked='checked'"; }}} ?>>
 						</div>
 					</div>
-					<div class="control-group span3">
+					<div class="control-group span4">
 						<label class="control-label">Travellers Cheque</label>
 						<div class="controls">
 						  <input data-no-uniform="true" type="checkbox" class="iphone-toggle required"  name="paymentOptions[]" value="Travellers Cheque" <?php if(isset($options)){foreach($options as $option){if($option=="Travellers Cheque"){echo "checked='checked'"; }}} ?>>
@@ -845,13 +845,13 @@ if($_SESSION['user']['user-role']=='Master-Admin'){
 					</div>
                 </div>
                 <div class="row-fluid">
-					<div class="control-group span3">
+					<div class="control-group span4">
 						<label class="control-label">American Express Card</label>
 						<div class="controls">
 						  <input data-no-uniform="true" type="checkbox" class="iphone-toggle required"  name="paymentOptions[]" value="American Express Card" <?php if(isset($options)){foreach($options as $option){if($option=="American Express Card"){echo "checked='checked'"; }}} ?>>
 						</div>
 					</div>
-					<div class="control-group span3">
+					<div class="control-group span4">
 						<label class="control-label">Dinners Card</label>
 						<div class="controls">
 						  <input data-no-uniform="true" type="checkbox" class="iphone-toggle required"  name="paymentOptions[]" value="Dinners Card" <?php if(isset($options)){foreach($options as $option){if($option=="Dinners Card"){echo "checked='checked'"; }}} ?>>
@@ -1078,7 +1078,7 @@ if($_SESSION['user']['user-role']=='Master-Admin'){
                 <label class="control-label" for="upload_image">Upload image</label>
 				<div class="controls">
 					<div id="previewDiv"><?php echo (isset($arrCompanyProductData[0]['product_img_path']) ? "<img src='uploads/".$arrCompanyProductData[0]['product_img_path']."' id='photo'>" : ''); ?></div>
-					<div id="thumbs" style="padding:5px; width:600px"></div>
+					<div id="thumbs" style="padding:5px"></div>
 					<input type="file" class="required" name="photoimg" id="photoimg" value="<?php echo (isset($arrCompanyProductData[0]['product_img_path']) ? "uploads/".$arrCompanyProductData[0]['product_img_path'] : ''); ?>"/>
 					<input type="hidden" name="img_path" id="img_path" value="<?php echo (isset($arrCompanyProductData[0]['product_img_path']) ? "uploads/".$arrCompanyProductData[0]['product_img_path'] : ''); ?>" />
 					<input type="hidden" name="x_axis" value="" id="x_axis" />

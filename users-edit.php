@@ -46,39 +46,54 @@ $arrAdmins = $objControl -> getRecords('user_master','user_role_id',$arrAdminRol
                                     <div class="control-group">
                                     <label class="control-label">First Name:</label>
                                       <div class="controls">
-                                        <input type="text"  value="<?php $objModel ->retainRecords('text', $arrUserDetails[0]['first_name']); ?>" class="span4 typeahead name required" id="first_name" name="first_name" />
+                                        <input type="text"  value="<?php $objModel ->retainRecords('text', $arrUserDetails[0]['first_name']); ?>" class="input-xlarge focused span4 required" id="first_name" name="first_name" />
                                       </div>
                                     </div>
 									<div class="control-group">
                                     <label class="control-label">Last Name:</label>
                                       <div class="controls">
-                                        <input type="text"  value="<?php $objModel ->retainRecords('text', $arrUserDetails[0]['last_name']); ?>" class="span4 typeahead name required" id="last_name" name="last_name" />
+                                        <input type="text"  value="<?php $objModel ->retainRecords('text', $arrUserDetails[0]['last_name']); ?>" class="input-xlarge focused span4 required" id="last_name" name="last_name" />
                                       </div>
                                     </div>
                                     <div class="control-group">
                                     <label class="control-label">Email:</label>
                                       <div class="controls">
-                                        <input type="text"  value="<?php $objModel ->retainRecords('text', $arrUserDetails[0]['email']); ?>" class="span4 typeahead email required" id="email" name="email" />
+                                        <input type="text"  value="<?php $objModel ->retainRecords('text', $arrUserDetails[0]['email']); ?>" class="input-xlarge focused span4 required" id="email" name="email" />
                                       </div>
                                     </div>
                              
                                     <div class="control-group">
                                     <label class="control-label">Username:</label>
                                       <div class="controls">
-                                        <input type="text"  value="<?php $objModel ->retainRecords('text', $arrUserDetails[0]['username']); ?>" class="span4 typeahead username" id="username" name="username" />
+                                        <input type="text"  value="<?php $objModel ->retainRecords('text', $arrUserDetails[0]['username']); ?>" class="input-xlarge focused span4 required" id="username" name="username" />
                                       </div>
                                     </div>
                                     <div class="control-group">
                                     <label class="control-label">Password:</label>
                                       <div class="controls">
-                                        <input type="password"  value="<?php $objModel ->retainRecords('text', $arrUserDetails[0]['password']); ?>" class="span4 typeahead password required" id="password" name="password" />
+                                        <input type="password"  value="<?php $objModel ->retainRecords('text', $arrUserDetails[0]['password']); ?>" class="input-xlarge focused span4 required" id="password" name="password" />
+                                      </div>
+                                    </div>
+									<div class="control-group">
+                                    <label class="control-label">Assign to:</label>
+                                      <div class="controls">
+                                        <select name="assigned_to" class="input-xlarge focused span4 required" id="assigned_to">
+											<option value="<?php echo $_SESSION['user']['user_id']; ?>"><?php echo "Self--".$_SESSION['user']['username']; ?></option>
+                                            <?php 	if(isset($_SESSION['user']['user-role']) && $_SESSION['user']['user-role']=='Master-Admin'){
+														for($intIndex = 0; $intIndex < count($arrAdmins); $intIndex++)
+															{
+																echo "<option value='".$arrAdmins[$intIndex]['user_id']."'".($arrUserDetails[0]['assigned_to']==$arrAdmins[$intIndex]['user_id']?'selected':'').">"."Admin-".$arrAdmins[$intIndex]['first_name']." ".$arrAdmins[$intIndex]['last_name']."</option>";
+															}
+														}
+                                            ?>
+                                        </select>
                                       </div>
                                     </div>
 									<?php if(isset($_SESSION['user']['user-role']) && $_SESSION['user']['user-role']=='Master-Admin'){ ?>
                                     <div class="control-group">
                                     <label class="control-label">User Role:</label>
                                       <div class="controls">
-                                        <select name="userRole" class="userRole required" id="userRole">
+                                        <select name="userRole" class="input-xlarge focused span4 required" id="userRole">
 											<option value="">&mdash; Please Select &mdash;</option>
                                             <?php for($intIndex = 0; $intIndex < count($arrAvailableRoles); $intIndex++)
                                                     {
@@ -88,20 +103,7 @@ $arrAdmins = $objControl -> getRecords('user_master','user_role_id',$arrAdminRol
                                         </select>
                                       </div>
                                     </div>
-									<div class="control-group">
-                                    <label class="control-label">Assign to:</label>
-                                      <div class="controls">
-                                        <select name="assigned_to" class="assignTo required" id="assigned_to">
-											<option value="">&mdash; Please Select &mdash;</option>
-											<option value="<?php echo $_SESSION['user']['user_id']; ?>">Self</option>
-                                            <?php for($intIndex = 0; $intIndex < count($arrAdmins); $intIndex++)
-                                                    {
-                                            			echo "<option value='".$arrAdmins[$intIndex]['user_id']."'".($arrUserDetails[0]['assigned_to']==$arrAdmins[$intIndex]['user_id']?'selected':'').">"."Admin-".$arrAdmins[$intIndex]['first_name']." ".$arrAdmins[$intIndex]['last_name']."</option>";
-                                                    }
-                                            ?>
-                                        </select>
-                                      </div>
-                                    </div>
+									
                                     <div class="control-group">
                                         <label class="control-label">Modules:</label>
                                         <div class="controls">
@@ -115,7 +117,7 @@ $arrAdmins = $objControl -> getRecords('user_master','user_role_id',$arrAdminRol
 												{
 													if($arrUserModules[$intIndex1]['module_id']==$arrAvailableModules[$intIndex]['module_id']){echo 'checked'; break;}
 												}
-										  ?>  id="inlineCheckbox<?php echo $arrAvailableModules[$intIndex]['module_id']; ?>" value="<?php echo $arrAvailableModules[$intIndex]['module_id']; ?>" class="required" name="modules[]"><?php echo ucfirst($arrAvailableModules[$intIndex]['module_name']); ?>
+										  ?>  id="inlineCheckbox<?php echo $arrAvailableModules[$intIndex]['module_id']; ?>" value="<?php echo $arrAvailableModules[$intIndex]['module_id']; ?>" class="required" name="modules[]"/><?php echo ucfirst($arrAvailableModules[$intIndex]['module_name']); ?>
                                           </label>
 										<?php
                                         }
@@ -123,6 +125,16 @@ $arrAdmins = $objControl -> getRecords('user_master','user_role_id',$arrAdminRol
                                         </div>
 							 		</div>
 									<?php } ?>
+									 <div class="control-group">
+										<label class="control-label" for="user_status">Status</label>
+										<div class="controls">
+											<select class="input-xlarge focused span4 required" id="user_status" name="user_status">
+												<option value="">&mdash; Please Select &mdash;</option>
+												<option <?php echo (isset($arrUserDetails[0]['user_status']) && $arrUserDetails[0]['user_status'] == 'Active' ? 'selected="selected"' : ''); ?> value="Active">Active</option>
+												<option <?php echo (isset($arrUserDetails[0]['user_status']) && $arrUserDetails[0]['user_status'] == 'Inactive' ? 'selected="selected"' : ''); ?> value="Inactive">Inactive</option>
+											</select>
+										</div>
+									</div>
                                 </div>
                         </div>
                         <div class="form-actions">

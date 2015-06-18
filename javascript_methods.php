@@ -9,7 +9,7 @@
 						alert("All fields are required");
 						return false;
 					}
-					$(".alert-info").html("<img src='img/loading.gif'></img>");
+					$(".alert-info").html("<img src='img/ajax-loaders/ajax-loader-7.gif'>");
 					var postData ="";
 					postData = $(this).serializeArray();
 					var formURL = $(this).attr("action");
@@ -24,7 +24,6 @@
 							$(".alert-info").html('Please login with your Username and Password.');
 							$(".loginForm").css("display","block");
 							$(".registrationFrom").css("display","none");
-						//window.location = "Dealer/PostPropertyAdvanceDetails.php?sdfdsf=sf";
 						},
 						error: function(jqXHR, textStatus, errorThrown) 
 						{
@@ -216,6 +215,8 @@
 				error.insertAfter("#paymentResult");
 			else if  (element.attr("name") == "visibleDiv" )
 				error.insertAfter("#mytable");
+			else if  (element.attr("name") == "photoimg" )
+				error.insertAfter(".uploader");
 			else
 				error.insertAfter(element);
 		}

@@ -30,10 +30,10 @@ $arrRecords = $objControl->getRecords('branch_master', null, null, '', $arrField
 			<table class="table table-striped table-bordered bootstrap-datatable datatable">
 				<thead>
 					<tr>
-						<th style="width: 20%">State Name</th>
-						<th style="width: 5%">Status</th>
-						<th style="width: 10%">Created Date</th>
-						<th style="width: 15%">Actions</th>
+						<th>State Name</th>
+						<th>Status</th>
+						<th>Created Date</th>
+						<th>Actions</th>
 					</tr>
 				</thead>   
 				<tbody>
@@ -86,6 +86,7 @@ $arrRecords = $objControl->getRecords('branch_master', null, null, '', $arrField
 			</table>            
 		</div>
 	</div><!--/span-->
+</div><!--/row-->
 
 	<?php
 	require_once('footer.php');

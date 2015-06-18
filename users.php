@@ -4,19 +4,12 @@ $arrField = array(
 	'user_id','name','email','username','password','(select role_name from role_master where role_master.role_id=user_master.user_role_id) as role_name','user_modules'
 	
 );
-//$arrUserDetails = $objControl->getRecords('user_master',null,null,'user_id',$arrField);
 $arrUserDetails = $objModel->getRecords(null,null,null,'user');
-//$arrAvailableRoles    = $objModel -> getRecords(null, null, null, 'role_master');
-//$arrAvailableModules  = $objModel -> getRecords('user_module_master', null, null, null);
-//$arrUserModules = explode(',', $arrUserDetails[0]['user_modules']);
 
 ?>
 
-<div class="box span12 pull-left">
-	
-   
-                
-      
+<div class="row-fluid sortable">		
+	<div class="box span12">
     <div class="box-header well" data-original-title>
         <h2><i class="icon-user"></i>Users</h2>
 		<a href="users-edit.php" class="btn btn-info add-new pull-right">
@@ -33,24 +26,17 @@ $arrUserDetails = $objModel->getRecords(null,null,null,'user');
                   <th>Email</th>
                   <th>Username</th>
                   <th>User Role</th>
-                 <!-- <th>Phone</th>-->
-                  <th> Permitted Modules</th>
+                  <th>Permitted Modules</th>
               </tr>
           </thead>   
           <tbody>
           <?php for($intIndex=0; $intIndex<count($arrUserDetails); $intIndex++){ 
 			?>
 		 	<tr>
-                <td class="center"><a href="users-edit.php?user_id=<?php echo $arrUserDetails[$intIndex]['user_id']; ?>"><?php echo ucfirst($arrUserDetails[$intIndex]['first_name'])." ".ucfirst($arrUserDetails[$intIndex]['last_name']); ?></a></td>
-                <td class="center"><a href="mailto:<?php echo $arrUserDetails[$intIndex]['email']; ?>" target="_blank"><?php echo $arrUserDetails[$intIndex]['email']; ?></a></td>
-                <td class="center"><?php echo $arrUserDetails[$intIndex]['username']; ?></td>
-                <td class="center"><?php /*for($intIndex = 0; $intIndex<count($arrAvailableRoles); $intIndex++)
-                                                    {
-														echo ($arrUserDetails[0]['user_role_id']==$arrAvailableRoles[$intIndex]['role_id'])? $arrAvailableRoles[$intIndex]['role_name'].',':'' ;
-                                                    }*/
-													echo $arrUserDetails[$intIndex]['role_name'];
-									?>
-				</td>
+                <td><a href="users-edit.php?user_id=<?php echo $arrUserDetails[$intIndex]['user_id']; ?>"><?php echo ucfirst($arrUserDetails[$intIndex]['first_name'])." ".ucfirst($arrUserDetails[$intIndex]['last_name']); ?></a></td>
+                <td><a href="mailto:<?php echo $arrUserDetails[$intIndex]['email']; ?>" target="_blank"><?php echo $arrUserDetails[$intIndex]['email']; ?></a></td>
+                <td><?php echo $arrUserDetails[$intIndex]['username']; ?></td>
+                <td><?php echo $arrUserDetails[$intIndex]['role_name'];	?></td>
                 <td class="center">
 				<?php 
 					$arrModuleRecords = $objControl->getRecords('user_module_master', 'user_id', $arrUserDetails[$intIndex]['user_id'], '');
@@ -67,7 +53,9 @@ $arrUserDetails = $objModel->getRecords(null,null,null,'user');
           </tbody>
       </table>            
     </div>
-</div>
+</div><!--/span-->
+</div><!--/row-->
+
 <?php
 require_once('footer.php');
 ?>

@@ -25,19 +25,19 @@ require_once('header.php');
 							  <div class="control-group">
 								<label class="control-label" for="txt_country">Name</label>
 								<div class="controls">
-								  <input class="input-xlarge focused required" disabled id="" name="" type="text" value="<?php echo (isset($arrData[0]['first_name'])?$arrData[0]['first_name']." ".$arrData[0]['last_name']:''); ?>">
+								  <input class="input-xlarge focused span4 required" disabled id="" name="" type="text" value="<?php echo (isset($arrData[0]['first_name'])?$arrData[0]['first_name']." ".$arrData[0]['last_name']:''); ?>">
 								</div>
 							  </div>
 							  <div class="control-group">
 								<label class="control-label" for="txt_country">New Password</label>
 								<div class="controls">
-								  <input class="input-xlarge focused required" id="newPwd" name="newPwd" type="password" value="">
+								  <input class="input-xlarge focused span4 required" id="newPwd" name="newPwd" type="password" value="">
 								</div>
 							  </div>
 							  <div class="control-group">
 								<label class="control-label" for="txt_country">Conform Password</label>
 								<div class="controls">
-								  <input class="input-xlarge focused required" id="conformPwd" name="conformPwd" type="password" value="">
+								  <input class="input-xlarge focused span4 required" id="conformPwd" name="conformPwd" type="password" value="">
 								</div>
 							  </div>
 							  

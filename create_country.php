@@ -33,13 +33,13 @@ if(isset($intCountryId) && $intCountryId !='')
 							  <div class="control-group">
 								<label class="control-label" for="txt_country">Country Name</label>
 								<div class="controls">
-								  <input class="input-xlarge focused required" data-min-chars="3" id="txt_country" name="txt_country" type="text" value="<?php echo (isset($arrData[0]['country_name'])?$arrData[0]['country_name']:''); ?>">
+								  <input class="input-xlarge focused span4 required" data-min-chars="3" id="txt_country" name="txt_country" type="text" value="<?php echo (isset($arrData[0]['country_name'])?$arrData[0]['country_name']:''); ?>">
 								</div>
 							  </div>
 							 <div class="control-group">
 								<label class="control-label" for="sel_status">Status</label>
 								<div class="controls">
-								  <select class="input-xlarge focused required" id="sel_status" name="sel_status" >
+								  <select class="input-xlarge focused span4 required" id="sel_status" name="sel_status" >
 									<option value="">&mdash; Please Select &mdash;</option>
 									<option <?php echo (isset($arrData[0]['status']) && $arrData[0]['status']=='Active' ?'selected="selected"':''); ?> value="Active">Active</option>
 									<option <?php echo (isset($arrData[0]['status']) && $arrData[0]['status']=='Inactive' ?'selected="selected"':''); ?> value="Inactive">Inactive</option>
