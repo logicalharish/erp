@@ -53,7 +53,7 @@
 		
 		var rowCount = $('#mytable >tbody >tr').length;
 		if(rowCount==0){
-		 $('#mytable tr').last().after('<tr id="firstRow"><td><input class="input-small focused required" id="contact_full_name" name="contact_full_name[]" type="text" value=""></td><td class="center"><input type="text" class="input-small datepicker required" id="dob" name="dob[]" value=""></td><td class="center"><input type="text" class="input-small datepicker required" id="dom" data-date="MM-DD-YYYY" name="dom[]" value=""></td><td class="center"><input class="input-small focused required" data-int data-min-chars="10" maxlength="10" id="contact_mobile" name="contact_mobile[]" type="text" value=""></td><td class="center"><input class="input-small focused required" id="contact_email" data-email name="contact_email[]" type="email" value=""></td><td class="center"><input class="input-small focused required" id="designation" name="designation[]" type="text" value=""></td><td class="center"><select class="input-small focused required" id="contact_status" name="contact_status[]" ><option value="Active">Active</option><option value="Inactive">Inactive</option></select></td><td class="center"><input class="btn btn-success" id="removeRows" type="button" value="Remove"></input></td></tr>');
+		 $('#mytable tbody').append('<tr id="firstRow"><td><input class="input-small focused required" id="contact_full_name" name="contact_full_name[]" type="text" value=""></td><td class="center"><input type="text" class="input-small datepicker required" id="dob" name="dob[]" value=""></td><td class="center"><input type="text" class="input-small datepicker required" id="dom" data-date="MM-DD-YYYY" name="dom[]" value=""></td><td class="center"><input class="input-small focused required" data-int data-min-chars="10" maxlength="10" id="contact_mobile" name="contact_mobile[]" type="text" value=""></td><td class="center"><input class="input-small focused required" id="contact_email" data-email name="contact_email[]" type="email" value=""></td><td class="center"><input class="input-small focused required" id="designation" name="designation[]" type="text" value=""></td><td class="center"><select class="input-small focused required" id="contact_status" name="contact_status[]" ><option value="Active">Active</option><option value="Inactive">Inactive</option></select></td><td class="center"><input class="btn btn-success" id="removeRows" type="button" value="Remove"></input></td></tr>');
 		}
 		$("#addrows").click(function () {
 			$("#firstRow").remove();
@@ -64,7 +64,7 @@
 			  var c_email = $('#c_email').val();
 			  var c_designation = $('#c_designation').val();
 			  var c_status = $('#c_status').val();
-			  $('#mytable tr').last().after('<tr id="visibleDiv" name="visibleDiv"><td><input type="hidden" name="company_contact_id[]" id="company_contact_id" value="" /><input class="input-small focused required" id="contact_full_name" name="contact_full_name[]" type="text" value="'+c_name+'"></td><td class="center"><input type="text" class="input-small datepicker required" id="dob" name="dob[]" value="'+c_dob+'"></td><td class="center"><input type="text" class="input-small datepicker required" id="dom" data-date="MM-DD-YYYY" name="dom[]" value="'+c_dom+'"></td><td class="center"><input class="input-small focused required" data-int data-min-chars="10" maxlength="10" id="contact_mobile" name="contact_mobile[]" type="text" value="'+c_mobile+'"></td><td class="center"><input class="input-small focused required" id="contact_email" data-email name="contact_email[]" type="email" value="'+c_email+'"></td><td class="center"><input class="input-small focused required"   id="designation" name="designation[]" type="text" value="'+c_designation+'"></td><td class="center"><select class="input-small focused required" id="contact_status" name="contact_status[]" ><option value="Active">Active</option><option value="Inactive">Inactive</option></select></td><td class="center"><input class="btn btn-success" id="removeRows" type="button" value="Remove"></input></td></tr>');
+			  $('#mytable tbody').append('<tr id="visibleDiv" name="visibleDiv"><td><input type="hidden" name="company_contact_id[]" id="company_contact_id" value="" /><input class="input-small focused required" id="contact_full_name" name="contact_full_name[]" type="text" value="'+c_name+'"></td><td class="center"><input type="text" class="input-small datepicker required" id="dob" name="dob[]" value="'+c_dob+'"></td><td class="center"><input type="text" class="input-small datepicker required" id="dom" data-date="MM-DD-YYYY" name="dom[]" value="'+c_dom+'"></td><td class="center"><input class="input-small focused required" data-int data-min-chars="10" maxlength="10" id="contact_mobile" name="contact_mobile[]" type="text" value="'+c_mobile+'"></td><td class="center"><input class="input-small focused required" id="contact_email" data-email name="contact_email[]" type="email" value="'+c_email+'"></td><td class="center"><input class="input-small focused required"   id="designation" name="designation[]" type="text" value="'+c_designation+'"></td><td class="center"><select class="input-small focused required" id="contact_status" name="contact_status[]" ><option value="Active">Active</option><option value="Inactive">Inactive</option></select></td><td class="center"><input class="btn btn-success" id="removeRows" type="button" value="Remove"></input></td></tr>');
 			$('#c_name').val("");$('#c_dob').val("");$('#c_dom').val("");$('#c_mobile').val("");$('#c_email').val("");$('#c_designation').val("");$('#c_status').val("");
 		});
 		
@@ -74,6 +74,51 @@
 			}else{alert("There must be at least one contact.");}
 		});
 		
+		function getSizes(im,obj)
+		{
+			if(obj.width > 0){
+				$("#x_axis").val(obj.x1);
+				$("#x2_axis").val(obj.x2);
+				$("#y_axis").val(obj.y1);
+				$("#y2_axis").val(obj.y2);
+				$("#thumb_width").val(obj.width);
+				$("#thumb_height").val(obj.height);
+			}else
+				alert("Please select image portion to upload..!");
+		}
+		$("#photoimg").on('change', function () {
+
+		var imgPath = $(this)[0].value;
+		var extn = imgPath.substring(imgPath.lastIndexOf('.') + 1).toLowerCase();
+
+		if (extn == "gif" || extn == "png" || extn == "jpg" || extn == "jpeg") {
+			if (typeof (FileReader) != "undefined") {
+
+				var image_holder = $("#previewDiv");
+				image_holder.empty();
+
+				var reader = new FileReader();
+				reader.onload = function (e) {
+					$("<img />", {
+						"src": e.target.result,
+							"id":"photo"
+					}).appendTo(image_holder);
+					$("#img_path").val(e.target.result);
+					$('#photo').imgAreaSelect({
+						//aspectRatio: '1:1',
+						onSelectEnd: getSizes
+					});
+
+				}
+				image_holder.show();
+				reader.readAsDataURL($(this)[0].files[0]);
+			} else {
+				alert("This browser does not support FileReader.");
+			}
+		} else {
+			alert("Pls select only images");
+		}
+	});
 		// Validate form
 		$("#form").validate({
 		debug: false,

@@ -5,7 +5,7 @@ $arrField = array('*');
 	$arrRecords = $objModel->getRecords(null,null,null,'user-company');
 
 ?>
-<div>
+			<div>
 				<ul class="breadcrumb">
 					<li>
 						<a href="index.php">Home</a> <span class="divider">/</span>

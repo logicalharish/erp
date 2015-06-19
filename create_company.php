@@ -1081,6 +1081,7 @@ if($_SESSION['user']['user-role']=='Master-Admin'){
 					<div id="thumbs" style="padding:5px"></div>
 					<input type="file" class="required" name="photoimg" id="photoimg" value="<?php echo (isset($arrCompanyProductData[0]['product_img_path']) ? "uploads/".$arrCompanyProductData[0]['product_img_path'] : ''); ?>"/>
 					<input type="hidden" name="img_path" id="img_path" value="<?php echo (isset($arrCompanyProductData[0]['product_img_path']) ? "uploads/".$arrCompanyProductData[0]['product_img_path'] : ''); ?>" />
+					<input type="hidden" name="previous_img" id="previous_img" value="<?php echo (isset($arrCompanyProductData[0]['product_img_path']) ? "uploads/".$arrCompanyProductData[0]['product_img_path'] : ''); ?>"  />
 					<input type="hidden" name="x_axis" value="" id="x_axis" />
 					<input type="hidden" name="y_axis" value="" id="y_axis" />
 					<input type="hidden" name="x2_axis" value="" id="x2_axis" />
@@ -1125,56 +1126,3 @@ require_once('footer.php');
 <?php
 require_once('javascript_methods.php');
 ?>
-<script type="text/javascript">
-   function getSizes(im,obj)
-	{
-		if(obj.width > 0){
-			$("#x_axis").val(obj.x1);
-			$("#x2_axis").val(obj.x2);
-			$("#y_axis").val(obj.y1);
-			$("#y2_axis").val(obj.y2);
-			$("#thumb_width").val(obj.width);
-			$("#thumb_height").val(obj.height);
-		}else
-			alert("Please select image portion to upload..!");
-	}
-
-$(document).ready(function () {
-	
-	$("#photoimg").on('change', function () {
-
-		var imgPath = $(this)[0].value;
-		var extn = imgPath.substring(imgPath.lastIndexOf('.') + 1).toLowerCase();
-
-		if (extn == "gif" || extn == "png" || extn == "jpg" || extn == "jpeg") {
-			if (typeof (FileReader) != "undefined") {
-
-				var image_holder = $("#previewDiv");
-				image_holder.empty();
-
-				var reader = new FileReader();
-				reader.onload = function (e) {
-					$("<img />", {
-						"src": e.target.result,
-							"id":"photo"
-					}).appendTo(image_holder);
-					$("#img_path").val(e.target.result);
-					$('#photo').imgAreaSelect({
-						//aspectRatio: '1:1',
-						onSelectEnd: getSizes
-					});
-
-				}
-				image_holder.show();
-				reader.readAsDataURL($(this)[0].files[0]);
-			} else {
-				alert("This browser does not support FileReader.");
-			}
-		} else {
-			alert("Pls select only images");
-		}
-	});
-    
-});
-
-</script>

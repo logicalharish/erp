@@ -217,7 +217,7 @@ class CommonController
 		public function uploadImage($img_path,$img,$companyId,$x1,$x2,$y1,$y2,$w,$h){
 			$t_width = 100;	// Maximum thumbnail width
 			$t_height = 100;	// Maximum thumbnail height
-			$new_name = $companyId.".jpg"; // Thumbnail image name
+			$new_name = $companyId.'-'.time().'.'."jpg"; // Thumbnail image name
 			$path = "../uploads/";
 					$ext1 = explode(".", $img_path);
 					//$ext = pathinfo($img, PATHINFO_EXTENSION);

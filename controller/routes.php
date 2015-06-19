@@ -456,7 +456,7 @@ switch ($strAction)
 			//$objControl->dbConnect->debug = true;
 			
 			$strSQL = "DELETE FROM company_contact where company_id='".$_REQUEST['company_id']."'";
-			$objControl->dbConnect->Execute($strSQL);
+		//	$objControl->dbConnect->Execute($strSQL);
 				for ($intContact = 0; $intContact < count($arrContact); $intContact++)
 					{
 						$arrData['contact_full_name']=$arrContact[$intContact];
@@ -466,8 +466,8 @@ switch ($strAction)
 						$arrData['contact_email']=$arremailContact[$intContact];
 						$arrData['designation']=$arrdesiContact[$intContact];
 						$arrData['contact_status']=$arrConStatus[$intContact];
-						$objControl->createTrigger("log_comp_contact","before insert","company_contact","log_company_contact","company_contact_id");
-						$objControl->createRecord($arrData, 'company_contact');
+					//	$objControl->createTrigger("log_comp_contact","before insert","company_contact","log_company_contact","company_contact_id");
+					//	$objControl->createRecord($arrData, 'company_contact');
 					}
 			$intCompanyAdvertiseId = $_REQUEST['company_advertise_id'];
 			$arrData['data_source'] = $_REQUEST['data_source'];
@@ -490,11 +490,16 @@ switch ($strAction)
 			$arrData['product_name'] = $_REQUEST['product_name'];
 			$arrData['price'] = $_REQUEST['price'];
 			$arrData['product_description'] = $_REQUEST['product_description'];
+			if(file_exists("../".$_REQUEST['previous_img'])){
+				echo "yes";
+				$removeImg = glob("../".$_REQUEST['previous_img']);
+				unlink($removeImg[0]);
+			}
 			if($_REQUEST['thumb_width']!=""){
 				$imgPath=$objControl->uploadImage($_FILES['photoimg']['name'],$_REQUEST['img_path'],$arrData['company_id'],$_REQUEST['x_axis'],$_REQUEST['x2_axis'],$_REQUEST['y_axis'],$_REQUEST['y2_axis'],$_REQUEST['thumb_width'],$_REQUEST['thumb_height']);
 			}else{
 				$temp = explode(".",$_FILES["photoimg"]["name"]);
-				$newfilename = $arrData['company_id'] . '.' ."jpg";
+				$newfilename = $arrData['company_id'] .'-'.time().'.'."jpg";
 				move_uploaded_file($_FILES["photoimg"]["tmp_name"], "../uploads/".$newfilename);
 				$imgPath=$newfilename;
 			}
@@ -508,7 +513,6 @@ switch ($strAction)
 				}else{
 					$objControl->createRecord($arrData, 'company_product');
 				}
-				
 			header('Location:' . HTTP_PATH . 'company.php');
 			exit;
 			break;

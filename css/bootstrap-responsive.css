@@ -807,7 +807,13 @@
     padding-left: 10px;
   }
 }
-
+@media (max-width: 560px){
+	.table tr td,.table tr th{
+		padding:3px;
+		margin:0px;
+		font-size:10px
+	}
+}
 @media (min-width: 768px) {
   .nav-collapse.collapse {
     height: auto !important;
