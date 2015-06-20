@@ -42,13 +42,29 @@ switch ($strAction)
 		header('Location:' . HTTP_PATH . 'role.php');
 		exit;
 		break;
-		
+	/*case 'check_username':
+		$username = $_REQUEST['username'];
+		$resultData = $objControl->getRecords('user_master', 'username', $username,'');
+			if(count($resultData)==0){
+				echo "false";
+			}else{
+				echo "Good username";
+			}
+		header('Location:' . HTTP_PATH . 'me.php');
+		exit;
+		break;*/
 	case 'create_user':
 		$httpPath = $_REQUEST['http_path'];
 		$arrData['first_name'] = $_REQUEST['first_name'];
 		$arrData['last_name'] = $_REQUEST['last_name'];
 		$arrData['email'] = $_REQUEST['email'];
 		$arrData['username'] = $_REQUEST['username'];
+	/*	$resultData = $objControl->getRecords('user_master', 'username', $username,'');
+		if(count($resultData)!=0){
+			
+		}else{
+			$arrData['username'] = $username;
+		}*/
 		$arrData['password'] = $_REQUEST['password'];
 		$arrData['user_role_id'] = $_REQUEST['userRole'];
 		$arrData['assigned_to'] = $_REQUEST['assigned_to'];
@@ -456,7 +472,7 @@ switch ($strAction)
 			//$objControl->dbConnect->debug = true;
 			
 			$strSQL = "DELETE FROM company_contact where company_id='".$_REQUEST['company_id']."'";
-		//	$objControl->dbConnect->Execute($strSQL);
+			$objControl->dbConnect->Execute($strSQL);
 				for ($intContact = 0; $intContact < count($arrContact); $intContact++)
 					{
 						$arrData['contact_full_name']=$arrContact[$intContact];
@@ -466,8 +482,8 @@ switch ($strAction)
 						$arrData['contact_email']=$arremailContact[$intContact];
 						$arrData['designation']=$arrdesiContact[$intContact];
 						$arrData['contact_status']=$arrConStatus[$intContact];
-					//	$objControl->createTrigger("log_comp_contact","before insert","company_contact","log_company_contact","company_contact_id");
-					//	$objControl->createRecord($arrData, 'company_contact');
+						$objControl->createTrigger("log_comp_contact","before insert","company_contact","log_company_contact","company_contact_id");
+						$objControl->createRecord($arrData, 'company_contact');
 					}
 			$intCompanyAdvertiseId = $_REQUEST['company_advertise_id'];
 			$arrData['data_source'] = $_REQUEST['data_source'];

@@ -142,7 +142,7 @@ $objModel -> checkSession();
                                         }
 										?>
 					</ul>
-					<label id="for-is-ajax" class="hidden-tablet" for="is-ajax"><input id="is-ajax" type="checkbox"> Ajax on menu</label>
+					<!--<label id="for-is-ajax" class="hidden-tablet" for="is-ajax"><input id="is-ajax" type="checkbox"> Ajax on menu</label>-->
 				</div><!--/.well -->
 			</div><!--/span-->
 			<!-- left menu ends -->

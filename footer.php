@@ -22,8 +22,8 @@
 		</div>
 
 		<footer>
-			<p class="pull-left">&copy; <a href="http://globalgujarat.com" target="_blank">Global Gujarat</a> <?php echo date('Y') ?></p>
-			<p class="pull-right">Powered by: <a href="http://globalgujarat.com">Global Gujarat</a></p>
+			<p class="pull-left">&copy; <a href="http://www.mieux.in" target="_blank">Mieux Infracon</a> <?php echo date('Y') ?></p>
+			<p class="pull-right">Powered by: <a href="http://www.mieux.in">Mieux Infracon</a></p>
 		</footer>
 		<?php } ?>
 

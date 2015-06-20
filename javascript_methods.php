@@ -5,10 +5,10 @@
 				e.preventDefault(); //STOP default action
 				//var validateForm=$(".registrationFrom").validate();
 				//if($(".registrationFrom").validate()){
-					if($("#first_name").val()=="" || $("#last_name").val()=="" || $("#email").val()=="" ||$("#username").val()=="" || $("#password").val()==""){
-						alert("All fields are required");
+					if($("#first_name").val()=="" || $("#last_name").val()=="" || $("#email").val()=="" ||$("#username").val()=="" || $("#password").val().length < 10 ){
 						return false;
 					}
+					alert("please note your Username.");
 					$(".alert-info").html("<img src='img/ajax-loaders/ajax-loader-7.gif'>");
 					var postData ="";
 					postData = $(this).serializeArray();
@@ -34,7 +34,7 @@
 			});
 		 $('#first_name,#last_name').keyup( function() {
 			var fname = $('input:text[name="first_name"]').val();
-			var lname = $('input:text[name="last_name"]').val().charAt(0);
+			var lname = $('input:text[name="last_name"]').val();
 			$('input:text[name="username"]').val(fname+lname);
 			$("#username").prop('readOnly', true);
 		});
@@ -53,7 +53,7 @@
 		
 		var rowCount = $('#mytable >tbody >tr').length;
 		if(rowCount==0){
-		 $('#mytable tbody').append('<tr id="firstRow"><td><input class="input-small focused required" id="contact_full_name" name="contact_full_name[]" type="text" value=""></td><td class="center"><input type="text" class="input-small datepicker required" id="dob" name="dob[]" value=""></td><td class="center"><input type="text" class="input-small datepicker required" id="dom" data-date="MM-DD-YYYY" name="dom[]" value=""></td><td class="center"><input class="input-small focused required" data-int data-min-chars="10" maxlength="10" id="contact_mobile" name="contact_mobile[]" type="text" value=""></td><td class="center"><input class="input-small focused required" id="contact_email" data-email name="contact_email[]" type="email" value=""></td><td class="center"><input class="input-small focused required" id="designation" name="designation[]" type="text" value=""></td><td class="center"><select class="input-small focused required" id="contact_status" name="contact_status[]" ><option value="Active">Active</option><option value="Inactive">Inactive</option></select></td><td class="center"><input class="btn btn-success" id="removeRows" type="button" value="Remove"></input></td></tr>');
+		 $('#mytable tbody').append('<tr id="firstRow"><td class="center"><input class="input-small focused required" id="contact_full_name" name="contact_full_name[]" type="text" value=""></td><td class="center"><input type="text" class="input-small datepicker required" id="dob" name="dob[]" value=""></td><td class="center"><input type="text" class="input-small datepicker required" id="dom" name="dom[]" value=""></td><td class="center"><input class="input-small focused required" id="contact_mobile" name="contact_mobile[]" type="text" value=""></td><td class="center"><input class="input-small focused required" id="contact_email" name="contact_email[]" type="email" value=""></td><td class="center"><input class="input-small focused required" id="designation" name="designation[]" type="text" value=""></td><td class="center"><select class="input-small focused required" id="contact_status" name="contact_status[]" ><option value="Active">Active</option><option value="Inactive">Inactive</option></select></td><td class="center"><input class="btn btn-success" id="removeRows" type="button" value="Remove"></input></td></tr>');
 		}
 		$("#addrows").click(function () {
 			$("#firstRow").remove();
@@ -64,7 +64,7 @@
 			  var c_email = $('#c_email').val();
 			  var c_designation = $('#c_designation').val();
 			  var c_status = $('#c_status').val();
-			  $('#mytable tbody').append('<tr id="visibleDiv" name="visibleDiv"><td><input type="hidden" name="company_contact_id[]" id="company_contact_id" value="" /><input class="input-small focused required" id="contact_full_name" name="contact_full_name[]" type="text" value="'+c_name+'"></td><td class="center"><input type="text" class="input-small datepicker required" id="dob" name="dob[]" value="'+c_dob+'"></td><td class="center"><input type="text" class="input-small datepicker required" id="dom" data-date="MM-DD-YYYY" name="dom[]" value="'+c_dom+'"></td><td class="center"><input class="input-small focused required" data-int data-min-chars="10" maxlength="10" id="contact_mobile" name="contact_mobile[]" type="text" value="'+c_mobile+'"></td><td class="center"><input class="input-small focused required" id="contact_email" data-email name="contact_email[]" type="email" value="'+c_email+'"></td><td class="center"><input class="input-small focused required"   id="designation" name="designation[]" type="text" value="'+c_designation+'"></td><td class="center"><select class="input-small focused required" id="contact_status" name="contact_status[]" ><option value="Active">Active</option><option value="Inactive">Inactive</option></select></td><td class="center"><input class="btn btn-success" id="removeRows" type="button" value="Remove"></input></td></tr>');
+			  $('#mytable tbody').append('<tr id="visibleDiv" name="visibleDiv"><td class="center"><input class="input-small focused required" id="contact_full_name" name="contact_full_name[]" type="text" value="'+c_name+'"></td><td class="center"><input type="text" class="input-small datepicker required" id="dob" name="dob[]" value="'+c_dob+'"></td><td class="center"><input type="text" class="input-small datepicker required" id="dom" name="dom[]" value="'+c_dom+'"></td><td class="center"><input class="input-small focused required" id="contact_mobile" name="contact_mobile[]" type="text" value="'+c_mobile+'"></td><td class="center"><input class="input-small focused required" id="contact_email" name="contact_email[]" type="email" value="'+c_email+'"></td><td class="center"><input class="input-small focused required" id="designation" name="designation[]" type="text" value="'+c_designation+'"></td><td class="center"><select class="input-small focused required" id="contact_status" name="contact_status[]" ><option value="Active">Active</option><option value="Inactive">Inactive</option></select></td><td class="center"><input class="btn btn-success" id="removeRows" type="button" value="Remove"></input></td></tr>');
 			$('#c_name').val("");$('#c_dob').val("");$('#c_dom').val("");$('#c_mobile').val("");$('#c_email').val("");$('#c_designation').val("");$('#c_status').val("");
 		});
 		
@@ -133,6 +133,17 @@
 										onlyletter: true,
 										maxlength : 30
 										},
+									/*username:{
+										remote:{
+												url: "controller/routes.php?hid_action=check_username",
+												type: "post",
+												data: {
+												  username: function() {
+													return $( "#username" ).val();
+												  }
+												}
+											}
+									},*/
 									password:{
 										minlength: 10,
 										nospace: true
@@ -254,9 +265,9 @@
 			$(element).removeClass(errorClass);
 		},
 		errorPlacement: function(error, element) {
-			if (element.attr("name") == "contact_full_name[]" || element.attr("name") == "dob[]" || element.attr("name") == "dom[]"|| element.attr("name") == "contact_mobile[]"|| element.attr("name") == "contact_email[]"|| element.attr("name") == "designation[]" || element.attr("name") == "contact_status[]")
-				error.insertAfter("#mytable");
-			else if  (element.attr("name") == "paymentOptions[]" )
+			//if (element.attr("name") == "contact_full_name[]" || element.attr("name") == "dob[]" || element.attr("name") == "dom[]"|| element.attr("name") == "contact_mobile[]"|| element.attr("name") == "contact_email[]"|| element.attr("name") == "designation[]" || element.attr("name") == "contact_status[]")
+			//	error.insertAfter("#mytable");
+			if  (element.attr("name") == "paymentOptions[]" )
 				error.insertAfter("#paymentResult");
 			else if  (element.attr("name") == "visibleDiv" )
 				error.insertAfter("#mytable");
