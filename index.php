@@ -1,4 +1,4 @@
-<?php include('header.php'); 
+<?php require_once 'header.php';
 	$arrRecords = $objModel->getRecords(null,null,null,'user-company');
 ?>
 			<div>
@@ -343,4 +343,4 @@
 
 		  
        
-<?php include('footer.php'); ?>
+<?php require_once 'footer.php';?>

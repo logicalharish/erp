@@ -1,37 +1,7 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		
-			$(".registrationFrom").submit(function(e){
-				e.preventDefault(); //STOP default action
-				//var validateForm=$(".registrationFrom").validate();
-				//if($(".registrationFrom").validate()){
-					if($("#first_name").val()=="" || $("#last_name").val()=="" || $("#email").val()=="" ||$("#username").val()=="" || $("#password").val().length < 10 ){
-						return false;
-					}
-					alert("please note your Username.");
-					$(".alert-info").html("<img src='img/ajax-loaders/ajax-loader-7.gif'>");
-					var postData ="";
-					postData = $(this).serializeArray();
-					var formURL = $(this).attr("action");
-					//alert(postData);
-					$.ajax({
-						url : formURL,
-						type: "POST",
-						data : postData,
-						success:function(data, textStatus, jqXHR) 
-						{
-							$(".alert-info").before('<div width=500px" class="alert alert-success"><strong>You have been Registered successfully.</strong></div>');
-							$(".alert-info").html('Please login with your Username and Password.');
-							$(".loginForm").css("display","block");
-							$(".registrationFrom").css("display","none");
-						},
-						error: function(jqXHR, textStatus, errorThrown) 
-						{
-							$(".alert-info").html('Failed to Register, textStatus='+textStatus+',errorThrown='+errorThrown+'.');
-						}
-					});
-				//}
-			});
+		                
 		 $('#first_name,#last_name').keyup( function() {
 			var fname = $('input:text[name="first_name"]').val();
 			var lname = $('input:text[name="last_name"]').val();
@@ -125,7 +95,7 @@
 		errorClass: "label label-important",
 		errorElement: "span",
 		ignore: [],
-		rules: {					first_name:{
+		rules: {                                               first_name:{
 										onlyletter: true,
 										maxlength : 30
 										},
@@ -133,33 +103,39 @@
 										onlyletter: true,
 										maxlength : 30
 										},
-									/*username:{
-										remote:{
-												url: "controller/routes.php?hid_action=check_username",
-												type: "post",
-												data: {
-												  username: function() {
-													return $( "#username" ).val();
-												  }
-												}
-											}
-									},*/
+									username: {
+                                                                                    required: true,
+                                                                                    //minlength: 5,
+                                                                                    remote: {
+                                                                                        url: "controller/routes.php",
+                                                                                        type: "get",
+                                                                                        data: {
+                                                                                            hid_action: function () {
+                                                                                                return "check_username";
+                                                                                            },
+                                                                                            username: function() {
+                                                                                                var username = $("#username").val();
+                                                                                                return username;
+                                                                                            }
+                                                                                        }
+                                                                                    }
+                                                                                },
 									password:{
 										minlength: 10,
 										nospace: true
 									},
 									full_name: {
-			            				letter_space: true,
-			            				minlength: 5
-			            				},
-				                    short_name: {
-			            				letter_space: true,
-			            				minlength: 2
-				            			},
-				                    est_date: {
-					                    date:true
-					                   },
-				                    pincode: {
+                                                                        letter_space: true,
+                                                                        minlength: 5
+                                                                        },
+                                                                        short_name: {
+                                                                                    letter_space: true,
+                                                                                    minlength: 2
+                                                                                    },
+                                                                        est_date: {
+                                                                                date:true
+                                                                               },
+                                                                        pincode: {
 							                number: true,
 							                minlength: 6,
 											maxlength: 9
@@ -171,8 +147,8 @@
 										lat_long:true
 									},
 									email: {
-				                        email: true
-				                    },
+                                                                            email: true
+                                                                        },
 									website: {
 									       url: true
 									      },
@@ -183,11 +159,11 @@
 									        maxlength: 10
 									       },
 									phone: {
-						                number: true,
-						                nospace: true,
-						                minlength: 8,
-						                maxlength: 8
-						               },
+                                                                        number: true,
+                                                                        nospace: true,
+                                                                        minlength: 8,
+                                                                        maxlength: 8
+                                                                       },
 									"contact_full_name[]": {
 										required: true,
 										letter_space: true
@@ -239,6 +215,9 @@
 									
 		},
 		messages: {
+                        username:{
+                            remote: "Username already Exist"
+                        },
 			"designation[]":{
 				required: "Designation is Required",
 				letter_space: "Designation requires valid entry"
@@ -336,6 +315,11 @@
 										}
 									//return $('#mytable tbody tr').length > 0;
 								}, "Must have at least one contact.");
+                                                                
+                                                                
+                                                                
+                                                                
+                            
 							
 	});
 	

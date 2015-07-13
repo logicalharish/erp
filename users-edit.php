@@ -35,7 +35,7 @@ $arrAdmins = $objControl -> getRecords('user_master','user_role_id',$arrAdminRol
 														?>
                 
             </div>
-			<form class="form-horizontal" id="form" method="post" action="controller/routes.php">
+			<form class=".re" id="form" method="post" action="controller/routes.php">
 				<input  type="hidden" name="hid_action" id="hid_action" value="create_user"/>
 				<input type="hidden" name="http_path" id="http_path" value="users.php"/>
 				<input type="hidden" name="user_id" id="user_id" value="<?php echo $_REQUEST['user_id']; ?>"/>

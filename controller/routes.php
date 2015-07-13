@@ -42,17 +42,16 @@ switch ($strAction)
 		header('Location:' . HTTP_PATH . 'role.php');
 		exit;
 		break;
-	/*case 'check_username':
-		$username = $_REQUEST['username'];
-		$resultData = $objControl->getRecords('user_master', 'username', $username,'');
-			if(count($resultData)==0){
-				echo "false";
+	case 'check_username':
+                $strSQL = "SELECT * from user_master where username='".$_REQUEST['username']."'";
+		$arrResultData = $objControl->dbConnect->getAll($strSQL);
+			if($arrResultData[0]['username'] != ""){
+                             echo "false";
 			}else{
-				echo "Good username";
+                             echo "true";
 			}
-		header('Location:' . HTTP_PATH . 'me.php');
 		exit;
-		break;*/
+		break;
 	case 'create_user':
 		$httpPath = $_REQUEST['http_path'];
 		$arrData['first_name'] = $_REQUEST['first_name'];

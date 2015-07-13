@@ -1,6 +1,6 @@
 <?php
 $no_visible_elements=true;
-include('header.php'); ?>
+require_once 'header.php'; ?>
 
 			<div class="row-fluid">
 				<div class="span12 center login-header">
@@ -51,6 +51,7 @@ include('header.php'); ?>
 					</form>
 					<form class="form-horizontal registrationFrom" id="form" action="controller/routes.php" method="post" style="display:none;" >
 						<input type="hidden" name="hid_action" id="hid_action" value="create_user"/>
+                                                <input type="hidden" name="assigned_to" id="assigned_to" value="1"/>
 						<input type="hidden" name="http_path" id="http_path" value="login.php"/>
 						<fieldset>
 							<div class="input-prepend" title="Firstname" data-rel="tooltip">
@@ -88,7 +89,7 @@ include('header.php'); ?>
 					</form>
 				</div><!--/span-->
 			</div><!--/row-->
-<?php include('footer.php'); ?>
+<?php require_once 'footer.php'; ?>
 <?php
 require_once('javascript_methods.php');
 ?>
